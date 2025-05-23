@@ -43,10 +43,10 @@ fun DailyChallenge1(
     Box(modifier = modifier.fillMaxSize()) {
         val listState = rememberLazyListState()
 
-        // Show FAB only after user has scrolled past the first 3 items
+        // Show FAB only after user has scrolled past the first 4 items
         val showFab by remember {
             derivedStateOf {
-                listState.firstVisibleItemIndex > 2
+                listState.firstVisibleItemIndex > 4
             }
         }
 

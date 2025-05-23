@@ -3,22 +3,18 @@ package com.nyinyi.dailychallenge.ui.screens.detail
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -27,12 +23,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.nyinyi.dailychallenge.ui.screens.challenge.DailyChallenge1
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
+import com.nyinyi.dailychallenge.ui.components.QuestionTab
+import com.nyinyi.dailychallenge.ui.components.SolutionTab
 import com.nyinyi.dailychallenge.ui.theme.ThemeColors
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,6 +39,8 @@ fun QuestionDetail(
     onToggleTheme: () -> Unit = {}
 ) {
     var showContent by remember { mutableStateOf(false) }
+    var selectedTabIndex by remember { mutableStateOf(0) }
+    val tabs = listOf("Question", "Solution")
 
     LaunchedEffect(Unit) {
         showContent = true
@@ -73,7 +71,6 @@ fun QuestionDetail(
                 ),
                 actions = {
                     IconButton(onClick = onToggleTheme) {
-                        // Show moon/sun icon based on theme
                         Text(
                             text = if (ThemeColors.isDarkTheme) "☀️" else "🌙",
                             style = MaterialTheme.typography.titleMedium
@@ -83,78 +80,48 @@ fun QuestionDetail(
             )
         }
     ) { paddingValues ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues),
-            contentAlignment = Alignment.TopCenter
+                .padding(paddingValues)
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
+            // Tab Row
+            TabRow(
+                selectedTabIndex = selectedTabIndex,
+                indicator = { tabPositions ->
+                    TabRowDefaults.Indicator(
+                        modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
+                        height = 3.dp,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                },
+                divider = {}
             ) {
-                AnimatedVisibility(
-                    visible = showContent,
-                    enter = fadeIn() + slideInVertically(initialOffsetY = { it / 5 })
-                ) {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f)
-                        ),
-                        shape = RoundedCornerShape(16.dp),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(24.dp)
-                        ) {
+                tabs.forEachIndexed { index, title ->
+                    Tab(
+                        selected = selectedTabIndex == index,
+                        onClick = { selectedTabIndex = index },
+                        text = {
                             Text(
-                                "Question",
-                                style = MaterialTheme.typography.labelLarge,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-
-                            Spacer(modifier = Modifier.height(8.dp))
-
-                            Text(
-                                question.question,
-                                style = MaterialTheme.typography.bodyLarge
+                                text = title,
+                                style = MaterialTheme.typography.bodyMedium.copy(
+                                    fontWeight = if (selectedTabIndex == index)
+                                        FontWeight.Bold else FontWeight.Normal
+                                )
                             )
                         }
-                    }
+                    )
                 }
+            }
 
-                Spacer(modifier = Modifier.height(24.dp))
-
-                AnimatedVisibility(
-                    visible = showContent,
-                    enter = fadeIn() + slideInVertically(initialOffsetY = { it / 3 })
-                ) {
-                    Surface(
-                        color = MaterialTheme.colorScheme.surface,
-                        shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(24.dp)
-                        ) {
-                            Text(
-                                "Solution",
-                                style = MaterialTheme.typography.titleMedium.copy(
-                                    fontWeight = FontWeight.Bold
-                                ),
-                                color = MaterialTheme.colorScheme.primary
-                            )
-
-                            Spacer(modifier = Modifier.height(16.dp))
-
-                            // The actual challenge content
-                            DailyChallenge1(modifier = Modifier)
-                        }
-                    }
+            // Content based on selected tab
+            AnimatedVisibility(
+                visible = showContent,
+                enter = fadeIn() + slideInVertically(initialOffsetY = { it / 5 })
+            ) {
+                when (selectedTabIndex) {
+                    0 -> QuestionTab(question)
+                    1 -> SolutionTab(question) // Uses updated SolutionTab with Design/Code toggle
                 }
             }
         }

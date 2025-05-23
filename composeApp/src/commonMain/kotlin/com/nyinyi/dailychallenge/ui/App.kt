@@ -19,7 +19,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 @Preview
 fun App() {
-    var darkTheme by rememberSaveable { mutableStateOf(false) }
+    var darkTheme by rememberSaveable { mutableStateOf(true) }
 
     val navController = rememberNavController()
 
@@ -42,7 +42,7 @@ fun App() {
                 val args = backStackEntry.toRoute<Routes.QuestionDetail>()
                 QuestionDetail(
                     onBack = { navController.popBackStack() },
-                    question = getDailyChallengeList().first { it.id == args.questionId },
+                    question = getDailyChallengeList().first { it.id == args.questionId }, // Using JSON-parsed challenge data
                     onToggleTheme = { darkTheme = !darkTheme }
                 )
             }
