@@ -51,24 +51,26 @@ import com.nyinyi.dailychallenge.ui.theme.ThemeColors
 fun QuestionDetail(
     onBack: () -> Unit,
     question: DailyChallengeObj,
-    onToggleTheme: () -> Unit = {}
+    onToggleTheme: () -> Unit = {},
 ) {
     var showContent by remember { mutableStateOf(false) }
     var isFlipped by remember { mutableStateOf(false) }
 
     val difficulty = question.difficulty
 
-    val difficultyColor = when (difficulty) {
-        "Easy" -> MaterialTheme.colorScheme.tertiary
-        "Medium" -> MaterialTheme.colorScheme.secondary
-        else -> MaterialTheme.colorScheme.error
-    }
+    val difficultyColor =
+        when (difficulty) {
+            "Easy" -> MaterialTheme.colorScheme.tertiary
+            "Medium" -> MaterialTheme.colorScheme.secondary
+            else -> MaterialTheme.colorScheme.error
+        }
 
-    val rotation = animateFloatAsState(
-        targetValue = if (isFlipped) 180f else 0f,
-        animationSpec = tween(500, easing = FastOutSlowInEasing),
-        label = "cardFlip"
-    )
+    val rotation =
+        animateFloatAsState(
+            targetValue = if (isFlipped) 180f else 0f,
+            animationSpec = tween(500, easing = FastOutSlowInEasing),
+            label = "cardFlip",
+        )
 
     LaunchedEffect(Unit) {
         showContent = true
@@ -79,26 +81,28 @@ fun QuestionDetail(
             CenterAlignedTopAppBar(
                 title = {
                     Row(
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
                             text = "Challenge ${question.id}",
-                            style = MaterialTheme.typography.titleMedium.copy(
-                                fontWeight = FontWeight.Bold
-                            )
+                            style =
+                                MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = FontWeight.Bold,
+                                ),
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Box(
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(12.dp))
-                                .background(difficultyColor.copy(alpha = 0.2f))
-                                .padding(horizontal = 8.dp, vertical = 2.dp),
-                            contentAlignment = Alignment.Center
+                            modifier =
+                                Modifier
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(difficultyColor.copy(alpha = 0.2f))
+                                    .padding(horizontal = 8.dp, vertical = 2.dp),
+                            contentAlignment = Alignment.Center,
                         ) {
                             Text(
                                 text = difficulty,
                                 style = MaterialTheme.typography.labelSmall,
-                                color = difficultyColor
+                                color = difficultyColor,
                             )
                         }
                     }
@@ -108,106 +112,116 @@ fun QuestionDetail(
                         Text(
                             "←",
                             style = MaterialTheme.typography.titleLarge,
-                            color = MaterialTheme.colorScheme.primary
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background
-                ),
+                colors =
+                    TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.background,
+                    ),
                 actions = {
                     Card(
                         shape = CircleShape,
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-                        ),
-                        modifier = Modifier.padding(end = 8.dp)
+                        colors =
+                            CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                            ),
+                        modifier = Modifier.padding(end = 8.dp),
                     ) {
                         IconButton(onClick = onToggleTheme) {
                             Text(
                                 text = if (ThemeColors.isDarkTheme) "☀️" else "🌙",
-                                style = MaterialTheme.typography.titleMedium
+                                style = MaterialTheme.typography.titleMedium,
                             )
                         }
                     }
-                }
+                },
             )
-        }
+        },
     ) { paddingValues ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
         ) {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 TextButton(
                     onClick = { isFlipped = !isFlipped },
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp),
-                    colors = androidx.compose.material3.ButtonDefaults.textButtonColors(
-                        contentColor = if (isFlipped) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.primary
-                    )
+                    modifier =
+                        Modifier
+                            .padding(horizontal = 16.dp),
+                    colors =
+                        androidx.compose.material3.ButtonDefaults.textButtonColors(
+                            contentColor = if (isFlipped) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.primary,
+                        ),
                 ) {
                     Text(
                         text = if (isFlipped) "✨ Show Question" else "\uD83D\uDCA1 Show Solution",
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Medium,
                         textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.primary,
                     )
                 }
             }
 
             AnimatedVisibility(
                 visible = showContent,
-                enter = fadeIn() + slideInVertically(initialOffsetY = { it / 5 })
+                enter = fadeIn() + slideInVertically(initialOffsetY = { it / 5 }),
             ) {
                 Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
+                    modifier =
+                        Modifier
+                            .weight(1f)
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
                 ) {
                     Card(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .graphicsLayer {
-                                rotationY = rotation.value
-                                cameraDistance = 12f * density
-                                alpha = if (rotation.value > 90f) 0f else 1f
-                            },
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surface
-                        ),
-                        elevation = CardDefaults.cardElevation(4.dp)
+                        modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .graphicsLayer {
+                                    rotationY = rotation.value
+                                    cameraDistance = 12f * density
+                                    alpha = if (rotation.value > 90f) 0f else 1f
+                                },
+                        colors =
+                            CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surface,
+                            ),
+                        elevation = CardDefaults.cardElevation(4.dp),
                     ) {
                         QuestionTab(question)
                     }
 
                     Card(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .graphicsLayer {
-                                rotationY = rotation.value - 180f
-                                cameraDistance = 12f * density
-                                alpha = if (rotation.value < 90f) 0f else 1f
-                            },
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surface
-                        ),
-                        elevation = CardDefaults.cardElevation(4.dp)
+                        modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .graphicsLayer {
+                                    rotationY = rotation.value - 180f
+                                    cameraDistance = 12f * density
+                                    alpha = if (rotation.value < 90f) 0f else 1f
+                                },
+                        colors =
+                            CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surface,
+                            ),
+                        elevation = CardDefaults.cardElevation(4.dp),
                     ) {
                         SolutionTab(question)
                     }
                 }
             }
-
         }
     }
 }

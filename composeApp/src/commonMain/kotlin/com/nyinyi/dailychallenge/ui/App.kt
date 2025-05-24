@@ -28,16 +28,16 @@ fun App() {
     DailyChallengeTheme(darkTheme = darkTheme) {
         NavHost(
             navController = navController,
-            startDestination = Routes.QuestionList
+            startDestination = Routes.QuestionList,
         ) {
             composable<Routes.QuestionList> {
                 QuestionsList(
                     onClick = { question ->
                         navController.navigate(
-                            Routes.QuestionDetail(questionId = question.id)
+                            Routes.QuestionDetail(questionId = question.id),
                         )
                     },
-                    onToggleTheme = { darkTheme = !darkTheme }
+                    onToggleTheme = { darkTheme = !darkTheme },
                 )
             }
             composable<Routes.QuestionDetail> { backStackEntry ->
@@ -52,7 +52,7 @@ fun App() {
                     QuestionDetail(
                         onBack = { navController.popBackStack() },
                         question = loadedChallenge,
-                        onToggleTheme = { darkTheme = !darkTheme }
+                        onToggleTheme = { darkTheme = !darkTheme },
                     )
                 }
             }
@@ -63,7 +63,7 @@ fun App() {
 sealed interface Routes {
     @Serializable
     data class QuestionDetail(
-        val questionId: String
+        val questionId: String,
     ) : Routes
 
     @Serializable

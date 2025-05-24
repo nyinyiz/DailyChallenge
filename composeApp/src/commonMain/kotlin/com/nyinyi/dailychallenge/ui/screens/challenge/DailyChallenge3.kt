@@ -24,40 +24,40 @@ import coil3.compose.AsyncImage
  Are you confident that this code will do just that? If not, then what would you change about it to make it truly adaptive?*/
 
 @Composable
-fun DailyChallenge3(
-    modifier: Modifier = Modifier
-) {
+fun DailyChallenge3(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize()) {
         Column {
             Text(
                 "Sample Items",
-                style = MaterialTheme.typography.bodyMedium.copy(
-                    fontWeight = FontWeight.Medium
-                ),
-                modifier = Modifier.padding(bottom = 8.dp)
+                style =
+                    MaterialTheme.typography.bodyMedium.copy(
+                        fontWeight = FontWeight.Medium,
+                    ),
+                modifier = Modifier.padding(bottom = 8.dp),
             )
 
-            val shoes = remember {
-                listOf(
-                    "Shoe 1",
-                    "Shoe 2",
-                    "Shoe 3",
-                    "Shoe 4",
-                    "Shoe 5",
-                    "Shoe 6",
-                    "Shoe 7",
-                    "Shoe 8",
-                    "Shoe 9",
-                    "Shoe 10",
-                    "Shoe 11",
-                    "Shoe 12",
-                )
-            }
+            val shoes =
+                remember {
+                    listOf(
+                        "Shoe 1",
+                        "Shoe 2",
+                        "Shoe 3",
+                        "Shoe 4",
+                        "Shoe 5",
+                        "Shoe 6",
+                        "Shoe 7",
+                        "Shoe 8",
+                        "Shoe 9",
+                        "Shoe 10",
+                        "Shoe 11",
+                        "Shoe 12",
+                    )
+                }
             LazyVerticalGrid(
                 columns = GridCells.Adaptive(minSize = 128.dp),
                 horizontalArrangement = Arrangement.spacedBy(24.dp),
                 verticalArrangement = Arrangement.spacedBy(24.dp),
-                contentPadding = PaddingValues(16.dp)
+                contentPadding = PaddingValues(16.dp),
             ) {
                 items(shoes) { shoe ->
                     ShopItemWithImage(shoe)
@@ -74,14 +74,15 @@ fun ShopItemWithImage(shoes: String) {
             model = "https://picsum.photos/200/300",
             contentDescription = null,
             modifier = Modifier.fillMaxSize().height(150.dp),
-            contentScale = androidx.compose.ui.layout.ContentScale.Crop
+            contentScale = androidx.compose.ui.layout.ContentScale.Crop,
         )
         Text(
             text = "Sample Item",
-            style = MaterialTheme.typography.bodyMedium.copy(
-                fontWeight = FontWeight.Medium
-            ),
-            modifier = Modifier.padding(top = 8.dp)
+            style =
+                MaterialTheme.typography.bodyMedium.copy(
+                    fontWeight = FontWeight.Medium,
+                ),
+            modifier = Modifier.padding(top = 8.dp),
         )
     }
 }

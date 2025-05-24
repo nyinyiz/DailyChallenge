@@ -37,9 +37,7 @@ You've got access to scroll state — now you need to connect that to visibility
 How would you do it? Feel free to share code snippets!*/
 
 @Composable
-fun DailyChallenge1(
-    modifier: Modifier = Modifier
-) {
+fun DailyChallenge1(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize()) {
         val listState = rememberLazyListState()
 
@@ -53,34 +51,38 @@ fun DailyChallenge1(
         Column {
             Text(
                 "Sample Items",
-                style = MaterialTheme.typography.bodyMedium.copy(
-                    fontWeight = FontWeight.Medium
-                ),
-                modifier = Modifier.padding(bottom = 8.dp)
+                style =
+                    MaterialTheme.typography.bodyMedium.copy(
+                        fontWeight = FontWeight.Medium,
+                    ),
+                modifier = Modifier.padding(bottom = 8.dp),
             )
 
             LazyColumn(
                 contentPadding = PaddingValues(vertical = 8.dp),
                 state = listState,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             ) {
                 items(50) { index ->
                     Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = when {
-                                index < 3 -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f)
-                                else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-                            }
-                        ),
-                        shape = RoundedCornerShape(8.dp)
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp),
+                        colors =
+                            CardDefaults.cardColors(
+                                containerColor =
+                                    when {
+                                        index < 3 -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f)
+                                        else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                                    },
+                            ),
+                        shape = RoundedCornerShape(8.dp),
                     ) {
                         Text(
                             "Item ${index + 1}${if (index < 3) " (scroll past me)" else ""}",
                             modifier = Modifier.padding(16.dp),
-                            style = MaterialTheme.typography.bodyMedium
+                            style = MaterialTheme.typography.bodyMedium,
                         )
                     }
 
@@ -93,19 +95,22 @@ fun DailyChallenge1(
 
         AnimatedVisibility(
             visible = showFab,
-            enter = fadeIn(animationSpec = tween(300)) +
+            enter =
+                fadeIn(animationSpec = tween(300)) +
                     slideInVertically(animationSpec = tween(300)) { it },
-            exit = fadeOut(animationSpec = tween(300)) +
+            exit =
+                fadeOut(animationSpec = tween(300)) +
                     slideOutVertically(animationSpec = tween(300)) { it },
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(16.dp)
+            modifier =
+                Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(16.dp),
         ) {
             FloatingActionButton(
                 onClick = { /* Handle FAB click */ },
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
-                shape = CircleShape
+                shape = CircleShape,
             ) {
                 Text("↑", style = MaterialTheme.typography.titleMedium)
             }

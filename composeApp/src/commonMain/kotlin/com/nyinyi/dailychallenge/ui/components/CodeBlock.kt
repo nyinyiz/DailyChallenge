@@ -14,22 +14,24 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun CodeBlock(
     code: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = modifier,
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f)
-        ),
-        shape = RoundedCornerShape(8.dp)
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.4f),
+            ),
+        shape = RoundedCornerShape(8.dp),
     ) {
         Text(
             text = code,
-            style = MaterialTheme.typography.bodyMedium.copy(
-                fontSize = 12.sp
-            ),
+            style =
+                MaterialTheme.typography.bodyMedium.copy(
+                    fontSize = 12.sp,
+                ),
             modifier = Modifier.padding(16.dp),
-            fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace
+            fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
         )
     }
 }

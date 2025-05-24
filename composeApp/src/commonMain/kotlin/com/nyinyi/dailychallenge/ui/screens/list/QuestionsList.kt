@@ -6,6 +6,8 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,6 +39,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -48,17 +52,25 @@ import com.nyinyi.dailychallenge.ui.theme.ThemeColors
 @Composable
 fun QuestionsList(
     onClick: (DailyChallengeObj) -> Unit = {},
-    onToggleTheme: () -> Unit = {}
+    onToggleTheme: () -> Unit = {},
 ) {
+    @Composable
+    fun getDifferentColor(difficulty: String): Color =
+        when (difficulty) {
+            "Easy" -> MaterialTheme.colorScheme.tertiary
+            "Medium" -> MaterialTheme.colorScheme.secondary
+            else -> MaterialTheme.colorScheme.error
+        }
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
                         "Daily Challenges",
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            fontWeight = FontWeight.Bold
-                        )
+                        style =
+                            MaterialTheme.typography.titleLarge.copy(
+                                fontWeight = FontWeight.Bold,
+                            ),
                     )
                 },
                 actions = {
@@ -66,15 +78,16 @@ fun QuestionsList(
                         // Show moon/sun icon based on theme
                         Text(
                             text = if (ThemeColors.isDarkTheme) "☀️" else "🌙",
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.titleMedium,
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
+                colors =
+                    TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.surface,
+                    ),
             )
-        }
+        },
     ) { paddingValues ->
         var dailyChallenge by remember { mutableStateOf<List<DailyChallengeObj>>(emptyList()) }
         val listState = rememberLazyListState()
@@ -96,34 +109,55 @@ fun QuestionsList(
                 itemsIndexed(dailyChallenge) { index, challenge ->
                     AnimatedVisibility(
                         visible = true,
-                        enter = fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) +
+                        enter =
+                            fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) +
                                 scaleIn(
                                     initialScale = 0.92f,
-                                    animationSpec = spring(stiffness = Spring.StiffnessLow)
+                                    animationSpec = spring(stiffness = Spring.StiffnessLow),
                                 ),
-                        exit = fadeOut()
+                        exit = fadeOut(),
                     ) {
                         Card(
                             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
                             shape = RoundedCornerShape(16.dp),
-                            colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp)
-                            ),
+                            colors =
+                                CardDefaults.cardColors(
+                                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
+                                ),
                             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                             onClick = {
                                 onClick(challenge)
-                            }
+                            },
                         ) {
                             Column(
-                                modifier = Modifier.padding(16.dp)
+                                modifier = Modifier.padding(16.dp),
                             ) {
                                 Row(
-                                    verticalAlignment = Alignment.CenterVertically
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween,
                                 ) {
                                     AssistChip(
                                         onClick = { },
                                         label = { Text("Challenge ${challenge.id}") },
                                     )
+                                    Box(
+                                        modifier =
+                                            Modifier
+                                                .clip(RoundedCornerShape(12.dp))
+                                                .background(
+                                                    getDifferentColor(challenge.difficulty).copy(
+                                                        alpha = 0.2f,
+                                                    ),
+                                                ).padding(horizontal = 8.dp, vertical = 2.dp),
+                                        contentAlignment = Alignment.Center,
+                                    ) {
+                                        Text(
+                                            text = challenge.difficulty,
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = getDifferentColor(challenge.difficulty),
+                                        )
+                                    }
                                 }
 
                                 Spacer(modifier = Modifier.height(12.dp))
@@ -132,7 +166,7 @@ fun QuestionsList(
                                     challenge.question,
                                     style = MaterialTheme.typography.bodyLarge,
                                     maxLines = 3,
-                                    overflow = TextOverflow.Ellipsis
+                                    overflow = TextOverflow.Ellipsis,
                                 )
                             }
                         }
