@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "question": "Activities in Android are a part of the application lifecycle.",
+    "correctAnswer": true,
+    "explanation": "Activities represent a single screen with a UI and are essential in the lifecycle of an Android app.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 2,
+    "question": "An Android `Service` runs in the foreground by default.",
+    "correctAnswer": false,
+    "explanation": "A Service runs in the background by default unless made foreground using startForeground().",
+    "difficulty": "medium"
+  },
+  {
+    "id": 3,
+    "question": "The `Manifest` file in Android declares permissions and components.",
+    "correctAnswer": true,
+    "explanation": "AndroidManifest.xml is used to declare essential app information and permissions.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 4,
+    "question": "Android `BroadcastReceiver` is used for background tasks continuously.",
+    "correctAnswer": false,
+    "explanation": "BroadcastReceiver is used to listen to and handle broadcast messages, not for continuous tasks.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 5,
+    "question": "The `WorkManager` API is suitable for guaranteed background tasks.",
+    "correctAnswer": true,
+    "explanation": "WorkManager is the recommended solution for deferrable, guaranteed background work.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 6,
+    "question": "All Android applications must have a `MainActivity`.",
+    "correctAnswer": false,
+    "explanation": "An Android app must have a launcher activity, not necessarily named MainActivity.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 7,
+    "question": "Fragments are deprecated in Jetpack libraries.",
+    "correctAnswer": false,
+    "explanation": "Fragments are still supported and widely used in many Android applications.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 8,
+    "question": "Android uses XML-based layouts in traditional UI development.",
+    "correctAnswer": true,
+    "explanation": "Before Jetpack Compose, Android used XML files for layout definitions.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 9,
+    "question": "Kotlin is fully interoperable with Java.",
+    "correctAnswer": true,
+    "explanation": "Kotlin can use Java libraries and vice versa without issues.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 10,
+    "question": "All Kotlin classes are open by default.",
+    "correctAnswer": false,
+    "explanation": "In Kotlin, classes are final by default and must be explicitly marked `open`.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 11,
+    "question": "`val` defines a mutable variable in Kotlin.",
+    "correctAnswer": false,
+    "explanation": "`val` defines an immutable (read-only) variable.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 12,
+    "question": "Kotlin supports extension functions.",
+    "correctAnswer": true,
+    "explanation": "Kotlin allows you to extend a class with new functionality without inheritance.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 13,
+    "question": "Kotlin coroutines are used for asynchronous programming.",
+    "correctAnswer": true,
+    "explanation": "Coroutines simplify async operations using structured concurrency.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 14,
+    "question": "A Kotlin `object` declaration is used to create a singleton.",
+    "correctAnswer": true,
+    "explanation": "The `object` keyword creates a thread-safe singleton in Kotlin.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 15,
+    "question": "Kotlin does not support functional programming features.",
+    "correctAnswer": false,
+    "explanation": "Kotlin supports many functional features like map, filter, lambdas, etc.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 16,
+    "question": "`lateinit` can be used with nullable types in Kotlin.",
+    "correctAnswer": false,
+    "explanation": "`lateinit` cannot be used with nullable types.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 17,
+    "question": "Jetpack Compose is the modern UI toolkit for Android.",
+    "correctAnswer": true,
+    "explanation": "Compose is Android\u2019s modern declarative UI toolkit.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 18,
+    "question": "In Compose, `@Composable` functions can return values.",
+    "correctAnswer": false,
+    "explanation": "`@Composable` functions are used to emit UI and should not return values.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 19,
+    "question": "Compose uses `remember` to maintain state across recompositions.",
+    "correctAnswer": true,
+    "explanation": "`remember` helps store values across recompositions.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 20,
+    "question": "`Modifier` in Compose is used for layout, styling, and interaction.",
+    "correctAnswer": true,
+    "explanation": "`Modifier` is a fundamental building block for UI elements in Compose.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 21,
+    "question": "Compose can interoperate with XML-based views.",
+    "correctAnswer": true,
+    "explanation": "Compose provides `AndroidView` for XML interoperability.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 22,
+    "question": "Recomposition occurs every time a Composable is called.",
+    "correctAnswer": false,
+    "explanation": "Recomposition only happens when observed state changes.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 23,
+    "question": "Compose eliminates the need for RecyclerView.",
+    "correctAnswer": true,
+    "explanation": "LazyColumn in Compose replaces RecyclerView in modern apps.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 24,
+    "question": "Kotlin Multiplatform allows sharing code between platforms like Android, iOS, and Web.",
+    "correctAnswer": true,
+    "explanation": "KMP promotes code reuse across multiple platforms.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 25,
+    "question": "Expect/Actual declarations are used in Kotlin Multiplatform for platform-specific implementations.",
+    "correctAnswer": true,
+    "explanation": "They allow common code to declare an API and platform code to implement it.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 26,
+    "question": "KMP supports UI sharing by default across platforms.",
+    "correctAnswer": false,
+    "explanation": "KMP mainly supports logic sharing; UI sharing is not handled directly.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 27,
+    "question": "KMP uses Kotlin Native to run on iOS.",
+    "correctAnswer": true,
+    "explanation": "Kotlin Native compiles Kotlin code to native binaries for iOS.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 28,
+    "question": "You can use Swift to access Kotlin shared code on iOS.",
+    "correctAnswer": true,
+    "explanation": "Kotlin Native exposes a framework that Swift can use.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 29,
+    "question": "Kotlin Multiplatform cannot be used in production apps.",
+    "correctAnswer": false,
+    "explanation": "Many companies use KMP in production successfully.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 30,
+    "question": "KMP projects require completely different build setups for each platform.",
+    "correctAnswer": false,
+    "explanation": "KMP uses a unified Gradle setup to build for multiple targets.",
+    "difficulty": "medium"
+  }
+]
