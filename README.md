@@ -1,21 +1,36 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop.
+# Daily Challenge
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+A multiplatform app to browse and solve daily coding challenges. Built with Kotlin Multiplatform and Compose for Android, iOS, Desktop, and Web.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Screenshots
 
+<!-- Add your screenshots here -->
+![Screenshot 1](screenshots/screen1.png)
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
+---
 
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+## Welcome for Contribution
 
-You can open the web application by running the `:composeApp:wasmJsBrowserDevelopmentRun` Gradle task.
+We welcome contributions! You can add new challenge questions in any area—Android, Kotlin, Compose, or even platform-specific topics. Help us grow the collection and make learning fun for everyone!
+
+1. **Fork** the repository.
+2. **Clone** your fork:
+   ```sh
+   git clone https://github.com/your-username/daily-challenge.git
+   ```
+3. **Create a new branch** for your feature or fix:
+   ```sh
+   git checkout -b my-new-challenge
+   ```
+4. **Add your challenge/question** or make your changes.
+5. **Commit** and **push** your changes:
+   ```sh
+   git add .
+   git commit -m "Add new challenge: [title]"
+   git push origin my-new-challenge
+   ```
+6. **Open a Pull Request** on GitHub and describe your contribution.
+
+## 👤 Author
+
+Created by **Nyi Nyi Zaw** (nyinyizaw.dev@gmail.com)
