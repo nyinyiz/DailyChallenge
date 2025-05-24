@@ -2,15 +2,22 @@
   {
     "id": "1",
     "difficulty": "Easy",
-    "question": "You want to show a FloatingActionButton (FAB) only after scrolling past the first few items. You've got access to scroll state — now you need to connect that to visibility. How would you do it? Feel free to share code snippets!",
+    "question": "\uD83D\uDDE3\uFE0F You want to show a FloatingActionButton (FAB) only after scrolling past the first few items. You’ve got access to scroll state — now you need to connect that to visibility. How would you do it? Feel free to share code snippets!",
     "questionCode": "val listState = rememberLazyListState()\n\nLazyColumn(state = listState) {\n  items(100) { Text(\"Item $it\") }\n}\n\n// Show a FAB only when the first visible index > 4",
     "answerCode": "val listState = rememberLazyListState()\n\n// Solution: use derivedStateOf to efficiently compute visibility\nval showFab by remember {\n    derivedStateOf {\n        listState.firstVisibleItemIndex > 2\n    }\n}\n\n// Then use AnimatedVisibility with showFab to control the FAB\nAnimatedVisibility(\n    visible = showFab,\n    enter = fadeIn() + slideInVertically { it },\n    exit = fadeOut() + slideOutVertically { it }\n) {\n    FloatingActionButton(onClick = { /* Action */ }) {\n        // FAB content\n    }\n}"
   },
   {
     "id": "2",
     "difficulty": "Medium",
-    "question": "How do you implement a custom state hoisting pattern for a composable that needs to track whether an item is favorited, and allow the parent to be notified of changes?",
-    "questionCode": "// You need to create a composable that:\n// 1. Shows an item that can be favorited\n// 2. Maintains its own state if parent doesn't need control\n// 3. Allows parent to control state if needed\n\n@Composable\nfun FavoritableItem(\n    item: Item,\n    // What parameters would you add here?\n) {\n    // How would you implement this?\n}",
+    "question": "\uD83D\uDDE3\uFE0F Below is a basic implementation of a LazyColumn. Will this work as expected, or do you think there is something wrong with the code? ",
+    "questionCode": "LazyColumn {\n    items(comments.map { it.text }, key = { it }) { text ->\n        CommentCard(text)\n    }\n}",
     "answerCode": ""
+  },
+  {
+    "id": "3",
+    "difficulty": "Hard",
+    "question": "\uD83D\uDDE3\uFE0F This grid layout looks great on your device, but you’ve been tasked to ensure that it looks great on many form factors, like a tablet. Are you confident that this code will do just that? If not, then what would you change about it to make it truly adaptive?",
+    "questionCode": "LazyVerticalGrid(\n  columns = GridCells.Fixed(2),\n  horizontalArrangement = Arrangement.spacedBy(24.dp),\n  verticalArrangement = Arrangement.spacedBy(24.dp),\n  contentPadding = PaddingValues(16.dp)\n) {\n  items(shoes) { shoe ->\n    ShopItemWithImage(shoe)\n  }\n}",
+    "answerCode": " LazyVerticalGrid(\n                columns = GridCells.Adaptive(minSize = 128.dp),\n                horizontalArrangement = Arrangement.spacedBy(24.dp),\n                verticalArrangement = Arrangement.spacedBy(24.dp),\n                contentPadding = PaddingValues(16.dp)\n            ) {\n                items(shoes) { shoe ->\n                    ShopItemWithImage(shoe)\n                }\n            }"
   }
 ]

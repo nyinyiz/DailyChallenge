@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
 import com.nyinyi.dailychallenge.ui.screens.challenge.DailyChallenge1
+import com.nyinyi.dailychallenge.ui.screens.challenge.DailyChallenge3
 
 enum class SolutionView {
     DESIGN_OUTPUT, CODE
@@ -143,6 +144,8 @@ fun DesignOutputView(question: DailyChallengeObj) {
             // Show the interactive solution based on question ID - this contains its own scrolling
             when (question.id) {
                 "1" -> DailyChallenge1(modifier = Modifier.fillMaxSize())
+//                "2" -> DailyChallenge2(modifier = Modifier.fillMaxSize())
+                "3" -> DailyChallenge3(modifier = Modifier.fillMaxSize())
                 // Add more cases as more challenges are added
                 else -> Box(
                     modifier = Modifier
