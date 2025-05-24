@@ -1,54 +1,42 @@
 package com.nyinyi.dailychallenge.data.model
 
+import dailychallenge.composeapp.generated.resources.Res
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 @Serializable
 data class DailyChallengeObj(
     val id: String,
+    val difficulty: String,
+    // Easy, Medium, Hard
     val question: String,
     val questionCode: String = "",
     val answerCode: String = ""
 )
 
-private val challengesJson = """
-{
-  "challenges": [
-    {
-      "id": "1",
-      "question": "You want to show a FloatingActionButton (FAB) only after scrolling past the first few items. You've got access to scroll state — now you need to connect that to visibility. How would you do it? Feel free to share code snippets!",
-      "questionCode": "val listState = rememberLazyListState()\n\nLazyColumn(state = listState) {\n  items(100) { Text(\"Item ${'$'}it\") }\n}\n\n// Show a FAB only when the first visible index > 4",
-      "answerCode": "val listState = rememberLazyListState()\n\n// Solution: use derivedStateOf to efficiently compute visibility\nval showFab by remember {\n    derivedStateOf {\n        listState.firstVisibleItemIndex > 2\n    }\n}\n\n// Then use AnimatedVisibility with showFab to control the FAB\nAnimatedVisibility(\n    visible = showFab,\n    enter = fadeIn() + slideInVertically { it },\n    exit = fadeOut() + slideOutVertically { it }\n) {\n    FloatingActionButton(onClick = { /* Action */ }) {\n        // FAB content\n    }\n}"
-    },
-    {
-      "id": "2",
-      "question": "How do you implement a custom state hoisting pattern for a composable that needs to track whether an item is favorited, and allow the parent to be notified of changes?",
-      "questionCode": "// You need to create a composable that:\n// 1. Shows an item that can be favorited\n// 2. Maintains its own state if parent doesn't need control\n// 3. Allows parent to control state if needed\n\n@Composable\nfun FavoritableItem(\n    item: Item,\n    // What parameters would you add here?\n) {\n    // How would you implement this?\n}",
-      "answerCode": ""
-    }
-  ]
-}
-""".trimIndent()
-
-@Serializable
-private data class ChallengesJson(
-    val challenges: List<DailyChallengeObj>
-)
-
 private val defaultChallenges = listOf(
     DailyChallengeObj(
-        "1",
-        "You want to show a FloatingActionButton (FAB) only after scrolling past the first few items. You've got access to scroll state — now you need to connect that to visibility. How would you do it?",
+        id = "1",
+        difficulty = "Easy",
+        question = "You want to show a FloatingActionButton (FAB) only after scrolling past the first few items. You've got access to scroll state — now you need to connect that to visibility. How would you do it?",
         questionCode = "val listState = rememberLazyListState()\n\nLazyColumn(state = listState) {\n  items(100) { Text(\"Item \$it\") }\n}\n\n// Show a FAB only when the first visible index > 4",
         answerCode = "val listState = rememberLazyListState()\n\n// Solution: use derivedStateOf to efficiently compute visibility\nval showFab by remember {\n    derivedStateOf {\n        listState.firstVisibleItemIndex > 2\n    }\n}\n\n// Then use AnimatedVisibility with showFab to control the FAB\nAnimatedVisibility(\n    visible = showFab,\n    enter = fadeIn() + slideInVertically { it },\n    exit = fadeOut() + slideOutVertically { it }\n) {\n    FloatingActionButton(onClick = { /* Action */ }) {\n        // FAB content\n    }\n}"
     )
 )
 
-fun getDailyChallengeList(): List<DailyChallengeObj> {
+suspend fun getDailyChallengeList(): List<DailyChallengeObj> {
     return try {
-        Json.decodeFromString<ChallengesJson>(challengesJson).challenges
+        loadData()
     } catch (e: Exception) {
         println("Error parsing challenges JSON: ${e.message}")
         defaultChallenges
     }
+}
+
+@OptIn(ExperimentalResourceApi::class)
+suspend fun loadData(): List<DailyChallengeObj> {
+    val readBytes = Res.readBytes("files/daily_challenges.json")
+    val jsonString = readBytes.decodeToString()
+    return Json.decodeFromString(jsonString)
 }
