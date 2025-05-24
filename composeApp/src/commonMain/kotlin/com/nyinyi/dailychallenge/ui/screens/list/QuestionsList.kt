@@ -20,12 +20,20 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -41,32 +49,46 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
 import com.nyinyi.dailychallenge.data.model.getDailyChallengeList
+import com.nyinyi.dailychallenge.ui.screens.play.PlayScreenContent
+import com.nyinyi.dailychallenge.ui.screens.profile.ProfileScreenContent
 import com.nyinyi.dailychallenge.ui.theme.ThemeColors
+
+sealed class BottomNavItem(
+    val route: String,
+    val icon: ImageVector,
+    val label: String,
+) {
+    object Home : BottomNavItem("home", Icons.Filled.Home, "Home")
+
+    object Play : BottomNavItem("play", Icons.Filled.PlayArrow, "Play")
+
+    object Profile : BottomNavItem("profile", Icons.Filled.Person, "Profile")
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuestionsList(
-    onClick: (DailyChallengeObj) -> Unit = {},
+    onClickChallenge: (DailyChallengeObj) -> Unit = {},
     onToggleTheme: () -> Unit = {},
 ) {
-    @Composable
-    fun getDifferentColor(difficulty: String): Color =
-        when (difficulty) {
-            "Easy" -> MaterialTheme.colorScheme.tertiary
-            "Medium" -> MaterialTheme.colorScheme.secondary
-            else -> MaterialTheme.colorScheme.error
-        }
+    var currentScreen by remember { mutableStateOf<BottomNavItem>(BottomNavItem.Home) }
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        "Daily Challenges",
+                        when (currentScreen) {
+                            BottomNavItem.Home -> "Daily Challenges"
+                            BottomNavItem.Play -> "Play Zone"
+                            BottomNavItem.Profile -> "Your Profile"
+                        },
                         style =
                             MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.Bold,
@@ -75,7 +97,6 @@ fun QuestionsList(
                 },
                 actions = {
                     IconButton(onClick = onToggleTheme) {
-                        // Show moon/sun icon based on theme
                         Text(
                             text = if (ThemeColors.isDarkTheme) "☀️" else "🌙",
                             style = MaterialTheme.typography.titleMedium,
@@ -88,95 +109,154 @@ fun QuestionsList(
                     ),
             )
         },
+        bottomBar = {
+            QuestionsListBottomNavigationBar(
+                currentScreen = currentScreen,
+                onScreenSelected = { screen -> currentScreen = screen },
+            )
+        },
     ) { paddingValues ->
-        var dailyChallenge by remember { mutableStateOf<List<DailyChallengeObj>>(emptyList()) }
-        val listState = rememberLazyListState()
+        Box(modifier = Modifier.padding(paddingValues)) {
+            when (currentScreen) {
+                BottomNavItem.Home ->
+                    DailyChallengeListContent(
+                        onClickChallenge,
+                    )
 
-        LaunchedEffect(Unit) {
-            dailyChallenge = getDailyChallengeList()
+                BottomNavItem.Play -> PlayScreenContent()
+                BottomNavItem.Profile -> ProfileScreenContent()
+            }
+        }
+    }
+}
+
+@Composable
+fun QuestionsListBottomNavigationBar(
+    currentScreen: BottomNavItem,
+    onScreenSelected: (BottomNavItem) -> Unit,
+) {
+    val items =
+        listOf(
+            BottomNavItem.Home,
+            BottomNavItem.Play,
+            BottomNavItem.Profile,
+        )
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.surface, // Or any other color
+        contentColor = MaterialTheme.colorScheme.onSurface, // Default color for icons and text
+    ) {
+        items.forEach { screen ->
+            NavigationBarItem(
+                icon = { Icon(screen.icon, contentDescription = screen.label) },
+                label = { Text(screen.label) },
+                selected = currentScreen == screen,
+                onClick = { onScreenSelected(screen) },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.primary,
+                    selectedTextColor = MaterialTheme.colorScheme.primary,
+                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    indicatorColor = MaterialTheme.colorScheme.primaryContainer // Color of the selection indicator
+                )
+            )
+        }
+    }
+}
+
+@Composable
+fun DailyChallengeListContent(onClickChallenge: (DailyChallengeObj) -> Unit) {
+    @Composable
+    fun getDifferentColor(difficulty: String): Color =
+        when (difficulty) {
+            "Easy" -> MaterialTheme.colorScheme.tertiary
+            "Medium" -> MaterialTheme.colorScheme.secondary
+            else -> MaterialTheme.colorScheme.error
         }
 
-        Box(
-            modifier = Modifier.fillMaxSize().padding(paddingValues),
-        ) {
-            LazyColumn(
-                state = listState,
-                modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
-            ) {
-                // Add extra padding at the top
-                item { Spacer(modifier = Modifier.height(8.dp)) }
+    var dailyChallenge by remember { mutableStateOf<List<DailyChallengeObj>>(emptyList()) }
+    val listState = rememberLazyListState()
 
-                itemsIndexed(dailyChallenge) { index, challenge ->
-                    AnimatedVisibility(
-                        visible = true,
-                        enter =
-                            fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) +
+    LaunchedEffect(Unit) {
+        dailyChallenge = getDailyChallengeList()
+    }
+
+    Box(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        LazyColumn(
+            state = listState,
+            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+        ) {
+            item { Spacer(modifier = Modifier.height(8.dp)) }
+
+            itemsIndexed(dailyChallenge) { _, challenge ->
+                AnimatedVisibility(
+                    visible = true,
+                    enter =
+                        fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) +
                                 scaleIn(
                                     initialScale = 0.92f,
                                     animationSpec = spring(stiffness = Spring.StiffnessLow),
                                 ),
-                        exit = fadeOut(),
+                    exit = fadeOut(),
+                ) {
+                    Card(
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        colors =
+                            CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
+                            ),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                        onClick = {
+                            onClickChallenge(challenge)
+                        },
                     ) {
-                        Card(
-                            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                            shape = RoundedCornerShape(16.dp),
-                            colors =
-                                CardDefaults.cardColors(
-                                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
-                                ),
-                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-                            onClick = {
-                                onClick(challenge)
-                            },
+                        Column(
+                            modifier = Modifier.padding(16.dp),
                         ) {
-                            Column(
-                                modifier = Modifier.padding(16.dp),
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween,
                             ) {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                ) {
-                                    AssistChip(
-                                        onClick = { },
-                                        label = { Text("Challenge ${challenge.id}") },
-                                    )
-                                    Box(
-                                        modifier =
-                                            Modifier
-                                                .clip(RoundedCornerShape(12.dp))
-                                                .background(
-                                                    getDifferentColor(challenge.difficulty).copy(
-                                                        alpha = 0.2f,
-                                                    ),
-                                                ).padding(horizontal = 8.dp, vertical = 2.dp),
-                                        contentAlignment = Alignment.Center,
-                                    ) {
-                                        Text(
-                                            text = challenge.difficulty,
-                                            style = MaterialTheme.typography.labelSmall,
-                                            color = getDifferentColor(challenge.difficulty),
-                                        )
-                                    }
-                                }
-
-                                Spacer(modifier = Modifier.height(12.dp))
-
-                                Text(
-                                    challenge.question,
-                                    style = MaterialTheme.typography.bodyLarge,
-                                    maxLines = 3,
-                                    overflow = TextOverflow.Ellipsis,
+                                AssistChip(
+                                    onClick = { /* No action needed for the chip itself */ },
+                                    label = { Text("Challenge ${challenge.id}") },
                                 )
+                                Box(
+                                    modifier =
+                                        Modifier
+                                            .clip(RoundedCornerShape(12.dp))
+                                            .background(
+                                                getDifferentColor(challenge.difficulty).copy(
+                                                    alpha = 0.2f,
+                                                ),
+                                            ).padding(horizontal = 8.dp, vertical = 2.dp),
+                                    contentAlignment = Alignment.Center,
+                                ) {
+                                    Text(
+                                        text = challenge.difficulty,
+                                        style = MaterialTheme.typography.labelSmall,
+                                        color = getDifferentColor(challenge.difficulty),
+                                    )
+                                }
                             }
+
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            Text(
+                                challenge.question,
+                                style = MaterialTheme.typography.bodyLarge,
+                                maxLines = 3,
+                                overflow = TextOverflow.Ellipsis,
+                            )
                         }
                     }
                 }
-
-                // Add some padding at the bottom
-                item {
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
+            }
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
             }
         }
     }

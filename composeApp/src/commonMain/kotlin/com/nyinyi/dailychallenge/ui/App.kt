@@ -32,7 +32,7 @@ fun App() {
         ) {
             composable<Routes.QuestionList> {
                 QuestionsList(
-                    onClick = { question ->
+                    onClickChallenge = { question ->
                         navController.navigate(
                             Routes.QuestionDetail(questionId = question.id),
                         )

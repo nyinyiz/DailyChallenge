@@ -18,6 +18,7 @@ kotlin = "2.1.21"
 kotlinx-coroutines = "1.10.2"
 materialIconsCore = "1.7.8"
 materialIconsExtended = "1.7.8"
+materialIconsExtendedVersion = "1.7.3"
 navigationCompose = "2.8.0-alpha10"
 kotlinSerialization = "1.7.3"
 
@@ -41,6 +42,7 @@ kotlinx-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-s
 jetbrains-compose-navigation = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 compose-resources = { group = "org.jetbrains.compose", name = "resources", version.ref = "composeMultiplatform" }
+material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "materialIconsExtendedVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
