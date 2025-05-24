@@ -151,13 +151,14 @@ fun QuestionsListBottomNavigationBar(
                 label = { Text(screen.label) },
                 selected = currentScreen == screen,
                 onClick = { onScreenSelected(screen) },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    indicatorColor = MaterialTheme.colorScheme.primaryContainer // Color of the selection indicator
-                )
+                colors =
+                    NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.primary,
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
+                        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        indicatorColor = MaterialTheme.colorScheme.primaryContainer, // Color of the selection indicator
+                    ),
             )
         }
     }
@@ -194,10 +195,10 @@ fun DailyChallengeListContent(onClickChallenge: (DailyChallengeObj) -> Unit) {
                     visible = true,
                     enter =
                         fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) +
-                                scaleIn(
-                                    initialScale = 0.92f,
-                                    animationSpec = spring(stiffness = Spring.StiffnessLow),
-                                ),
+                            scaleIn(
+                                initialScale = 0.92f,
+                                animationSpec = spring(stiffness = Spring.StiffnessLow),
+                            ),
                     exit = fadeOut(),
                 ) {
                     Card(
