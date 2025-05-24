@@ -1,14 +1,19 @@
 package com.nyinyi.dailychallenge.ui.screens.detail
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -20,11 +25,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -35,7 +37,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
 import com.nyinyi.dailychallenge.ui.components.QuestionTab
@@ -50,8 +54,7 @@ fun QuestionDetail(
     onToggleTheme: () -> Unit = {}
 ) {
     var showContent by remember { mutableStateOf(false) }
-    var selectedTabIndex by remember { mutableStateOf(0) }
-    val tabs = listOf("Question", "Solution")
+    var isFlipped by remember { mutableStateOf(false) }
 
     val difficulty = question.difficulty
 
@@ -60,6 +63,12 @@ fun QuestionDetail(
         "Medium" -> MaterialTheme.colorScheme.secondary
         else -> MaterialTheme.colorScheme.error
     }
+
+    val rotation = animateFloatAsState(
+        targetValue = if (isFlipped) 180f else 0f,
+        animationSpec = tween(500, easing = FastOutSlowInEasing),
+        label = "cardFlip"
+    )
 
     LaunchedEffect(Unit) {
         showContent = true
@@ -130,50 +139,75 @@ fun QuestionDetail(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Tab Row with improved styling
-            TabRow(
-                selectedTabIndex = selectedTabIndex,
-                indicator = { tabPositions ->
-                    TabRowDefaults.Indicator(
-                        modifier = Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
-                        height = 3.dp,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                },
-                divider = {},
-                containerColor = MaterialTheme.colorScheme.background
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                tabs.forEachIndexed { index, title ->
-                    Tab(
-                        selected = selectedTabIndex == index,
-                        onClick = { selectedTabIndex = index },
-                        text = {
-                            Text(
-                                text = title,
-                                style = MaterialTheme.typography.bodyMedium.copy(
-                                    fontWeight = if (selectedTabIndex == index)
-                                        FontWeight.Bold else FontWeight.Normal
-                                ),
-                                color = if (selectedTabIndex == index)
-                                    MaterialTheme.colorScheme.primary
-                                else
-                                    MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
-                            )
-                        }
+                TextButton(
+                    onClick = { isFlipped = !isFlipped },
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp),
+                    colors = androidx.compose.material3.ButtonDefaults.textButtonColors(
+                        contentColor = if (isFlipped) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.primary
+                    )
+                ) {
+                    Text(
+                        text = if (isFlipped) "✨ Show Question" else "\uD83D\uDCA1 Show Solution",
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Medium,
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
             }
 
-            // Content based on selected tab with enhanced animation
             AnimatedVisibility(
                 visible = showContent,
                 enter = fadeIn() + slideInVertically(initialOffsetY = { it / 5 })
             ) {
-                when (selectedTabIndex) {
-                    0 -> QuestionTab(question)
-                    1 -> SolutionTab(question)
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                ) {
+                    Card(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .graphicsLayer {
+                                rotationY = rotation.value
+                                cameraDistance = 12f * density
+                                alpha = if (rotation.value > 90f) 0f else 1f
+                            },
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surface
+                        ),
+                        elevation = CardDefaults.cardElevation(4.dp)
+                    ) {
+                        QuestionTab(question)
+                    }
+
+                    Card(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .graphicsLayer {
+                                rotationY = rotation.value - 180f
+                                cameraDistance = 12f * density
+                                alpha = if (rotation.value < 90f) 0f else 1f
+                            },
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surface
+                        ),
+                        elevation = CardDefaults.cardElevation(4.dp)
+                    ) {
+                        SolutionTab(question)
+                    }
                 }
             }
+
         }
     }
 }
