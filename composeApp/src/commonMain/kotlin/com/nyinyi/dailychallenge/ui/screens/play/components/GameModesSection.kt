@@ -21,11 +21,13 @@ import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.StarHalf
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.Compare
 import androidx.compose.material.icons.rounded.LibraryAddCheck
 import androidx.compose.material.icons.rounded.RadioButtonChecked
 import androidx.compose.material.icons.rounded.Star
+import androidx.compose.material.icons.rounded.StarBorder
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -228,7 +230,6 @@ fun GameModeCard(
                         color = Color.White.copy(alpha = 0.8f),
                     )
 
-                    // Stats or Additional Info
                     Row(
                         modifier =
                             Modifier
@@ -246,11 +247,19 @@ fun GameModeCard(
                             modifier = Modifier.size(16.dp),
                             tint = Color.White,
                         )
-                        Text(
-                            text = "4.8",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = Color.White,
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Rounded.StarHalf,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp),
+                            tint = Color.White,
                         )
+                        Icon(
+                            imageVector = Icons.Rounded.StarBorder,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp),
+                            tint = Color.White,
+                        )
+
                     }
                 }
             }

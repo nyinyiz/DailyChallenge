@@ -1,16 +1,12 @@
 package com.nyinyi.dailychallenge.ui.screens.play.quiz
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.Card
@@ -30,7 +26,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -69,14 +64,16 @@ fun QuizScreen(
     var quizResults by remember { mutableStateOf<QuizResult?>(null) }
     var incorrectAnswers by remember { mutableStateOf(listOf<QuizCard>()) }
 
-    val difficulty = "Easy" // Replace with actual difficulty logic
+    /*
+        val difficulty = "Easy" // Replace with actual difficulty logic
 
-    val difficultyColor =
-        when (difficulty) {
-            "Easy" -> MaterialTheme.colorScheme.tertiary
-            "Medium" -> MaterialTheme.colorScheme.secondary
-            else -> MaterialTheme.colorScheme.error
-        }
+        val difficultyColor =
+            when (difficulty) {
+                "Easy" -> MaterialTheme.colorScheme.tertiary
+                "Medium" -> MaterialTheme.colorScheme.secondary
+                else -> MaterialTheme.colorScheme.error
+            }
+    */
 
     Scaffold(
         topBar = {
@@ -92,21 +89,6 @@ fun QuizScreen(
                                     fontWeight = FontWeight.Bold,
                                 ),
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Box(
-                            modifier =
-                                Modifier
-                                    .clip(RoundedCornerShape(12.dp))
-                                    .background(difficultyColor.copy(alpha = 0.2f))
-                                    .padding(horizontal = 8.dp, vertical = 2.dp),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            Text(
-                                text = difficulty,
-                                style = MaterialTheme.typography.labelSmall,
-                                color = difficultyColor,
-                            )
-                        }
                     }
                 },
                 navigationIcon = {
@@ -171,7 +153,14 @@ fun QuizScreen(
                         )
                     } else {
                         // Question Progress UI
+                        val difficultyStatus = if (currentQuestionIndex < state.quizList.size) {
+                            state.quizList[currentQuestionIndex].difficulty
+                        } else {
+                            "Completed"
+                        }
+
                         QuestionProgressUI(
+                            difficulty = difficultyStatus,
                             currentQuestion = currentQuestionIndex + 1,
                             totalQuestions = state.quizList.size,
                         )
@@ -183,6 +172,7 @@ fun QuizScreen(
                                     currentQuestionIndex = 0
                                     incorrectAnswers = listOf()
                                     quizResults = null
+                                    viewModel.getTrueFalseChallenges()
                                 },
                             )
                         } else if (currentQuestionIndex < state.quizList.size) {

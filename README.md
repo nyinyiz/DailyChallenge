@@ -1,6 +1,7 @@
 # Daily Challenge
 
-A multiplatform app to browse and solve daily coding challenges. Built with Kotlin Multiplatform and Compose for Android, iOS, Desktop, and Web.
+A multiplatform app to browse and solve daily coding challenges. Built with Kotlin Multiplatform and
+Compose for Android, iOS, Desktop, and Web.
 
 ## Screenshots
 
@@ -11,7 +12,8 @@ A multiplatform app to browse and solve daily coding challenges. Built with Kotl
 
 ## Welcome for Contribution
 
-We welcome contributions! You can add new challenge questions in any area—Android, Kotlin, Compose, or even platform-specific topics. Help us grow the collection and make learning fun for everyone!
+I welcome contributions! You can add new challenge questions in any area—Android, Kotlin, Compose,
+or even platform-specific topics. Help me grow the collection and make learning fun for everyone!
 
 1. **Fork** the repository.
 2. **Clone** your fork:
