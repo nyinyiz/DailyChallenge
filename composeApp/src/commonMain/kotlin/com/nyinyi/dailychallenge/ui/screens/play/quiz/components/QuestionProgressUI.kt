@@ -46,86 +46,90 @@ fun QuestionProgressUI(
     difficulty: String,
     currentQuestion: Int,
     totalQuestions: Int,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val updatedCurrentQuestionCount =
         if (currentQuestion > totalQuestions) totalQuestions else currentQuestion
     var progressAnimation by remember { mutableFloatStateOf(0f) }
     val progress = updatedCurrentQuestionCount.toFloat() / totalQuestions
 
-    val difficultyColor = when (difficulty) {
-        "Completed" -> MaterialTheme.colorScheme.primary
-        "Easy" -> MaterialTheme.colorScheme.tertiary
-        "Medium" -> MaterialTheme.colorScheme.secondary
-        else -> MaterialTheme.colorScheme.error
-    }
+    val difficultyColor =
+        when (difficulty) {
+            "Completed" -> MaterialTheme.colorScheme.primary
+            "Easy" -> MaterialTheme.colorScheme.tertiary
+            "Medium" -> MaterialTheme.colorScheme.secondary
+            else -> MaterialTheme.colorScheme.error
+        }
 
     LaunchedEffect(currentQuestion) {
         animate(
             initialValue = progressAnimation,
             targetValue = progress,
-            animationSpec = tween(
-                durationMillis = 500,
-                easing = FastOutSlowInEasing
-            )
+            animationSpec =
+                tween(
+                    durationMillis = 500,
+                    easing = FastOutSlowInEasing,
+                ),
         ) { value, _ ->
             progressAnimation = value
         }
     }
 
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             // Progress Stats with Animation
             Column(
-                modifier = Modifier.padding(vertical = 8.dp)
+                modifier = Modifier.padding(vertical = 8.dp),
             ) {
                 Text(
-                    text = buildAnnotatedString {
-                        withStyle(
-                            SpanStyle(
-                                color = MaterialTheme.colorScheme.primary,
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 28.sp
-                            )
-                        ) {
-                            append("$updatedCurrentQuestionCount")
-                        }
-                        withStyle(
-                            SpanStyle(
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                fontSize = 20.sp
-                            )
-                        ) {
-                            append(" / $totalQuestions")
-                        }
-                    }
+                    text =
+                        buildAnnotatedString {
+                            withStyle(
+                                SpanStyle(
+                                    color = MaterialTheme.colorScheme.primary,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 28.sp,
+                                ),
+                            ) {
+                                append("$updatedCurrentQuestionCount")
+                            }
+                            withStyle(
+                                SpanStyle(
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    fontSize = 20.sp,
+                                ),
+                            ) {
+                                append(" / $totalQuestions")
+                            }
+                        },
                 )
 
                 AnimatedVisibility(
                     visible = true,
                     enter = fadeIn() + expandVertically(),
-                    exit = fadeOut() + shrinkVertically()
+                    exit = fadeOut() + shrinkVertically(),
                 ) {
                     Text(
                         text = "Questions Completed",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }
 
             DifficultyTag(
                 difficulty = difficulty,
-                color = difficultyColor
+                color = difficultyColor,
             )
         }
 
@@ -133,44 +137,50 @@ fun QuestionProgressUI(
 
         // Custom Progress Bar with Gradient and Shimmer
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(12.dp)
-                .clip(RoundedCornerShape(6.dp))
-                .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(12.dp)
+                    .clip(RoundedCornerShape(6.dp))
+                    .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
         ) {
             Box(
-                modifier = Modifier
-                    .fillMaxWidth(progressAnimation)
-                    .fillMaxHeight()
-                    .clip(RoundedCornerShape(6.dp))
-                    .background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                MaterialTheme.colorScheme.primary,
-                                MaterialTheme.colorScheme.tertiary
-                            )
-                        )
-                    )
+                modifier =
+                    Modifier
+                        .fillMaxWidth(progressAnimation)
+                        .fillMaxHeight()
+                        .clip(RoundedCornerShape(6.dp))
+                        .background(
+                            brush =
+                                Brush.horizontalGradient(
+                                    colors =
+                                        listOf(
+                                            MaterialTheme.colorScheme.primary,
+                                            MaterialTheme.colorScheme.tertiary,
+                                        ),
+                                ),
+                        ),
             ) {
                 // Shimmer effect
                 Canvas(
-                    modifier = Modifier.matchParentSize()
+                    modifier = Modifier.matchParentSize(),
                 ) {
                     val shimmerWidth = size.width * 0.2f
                     val shimmerOffset =
                         (size.width + shimmerWidth) * progressAnimation - shimmerWidth
 
                     drawRect(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                Color.White.copy(alpha = 0f),
-                                Color.White.copy(alpha = 0.3f),
-                                Color.White.copy(alpha = 0f)
+                        brush =
+                            Brush.horizontalGradient(
+                                colors =
+                                    listOf(
+                                        Color.White.copy(alpha = 0f),
+                                        Color.White.copy(alpha = 0.3f),
+                                        Color.White.copy(alpha = 0f),
+                                    ),
+                                startX = shimmerOffset,
+                                endX = shimmerOffset + shimmerWidth,
                             ),
-                            startX = shimmerOffset,
-                            endX = shimmerOffset + shimmerWidth
-                        )
                     )
                 }
             }

@@ -86,9 +86,10 @@ fun DailyChallengeListContent(
             is QuestionListState.Success -> {
                 LazyColumn(
                     state = listState,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 16.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 16.dp),
                 ) {
                     itemsIndexed(state.dailyChallenges) { index, challenge ->
                         ChallengeCard(
@@ -116,74 +117,83 @@ private fun ChallengeCard(
     challenge: DailyChallengeObj,
     index: Int,
     onClickChallenge: (DailyChallengeObj) -> Unit,
-
-    ) {
+) {
     var isPressed by remember { mutableStateOf(false) }
 
-    val difficultyColor = when (challenge.difficulty) {
-        "Easy" -> MaterialTheme.colorScheme.tertiary
-        "Medium" -> MaterialTheme.colorScheme.secondary
-        else -> MaterialTheme.colorScheme.error
-    }
+    val difficultyColor =
+        when (challenge.difficulty) {
+            "Easy" -> MaterialTheme.colorScheme.tertiary
+            "Medium" -> MaterialTheme.colorScheme.secondary
+            else -> MaterialTheme.colorScheme.error
+        }
 
     AnimatedVisibility(
         visible = true,
-        enter = fadeIn(
-            animationSpec = tween(
-                durationMillis = 300,
-                delayMillis = index * 100
-            )
-        ) + slideInVertically(
-            initialOffsetY = { it * 2 },
-            animationSpec = spring(
-                dampingRatio = Spring.DampingRatioMediumBouncy,
-                stiffness = Spring.StiffnessLow
-            )
-        )
+        enter =
+            fadeIn(
+                animationSpec =
+                    tween(
+                        durationMillis = 300,
+                        delayMillis = index * 100,
+                    ),
+            ) +
+                slideInVertically(
+                    initialOffsetY = { it * 2 },
+                    animationSpec =
+                        spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow,
+                        ),
+                ),
     ) {
         Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp)
-                .graphicsLayer {
-                    scaleX = if (isPressed) 0.95f else 1f
-                    scaleY = if (isPressed) 0.95f else 1f
-                }
-                .pointerInput(Unit) {
-                    awaitPointerEventScope {
-                        while (true) {
-                            val event = awaitPointerEvent()
-                            when {
-                                event.type == PointerEventType.Press -> isPressed = true
-                                event.type == PointerEventType.Release -> isPressed = false
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
+                    .graphicsLayer {
+                        scaleX = if (isPressed) 0.95f else 1f
+                        scaleY = if (isPressed) 0.95f else 1f
+                    }.pointerInput(Unit) {
+                        awaitPointerEventScope {
+                            while (true) {
+                                val event = awaitPointerEvent()
+                                when {
+                                    event.type == PointerEventType.Press -> isPressed = true
+                                    event.type == PointerEventType.Release -> isPressed = false
+                                }
                             }
                         }
-                    }
-                },
+                    },
             shape = RoundedCornerShape(24.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp)
-            ),
-            onClick = { onClickChallenge(challenge) }
+            colors =
+                CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
+                ),
+            onClick = { onClickChallenge(challenge) },
         ) {
             Box {
                 // Background pattern
                 Canvas(
-                    modifier = Modifier.matchParentSize()
+                    modifier = Modifier.matchParentSize(),
                 ) {
-                    val pattern = Path().apply {
-                        moveTo(size.width * 0.8f, 0f)
-                        cubicTo(
-                            size.width, size.height * 0.2f,
-                            size.width * 0.8f, size.height * 0.8f,
-                            size.width, size.height
-                        )
-                    }
+                    val pattern =
+                        Path().apply {
+                            moveTo(size.width * 0.8f, 0f)
+                            cubicTo(
+                                size.width,
+                                size.height * 0.2f,
+                                size.width * 0.8f,
+                                size.height * 0.8f,
+                                size.width,
+                                size.height,
+                            )
+                        }
 
                     drawPath(
                         path = pattern,
                         color = difficultyColor.copy(alpha = 0.1f),
-                        style = Stroke(width = 8f)
+                        style = Stroke(width = 8f),
                     )
                 }
 
@@ -193,12 +203,12 @@ private fun ChallengeCard(
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         ChallengeBadge(challenge.id)
                         DifficultyTag(
                             difficulty = challenge.difficulty,
-                            color = difficultyColor
+                            color = difficultyColor,
                         )
                     }
 
@@ -208,7 +218,7 @@ private fun ChallengeCard(
                         text = challenge.question,
                         style = MaterialTheme.typography.titleMedium,
                         maxLines = 3,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
                     )
 
                     Spacer(modifier = Modifier.height(12.dp))
@@ -225,48 +235,49 @@ private fun ChallengeBadge(id: String) {
         label = {
             Text(
                 "Challenge $id",
-                style = MaterialTheme.typography.labelMedium
+                style = MaterialTheme.typography.labelMedium,
             )
         },
         leadingIcon = {
             Icon(
                 imageVector = Icons.Rounded.EmojiEvents,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
+                tint = MaterialTheme.colorScheme.primary,
             )
-        }
+        },
     )
 }
 
 @Composable
 fun DifficultyTag(
     difficulty: String,
-    color: Color
+    color: Color,
 ) {
     Surface(
         color = color.copy(alpha = 0.1f),
         shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(1.dp, color.copy(alpha = 0.3f))
+        border = BorderStroke(1.dp, color.copy(alpha = 0.3f)),
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
             horizontalArrangement = Arrangement.spacedBy(4.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                imageVector = when (difficulty) {
-                    "Easy" -> Icons.Rounded.Star
-                    "Medium" -> Icons.AutoMirrored.Rounded.StarHalf
-                    else -> Icons.Rounded.StarBorder
-                },
+                imageVector =
+                    when (difficulty) {
+                        "Easy" -> Icons.Rounded.Star
+                        "Medium" -> Icons.AutoMirrored.Rounded.StarHalf
+                        else -> Icons.Rounded.StarBorder
+                    },
                 contentDescription = null,
                 modifier = Modifier.size(16.dp),
-                tint = color
+                tint = color,
             )
             Text(
                 text = difficulty,
                 style = MaterialTheme.typography.labelMedium,
-                color = color
+                color = color,
             )
         }
     }
@@ -279,11 +290,12 @@ private fun LoadingAnimation() {
         contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator(
-            modifier = Modifier
-                .size(64.dp)
-                .scale(1f),
+            modifier =
+                Modifier
+                    .size(64.dp)
+                    .scale(1f),
             color = MaterialTheme.colorScheme.primary,
-            strokeWidth = 6.dp
+            strokeWidth = 6.dp,
         )
     }
 }
@@ -296,23 +308,24 @@ private fun ErrorSection() {
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Icon(
                 imageVector = Icons.Rounded.Error,
                 contentDescription = null,
                 modifier = Modifier.size(48.dp),
-                tint = MaterialTheme.colorScheme.error
+                tint = MaterialTheme.colorScheme.error,
             )
             Text(
                 "Challenge loading failed",
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
             )
             Button(
                 onClick = { /* Add retry logic */ },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.error
-                )
+                colors =
+                    ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.error,
+                    ),
             ) {
                 Text("Try Again")
             }

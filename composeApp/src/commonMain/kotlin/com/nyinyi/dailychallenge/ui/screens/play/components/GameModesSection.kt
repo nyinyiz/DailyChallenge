@@ -259,7 +259,6 @@ fun GameModeCard(
                             modifier = Modifier.size(16.dp),
                             tint = Color.White,
                         )
-
                     }
                 }
             }

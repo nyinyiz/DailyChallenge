@@ -59,7 +59,7 @@ fun PlayScreenPreview() {
 @Composable
 fun PlayScreenContent(
     onNavigateToChallenge: () -> Unit = {},
-    onNavigateToGameMode: (GameMode) -> Unit
+    onNavigateToGameMode: (GameMode) -> Unit,
 ) {
     var isContentVisible by remember { mutableStateOf(false) }
 
@@ -68,17 +68,19 @@ fun PlayScreenContent(
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
     ) {
         // Top Section with Welcome and Profile
         AnimatedVisibility(
             visible = isContentVisible,
-            enter = slideInVertically(
-                initialOffsetY = { -it },
-                animationSpec = tween(durationMillis = 500)
-            ) + fadeIn(animationSpec = tween(durationMillis = 500))
+            enter =
+                slideInVertically(
+                    initialOffsetY = { -it },
+                    animationSpec = tween(durationMillis = 500),
+                ) + fadeIn(animationSpec = tween(durationMillis = 500)),
         ) {
             TopSection()
         }
@@ -86,48 +88,56 @@ fun PlayScreenContent(
         // Daily Challenge Section with scale animation
         AnimatedVisibility(
             visible = isContentVisible,
-            enter = scaleIn(
-                initialScale = 0.8f,
-                animationSpec = tween(
-                    durationMillis = 500,
-                    delayMillis = 100,
-                    easing = EaseOutBack
-                )
-            ) + fadeIn(
-                animationSpec = tween(
-                    durationMillis = 500,
-                    delayMillis = 100
-                )
-            )
+            enter =
+                scaleIn(
+                    initialScale = 0.8f,
+                    animationSpec =
+                        tween(
+                            durationMillis = 500,
+                            delayMillis = 100,
+                            easing = EaseOutBack,
+                        ),
+                ) +
+                    fadeIn(
+                        animationSpec =
+                            tween(
+                                durationMillis = 500,
+                                delayMillis = 100,
+                            ),
+                    ),
         ) {
             DailyChallengeCard(
                 onStartChallenge = {
                     onNavigateToChallenge()
-                }
+                },
             )
         }
 
         // Game Modes with staggered animation
         AnimatedVisibility(
             visible = isContentVisible,
-            enter = slideInVertically(
-                initialOffsetY = { it / 2 },
-                animationSpec = tween(
-                    durationMillis = 500,
-                    delayMillis = 200,
-                    easing = EaseOutBack
-                )
-            ) + fadeIn(
-                animationSpec = tween(
-                    durationMillis = 500,
-                    delayMillis = 200
-                )
-            )
+            enter =
+                slideInVertically(
+                    initialOffsetY = { it / 2 },
+                    animationSpec =
+                        tween(
+                            durationMillis = 500,
+                            delayMillis = 200,
+                            easing = EaseOutBack,
+                        ),
+                ) +
+                    fadeIn(
+                        animationSpec =
+                            tween(
+                                durationMillis = 500,
+                                delayMillis = 200,
+                            ),
+                    ),
         ) {
             GameModesSection(
                 onGameModeSelected = { gameMode ->
                     onNavigateToGameMode(gameMode)
-                }
+                },
             )
         }
     }

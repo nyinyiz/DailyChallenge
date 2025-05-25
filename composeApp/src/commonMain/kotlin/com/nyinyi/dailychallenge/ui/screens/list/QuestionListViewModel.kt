@@ -23,7 +23,7 @@ class QuestionListViewModel(
     fun getDailyChallenges() {
         viewModelScope.launch {
             _state.value = QuestionListState.Loading
-            delay(3000)
+            delay(1000)
             try {
                 repository.getDailyChallenges().let {
                     _state.value = QuestionListState.Success(it)

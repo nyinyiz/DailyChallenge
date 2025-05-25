@@ -73,7 +73,7 @@ fun QuizScreen(
                 "Medium" -> MaterialTheme.colorScheme.secondary
                 else -> MaterialTheme.colorScheme.error
             }
-    */
+     */
 
     Scaffold(
         topBar = {
@@ -153,11 +153,12 @@ fun QuizScreen(
                         )
                     } else {
                         // Question Progress UI
-                        val difficultyStatus = if (currentQuestionIndex < state.quizList.size) {
-                            state.quizList[currentQuestionIndex].difficulty
-                        } else {
-                            "Completed"
-                        }
+                        val difficultyStatus =
+                            if (currentQuestionIndex < state.quizList.size) {
+                                state.quizList[currentQuestionIndex].difficulty
+                            } else {
+                                "Completed"
+                            }
 
                         QuestionProgressUI(
                             difficulty = difficultyStatus,

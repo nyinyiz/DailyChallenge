@@ -48,7 +48,7 @@ class ChallengesRepositoryImpl : ChallengesRepository {
             // Get 10 random questions
             allQuestions
                 .shuffled() // Randomly shuffle the list
-                .take(10)   // Take first 10 items from shuffled list
+                .take(10) // Take first 10 items from shuffled list
                 .also { randomQuestions ->
                     if (randomQuestions.isEmpty()) {
                         println("Warning: No questions were loaded")
