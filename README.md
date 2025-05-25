@@ -6,7 +6,7 @@ Compose for Android, iOS, Desktop, and Web.
 ## Screenshots
 
 <!-- Add your screenshots here -->
-![Screenshot 1](screenshots/screen1.png)
+![Screenshot 1](screenshots/screen2.png)
 
 ---
 
