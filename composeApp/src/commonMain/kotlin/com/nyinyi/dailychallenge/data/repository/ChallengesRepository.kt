@@ -1,0 +1,12 @@
+package com.nyinyi.dailychallenge.data.repository
+
+import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
+import com.nyinyi.dailychallenge.data.model.QuizCard
+
+interface ChallengesRepository {
+    suspend fun getDailyChallengeById(id: String): DailyChallengeObj
+
+    suspend fun getDailyChallenges(): List<DailyChallengeObj>
+
+    suspend fun getTrueFalseChallenges(): List<QuizCard>
+}

@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,7 +41,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,11 +53,12 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
-import com.nyinyi.dailychallenge.data.model.getDailyChallengeList
 import com.nyinyi.dailychallenge.ui.screens.play.PlayScreenContent
 import com.nyinyi.dailychallenge.ui.screens.profile.ProfileScreenContent
 import com.nyinyi.dailychallenge.ui.theme.ThemeColors
+import org.koin.compose.viewmodel.koinViewModel
 
 sealed class BottomNavItem(
     val route: String,
@@ -120,7 +121,7 @@ fun QuestionsList(
             when (currentScreen) {
                 BottomNavItem.Home ->
                     DailyChallengeListContent(
-                        onClickChallenge,
+                        onClickChallenge = onClickChallenge,
                     )
 
                 BottomNavItem.Play -> PlayScreenContent()
@@ -165,7 +166,12 @@ fun QuestionsListBottomNavigationBar(
 }
 
 @Composable
-fun DailyChallengeListContent(onClickChallenge: (DailyChallengeObj) -> Unit) {
+fun DailyChallengeListContent(
+    viewModel: QuestionListViewModel = koinViewModel(),
+    onClickChallenge: (DailyChallengeObj) -> Unit,
+) {
+    val uiState by viewModel.state.collectAsStateWithLifecycle()
+
     @Composable
     fun getDifferentColor(difficulty: String): Color =
         when (difficulty) {
@@ -174,90 +180,115 @@ fun DailyChallengeListContent(onClickChallenge: (DailyChallengeObj) -> Unit) {
             else -> MaterialTheme.colorScheme.error
         }
 
-    var dailyChallenge by remember { mutableStateOf<List<DailyChallengeObj>>(emptyList()) }
     val listState = rememberLazyListState()
-
-    LaunchedEffect(Unit) {
-        dailyChallenge = getDailyChallengeList()
-    }
 
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
-        LazyColumn(
-            state = listState,
-            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
-        ) {
-            item { Spacer(modifier = Modifier.height(8.dp)) }
-
-            itemsIndexed(dailyChallenge) { _, challenge ->
-                AnimatedVisibility(
-                    visible = true,
-                    enter =
-                        fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) +
-                            scaleIn(
-                                initialScale = 0.92f,
-                                animationSpec = spring(stiffness = Spring.StiffnessLow),
-                            ),
-                    exit = fadeOut(),
+        when (val state = uiState) {
+            is QuestionListState.Loading -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center,
                 ) {
-                    Card(
-                        modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-                        shape = RoundedCornerShape(16.dp),
-                        colors =
-                            CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
-                            ),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-                        onClick = {
-                            onClickChallenge(challenge)
-                        },
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(16.dp),
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                }
+            }
+
+            is QuestionListState.Success -> {
+                LazyColumn(
+                    state = listState,
+                    modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+                ) {
+                    item { Spacer(modifier = Modifier.height(8.dp)) }
+
+                    itemsIndexed(state.dailyChallenges) { _, challenge ->
+                        AnimatedVisibility(
+                            visible = true,
+                            enter =
+                                fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) +
+                                    scaleIn(
+                                        initialScale = 0.92f,
+                                        animationSpec = spring(stiffness = Spring.StiffnessLow),
+                                    ),
+                            exit = fadeOut(),
                         ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween,
+                            Card(
+                                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                                shape = RoundedCornerShape(16.dp),
+                                colors =
+                                    CardDefaults.cardColors(
+                                        containerColor =
+                                            MaterialTheme.colorScheme.surfaceColorAtElevation(
+                                                2.dp,
+                                            ),
+                                    ),
+                                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                                onClick = {
+                                    onClickChallenge(challenge)
+                                },
                             ) {
-                                AssistChip(
-                                    onClick = { /* No action needed for the chip itself */ },
-                                    label = { Text("Challenge ${challenge.id}") },
-                                )
-                                Box(
-                                    modifier =
-                                        Modifier
-                                            .clip(RoundedCornerShape(12.dp))
-                                            .background(
-                                                getDifferentColor(challenge.difficulty).copy(
-                                                    alpha = 0.2f,
-                                                ),
-                                            ).padding(horizontal = 8.dp, vertical = 2.dp),
-                                    contentAlignment = Alignment.Center,
+                                Column(
+                                    modifier = Modifier.padding(16.dp),
                                 ) {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                    ) {
+                                        AssistChip(
+                                            onClick = { /* No action needed for the chip itself */ },
+                                            label = { Text("Challenge ${challenge.id}") },
+                                        )
+                                        Box(
+                                            modifier =
+                                                Modifier
+                                                    .clip(RoundedCornerShape(12.dp))
+                                                    .background(
+                                                        getDifferentColor(challenge.difficulty).copy(
+                                                            alpha = 0.2f,
+                                                        ),
+                                                    ).padding(horizontal = 8.dp, vertical = 2.dp),
+                                            contentAlignment = Alignment.Center,
+                                        ) {
+                                            Text(
+                                                text = challenge.difficulty,
+                                                style = MaterialTheme.typography.labelSmall,
+                                                color = getDifferentColor(challenge.difficulty),
+                                            )
+                                        }
+                                    }
+
+                                    Spacer(modifier = Modifier.height(12.dp))
+
                                     Text(
-                                        text = challenge.difficulty,
-                                        style = MaterialTheme.typography.labelSmall,
-                                        color = getDifferentColor(challenge.difficulty),
+                                        challenge.question,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        maxLines = 3,
+                                        overflow = TextOverflow.Ellipsis,
                                     )
                                 }
                             }
-
-                            Spacer(modifier = Modifier.height(12.dp))
-
-                            Text(
-                                challenge.question,
-                                style = MaterialTheme.typography.bodyLarge,
-                                maxLines = 3,
-                                overflow = TextOverflow.Ellipsis,
-                            )
                         }
+                    }
+                    item {
+                        Spacer(modifier = Modifier.height(16.dp))
                     }
                 }
             }
-            item {
-                Spacer(modifier = Modifier.height(16.dp))
+
+            is QuestionListState.Error -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        "Challenge loading failed. Please try again.",
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                }
             }
         }
     }
