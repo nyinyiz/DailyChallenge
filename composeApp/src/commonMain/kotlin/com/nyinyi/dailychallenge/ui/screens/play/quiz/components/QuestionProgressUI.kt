@@ -54,10 +54,10 @@ fun QuestionProgressUI(
     val progress = updatedCurrentQuestionCount.toFloat() / totalQuestions
 
     val difficultyColor =
-        when (difficulty) {
-            "Completed" -> MaterialTheme.colorScheme.primary
-            "Easy" -> MaterialTheme.colorScheme.tertiary
-            "Medium" -> MaterialTheme.colorScheme.secondary
+        when (difficulty.lowercase()) {
+            "completed" -> MaterialTheme.colorScheme.primary
+            "easy" -> MaterialTheme.colorScheme.tertiary
+            "medium" -> MaterialTheme.colorScheme.secondary
             else -> MaterialTheme.colorScheme.error
         }
 

@@ -208,5 +208,145 @@
     "correctAnswer": false,
     "explanation": "KMP uses a unified Gradle setup to build for multiple targets.",
     "difficulty": "medium"
+  },
+  {
+    "id": 31,
+    "question": "In Android, `ViewModel` is destroyed when the screen is rotated.",
+    "correctAnswer": false,
+    "explanation": "`ViewModel` survives configuration changes like screen rotation.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 32,
+    "question": "Jetpack Compose is a declarative UI toolkit for building Android apps.",
+    "correctAnswer": true,
+    "explanation": "Jetpack Compose allows you to describe your UI using composable functions.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 33,
+    "question": "An `Activity` in Android can exist without a `Context`.",
+    "correctAnswer": false,
+    "explanation": "All `Activity` instances require a `Context` to function properly.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 34,
+    "question": "`LiveData` is lifecycle-aware and updates only when the observer is active.",
+    "correctAnswer": true,
+    "explanation": "`LiveData` only sends updates to observers in active lifecycle states.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 35,
+    "question": "In Android, all UI updates must happen on a background thread.",
+    "correctAnswer": false,
+    "explanation": "UI updates must happen on the **main (UI)** thread, not a background thread.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 36,
+    "question": "Kotlin Coroutines can be used for asynchronous programming in Android.",
+    "correctAnswer": true,
+    "explanation": "Coroutines simplify asynchronous tasks by using structured concurrency.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 37,
+    "question": "The `onCreate()` method is called after `onStart()` in an Activity lifecycle.",
+    "correctAnswer": false,
+    "explanation": "`onCreate()` is called before `onStart()` when the activity is first created.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 38,
+    "question": "Room is an object-mapping library for SQLite databases in Android.",
+    "correctAnswer": true,
+    "explanation": "Room provides an abstraction layer over SQLite for easier database access.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 39,
+    "question": "Fragments can be added to an Activity using `FragmentManager`.",
+    "correctAnswer": true,
+    "explanation": "`FragmentManager` allows you to perform fragment transactions in an Activity.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 40,
+    "question": "Android applications cannot run background tasks after API 26.",
+    "correctAnswer": false,
+    "explanation": "Background tasks are still possible after API 26, but with stricter limitations (e.g., using `WorkManager`).",
+    "difficulty": "hard"
+  },
+  {
+    "id": 41,
+    "question": "Using `GlobalScope` for launching coroutines in Android is recommended for UI-related tasks.",
+    "correctAnswer": false,
+    "explanation": "`GlobalScope` lives for the entire application lifecycle and is not lifecycle-aware, making it unsafe for UI operations.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 42,
+    "question": "Kotlin coroutines launched in `GlobalScope` are automatically canceled when the `Activity` is destroyed.",
+    "correctAnswer": false,
+    "explanation": "`GlobalScope` coroutines are not tied to any lifecycle and must be manually canceled to avoid memory leaks.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 43,
+    "question": "`SharedFlow` will automatically re-emit the last value to new subscribers by default.",
+    "correctAnswer": false,
+    "explanation": "`SharedFlow` does not retain values unless a replay cache is explicitly defined.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 44,
+    "question": "`StateFlow` requires an initial value upon creation.",
+    "correctAnswer": true,
+    "explanation": "`StateFlow` is a state-holder and always requires an initial value to emit.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 45,
+    "question": "Jetpack Compose's `LaunchedEffect` runs every time recomposition occurs regardless of its key.",
+    "correctAnswer": false,
+    "explanation": "`LaunchedEffect` only re-runs when the provided key(s) change.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 46,
+    "question": "You can use `suspend` functions directly inside `@Composable` functions.",
+    "correctAnswer": false,
+    "explanation": "`@Composable` functions cannot call `suspend` functions directly. Use `LaunchedEffect` or coroutine scopes inside Compose.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 47,
+    "question": "Using `remember` inside a `@Composable` prevents recomposition when values change.",
+    "correctAnswer": false,
+    "explanation": "`remember` retains the value across recompositions but doesn't prevent recomposition itself.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 48,
+    "question": "`collectAsState()` can be used to observe a `StateFlow` in Compose and trigger recompositions.",
+    "correctAnswer": true,
+    "explanation": "`collectAsState()` bridges StateFlow and Compose by observing the flow and triggering recomposition.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 49,
+    "question": "The Android Runtime (ART) uses Just-In-Time (JIT) and Ahead-Of-Time (AOT) compilation strategies.",
+    "correctAnswer": true,
+    "explanation": "ART uses both JIT (during runtime) and AOT (during install) to improve performance and reduce startup time.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 50,
+    "question": "ViewModel's `viewModelScope` gets automatically cancelled when the associated `Activity` is destroyed.",
+    "correctAnswer": false,
+    "explanation": "`viewModelScope` is tied to the `ViewModel`, not the `Activity`. It is only cleared when the ViewModel is cleared.",
+    "difficulty": "hard"
   }
 ]

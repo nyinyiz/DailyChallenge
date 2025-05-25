@@ -64,17 +64,6 @@ fun QuizScreen(
     var quizResults by remember { mutableStateOf<QuizResult?>(null) }
     var incorrectAnswers by remember { mutableStateOf(listOf<QuizCard>()) }
 
-    /*
-        val difficulty = "Easy" // Replace with actual difficulty logic
-
-        val difficultyColor =
-            when (difficulty) {
-                "Easy" -> MaterialTheme.colorScheme.tertiary
-                "Medium" -> MaterialTheme.colorScheme.secondary
-                else -> MaterialTheme.colorScheme.error
-            }
-     */
-
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -152,12 +141,11 @@ fun QuizScreen(
                             },
                         )
                     } else {
-                        // Question Progress UI
                         val difficultyStatus =
                             if (currentQuestionIndex < state.quizList.size) {
                                 state.quizList[currentQuestionIndex].difficulty
                             } else {
-                                "Completed"
+                                "completed"
                             }
 
                         QuestionProgressUI(

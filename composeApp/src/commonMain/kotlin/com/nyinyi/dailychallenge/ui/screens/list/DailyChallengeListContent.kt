@@ -121,10 +121,11 @@ private fun ChallengeCard(
     var isPressed by remember { mutableStateOf(false) }
 
     val difficultyColor =
-        when (challenge.difficulty) {
-            "Easy" -> MaterialTheme.colorScheme.tertiary
-            "Medium" -> MaterialTheme.colorScheme.secondary
-            else -> MaterialTheme.colorScheme.error
+        when (challenge.difficulty.lowercase()) {
+            "easy" -> MaterialTheme.colorScheme.tertiary
+            "medium" -> MaterialTheme.colorScheme.secondary
+            "hard" -> MaterialTheme.colorScheme.error
+            else -> MaterialTheme.colorScheme.error // fallback color
         }
 
     AnimatedVisibility(
@@ -265,9 +266,9 @@ fun DifficultyTag(
         ) {
             Icon(
                 imageVector =
-                    when (difficulty) {
-                        "Easy" -> Icons.Rounded.Star
-                        "Medium" -> Icons.AutoMirrored.Rounded.StarHalf
+                    when (difficulty.lowercase()) {
+                        "easy" -> Icons.Rounded.Star
+                        "medium" -> Icons.AutoMirrored.Rounded.StarHalf
                         else -> Icons.Rounded.StarBorder
                     },
                 contentDescription = null,

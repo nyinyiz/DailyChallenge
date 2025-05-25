@@ -62,10 +62,11 @@ fun QuestionDetail(
     val difficulty = question.difficulty
 
     val difficultyColor =
-        when (difficulty) {
-            "Easy" -> MaterialTheme.colorScheme.tertiary
-            "Medium" -> MaterialTheme.colorScheme.secondary
-            else -> MaterialTheme.colorScheme.error
+        when (difficulty.lowercase()) {
+            "easy" -> MaterialTheme.colorScheme.tertiary
+            "medium" -> MaterialTheme.colorScheme.secondary
+            "hard" -> MaterialTheme.colorScheme.error
+            else -> MaterialTheme.colorScheme.error // fallback color
         }
 
     val rotation =
