@@ -222,10 +222,10 @@ fun DailyChallengeListContent(
                             visible = true,
                             enter =
                                 fadeIn(spring(stiffness = Spring.StiffnessMediumLow)) +
-                                    scaleIn(
-                                        initialScale = 0.92f,
-                                        animationSpec = spring(stiffness = Spring.StiffnessLow),
-                                    ),
+                                        scaleIn(
+                                            initialScale = 0.92f,
+                                            animationSpec = spring(stiffness = Spring.StiffnessLow),
+                                        ),
                             exit = fadeOut(),
                         ) {
                             Card(

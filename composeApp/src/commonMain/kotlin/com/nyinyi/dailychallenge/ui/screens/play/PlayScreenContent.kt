@@ -1,5 +1,11 @@
 package com.nyinyi.dailychallenge.ui.screens.play
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.EaseOutBack
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,6 +31,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -52,28 +59,77 @@ fun PlayScreenPreview() {
 @Composable
 fun PlayScreenContent(
     onNavigateToChallenge: () -> Unit = {},
-    onNavigateToGameMode: (GameMode) -> Unit,
+    onNavigateToGameMode: (GameMode) -> Unit
 ) {
+    var isContentVisible by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        isContentVisible = true
+    }
+
     Column(
-        modifier =
-            Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
     ) {
         // Top Section with Welcome and Profile
-        TopSection()
+        AnimatedVisibility(
+            visible = isContentVisible,
+            enter = slideInVertically(
+                initialOffsetY = { -it },
+                animationSpec = tween(durationMillis = 500)
+            ) + fadeIn(animationSpec = tween(durationMillis = 500))
+        ) {
+            TopSection()
+        }
 
-        // Daily Challenge Section
-        DailyChallengeCard(
-            onStartChallenge = { onNavigateToChallenge() },
-        )
+        // Daily Challenge Section with scale animation
+        AnimatedVisibility(
+            visible = isContentVisible,
+            enter = scaleIn(
+                initialScale = 0.8f,
+                animationSpec = tween(
+                    durationMillis = 500,
+                    delayMillis = 100,
+                    easing = EaseOutBack
+                )
+            ) + fadeIn(
+                animationSpec = tween(
+                    durationMillis = 500,
+                    delayMillis = 100
+                )
+            )
+        ) {
+            DailyChallengeCard(
+                onStartChallenge = {
+                    onNavigateToChallenge()
+                }
+            )
+        }
 
-        // Game Modes
-        GameModesSection(
-            onGameModeSelected = { gameMode ->
-                onNavigateToGameMode(gameMode)
-            },
-        )
+        // Game Modes with staggered animation
+        AnimatedVisibility(
+            visible = isContentVisible,
+            enter = slideInVertically(
+                initialOffsetY = { it / 2 },
+                animationSpec = tween(
+                    durationMillis = 500,
+                    delayMillis = 200,
+                    easing = EaseOutBack
+                )
+            ) + fadeIn(
+                animationSpec = tween(
+                    durationMillis = 500,
+                    delayMillis = 200
+                )
+            )
+        ) {
+            GameModesSection(
+                onGameModeSelected = { gameMode ->
+                    onNavigateToGameMode(gameMode)
+                }
+            )
+        }
     }
 }
 

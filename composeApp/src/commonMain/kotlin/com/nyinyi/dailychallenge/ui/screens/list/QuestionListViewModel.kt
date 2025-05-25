@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
 import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,6 +23,7 @@ class QuestionListViewModel(
     fun getDailyChallenges() {
         viewModelScope.launch {
             _state.value = QuestionListState.Loading
+            delay(3000)
             try {
                 repository.getDailyChallenges().let {
                     _state.value = QuestionListState.Success(it)
