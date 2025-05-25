@@ -78,9 +78,16 @@ kotlin {
             implementation(libs.jetbrains.compose.navigation)
             implementation(libs.kotlinx.serialization.json)
 
+            // Image loading
             implementation(libs.coil.compose)
 
+            // Icons
             implementation(libs.material.icons.extended)
+
+            // Koin DI
+            implementation(libs.koin.compose.viewmodel)
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.koin.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
