@@ -69,11 +69,13 @@ fun DailyChallengeTheme(
     content: @Composable () -> Unit,
 ) {
     val colorScheme = if (darkTheme) DarkColors else LightColors
+    val typography = rememberResponsiveTypography()
 
     CompositionLocalProvider(LocalDarkTheme provides darkTheme) {
         MaterialTheme(
             colorScheme = colorScheme,
             content = content,
+            typography = typography,
         )
     }
 }

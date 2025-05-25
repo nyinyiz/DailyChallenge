@@ -1,10 +1,9 @@
-package com.nyinyi.dailychallenge.ui.screens.play.components
+package com.nyinyi.dailychallenge.ui.screens.play.quiz.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -50,7 +50,7 @@ fun TinderStyleCard(
         label = "rotation",
     )
 
-    Card(
+    OutlinedCard(
         modifier =
             Modifier
                 .width(300.dp)
@@ -88,7 +88,6 @@ fun TinderStyleCard(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.onPrimary)
                     .padding(16.dp),
             contentAlignment = Alignment.Center,
         ) {
@@ -97,7 +96,6 @@ fun TinderStyleCard(
                 text = card.question,
                 style = MaterialTheme.typography.headlineSmall,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.surface,
             )
 
             // Swipe Indicators overlaid on card

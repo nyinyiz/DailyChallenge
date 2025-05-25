@@ -1,0 +1,240 @@
+package com.nyinyi.dailychallenge.ui.screens.play.quiz
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowBackIosNew
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.nyinyi.dailychallenge.data.model.QuizCard
+import com.nyinyi.dailychallenge.data.model.QuizResult
+import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.EmptyState
+import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.ErrorState
+import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.LoadingState
+import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.QuestionProgressUI
+import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.ResultScreen
+import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.SwipeInstructions
+import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.TinderStyleCard
+import com.nyinyi.dailychallenge.ui.theme.ThemeColors
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
+
+@Preview
+@Composable
+fun QuizScreenPreview() {
+    QuizScreen(
+        onBack = {},
+        onToggleTheme = {},
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun QuizScreen(
+    onBack: () -> Unit,
+    onToggleTheme: () -> Unit = {},
+    viewModel: QuizScreenViewModel = koinViewModel(),
+) {
+    val uiState by viewModel.state.collectAsStateWithLifecycle()
+
+    var currentQuestionIndex by remember { mutableStateOf(0) }
+    var quizResults by remember { mutableStateOf<QuizResult?>(null) }
+    var incorrectAnswers by remember { mutableStateOf(listOf<QuizCard>()) }
+
+    val difficulty = "Easy" // Replace with actual difficulty logic
+
+    val difficultyColor =
+        when (difficulty) {
+            "Easy" -> MaterialTheme.colorScheme.tertiary
+            "Medium" -> MaterialTheme.colorScheme.secondary
+            else -> MaterialTheme.colorScheme.error
+        }
+
+    Scaffold(
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            text = "True or False",
+                            style =
+                                MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = FontWeight.Bold,
+                                ),
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Box(
+                            modifier =
+                                Modifier
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(difficultyColor.copy(alpha = 0.2f))
+                                    .padding(horizontal = 8.dp, vertical = 2.dp),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            Text(
+                                text = difficulty,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = difficultyColor,
+                            )
+                        }
+                    }
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(
+                            Icons.Outlined.ArrowBackIosNew,
+                            contentDescription = "Back",
+                            tint = MaterialTheme.colorScheme.primary,
+                        )
+                    }
+                },
+                colors =
+                    TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.background,
+                    ),
+                actions = {
+                    Card(
+                        shape = CircleShape,
+                        colors =
+                            CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                            ),
+                        modifier = Modifier.padding(end = 8.dp),
+                    ) {
+                        IconButton(onClick = onToggleTheme) {
+                            Text(
+                                text = if (ThemeColors.isDarkTheme) "☀️" else "🌙",
+                                style = MaterialTheme.typography.titleMedium,
+                            )
+                        }
+                    }
+                },
+            )
+        },
+    ) { innerPadding ->
+        Column(
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            when (val state = uiState) {
+                is QuizState.Loading -> {
+                    LoadingState()
+                }
+
+                is QuizState.Error -> {
+                    ErrorState(
+                        message = "Error loading questions",
+                        onRetry = {
+                        },
+                    )
+                }
+
+                is QuizState.Success -> {
+                    if (state.quizList.isEmpty()) {
+                        EmptyState(
+                            onRetry = {
+                            },
+                        )
+                    } else {
+                        // Question Progress UI
+                        QuestionProgressUI(
+                            currentQuestion = currentQuestionIndex + 1,
+                            totalQuestions = state.quizList.size,
+                        )
+
+                        if (quizResults != null) {
+                            ResultScreen(
+                                result = quizResults!!,
+                                onRetryQuiz = {
+                                    currentQuestionIndex = 0
+                                    incorrectAnswers = listOf()
+                                    quizResults = null
+                                },
+                            )
+                        } else if (currentQuestionIndex < state.quizList.size) {
+                            Box(
+                                modifier =
+                                    Modifier
+                                        .weight(1f)
+                                        .fillMaxWidth(),
+                                contentAlignment = Alignment.Center,
+                            ) {
+                                // Swipe Instruction Text
+                                SwipeInstructions()
+
+                                // Question Card
+                                TinderStyleCard(
+                                    card = state.quizList[currentQuestionIndex],
+                                    onSwipeLeft = {
+                                        if (state.quizList[currentQuestionIndex].correctAnswer) {
+                                            incorrectAnswers =
+                                                incorrectAnswers + state.quizList[currentQuestionIndex]
+                                        }
+                                        currentQuestionIndex++
+                                        if (currentQuestionIndex >= state.quizList.size) {
+                                            quizResults =
+                                                QuizResult(
+                                                    totalQuestions = state.quizList.size,
+                                                    correctAnswers = state.quizList.size - incorrectAnswers.size,
+                                                    incorrectAnswers = incorrectAnswers,
+                                                )
+                                        }
+                                    },
+                                    onSwipeRight = {
+                                        if (!state.quizList[currentQuestionIndex].correctAnswer) {
+                                            incorrectAnswers =
+                                                incorrectAnswers + state.quizList[currentQuestionIndex]
+                                        }
+                                        currentQuestionIndex++
+                                        if (currentQuestionIndex >= state.quizList.size) {
+                                            quizResults =
+                                                QuizResult(
+                                                    totalQuestions = state.quizList.size,
+                                                    correctAnswers = state.quizList.size - incorrectAnswers.size,
+                                                    incorrectAnswers = incorrectAnswers,
+                                                )
+                                        }
+                                    },
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

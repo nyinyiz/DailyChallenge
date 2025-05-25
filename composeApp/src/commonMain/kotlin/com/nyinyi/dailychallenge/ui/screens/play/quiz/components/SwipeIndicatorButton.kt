@@ -1,4 +1,4 @@
-package com.nyinyi.dailychallenge.ui.screens.play.components
+package com.nyinyi.dailychallenge.ui.screens.play.quiz.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box

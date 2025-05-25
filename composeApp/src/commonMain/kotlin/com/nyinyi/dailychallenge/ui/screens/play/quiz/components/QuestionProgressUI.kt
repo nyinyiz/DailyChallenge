@@ -1,4 +1,4 @@
-package com.nyinyi.dailychallenge.ui.screens.play.components
+package com.nyinyi.dailychallenge.ui.screens.play.quiz.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,7 +24,7 @@ fun QuestionProgressUI(
         modifier =
             Modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp),
+                .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         val questionsCompletedCount =

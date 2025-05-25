@@ -56,6 +56,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
 import com.nyinyi.dailychallenge.ui.screens.play.PlayScreenContent
+import com.nyinyi.dailychallenge.ui.screens.play.components.GameMode
 import com.nyinyi.dailychallenge.ui.screens.profile.ProfileScreenContent
 import com.nyinyi.dailychallenge.ui.theme.ThemeColors
 import org.koin.compose.viewmodel.koinViewModel
@@ -77,38 +78,41 @@ sealed class BottomNavItem(
 fun QuestionsList(
     onClickChallenge: (DailyChallengeObj) -> Unit = {},
     onToggleTheme: () -> Unit = {},
+    navigateToGameMode: (GameMode) -> Unit = {},
 ) {
     var currentScreen by remember { mutableStateOf<BottomNavItem>(BottomNavItem.Home) }
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        when (currentScreen) {
-                            BottomNavItem.Home -> "Daily Challenges"
-                            BottomNavItem.Play -> "Play Zone"
-                            BottomNavItem.Profile -> "Your Profile"
-                        },
-                        style =
-                            MaterialTheme.typography.titleLarge.copy(
-                                fontWeight = FontWeight.Bold,
-                            ),
-                    )
-                },
-                actions = {
-                    IconButton(onClick = onToggleTheme) {
+            if (currentScreen == BottomNavItem.Home) {
+                TopAppBar(
+                    title = {
                         Text(
-                            text = if (ThemeColors.isDarkTheme) "☀️" else "🌙",
-                            style = MaterialTheme.typography.titleMedium,
+                            when (currentScreen) {
+                                BottomNavItem.Home -> "Daily Challenges"
+                                BottomNavItem.Play -> "Play Zone"
+                                BottomNavItem.Profile -> "Your Profile"
+                            },
+                            style =
+                                MaterialTheme.typography.titleLarge.copy(
+                                    fontWeight = FontWeight.Bold,
+                                ),
                         )
-                    }
-                },
-                colors =
-                    TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.surface,
-                    ),
-            )
+                    },
+                    actions = {
+                        IconButton(onClick = onToggleTheme) {
+                            Text(
+                                text = if (ThemeColors.isDarkTheme) "☀️" else "🌙",
+                                style = MaterialTheme.typography.titleMedium,
+                            )
+                        }
+                    },
+                    colors =
+                        TopAppBarDefaults.topAppBarColors(
+                            containerColor = MaterialTheme.colorScheme.surface,
+                        ),
+                )
+            }
         },
         bottomBar = {
             QuestionsListBottomNavigationBar(
@@ -124,7 +128,16 @@ fun QuestionsList(
                         onClickChallenge = onClickChallenge,
                     )
 
-                BottomNavItem.Play -> PlayScreenContent()
+                BottomNavItem.Play ->
+                    PlayScreenContent(
+                        onNavigateToGameMode = { gameMode ->
+                            navigateToGameMode(gameMode)
+                        },
+                        onNavigateToChallenge = {
+                            // TODO navigate to challenge
+                        },
+                    )
+
                 BottomNavItem.Profile -> ProfileScreenContent()
             }
         }

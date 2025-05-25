@@ -1,4 +1,4 @@
-package com.nyinyi.dailychallenge.ui.screens.play
+package com.nyinyi.dailychallenge.ui.screens.play.quiz
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

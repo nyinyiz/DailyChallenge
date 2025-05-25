@@ -1,4 +1,4 @@
-package com.nyinyi.dailychallenge.ui.screens.play.components
+package com.nyinyi.dailychallenge.ui.screens.play.quiz.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.QuestionMark
+import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -24,7 +24,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun EmptyState(onRetry: () -> Unit) {
+fun ErrorState(
+    message: String,
+    onRetry: () -> Unit,
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
@@ -35,23 +38,17 @@ fun EmptyState(onRetry: () -> Unit) {
             modifier = Modifier.padding(16.dp),
         ) {
             Icon(
-                imageVector = Icons.Default.QuestionMark,
-                contentDescription = "No Questions",
-                tint = MaterialTheme.colorScheme.primary,
+                imageVector = Icons.Default.Error,
+                contentDescription = "Error",
+                tint = MaterialTheme.colorScheme.error,
                 modifier = Modifier.size(48.dp),
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "No Questions Available",
-                style = MaterialTheme.typography.headlineSmall,
-                textAlign = TextAlign.Center,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "There are no quiz questions available at the moment. Please try again later.",
+                text = message,
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.colorScheme.error,
             )
             Spacer(modifier = Modifier.height(24.dp))
             Button(
@@ -66,7 +63,7 @@ fun EmptyState(onRetry: () -> Unit) {
                     contentDescription = "Retry",
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Refresh")
+                Text("Try Again")
             }
         }
     }

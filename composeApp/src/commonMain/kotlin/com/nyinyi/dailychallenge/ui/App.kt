@@ -14,6 +14,8 @@ import androidx.navigation.toRoute
 import com.nyinyi.dailychallenge.di.KoinInitializer
 import com.nyinyi.dailychallenge.ui.screens.detail.QuestionDetail
 import com.nyinyi.dailychallenge.ui.screens.list.QuestionsList
+import com.nyinyi.dailychallenge.ui.screens.play.components.GameMode
+import com.nyinyi.dailychallenge.ui.screens.play.quiz.QuizScreen
 import com.nyinyi.dailychallenge.ui.theme.DailyChallengeTheme
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -36,6 +38,25 @@ fun App(viewModel: AppViewModel = koinViewModel()) {
         ) {
             composable<Routes.QuestionList> {
                 QuestionsList(
+                    navigateToGameMode = { gameMode ->
+                        when (gameMode) {
+                            GameMode.TrueOrFalse -> {
+                                navController.navigate(Routes.QuizScreen)
+                            }
+
+                            GameMode.MultipleChoice -> {
+                                // TODO: Handle multiple choice
+                            }
+
+                            GameMode.MultipleSelect -> {
+                                // TODO: Handle multiple select
+                            }
+
+                            GameMode.MatchingGame -> {
+                                // TODO: Handle matching game
+                            }
+                        }
+                    },
                     onClickChallenge = { question ->
                         navController.navigate(
                             Routes.QuestionDetail(questionId = question.id),
@@ -66,6 +87,13 @@ fun App(viewModel: AppViewModel = koinViewModel()) {
                     }
                 }
             }
+
+            composable<Routes.QuizScreen> {
+                QuizScreen(
+                    onToggleTheme = { darkTheme = !darkTheme },
+                    onBack = { navController.popBackStack() },
+                )
+            }
         }
     }
 }
@@ -78,4 +106,7 @@ sealed interface Routes {
 
     @Serializable
     data object QuestionList : Routes
+
+    @Serializable
+    data object QuizScreen : Routes
 }
