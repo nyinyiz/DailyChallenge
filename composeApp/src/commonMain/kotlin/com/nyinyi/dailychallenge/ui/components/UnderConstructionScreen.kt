@@ -37,42 +37,46 @@ fun UnderConstructionScreen() {
     val rotation by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(3000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "rotation_animation"
+        animationSpec =
+            infiniteRepeatable(
+                animation = tween(3000, easing = LinearEasing),
+                repeatMode = RepeatMode.Restart,
+            ),
+        label = "rotation_animation",
     )
 
     val scale by infiniteTransition.animateFloat(
         initialValue = 0.8f,
         targetValue = 1.2f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(1000),
-            repeatMode = RepeatMode.Reverse
-        ),
-        label = "scale_animation"
+        animationSpec =
+            infiniteRepeatable(
+                animation = tween(1000),
+                repeatMode = RepeatMode.Reverse,
+            ),
+        label = "scale_animation",
     )
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+        contentAlignment = Alignment.Center,
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
         ) {
             Icon(
                 imageVector = Icons.Rounded.Build,
                 contentDescription = "Construction Icon",
-                modifier = Modifier
-                    .size(120.dp)
-                    .rotate(rotation)
-                    .graphicsLayer(scaleX = scale, scaleY = scale),
-                tint = MaterialTheme.colorScheme.primary
+                modifier =
+                    Modifier
+                        .size(120.dp)
+                        .rotate(rotation)
+                        .graphicsLayer(scaleX = scale, scaleY = scale),
+                tint = MaterialTheme.colorScheme.primary,
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -81,26 +85,27 @@ fun UnderConstructionScreen() {
                 text = "Under Construction",
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "We're working hard to bring you something amazing!",
+                text = "Working hard to bring you something amazing!",
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
             LinearProgressIndicator(
-                modifier = Modifier
-                    .width(200.dp)
-                    .height(8.dp),
+                modifier =
+                    Modifier
+                        .width(200.dp)
+                        .height(8.dp),
                 color = MaterialTheme.colorScheme.primary,
-                trackColor = MaterialTheme.colorScheme.surfaceVariant
+                trackColor = MaterialTheme.colorScheme.surfaceVariant,
             )
 
             Spacer(modifier = Modifier.height(48.dp))
@@ -109,10 +114,11 @@ fun UnderConstructionScreen() {
                 text = "Coming Soon",
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.secondary,
-                modifier = Modifier.graphicsLayer(
-                    scaleX = scale,
-                    scaleY = scale
-                )
+                modifier =
+                    Modifier.graphicsLayer(
+                        scaleX = scale,
+                        scaleY = scale,
+                    ),
             )
         }
     }
