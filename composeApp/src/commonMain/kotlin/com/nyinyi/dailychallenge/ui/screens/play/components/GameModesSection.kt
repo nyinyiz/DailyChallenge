@@ -106,7 +106,7 @@ fun GameModesSection(onGameModeSelected: (GameMode) -> Unit) {
         )
 
         LazyVerticalStaggeredGrid(
-            columns = StaggeredGridCells.Adaptive(minSize = 120.dp),
+            columns = StaggeredGridCells.Adaptive(minSize = 150.dp),
             modifier = Modifier.fillMaxSize(),
             verticalItemSpacing = 8.dp,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
