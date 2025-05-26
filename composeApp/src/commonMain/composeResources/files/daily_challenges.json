@@ -11,14 +11,14 @@
     "difficulty": "Medium",
     "question": "\uD83D\uDDE3\uFE0F Below is a basic implementation of a LazyColumn. Will this work as expected, or do you think there is something wrong with the code? ",
     "questionCode": "LazyColumn {\n    items(comments.map { it.text }, key = { it }) { text ->\n        CommentCard(text)\n    }\n}",
-    "answerCode": ""
+    "answerCode": "Solution,\n \uD83D\uDD28\n\nAt first glance, it looks like we’re doing everything right: we’re using the key parameter in items(), and we’re rendering a stable list.\n\nBut here’s the gotcha: we’re keying the list by the comment text, not by the actual unique identity of each comment.\n\nIf two comments have the same text — which is common in real apps — the key is no longer unique. This leads to Compose treating different items as the same, resulting in a crash when when a duplicate key is found as the list is being scrolled.\n\nFix: Always use a true stable identifier, like a comment ID: LazyColumn {\n    items(comments, key = { it.id }) { comment ->\n        CommentCard(comment.text)\n    }\n}"
   },
   {
     "id": "3",
     "difficulty": "Hard",
     "question": "\uD83D\uDDE3\uFE0F This grid layout looks great on your device, but you’ve been tasked to ensure that it looks great on many form factors, like a tablet. Are you confident that this code will do just that? If not, then what would you change about it to make it truly adaptive?",
     "questionCode": "LazyVerticalGrid(\n  columns = GridCells.Fixed(2),\n  horizontalArrangement = Arrangement.spacedBy(24.dp),\n  verticalArrangement = Arrangement.spacedBy(24.dp),\n  contentPadding = PaddingValues(16.dp)\n) {\n  items(shoes) { shoe ->\n    ShopItemWithImage(shoe)\n  }\n}",
-    "answerCode": " LazyVerticalGrid(\n                columns = GridCells.Adaptive(minSize = 128.dp),\n                horizontalArrangement = Arrangement.spacedBy(24.dp),\n                verticalArrangement = Arrangement.spacedBy(24.dp),\n                contentPadding = PaddingValues(16.dp)\n            ) {\n                items(shoes) { shoe ->\n                    ShopItemWithImage(shoe)\n                }\n            }"
+    "answerCode": "Solution,\n \uD83E\uDD73 \n\nUsing GridCells.Fixed(2) forces exactly two columns, no matter how wide the screen is. On wide layouts (landscape, tablets), that makes each column too wide, stretching your cards unnaturally and breaking image aspect ratios.\n\nThe correct solution is to use GridCells.Adaptive(minSize), which calculates the number of columns based on available width and a minimum item width — keeping your cards looking good across screen sizes.\n\n            LazyVerticalGrid(\n                columns = GridCells.Adaptive(minSize = 128.dp),\n                horizontalArrangement = Arrangement.spacedBy(24.dp),\n                verticalArrangement = Arrangement.spacedBy(24.dp),\n                contentPadding = PaddingValues(16.dp)\n            ) {\n                items(shoes) { shoe ->\n                    ShopItemWithImage(shoe)\n                }\n            }"
   },
   {
     "id": "4",
