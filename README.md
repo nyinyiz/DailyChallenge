@@ -7,20 +7,26 @@ Compose for Android, iOS, Desktop, and Web.
 
 ### Android Screenshots
 
-![screenshot_android_1](screenshots/Android1.png)
-![screenshot_android_2](screenshots/Android2.png)
-![screenshot_android_3](screenshots/Android3.png)
+<div align="center">
+  <img src="screenshots/Android1.png" alt="Android Screenshot 1" width="200">
+  <img src="screenshots/Android2.png" alt="Android Screenshot 2" width="200">
+  <img src="screenshots/Android3.png" alt="Android Screenshot 3" width="200">
+</div>
 
 ### iOS Screenshots
 
-![screenshot_ios_1](screenshots/ios1.png)
-![screenshot_ios_2](screenshots/ios2.png)
+<div align="center">
+  <img src="screenshots/ios1.png" alt="iOS Screenshot 1" width="200">
+  <img src="screenshots/ios2.png" alt="iOS Screenshot 2" width="200">
+</div>
 
 ### Desktop Screenshots
 
-![screenshot_desktop_1](screenshots/desktop1.png)
-![screenshot_desktop_2](screenshots/desktop2.png)
-![screenshot_desktop_3](screenshots/desktop3.png)
+<div align="center">
+  <img src="screenshots/desktop1.png" alt="Desktop Screenshot 1" width="250">
+  <img src="screenshots/desktop2.png" alt="Desktop Screenshot 2" width="250">
+  <img src="screenshots/desktop3.png" alt="Desktop Screenshot 3" width="250">
+</div>
 
 ---
 
