@@ -18,10 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -31,6 +27,7 @@ import com.nyinyi.dailychallenge.ui.screens.play.PlayScreenContent
 import com.nyinyi.dailychallenge.ui.screens.play.components.GameMode
 import com.nyinyi.dailychallenge.ui.screens.profile.ProfileScreenContent
 import com.nyinyi.dailychallenge.ui.theme.ThemeColors
+import org.koin.compose.viewmodel.koinViewModel
 
 sealed class BottomNavItem(
     val route: String,
@@ -47,11 +44,12 @@ sealed class BottomNavItem(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuestionsList(
+    viewModel: QuestionListViewModel = koinViewModel(),
     onClickChallenge: (DailyChallengeObj) -> Unit = {},
     onToggleTheme: () -> Unit = {},
     navigateToGameMode: (GameMode) -> Unit = {},
 ) {
-    var currentScreen by remember { mutableStateOf<BottomNavItem>(BottomNavItem.Home) }
+    val currentScreen = viewModel.currentScreen.value
 
     Scaffold(
         topBar = {
@@ -85,7 +83,9 @@ fun QuestionsList(
         bottomBar = {
             QuestionsListBottomNavigationBar(
                 currentScreen = currentScreen,
-                onScreenSelected = { screen -> currentScreen = screen },
+                onScreenSelected = { screen ->
+                    viewModel.updateCurrentScreen(screen)
+                },
             )
         },
     ) { paddingValues ->

@@ -1,5 +1,6 @@
 package com.nyinyi.dailychallenge.ui.screens.list
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
@@ -13,6 +14,9 @@ import kotlinx.coroutines.launch
 class QuestionListViewModel(
     private val repository: ChallengesRepository,
 ) : ViewModel() {
+    private val _currentScreen = mutableStateOf<BottomNavItem>(BottomNavItem.Home)
+    val currentScreen = _currentScreen
+
     private val _state = MutableStateFlow<QuestionListState>(QuestionListState.Loading)
     val state: StateFlow<QuestionListState> = _state.asStateFlow()
 
@@ -32,6 +36,10 @@ class QuestionListViewModel(
                 _state.value = QuestionListState.Error
             }
         }
+    }
+
+    fun updateCurrentScreen(screen: BottomNavItem) {
+        _currentScreen.value = screen
     }
 }
 
