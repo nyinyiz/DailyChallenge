@@ -5,8 +5,22 @@ Compose for Android, iOS, Desktop, and Web.
 
 ## Screenshots
 
-<!-- Add your screenshots here -->
-![Screenshot 1](screenshots/screen2.png)
+### Android Screenshots
+
+![screenshot_android_1](screenshots/Android1.png)
+![screenshot_android_2](screenshots/Android2.png)
+![screenshot_android_3](screenshots/Android3.png)
+
+### iOS Screenshots
+
+![screenshot_ios_1](screenshots/ios1.png)
+![screenshot_ios_2](screenshots/ios2.png)
+
+### Desktop Screenshots
+
+![screenshot_desktop_1](screenshots/desktop1.png)
+![screenshot_desktop_2](screenshots/desktop2.png)
+![screenshot_desktop_3](screenshots/desktop3.png)
 
 ---
 
