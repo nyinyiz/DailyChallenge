@@ -64,6 +64,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.material.icons.core)
             implementation(libs.androidx.material.icons.extended)
+            implementation(libs.androidx.adaptive)
         }
         commonMain.dependencies {
             implementation(compose.runtime)

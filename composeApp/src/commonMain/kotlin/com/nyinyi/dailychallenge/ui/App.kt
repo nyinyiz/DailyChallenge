@@ -15,6 +15,7 @@ import com.nyinyi.dailychallenge.di.KoinInitializer
 import com.nyinyi.dailychallenge.ui.screens.detail.QuestionDetail
 import com.nyinyi.dailychallenge.ui.screens.list.QuestionsList
 import com.nyinyi.dailychallenge.ui.screens.play.components.GameMode
+import com.nyinyi.dailychallenge.ui.screens.play.mcq.MultipleChoiceScreen
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.QuizScreen
 import com.nyinyi.dailychallenge.ui.theme.DailyChallengeTheme
 import kotlinx.serialization.Serializable
@@ -27,10 +28,9 @@ private val kotlinInitializer = KoinInitializer.init()
 @Preview
 fun App(viewModel: AppViewModel = koinViewModel()) {
     val uiState = viewModel.state.collectAsStateWithLifecycle()
-
     var darkTheme by rememberSaveable { mutableStateOf(true) }
-
     val navController = rememberNavController()
+
     DailyChallengeTheme(darkTheme = darkTheme) {
         NavHost(
             navController = navController,
@@ -45,7 +45,7 @@ fun App(viewModel: AppViewModel = koinViewModel()) {
                             }
 
                             GameMode.MultipleChoice -> {
-                                // TODO: Handle multiple choice
+                                navController.navigate(Routes.MultipleChoiceScreen)
                             }
 
                             GameMode.MultipleSelect -> {
@@ -94,6 +94,14 @@ fun App(viewModel: AppViewModel = koinViewModel()) {
                     onBack = { navController.popBackStack() },
                 )
             }
+
+            composable<Routes.MultipleChoiceScreen> {
+                MultipleChoiceScreen(
+                    onBack = { navController.popBackStack() },
+                    onBackToHome = { navController.popBackStack() },
+                    onToggleTheme = { darkTheme = !darkTheme },
+                )
+            }
         }
     }
 }
@@ -109,4 +117,7 @@ sealed interface Routes {
 
     @Serializable
     data object QuizScreen : Routes
+
+    @Serializable
+    data object MultipleChoiceScreen : Routes
 }

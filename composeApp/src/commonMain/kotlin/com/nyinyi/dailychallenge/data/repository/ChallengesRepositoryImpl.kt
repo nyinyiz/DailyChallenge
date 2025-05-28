@@ -1,6 +1,7 @@
 package com.nyinyi.dailychallenge.data.repository
 
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
+import com.nyinyi.dailychallenge.data.model.MultipleChoiceObj
 import com.nyinyi.dailychallenge.data.model.QuizCard
 import dailychallenge.composeapp.generated.resources.Res
 import kotlinx.serialization.json.Json
@@ -44,6 +45,28 @@ class ChallengesRepositoryImpl : ChallengesRepository {
             val readBytes = Res.readBytes("files/true_or_false_challenges_2.json")
             val jsonString = readBytes.decodeToString()
             val allQuestions: List<QuizCard> = Json.decodeFromString(jsonString)
+
+            // Get 10 random questions
+            allQuestions
+                .shuffled() // Randomly shuffle the list
+                .take(10) // Take first 10 items from shuffled list
+                .also { randomQuestions ->
+                    if (randomQuestions.isEmpty()) {
+                        println("Warning: No questions were loaded")
+                    } else {
+                        println("Successfully loaded ${randomQuestions.size} random questions")
+                    }
+                }
+        } catch (e: Exception) {
+            println("Error loading questions: ${e.message}")
+            emptyList()
+        }
+
+    override suspend fun getMultipleChoiceChallenges(): List<MultipleChoiceObj> =
+        try {
+            val readBytes = Res.readBytes("files/multiple_choice_challenges_android.json")
+            val jsonString = readBytes.decodeToString()
+            val allQuestions: List<MultipleChoiceObj> = Json.decodeFromString(jsonString)
 
             // Get 10 random questions
             allQuestions

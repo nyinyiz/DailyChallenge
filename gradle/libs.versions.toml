@@ -1,4 +1,5 @@
 [versions]
+adaptive = "1.2.0-alpha06"
 agp = "8.7.3"
 android-compileSdk = "35"
 android-minSdk = "24"
@@ -25,6 +26,7 @@ kotlinSerialization = "1.7.3"
 koin-bom = "4.0.0"
 
 [libraries]
+androidx-adaptive = { module = "androidx.compose.material3.adaptive:adaptive", version.ref = "adaptive" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 androidx-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "materialIconsCore" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }

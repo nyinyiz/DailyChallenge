@@ -1,4 +1,4 @@
-package com.nyinyi.dailychallenge.ui.screens.play.quiz.components
+package com.nyinyi.dailychallenge.ui.screens.play.mcq.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
@@ -47,16 +47,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.nyinyi.dailychallenge.data.model.QuizCard
-import com.nyinyi.dailychallenge.data.model.QuizResult
+import com.nyinyi.dailychallenge.data.model.MultipleChoiceObj
+import com.nyinyi.dailychallenge.data.model.MultipleChoiceResult
 import kotlin.math.roundToInt
 
 @Composable
-fun ResultScreen(
-    result: QuizResult,
-    onRetryQuiz: () -> Unit,
+fun MultipleChoiceResultScreen(
+    result: MultipleChoiceResult,
+    onRestartQuiz: () -> Unit,
+    onBackToHome: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    val percentage = (result.correctAnswers.toFloat() / result.totalQuestions.toFloat()) * 100
+    val percentage = (result.score.toFloat() / result.totalQuestions.toFloat()) * 100
     val scoreColor =
         when {
             percentage >= 80 -> MaterialTheme.colorScheme.primary
@@ -134,7 +136,7 @@ fun ResultScreen(
                                 color = scoreColor,
                             )
                             Text(
-                                text = "${result.correctAnswers}/${result.totalQuestions}",
+                                text = "${result.score}/${result.totalQuestions}",
                                 style = MaterialTheme.typography.titleMedium,
                             )
                         }
@@ -158,9 +160,8 @@ fun ResultScreen(
                 ) {
                     items(
                         items = result.incorrectAnswers,
-                        key = { it.id },
                     ) { question ->
-                        ReviewQuestionCard(question = question)
+                        ReviewMultipleChoiceCard(question = question)
                     }
                 }
             }
@@ -173,7 +174,7 @@ fun ResultScreen(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Button(
-                    onClick = onRetryQuiz,
+                    onClick = onRestartQuiz,
                     modifier = Modifier.weight(1f),
                     colors =
                         ButtonDefaults.buttonColors(
@@ -194,7 +195,7 @@ fun ResultScreen(
 }
 
 @Composable
-private fun ReviewQuestionCard(question: QuizCard) {
+private fun ReviewMultipleChoiceCard(question: MultipleChoiceObj) {
     ElevatedCard(
         modifier =
             Modifier
@@ -243,7 +244,7 @@ private fun ReviewQuestionCard(question: QuizCard) {
                     modifier = Modifier.padding(top = 8.dp),
                 ) {
                     Text(
-                        text = "Correct Answer: ${if (question.correctAnswer) "True" else "False"}",
+                        text = "Correct Answer: ${question.correctAnswer}",
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onErrorContainer,
