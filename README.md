@@ -18,6 +18,7 @@ Compose for Android, iOS, Desktop, and Web.
 <div align="center">
   <img src="screenshots/ios1.png" alt="iOS Screenshot 1" width="200">
   <img src="screenshots/ios2.png" alt="iOS Screenshot 2" width="200">
+  <img src="screenshots/ios3.png" alt="iOS Screenshot 3" width="200">
 </div>
 
 ### Desktop Screenshots
