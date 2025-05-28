@@ -38,7 +38,7 @@ or even platform-specific topics. Help me grow the collection and make learning 
 1. **Fork** the repository.
 2. **Clone** your fork:
    ```sh
-   git clone https://github.com/your-username/daily-challenge.git
+   git clone https://github.com/nyinyiz/DailyChallenge.git
    ```
 3. **Create a new branch** for your feature or fix:
    ```sh
