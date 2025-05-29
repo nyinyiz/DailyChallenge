@@ -19,11 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Android
 import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.icons.rounded.Code
-import androidx.compose.material.icons.rounded.Phone
-import androidx.compose.material.icons.rounded.Web
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -32,20 +28,22 @@ import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.nyinyi.dailychallenge.data.model.Category
 import com.nyinyi.dailychallenge.ui.screens.play.components.AnimatedCategoryText
 import com.nyinyi.dailychallenge.ui.screens.play.components.DailyChallengeCard
 import com.nyinyi.dailychallenge.ui.screens.play.components.GameMode
 import com.nyinyi.dailychallenge.ui.screens.play.components.GameModesSection
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
 
 @Preview
 @Composable
@@ -58,6 +56,7 @@ fun PlayScreenPreview() {
 
 @Composable
 fun PlayScreenContent(
+    viewModel: PlayScreenContentViewModel = koinViewModel(),
     onNavigateToChallenge: () -> Unit = {},
     onNavigateToGameMode: (GameMode) -> Unit,
 ) {
@@ -82,7 +81,7 @@ fun PlayScreenContent(
                     animationSpec = tween(durationMillis = 500),
                 ) + fadeIn(animationSpec = tween(durationMillis = 500)),
         ) {
-            TopSection()
+            TopSection(viewModel = viewModel)
         }
 
         // Daily Challenge Section with scale animation
@@ -98,13 +97,13 @@ fun PlayScreenContent(
                             easing = EaseOutBack,
                         ),
                 ) +
-                    fadeIn(
-                        animationSpec =
-                            tween(
-                                durationMillis = 500,
-                                delayMillis = 100,
-                            ),
-                    ),
+                        fadeIn(
+                            animationSpec =
+                                tween(
+                                    durationMillis = 500,
+                                    delayMillis = 100,
+                                ),
+                        ),
         ) {
             DailyChallengeCard(
                 onStartChallenge = {
@@ -126,13 +125,13 @@ fun PlayScreenContent(
                             easing = EaseOutBack,
                         ),
                 ) +
-                    fadeIn(
-                        animationSpec =
-                            tween(
-                                durationMillis = 500,
-                                delayMillis = 200,
-                            ),
-                    ),
+                        fadeIn(
+                            animationSpec =
+                                tween(
+                                    durationMillis = 500,
+                                    delayMillis = 200,
+                                ),
+                        ),
         ) {
             GameModesSection(
                 onGameModeSelected = { gameMode ->
@@ -144,9 +143,11 @@ fun PlayScreenContent(
 }
 
 @Composable
-private fun TopSection() {
+private fun TopSection(
+    viewModel: PlayScreenContentViewModel,
+) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedCategory by remember { mutableStateOf(Category.Android) }
+    val selectedCategory by viewModel.selectedCategory.collectAsState()
 
     Row(
         modifier =
@@ -204,7 +205,7 @@ private fun TopSection() {
                                         RoundedCornerShape(16.dp),
                                     ).width(200.dp),
                         ) {
-                            Category.values().forEach { category ->
+                            Category.values().toList().forEach { category ->
                                 DropdownMenuItem(
                                     text = {
                                         Row(
@@ -213,7 +214,7 @@ private fun TopSection() {
                                             verticalAlignment = Alignment.CenterVertically,
                                         ) {
                                             Text(
-                                                text = category.title,
+                                                text = category.name,
                                                 style = MaterialTheme.typography.bodyLarge,
                                                 color =
                                                     if (category == selectedCategory) {
@@ -234,7 +235,7 @@ private fun TopSection() {
                                         }
                                     },
                                     onClick = {
-                                        selectedCategory = category
+                                        viewModel.updateCategory(category)
                                         expanded = false
                                     },
                                     colors =
@@ -255,21 +256,4 @@ private fun TopSection() {
             }
         }
     }
-}
-
-enum class Category(
-    val title: String,
-    val icon: ImageVector,
-) {
-    Android("Android", Icons.Rounded.Android),
-    IOS("iOS", Icons.Rounded.Phone),
-    Kotlin("Kotlin", Icons.Rounded.Code),
-    Swift("Swift", Icons.Rounded.Code),
-    Flutter("Flutter", Icons.Rounded.Web),
-}
-
-enum class Difficulty {
-    Easy,
-    Medium,
-    Hard,
 }

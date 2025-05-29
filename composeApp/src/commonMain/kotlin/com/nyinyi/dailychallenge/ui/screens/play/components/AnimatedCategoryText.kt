@@ -31,7 +31,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.nyinyi.dailychallenge.ui.screens.play.Category
+import com.nyinyi.dailychallenge.data.model.Category
 
 @Composable
 fun AnimatedCategoryText(
@@ -100,7 +100,7 @@ fun AnimatedCategoryText(
         )
 
         Text(
-            text = selectedCategory.title,
+            text = selectedCategory.name,
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.ExtraBold,
             modifier =

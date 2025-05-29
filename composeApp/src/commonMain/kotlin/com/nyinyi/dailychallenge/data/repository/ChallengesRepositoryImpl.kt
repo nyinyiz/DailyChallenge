@@ -1,12 +1,18 @@
 package com.nyinyi.dailychallenge.data.repository
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
 import com.nyinyi.dailychallenge.data.model.MultipleChoiceObj
 import com.nyinyi.dailychallenge.data.model.QuizCard
 import dailychallenge.composeapp.generated.resources.Res
 import kotlinx.serialization.json.Json
+import kotlinx.coroutines.flow.first
 
-class ChallengesRepositoryImpl : ChallengesRepository {
+class ChallengesRepositoryImpl(
+    private val dataStore: DataStore<Preferences>,
+    private val userPreferencesRepository: UserPreferencesRepository
+) : ChallengesRepository {
     private val defaultChallenges =
         listOf(
             DailyChallengeObj(
@@ -42,7 +48,8 @@ class ChallengesRepositoryImpl : ChallengesRepository {
 
     override suspend fun getTrueFalseChallenges(): List<QuizCard> =
         try {
-            val readBytes = Res.readBytes("files/true_or_false_challenges_android.json")
+            val category = userPreferencesRepository.selectedCategory.first()
+            val readBytes = Res.readBytes("files/true_or_false_challenges_${category.name.lowercase()}.json")
             val jsonString = readBytes.decodeToString()
             val allQuestions: List<QuizCard> = Json.decodeFromString(jsonString)
 
@@ -64,7 +71,8 @@ class ChallengesRepositoryImpl : ChallengesRepository {
 
     override suspend fun getMultipleChoiceChallenges(): List<MultipleChoiceObj> =
         try {
-            val readBytes = Res.readBytes("files/multiple_choice_challenges_android.json")
+            val category = userPreferencesRepository.selectedCategory.first()
+            val readBytes = Res.readBytes("files/multiple_choice_challenges_${category.name.lowercase()}.json")
             val jsonString = readBytes.decodeToString()
             val allQuestions: List<MultipleChoiceObj> = Json.decodeFromString(jsonString)
 

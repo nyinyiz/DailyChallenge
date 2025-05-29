@@ -34,9 +34,8 @@ kotlin {
 
     jvm("desktop")
 
-    @OptIn(ExperimentalWasmDsl::class)
+/*    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "composeApp"
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
@@ -54,7 +53,7 @@ kotlin {
             }
         }
         binaries.executable()
-    }
+    }*/
 
     sourceSets {
         val desktopMain by getting
@@ -89,6 +88,9 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
+
+            api(libs.androidx.datastore)
+            api(libs.androidx.datastore.preferences)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

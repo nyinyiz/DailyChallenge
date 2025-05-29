@@ -22,11 +22,11 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
-private val kotlinInitializer = KoinInitializer.init()
-
 @Composable
 @Preview
-fun App(viewModel: AppViewModel = koinViewModel()) {
+fun App(
+    viewModel: AppViewModel = koinViewModel(),
+) {
     val uiState = viewModel.state.collectAsStateWithLifecycle()
     var darkTheme by rememberSaveable { mutableStateOf(true) }
     val navController = rememberNavController()
