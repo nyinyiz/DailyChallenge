@@ -9,14 +9,15 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class PlayScreenContentViewModel(
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
 ) : ViewModel() {
-    val selectedCategory = userPreferencesRepository.selectedCategory
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = Category.ANDROID
-        )
+    val selectedCategory =
+        userPreferencesRepository.selectedCategory
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = Category.ANDROID,
+            )
 
     fun updateCategory(category: Category) {
         viewModelScope.launch {

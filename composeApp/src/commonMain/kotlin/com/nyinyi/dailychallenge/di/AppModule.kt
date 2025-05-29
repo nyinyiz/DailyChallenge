@@ -39,6 +39,7 @@ val appModule =
         }
     }
 
-fun preferencesModule(dataStore: DataStore<Preferences>) = module {
-    single { dataStore }
-}
+fun preferencesModule(dataStore: DataStore<Preferences>) =
+    module {
+        single { dataStore }
+    }

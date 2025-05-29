@@ -5,10 +5,10 @@ enum class Category {
     IOS,
     KOTLIN,
     SWIFT,
-    FLUTTER;
+    FLUTTER,
+    ;
 
     companion object {
-        fun fromString(value: String): Category =
-            values().find { it.name.equals(value, ignoreCase = true) } ?: ANDROID
+        fun fromString(value: String): Category = values().find { it.name.equals(value, ignoreCase = true) } ?: ANDROID
     }
 }

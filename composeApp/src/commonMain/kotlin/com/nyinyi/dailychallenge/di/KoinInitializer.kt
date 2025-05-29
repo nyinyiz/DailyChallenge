@@ -9,7 +9,7 @@ object KoinInitializer {
         startKoin {
             modules(
                 appModule,
-                preferencesModule(dataStore)
+                preferencesModule(dataStore),
             )
         }
     }

@@ -6,12 +6,12 @@ import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
 import com.nyinyi.dailychallenge.data.model.MultipleChoiceObj
 import com.nyinyi.dailychallenge.data.model.QuizCard
 import dailychallenge.composeapp.generated.resources.Res
-import kotlinx.serialization.json.Json
 import kotlinx.coroutines.flow.first
+import kotlinx.serialization.json.Json
 
 class ChallengesRepositoryImpl(
     private val dataStore: DataStore<Preferences>,
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
 ) : ChallengesRepository {
     private val defaultChallenges =
         listOf(

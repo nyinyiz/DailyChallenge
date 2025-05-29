@@ -5,5 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserPreferencesRepository {
     val selectedCategory: Flow<Category>
+
     suspend fun setSelectedCategory(category: Category)
 }

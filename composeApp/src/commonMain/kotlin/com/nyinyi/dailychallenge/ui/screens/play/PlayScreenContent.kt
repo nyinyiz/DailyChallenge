@@ -97,13 +97,13 @@ fun PlayScreenContent(
                             easing = EaseOutBack,
                         ),
                 ) +
-                        fadeIn(
-                            animationSpec =
-                                tween(
-                                    durationMillis = 500,
-                                    delayMillis = 100,
-                                ),
-                        ),
+                    fadeIn(
+                        animationSpec =
+                            tween(
+                                durationMillis = 500,
+                                delayMillis = 100,
+                            ),
+                    ),
         ) {
             DailyChallengeCard(
                 onStartChallenge = {
@@ -125,13 +125,13 @@ fun PlayScreenContent(
                             easing = EaseOutBack,
                         ),
                 ) +
-                        fadeIn(
-                            animationSpec =
-                                tween(
-                                    durationMillis = 500,
-                                    delayMillis = 200,
-                                ),
-                        ),
+                    fadeIn(
+                        animationSpec =
+                            tween(
+                                durationMillis = 500,
+                                delayMillis = 200,
+                            ),
+                    ),
         ) {
             GameModesSection(
                 onGameModeSelected = { gameMode ->
@@ -143,9 +143,7 @@ fun PlayScreenContent(
 }
 
 @Composable
-private fun TopSection(
-    viewModel: PlayScreenContentViewModel,
-) {
+private fun TopSection(viewModel: PlayScreenContentViewModel) {
     var expanded by remember { mutableStateOf(false) }
     val selectedCategory by viewModel.selectedCategory.collectAsState()
 
