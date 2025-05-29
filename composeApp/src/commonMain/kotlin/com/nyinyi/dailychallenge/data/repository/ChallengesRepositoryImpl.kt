@@ -42,7 +42,7 @@ class ChallengesRepositoryImpl : ChallengesRepository {
 
     override suspend fun getTrueFalseChallenges(): List<QuizCard> =
         try {
-            val readBytes = Res.readBytes("files/true_or_false_challenges_2.json")
+            val readBytes = Res.readBytes("files/true_or_false_challenges_android.json")
             val jsonString = readBytes.decodeToString()
             val allQuestions: List<QuizCard> = Json.decodeFromString(jsonString)
 

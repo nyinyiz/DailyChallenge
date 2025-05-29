@@ -54,6 +54,59 @@ or even platform-specific topics. Help me grow the collection and make learning 
    ```
 6. **Open a Pull Request** on GitHub and describe your contribution.
 
+## Contributing Challenge Questions
+
+Thank you for considering contributing to Daily Challenge! Here's how you can add new challenge questions.
+
+### JSON File Structure
+
+Challenge questions are stored in the `composeApp/src/commonMain/composeResources/files` directory. There are three types of challenges:
+
+1. Daily Challenges: `daily_challenges.json`
+2. True/False Questions: `true_or_false_challenges_[category].json`
+3. Multiple Choice Questions: `multiple_choice_challenges_[category].json`
+
+where `[category]` can be: android, ios, kotlin, swift, or flutter
+
+### JSON Format Examples
+
+#### Daily Challenge Format
+```json
+{
+  "id": "unique_id",
+  "difficulty": "Easy|Medium|Hard",
+  "question": "Your question text here",
+  "questionCode": "Code snippet for the question (optional)",
+  "answerCode": "Solution code snippet"
+}
+```
+
+### True/False Challenge Format
+```json
+{
+  "id": "unique_id",
+  "question": "Your question text here",
+  "correctAnswer": "true|false",
+  "explanation": "Explanation text",
+  "difficulty": "Easy|Medium|Hard"
+}
+```
+
+### Multiple Choice Challenge Format
+```json
+{
+   "question": "Your multiple choice question",
+   "options": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+   ],
+   "correctAnswer": "A|B|C|D",
+   "explanation": "Explanation for the correct answer"
+}
+```
+
 ## 👤 Author
 
 Created by **Nyi Nyi Zaw** (nyinyizaw.dev@gmail.com)
