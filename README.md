@@ -31,6 +31,42 @@ Compose for Android, iOS, Desktop, and Web.
 
 ---
 
+## Tech Stack
+
+### Core Technologies
+- **Kotlin Multiplatform (KMP)** – Version `2.1.21`
+- **Jetpack Compose Multiplatform** – Version `1.8.1`
+- **Compose Hot Reload** – For development workflow enhancement
+
+### Architecture & Design Patterns
+- **MVVM Architecture** – Using `ViewModel` and state management
+- **Navigation Component** – Jetpack Navigation Compose for routing
+- **Koin** – Dependency injection (Version `4.0.0`)
+
+### UI Framework
+- **Compose Material 3** – For modern UI components
+- **Adaptive UI** – For responsive design across platforms
+- **Compose Navigation** – For screen navigation
+
+### Data Management
+- **DataStore** – Preferences storage (Version `1.1.7`)
+- **Kotlinx Serialization** – JSON serialization (Version `1.7.3`)
+
+### Image Loading
+- **Coil** – Image loading and caching (Version `3.2.0`)
+
+### Platform Support
+- **Android** – Min SDK `24`, Target SDK `35`
+- **iOS** – Native support via KMP
+- **Desktop** – JVM-based desktop application
+- **Web** – Configured for WebAssembly *(currently commented out. Looking for a solution with dataStore. That's why looking for contributors xD)*
+
+### Other Libraries
+- **Material Icons Extended** – For UI icons
+- **Coroutines** – Asynchronous programming (Version `1.10.2`)
+
+---
+
 ## Welcome for Contribution
 
 I welcome contributions! You can add new challenge questions in any area—Android, Kotlin, Compose,
