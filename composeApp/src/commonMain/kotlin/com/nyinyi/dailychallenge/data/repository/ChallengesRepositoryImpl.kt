@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.serialization.json.Json
 
 class ChallengesRepositoryImpl(
-    private val dataStore: DataStore<Preferences>,
     private val userPreferencesRepository: UserPreferencesRepository,
 ) : ChallengesRepository {
     private val defaultChallenges =

@@ -19,7 +19,7 @@ val appModule =
         single<UserPreferencesRepository> { UserPreferencesRepositoryImpl(get()) }
 
         single<ChallengesRepository> {
-            ChallengesRepositoryImpl(get(), get())
+            ChallengesRepositoryImpl(get())
         }
 
         viewModel {
