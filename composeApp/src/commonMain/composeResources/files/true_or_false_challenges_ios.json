@@ -1,349 +1,299 @@
 [
   {
-    "id": 1,
     "question": "In Swift, a struct is a value type.",
     "correctAnswer": true,
     "explanation": "Structs in Swift are value types, which means they are copied when assigned or passed as arguments, unlike classes which are reference types.",
     "difficulty": "easy"
   },
   {
-    "id": 2,
     "question": "UIKit is the only framework used for building user interfaces in iOS.",
     "correctAnswer": false,
     "explanation": "SwiftUI is another modern framework for building user interfaces in iOS, introduced in iOS 13.",
     "difficulty": "easy"
   },
   {
-    "id": 3,
     "question": "Xcode is the primary integrated development environment (IDE) for iOS app development.",
     "correctAnswer": true,
     "explanation": "Xcode is Apple's official IDE for developing software for macOS, iOS, iPadOS, watchOS, and tvOS.",
     "difficulty": "easy"
   },
   {
-    "id": 4,
     "question": "ARC (Automatic Reference Counting) manages memory automatically in Swift.",
     "correctAnswer": true,
     "explanation": "ARC automatically keeps track of strong references to class instances and deallocates memory when no longer needed.",
     "difficulty": "medium"
   },
   {
-    "id": 5,
     "question": "Swift is a compiled programming language.",
     "correctAnswer": true,
     "explanation": "Swift is a compiled language that is optimized for performance and safety.",
     "difficulty": "easy"
   },
   {
-    "id": 6,
     "question": "@objc attribute is always required when working with Objective-C code in Swift.",
     "correctAnswer": false,
     "explanation": "@objc is only needed when you want to expose Swift code to Objective-C or use dynamic dispatch.",
     "difficulty": "medium"
   },
   {
-    "id": 7,
     "question": "Core Data is a framework for managing the model layer objects in iOS applications.",
     "correctAnswer": true,
     "explanation": "Core Data provides an object graph management and persistence framework for iOS and macOS applications.",
     "difficulty": "medium"
   },
   {
-    "id": 8,
     "question": "Swift supports multiple inheritance of classes.",
     "correctAnswer": false,
     "explanation": "Swift does not support multiple inheritance of classes. Instead, it uses protocols and protocol extensions to achieve similar functionality.",
     "difficulty": "medium"
   },
   {
-    "id": 9,
     "question": "App Transport Security (ATS) is enabled by default in iOS apps.",
     "correctAnswer": true,
     "explanation": "ATS is a security feature that requires apps to use secure network connections by default.",
     "difficulty": "medium"
   },
   {
-    "id": 10,
     "question": "In SwiftUI, @State is used to create a persistent storage for a value type.",
     "correctAnswer": true,
     "explanation": "@State property wrapper creates a storage for a value that can be modified and triggers view updates.",
     "difficulty": "medium"
   },
   {
-    "id": 11,
     "question": "Combine framework is used for handling asynchronous events in iOS.",
     "correctAnswer": true,
     "explanation": "Combine provides a declarative Swift API for processing values over time, such as handling network requests or user interface events.",
     "difficulty": "hard"
   },
   {
-    "id": 12,
     "question": "UIViewController lifecycle methods are always called in a predictable order.",
     "correctAnswer": false,
     "explanation": "While there is a general order, not all lifecycle methods are guaranteed to be called in every scenario, and some can be skipped depending on the app's state.",
     "difficulty": "hard"
   },
   {
-    "id": 13,
     "question": "Swift's optional chaining can prevent runtime crashes when accessing nested properties.",
     "correctAnswer": true,
     "explanation": "Optional chaining allows you to safely access properties, methods, and subscripts of an optional that might currently be nil.",
     "difficulty": "medium"
   },
   {
-    "id": 14,
     "question": "Grand Central Dispatch (GCD) is part of the Core Foundation framework.",
     "correctAnswer": false,
     "explanation": "GCD is part of the libdispatch library and is used for managing concurrent tasks in iOS and macOS.",
     "difficulty": "medium"
   },
   {
-    "id": 15,
     "question": "Swift supports functional programming paradigms.",
     "correctAnswer": true,
     "explanation": "Swift includes many functional programming features like map, filter, reduce, and first-class functions.",
     "difficulty": "medium"
   },
   {
-    "id": 16,
     "question": "URLSession is only used for making network requests.",
     "correctAnswer": false,
     "explanation": "URLSession can also handle background downloads, uploads, and other network-related tasks.",
     "difficulty": "medium"
   },
   {
-    "id": 17,
     "question": "In Swift, all numeric types are converted implicitly.",
     "correctAnswer": false,
     "explanation": "Swift requires explicit type conversion between different numeric types to prevent unintended precision loss.",
     "difficulty": "medium"
   },
   {
-    "id": 18,
     "question": "Property observers can be added to stored properties in Swift.",
     "correctAnswer": true,
     "explanation": "willSet and didSet property observers allow you to observe and respond to changes in a property's value.",
     "difficulty": "medium"
   },
   {
-    "id": 19,
     "question": "Protocol extensions can provide default implementations for protocol methods.",
     "correctAnswer": true,
     "explanation": "Swift allows adding default implementations to protocol methods through protocol extensions.",
     "difficulty": "hard"
   },
   {
-    "id": 20,
     "question": "Core Animation is exclusively used for animating user interface elements.",
     "correctAnswer": false,
     "explanation": "Core Animation is a graphics rendering and animation infrastructure used for more than just UI animations, including complex rendering tasks.",
     "difficulty": "hard"
   },
   {
-    "id": 21,
     "question": "Swift's type inference always works perfectly for complex generic types.",
     "correctAnswer": false,
     "explanation": "While Swift has powerful type inference, complex generic types may require explicit type annotations.",
     "difficulty": "hard"
   },
   {
-    "id": 22,
     "question": "App Thinning helps reduce the download size of iOS apps.",
     "correctAnswer": true,
     "explanation": "App Thinning is a process that ensures users only download the app resources needed for their specific device.",
     "difficulty": "medium"
   },
   {
-    "id": 23,
     "question": "Generics in Swift can work with any type that conforms to a specific protocol.",
     "correctAnswer": true,
     "explanation": "Swift's generics allow creating flexible, reusable code that works with types conforming to specified protocols.",
     "difficulty": "hard"
   },
   {
-    "id": 24,
     "question": "The Codable protocol can automatically generate encoding and decoding methods.",
     "correctAnswer": true,
     "explanation": "Swift's Codable protocol provides automatic encoding and decoding for types that conform to it.",
     "difficulty": "medium"
   },
   {
-    "id": 25,
     "question": "Metal framework is only used for 2D graphics rendering.",
     "correctAnswer": false,
     "explanation": "Metal is a low-level graphics and compute API used for both 2D and 3D rendering, as well as parallel computing.",
     "difficulty": "hard"
   },
   {
-    "id": 26,
     "question": "Dependency Injection is not used in iOS development.",
     "correctAnswer": false,
     "explanation": "Dependency Injection is a design pattern commonly used in iOS development to improve code modularity and testability.",
     "difficulty": "medium"
   },
   {
-    "id": 27,
     "question": "Swift's type system prevents all possible runtime errors.",
     "correctAnswer": false,
     "explanation": "While Swift's type system is robust, it cannot prevent all possible runtime errors, such as those involving optionals or force unwrapping.",
     "difficulty": "hard"
   },
   {
-    "id": 28,
     "question": "Closures in Swift are reference types.",
     "correctAnswer": true,
     "explanation": "Closures are reference types in Swift, which means they can create retain cycles if not handled carefully.",
     "difficulty": "hard"
   },
   {
-    "id": 29,
     "question": "Core Location framework is used only for GPS tracking.",
     "correctAnswer": false,
     "explanation": "Core Location provides a range of location services, including GPS, cellular, and Wi-Fi positioning.",
     "difficulty": "medium"
   },
   {
-    "id": 30,
     "question": "Swift supports multiple return values from a function using tuples.",
     "correctAnswer": true,
     "explanation": "Swift allows functions to return multiple values by packaging them in a tuple.",
     "difficulty": "easy"
   },
   {
-    "id": 31,
     "question": "UIKit views can be directly used in SwiftUI without any conversion.",
     "correctAnswer": false,
     "explanation": "UIKit views need to be wrapped in UIViewRepresentable protocol to be used in SwiftUI.",
     "difficulty": "medium"
   },
   {
-    "id": 32,
     "question": "Optionals in Swift can only contain reference types.",
     "correctAnswer": false,
     "explanation": "Optionals in Swift can contain both value and reference types.",
     "difficulty": "medium"
   },
   {
-    "id": 33,
     "question": "Swift's Result type is used for handling errors in a functional way.",
     "correctAnswer": true,
     "explanation": "The Result type provides a way to represent either a successful value or an error in a type-safe manner.",
     "difficulty": "hard"
   },
   {
-    "id": 34,
     "question": "Core Graphics is a low-level drawing API for iOS.",
     "correctAnswer": true,
     "explanation": "Core Graphics provides low-level drawing capabilities for creating custom graphics and rendering.",
     "difficulty": "medium"
   },
   {
-    "id": 35,
     "question": "Swift supports operator overloading.",
     "correctAnswer": true,
     "explanation": "Swift allows developers to define custom implementations for standard operators for their own types.",
     "difficulty": "medium"
   },
   {
-    "id": 36,
     "question": "Lazy properties are initialized only when they are first accessed.",
     "correctAnswer": true,
     "explanation": "Lazy properties defer their initialization until the first time they are accessed, which can help improve performance.",
     "difficulty": "medium"
   },
   {
-    "id": 37,
     "question": "Swift's protocol-oriented programming completely replaces object-oriented programming.",
     "correctAnswer": false,
     "explanation": "Protocol-oriented programming is a powerful paradigm in Swift, but it complements rather than completely replaces object-oriented programming.",
     "difficulty": "hard"
   },
   {
-    "id": 38,
     "question": "Apple's Instruments tool is used for performance profiling and analysis.",
     "correctAnswer": true,
     "explanation": "Instruments is a powerful profiling and tracing tool included in Xcode for analyzing app performance.",
     "difficulty": "medium"
   },
   {
-    "id": 39,
     "question": "Swift's defer keyword guarantees that a block of code will always execute.",
     "correctAnswer": true,
     "explanation": "The defer keyword ensures a block of code is executed when the current scope exits, regardless of how it exits.",
     "difficulty": "hard"
   },
   {
-    "id": 40,
     "question": "Type erasure is not used in Swift generics.",
     "correctAnswer": false,
     "explanation": "Type erasure is a technique used in Swift to hide the underlying type details of generic types.",
     "difficulty": "hard"
   },
   {
-    "id": 41,
     "question": "UITableView is part of the SwiftUI framework.",
     "correctAnswer": false,
     "explanation": "UITableView is a UIKit component, not a SwiftUI component. SwiftUI uses List for similar functionality.",
     "difficulty": "easy"
   },
   {
-    "id": 42,
     "question": "Swift supports default parameter values in function definitions.",
     "correctAnswer": true,
     "explanation": "Swift allows specifying default values for function parameters, making them optional when calling the function.",
     "difficulty": "easy"
   },
   {
-    "id": 43,
     "question": "Objective-C and Swift can be used together in the same project.",
     "correctAnswer": true,
     "explanation": "iOS projects can use both Objective-C and Swift through an interoperability bridge.",
     "difficulty": "medium"
   },
   {
-    "id": 44,
     "question": "Swift's @escaping closure can outlive the function it was created in.",
     "correctAnswer": true,
     "explanation": "@escaping closures can be stored and called after the function they were created in has finished executing.",
     "difficulty": "hard"
   },
   {
-    "id": 45,
     "question": "Core Data can only persist data to SQLite databases.",
     "correctAnswer": false,
     "explanation": "Core Data supports multiple store types, including SQLite, XML, and binary stores.",
     "difficulty": "medium"
   },
   {
-    "id": 46,
     "question": "Swift's where clause can be used to add constraints to generics.",
     "correctAnswer": true,
     "explanation": "The where clause allows adding specific constraints to generic type parameters.",
     "difficulty": "hard"
   },
   {
-    "id": 47,
     "question": "NSPredicate is used only for Core Data filtering.",
     "correctAnswer": false,
     "explanation": "NSPredicate can be used for filtering in various contexts, including Core Data, but not limited to it.",
     "difficulty": "medium"
   },
   {
-    "id": 48,
     "question": "Swift allows creating custom subscripts for types.",
     "correctAnswer": true,
     "explanation": "Swift provides the ability to define custom subscript methods for types to enable custom access patterns.",
     "difficulty": "hard"
   },
   {
-    "id": 49,
     "question": "URLSession's dataTask method always runs on the main thread.",
     "correctAnswer": false,
     "explanation": "URLSession's dataTask runs on a background thread by default, requiring explicit main thread dispatching for UI updates.",
     "difficulty": "medium"
   },
   {
-    "id": 50,
     "question": "Swift's associated types in protocols provide a way to create generic protocols.",
     "correctAnswer": true,
     "explanation": "Associated types allow creating flexible, generic protocols with placeholder types that are specified when the protocol is adopted.",

@@ -1,7 +1,5 @@
 package com.nyinyi.dailychallenge.data.repository
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
 import com.nyinyi.dailychallenge.data.model.MultipleChoiceObj
 import com.nyinyi.dailychallenge.data.model.QuizCard

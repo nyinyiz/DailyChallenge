@@ -4,7 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class QuizCard(
-    val id: Int,
     val difficulty: String,
     val question: String,
     val correctAnswer: Boolean,

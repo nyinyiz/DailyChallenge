@@ -158,7 +158,6 @@ fun ResultScreen(
                 ) {
                     items(
                         items = result.incorrectAnswers,
-                        key = { it.id },
                     ) { question ->
                         ReviewQuestionCard(question = question)
                     }
