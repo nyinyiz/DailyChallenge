@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "question": "Which framework is used for building user interfaces declaratively in iOS?",
     "options": [
       "UIKit",
@@ -9,45 +10,10 @@
     ],
     "correctAnswer": "SwiftUI",
     "explanation": "SwiftUI is Apple's modern framework for building user interfaces declaratively across all Apple platforms.",
-    "difficulty": "Easy"
+    "difficulty": "easy"
   },
   {
-    "question": "What is the primary programming language for iOS app development?",
-    "options": [
-      "C++",
-      "Swift",
-      "Kotlin",
-      "Java"
-    ],
-    "correctAnswer": "Swift",
-    "explanation": "Swift is the primary programming language developed by Apple for iOS, macOS, watchOS, and tvOS development.",
-    "difficulty": "Easy"
-  },
-  {
-    "question": "Which property wrapper is used to create a state variable in SwiftUI?",
-    "options": [
-      "@Binding",
-      "@Published",
-      "@State",
-      "@Observed"
-    ],
-    "correctAnswer": "@State",
-    "explanation": "@State is used to create a source of truth for a value that can be modified and will trigger view updates.",
-    "difficulty": "Medium"
-  },
-  {
-    "question": "What does ARC stand for in Swift?",
-    "options": [
-      "Automated Reference Counting",
-      "Advanced Resource Control",
-      "Automatic Resource Cleanup",
-      "Allocated Reference Checking"
-    ],
-    "correctAnswer": "Automated Reference Counting",
-    "explanation": "ARC (Automatic Reference Counting) is Swift's memory management mechanism that automatically tracks and manages an app's memory usage.",
-    "difficulty": "Medium"
-  },
-  {
+    "id": 2,
     "question": "Which type of method is called when a view is about to appear in UIKit?",
     "options": [
       "viewDidLoad()",
@@ -57,21 +23,10 @@
     ],
     "correctAnswer": "viewWillAppear(_:)",
     "explanation": "viewWillAppear(_:) is called just before the view becomes visible, allowing final preparations before the view is displayed.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
-    "question": "Which protocol is used to make a type encodable and decodable in Swift?",
-    "options": [
-      "Serializable",
-      "Codable",
-      "Encodable",
-      "JSONSerializable"
-    ],
-    "correctAnswer": "Codable",
-    "explanation": "Codable protocol allows automatic encoding and decoding of types to and from external representations like JSON.",
-    "difficulty": "Medium"
-  },
-  {
+    "id": 3,
     "question": "What framework provides low-level graphics rendering in iOS?",
     "options": [
       "Core Graphics",
@@ -81,21 +36,10 @@
     ],
     "correctAnswer": "Metal",
     "explanation": "Metal is a low-level, low-overhead hardware-accelerated graphics and compute API developed by Apple.",
-    "difficulty": "Hard"
+    "difficulty": "hard"
   },
   {
-    "question": "Which property wrapper is used to create an observable object in SwiftUI?",
-    "options": [
-      "@State",
-      "@Binding",
-      "@Published",
-      "@ObservedObject"
-    ],
-    "correctAnswer": "@Published",
-    "explanation": "@Published is used to create an observable property that automatically announces changes to its value.",
-    "difficulty": "Medium"
-  },
-  {
+    "id": 4,
     "question": "What is the primary way to handle network requests in iOS?",
     "options": [
       "NSURLConnection",
@@ -105,9 +49,10 @@
     ],
     "correctAnswer": "URLSession",
     "explanation": "URLSession is the modern Apple framework for handling network requests and downloads.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 5,
     "question": "What is used to create background tasks in iOS?",
     "options": [
       "Background Modes",
@@ -117,9 +62,10 @@
     ],
     "correctAnswer": "Background Tasks Framework",
     "explanation": "The Background Tasks Framework allows apps to schedule and manage background work efficiently.",
-    "difficulty": "Hard"
+    "difficulty": "hard"
   },
   {
+    "id": 6,
     "question": "Which framework is used for location services in iOS?",
     "options": [
       "MapKit",
@@ -129,45 +75,10 @@
     ],
     "correctAnswer": "Core Location",
     "explanation": "Core Location provides services for determining a device's geographic location, altitude, orientation, and more.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
-    "question": "What is the primary way to handle error handling in Swift?",
-    "options": [
-      "Exception Handling",
-      "Do-Catch Statements",
-      "Try-Except Blocks",
-      "Error Protocols"
-    ],
-    "correctAnswer": "Do-Catch Statements",
-    "explanation": "Swift uses do-catch statements to handle and propagate errors in a type-safe manner.",
-    "difficulty": "Medium"
-  },
-  {
-    "question": "Which property is initialized only when first accessed?",
-    "options": [
-      "Computed Property",
-      "Stored Property",
-      "Lazy Property",
-      "Static Property"
-    ],
-    "correctAnswer": "Lazy Property",
-    "explanation": "Lazy properties are initialized only when they are first accessed, which can help improve performance.",
-    "difficulty": "Medium"
-  },
-  {
-    "question": "What prevents retain cycles in Swift?",
-    "options": [
-      "Strong References",
-      "Weak References",
-      "Unowned References",
-      "Shared References"
-    ],
-    "correctAnswer": "Weak References",
-    "explanation": "Weak references break potential retain cycles by not increasing the reference count of an object.",
-    "difficulty": "Medium"
-  },
-  {
+    "id": 7,
     "question": "Which framework provides push notification services in iOS?",
     "options": [
       "Notification Center",
@@ -177,9 +88,10 @@
     ],
     "correctAnswer": "User Notifications",
     "explanation": "The User Notifications framework handles the delivery and handling of local and remote notifications.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 8,
     "question": "What is used to create custom drawing in iOS?",
     "options": [
       "UIGraphics",
@@ -189,9 +101,10 @@
     ],
     "correctAnswer": "Core Graphics",
     "explanation": "Core Graphics provides low-level drawing capabilities for creating custom graphics and rendering.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 9,
     "question": "Which framework is used for machine learning in iOS?",
     "options": [
       "CoreML",
@@ -201,117 +114,10 @@
     ],
     "correctAnswer": "CoreML",
     "explanation": "CoreML is Apple's framework for integrating machine learning models into iOS applications.",
-    "difficulty": "Hard"
+    "difficulty": "hard"
   },
   {
-    "question": "What allows Swift types to be used interchangeably with Objective-C?",
-    "options": [
-      "Objective-C Runtime",
-      "@objc Attribute",
-      "Bridge Header",
-      "Interop Protocol"
-    ],
-    "correctAnswer": "@objc Attribute",
-    "explanation": "The @objc attribute allows Swift types and methods to be used in Objective-C code.",
-    "difficulty": "Medium"
-  },
-  {
-    "question": "Which collection type in Swift is unordered and contains unique values?",
-    "options": [
-      "Array",
-      "Dictionary",
-      "Set",
-      "Tuple"
-    ],
-    "correctAnswer": "Set",
-    "explanation": "A Set in Swift is an unordered collection of unique values, ensuring no duplicate elements.",
-    "difficulty": "Easy"
-  },
-  {
-    "question": "Which type allows representing either a success or a failure in Swift?",
-    "options": [
-      "Optional",
-      "Error",
-      "Result",
-      "Either"
-    ],
-    "correctAnswer": "Result",
-    "explanation": "The Result type provides a way to represent either a successful value or an error in a type-safe manner.",
-    "difficulty": "Hard"
-  },
-  {
-    "question": "What is used to add constraints to generic type parameters in Swift?",
-    "options": [
-      "Type Constraints",
-      "Generic Constraints",
-      "Where Clause",
-      "Constraint Protocol"
-    ],
-    "correctAnswer": "Where Clause",
-    "explanation": "The where clause allows adding specific constraints to generic type parameters in Swift.",
-    "difficulty": "Hard"
-  },
-  {
-    "question": "What type are closures in Swift?",
-    "options": [
-      "Value Types",
-      "Reference Types",
-      "Primitive Types",
-      "Enum Types"
-    ],
-    "correctAnswer": "Reference Types",
-    "explanation": "Closures are reference types in Swift, which means they can create retain cycles if not handled carefully.",
-    "difficulty": "Hard"
-  },
-  {
-    "question": "Which keyword ensures a block of code is executed when a scope exits?",
-    "options": [
-      "finally",
-      "ensure",
-      "defer",
-      "always"
-    ],
-    "correctAnswer": "defer",
-    "explanation": "The defer keyword guarantees that a block of code is executed when the current scope exits, regardless of how it exits.",
-    "difficulty": "Hard"
-  },
-  {
-    "question": "What is used to create custom subscripts in Swift?",
-    "options": [
-      "Subscript Method",
-      "Custom Indexing",
-      "Subscript Keyword",
-      "Index Protocol"
-    ],
-    "correctAnswer": "Subscript Keyword",
-    "explanation": "Swift allows creating custom subscripts using the subscript keyword to define custom access patterns for types.",
-    "difficulty": "Hard"
-  },
-  {
-    "question": "What is used to create associated types in protocols?",
-    "options": [
-      "Associated Protocol",
-      "Generic Protocol",
-      "Associated Type",
-      "Type Alias"
-    ],
-    "correctAnswer": "Associated Type",
-    "explanation": "Associated types allow creating flexible, generic protocols with placeholder types that are specified when the protocol is adopted.",
-    "difficulty": "Hard"
-  },
-  {
-    "question": "What type of programming does Swift primarily support?",
-    "options": [
-      "Purely Object-Oriented",
-      "Purely Functional",
-      "Protocol-Oriented",
-      "Procedural"
-    ],
-    "correctAnswer": "Protocol-Oriented",
-    "explanation": "Swift emphasizes protocol-oriented programming, allowing for more flexible and composable code design.",
-    "difficulty": "Medium"
-  },
-  {
+    "id": 10,
     "question": "Which method is called when a view controller is loaded into memory?",
     "options": [
       "viewDidLoad()",
@@ -321,9 +127,10 @@
     ],
     "correctAnswer": "viewDidLoad()",
     "explanation": "viewDidLoad() is called after the view controller's view is loaded into memory, typically used for initial setup.",
-    "difficulty": "Easy"
+    "difficulty": "easy"
   },
   {
+    "id": 11,
     "question": "What is the purpose of the App Transport Security (ATS) in iOS?",
     "options": [
       "To speed up network connections",
@@ -333,9 +140,10 @@
     ],
     "correctAnswer": "To enforce secure network connections",
     "explanation": "ATS requires apps to use secure network connections (HTTPS) by default, improving network security.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 12,
     "question": "Which framework provides audio and video capabilities in iOS?",
     "options": [
       "MediaKit",
@@ -345,9 +153,10 @@
     ],
     "correctAnswer": "AVFoundation",
     "explanation": "AVFoundation is the comprehensive framework for working with time-based audiovisual media on iOS.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 13,
     "question": "What is used to store small amounts of persistent data in iOS?",
     "options": [
       "Core Data",
@@ -357,21 +166,10 @@
     ],
     "correctAnswer": "UserDefaults",
     "explanation": "UserDefaults is used to store small amounts of user preferences and settings persistently.",
-    "difficulty": "Easy"
+    "difficulty": "easy"
   },
   {
-    "question": "Which design pattern is commonly used for communication between objects in iOS?",
-    "options": [
-      "Singleton Pattern",
-      "Observer Pattern",
-      "Factory Pattern",
-      "Decorator Pattern"
-    ],
-    "correctAnswer": "Observer Pattern",
-    "explanation": "The Observer pattern is widely used in iOS for handling events and notifications between objects.",
-    "difficulty": "Medium"
-  },
-  {
+    "id": 14,
     "question": "What is the primary purpose of the Keychain Services in iOS?",
     "options": [
       "App Performance Tracking",
@@ -381,9 +179,10 @@
     ],
     "correctAnswer": "Secure Data Storage",
     "explanation": "Keychain Services provides a secure way to store sensitive information like passwords and cryptographic keys.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 15,
     "question": "What is used to create animations in SwiftUI?",
     "options": [
       "UIView Animations",
@@ -393,21 +192,10 @@
     ],
     "correctAnswer": ".animation() modifier",
     "explanation": "The .animation() modifier in SwiftUI allows for easy and declarative animation of view changes.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
-    "question": "Which protocol is used to make an object observable in Combine?",
-    "options": [
-      "Observable",
-      "ObservableObject",
-      "Observing",
-      "PublishedObject"
-    ],
-    "correctAnswer": "ObservableObject",
-    "explanation": "ObservableObject protocol is used to create objects that can be observed for changes in Combine.",
-    "difficulty": "Hard"
-  },
-  {
+    "id": 16,
     "question": "Which framework is used for creating augmented reality experiences in iOS?",
     "options": [
       "ARCore",
@@ -417,9 +205,10 @@
     ],
     "correctAnswer": "ARKit",
     "explanation": "ARKit is Apple's framework for creating immersive augmented reality experiences on iOS devices.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 17,
     "question": "What is the primary way to handle memory warnings in iOS?",
     "options": [
       "Manual Memory Management",
@@ -429,9 +218,10 @@
     ],
     "correctAnswer": "UIApplicationDidReceiveMemoryWarning",
     "explanation": "The UIApplicationDidReceiveMemoryWarning notification helps apps respond to low memory conditions by releasing unnecessary resources.",
-    "difficulty": "Hard"
+    "difficulty": "hard"
   },
   {
+    "id": 18,
     "question": "Which framework provides accessibility features in iOS?",
     "options": [
       "Accessibility Framework",
@@ -441,9 +231,10 @@
     ],
     "correctAnswer": "UIAccessibility",
     "explanation": "UIAccessibility provides a set of methods and properties to make iOS apps more accessible to users with disabilities.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 19,
     "question": "What is used to create and manage threads in iOS?",
     "options": [
       "Thread Class",
@@ -453,9 +244,10 @@
     ],
     "correctAnswer": "Grand Central Dispatch",
     "explanation": "Grand Central Dispatch (GCD) provides a modern way to manage concurrent tasks and threads in iOS applications.",
-    "difficulty": "Hard"
+    "difficulty": "hard"
   },
   {
+    "id": 20,
     "question": "Which protocol is used to implement data source methods in UITableView?",
     "options": [
       "UITableViewDelegate",
@@ -465,9 +257,10 @@
     ],
     "correctAnswer": "UITableViewDataSource",
     "explanation": "UITableViewDataSource provides methods for populating a table view with data and managing table view rows.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 21,
     "question": "What is the primary purpose of the Instruments tool in Xcode?",
     "options": [
       "Code Editing",
@@ -477,9 +270,10 @@
     ],
     "correctAnswer": "Performance Profiling",
     "explanation": "Instruments is a powerful profiling and tracing tool used to analyze app performance, memory usage, and other system-level metrics.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 22,
     "question": "Which method is used to present a view controller modally in iOS?",
     "options": [
       "presentViewController(_:animated:completion:)",
@@ -489,9 +283,10 @@
     ],
     "correctAnswer": "presentViewController(_:animated:completion:)",
     "explanation": "The presentViewController method is used to present a view controller modally, allowing for temporary display of another view.",
-    "difficulty": "Easy"
+    "difficulty": "easy"
   },
   {
+    "id": 23,
     "question": "What is the primary way to handle user input in iOS?",
     "options": [
       "Touch Events",
@@ -501,9 +296,10 @@
     ],
     "correctAnswer": "Gesture Recognizers",
     "explanation": "Gesture Recognizers are used to handle various user input gestures like taps, swipes, and pinches in iOS applications.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 24,
     "question": "Which framework is used for creating animations in iOS?",
     "options": [
       "Core Animation",
@@ -513,9 +309,10 @@
     ],
     "correctAnswer": "Core Animation",
     "explanation": "Core Animation is the primary framework for creating smooth and efficient animations in iOS applications.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
   },
   {
+    "id": 25,
     "question": "What is the primary method for persisting complex data models in iOS?",
     "options": [
       "UserDefaults",
@@ -525,6 +322,162 @@
     ],
     "correctAnswer": "Core Data",
     "explanation": "Core Data is Apple's framework for managing and persisting complex data models in iOS applications.",
-    "difficulty": "Medium"
+    "difficulty": "medium"
+  },
+  {
+    "id": 26,
+    "question": "Which design pattern is commonly used for communication between objects in iOS?",
+    "options": [
+      "Singleton Pattern",
+      "Observer Pattern",
+      "Factory Pattern",
+      "Decorator Pattern"
+    ],
+    "correctAnswer": "Observer Pattern",
+    "explanation": "The Observer pattern is widely used in iOS for handling events and notifications between objects.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 27,
+    "question": "Which protocol is used to make an object observable in Combine?",
+    "options": [
+      "Observable",
+      "ObservableObject",
+      "Observing",
+      "PublishedObject"
+    ],
+    "correctAnswer": "ObservableObject",
+    "explanation": "ObservableObject protocol is used to create objects that can be observed for changes in Combine.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 28,
+    "question": "Which framework is used for image and video processing with filters?",
+    "options": [
+      "Core Graphics",
+      "Core Image",
+      "Vision",
+      "Metal Performance Shaders"
+    ],
+    "correctAnswer": "Core Image",
+    "explanation": "Core Image provides a powerful framework for applying filters and effects to images and video frames.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 29,
+    "question": "What is the main class for managing the app's life cycle events?",
+    "options": [
+      "UIApplication",
+      "AppDelegate",
+      "SceneDelegate",
+      "UIWindow"
+    ],
+    "correctAnswer": "UIApplication",
+    "explanation": "UIApplication is the centralized control point for iOS apps, managing app lifecycle and handling system events.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 30,
+    "question": "Which framework provides haptic feedback capabilities?",
+    "options": [
+      "UIKit",
+      "Core Haptics",
+      "Taptic Engine",
+      "Feedback Framework"
+    ],
+    "correctAnswer": "Core Haptics",
+    "explanation": "Core Haptics allows creating custom haptic patterns and controlling the Taptic Engine for tactile feedback.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 31,
+    "question": "What is used to share data between app extensions and the main app?",
+    "options": [
+      "UserDefaults",
+      "App Groups",
+      "Shared Container",
+      "Extension Bridge"
+    ],
+    "correctAnswer": "App Groups",
+    "explanation": "App Groups enable data sharing between an app and its extensions through a shared container.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 32,
+    "question": "Which class is used to manage collection view layouts?",
+    "options": [
+      "UICollectionView",
+      "UICollectionViewLayout",
+      "UICollectionViewFlowLayout",
+      "UICollectionViewController"
+    ],
+    "correctAnswer": "UICollectionViewFlowLayout",
+    "explanation": "UICollectionViewFlowLayout is the concrete layout class that organizes items into a grid with optional headers and footers.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 33,
+    "question": "What framework provides speech recognition capabilities?",
+    "options": [
+      "AVFoundation",
+      "Speech",
+      "Core Audio",
+      "Natural Language"
+    ],
+    "correctAnswer": "Speech",
+    "explanation": "The Speech framework provides APIs for performing speech recognition on audio content.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 34,
+    "question": "Which notification is posted when the app enters the background?",
+    "options": [
+      "UIApplicationWillResignActive",
+      "UIApplicationDidEnterBackground",
+      "UIApplicationWillTerminate",
+      "UIApplicationDidBecomeInactive"
+    ],
+    "correctAnswer": "UIApplicationDidEnterBackground",
+    "explanation": "UIApplicationDidEnterBackground notification is posted when the app transitions from foreground to background state.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 35,
+    "question": "What is used to detect faces and objects in images?",
+    "options": [
+      "Core Image",
+      "Vision",
+      "Core ML",
+      "Image Analysis"
+    ],
+    "correctAnswer": "Vision",
+    "explanation": "Vision framework provides high-level image analysis capabilities including face detection, object tracking, and text recognition.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 36,
+    "question": "Which protocol must a UIView subclass implement to support Interface Builder?",
+    "options": [
+      "IBDesignable",
+      "NSCoding",
+      "UIViewRepresentable",
+      "InterfaceBuilderKit"
+    ],
+    "correctAnswer": "NSCoding",
+    "explanation": "NSCoding protocol is required for views to be properly archived and unarchived by Interface Builder.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 37,
+    "question": "What manages the presentation of alerts and action sheets?",
+    "options": [
+      "UIAlertView",
+      "UIAlertController",
+      "UIActionSheet",
+      "UIPopoverController"
+    ],
+    "correctAnswer": "UIAlertController",
+    "explanation": "UIAlertController is the modern way to present alerts and action sheets, replacing the deprecated UIAlertView and UIActionSheet.",
+    "difficulty": "easy"
   }
 ]

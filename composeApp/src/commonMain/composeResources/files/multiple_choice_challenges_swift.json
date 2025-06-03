@@ -1,0 +1,353 @@
+[
+  {
+    "id": 1,
+    "question": "What is the primary programming language for iOS app development?",
+    "options": [
+      "C++",
+      "Swift",
+      "Kotlin",
+      "Java"
+    ],
+    "correctAnswer": "Swift",
+    "explanation": "Swift is the primary programming language developed by Apple for iOS, macOS, watchOS, and tvOS development.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 2,
+    "question": "Which property wrapper is used to create a state variable in SwiftUI?",
+    "options": [
+      "@Binding",
+      "@Published",
+      "@State",
+      "@Observed"
+    ],
+    "correctAnswer": "@State",
+    "explanation": "@State is used to create a source of truth for a value that can be modified and will trigger view updates.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 3,
+    "question": "What does ARC stand for in Swift?",
+    "options": [
+      "Automated Reference Counting",
+      "Advanced Resource Control",
+      "Automatic Resource Cleanup",
+      "Allocated Reference Checking"
+    ],
+    "correctAnswer": "Automated Reference Counting",
+    "explanation": "ARC (Automatic Reference Counting) is Swift's memory management mechanism that automatically tracks and manages an app's memory usage.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 4,
+    "question": "Which protocol is used to make a type encodable and decodable in Swift?",
+    "options": [
+      "Serializable",
+      "Codable",
+      "Encodable",
+      "JSONSerializable"
+    ],
+    "correctAnswer": "Codable",
+    "explanation": "Codable protocol allows automatic encoding and decoding of types to and from external representations like JSON.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 5,
+    "question": "Which property wrapper is used to create an observable object in SwiftUI?",
+    "options": [
+      "@State",
+      "@Binding",
+      "@Published",
+      "@ObservedObject"
+    ],
+    "correctAnswer": "@Published",
+    "explanation": "@Published is used to create an observable property that automatically announces changes to its value.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 6,
+    "question": "What is the primary way to handle error handling in Swift?",
+    "options": [
+      "Exception Handling",
+      "Do-Catch Statements",
+      "Try-Except Blocks",
+      "Error Protocols"
+    ],
+    "correctAnswer": "Do-Catch Statements",
+    "explanation": "Swift uses do-catch statements to handle and propagate errors in a type-safe manner.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 7,
+    "question": "Which property is initialized only when first accessed?",
+    "options": [
+      "Computed Property",
+      "Stored Property",
+      "Lazy Property",
+      "Static Property"
+    ],
+    "correctAnswer": "Lazy Property",
+    "explanation": "Lazy properties are initialized only when they are first accessed, which can help improve performance.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 8,
+    "question": "What prevents retain cycles in Swift?",
+    "options": [
+      "Strong References",
+      "Weak References",
+      "Unowned References",
+      "Shared References"
+    ],
+    "correctAnswer": "Weak References",
+    "explanation": "Weak references break potential retain cycles by not increasing the reference count of an object.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 9,
+    "question": "What allows Swift types to be used interchangeably with Objective-C?",
+    "options": [
+      "Objective-C Runtime",
+      "@objc Attribute",
+      "Bridge Header",
+      "Interop Protocol"
+    ],
+    "correctAnswer": "@objc Attribute",
+    "explanation": "The @objc attribute allows Swift types and methods to be used in Objective-C code.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 10,
+    "question": "Which collection type in Swift is unordered and contains unique values?",
+    "options": [
+      "Array",
+      "Dictionary",
+      "Set",
+      "Tuple"
+    ],
+    "correctAnswer": "Set",
+    "explanation": "A Set in Swift is an unordered collection of unique values, ensuring no duplicate elements.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 11,
+    "question": "Which type allows representing either a success or a failure in Swift?",
+    "options": [
+      "Optional",
+      "Error",
+      "Result",
+      "Either"
+    ],
+    "correctAnswer": "Result",
+    "explanation": "The Result type provides a way to represent either a successful value or an error in a type-safe manner.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 12,
+    "question": "What is used to add constraints to generic type parameters in Swift?",
+    "options": [
+      "Type Constraints",
+      "Generic Constraints",
+      "Where Clause",
+      "Constraint Protocol"
+    ],
+    "correctAnswer": "Where Clause",
+    "explanation": "The where clause allows adding specific constraints to generic type parameters in Swift.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 13,
+    "question": "What type are closures in Swift?",
+    "options": [
+      "Value Types",
+      "Reference Types",
+      "Primitive Types",
+      "Enum Types"
+    ],
+    "correctAnswer": "Reference Types",
+    "explanation": "Closures are reference types in Swift, which means they can create retain cycles if not handled carefully.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 14,
+    "question": "Which keyword ensures a block of code is executed when a scope exits?",
+    "options": [
+      "finally",
+      "ensure",
+      "defer",
+      "always"
+    ],
+    "correctAnswer": "defer",
+    "explanation": "The defer keyword guarantees that a block of code is executed when the current scope exits, regardless of how it exits.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 15,
+    "question": "What is used to create custom subscripts in Swift?",
+    "options": [
+      "Subscript Method",
+      "Custom Indexing",
+      "Subscript Keyword",
+      "Index Protocol"
+    ],
+    "correctAnswer": "Subscript Keyword",
+    "explanation": "Swift allows creating custom subscripts using the subscript keyword to define custom access patterns for types.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 16,
+    "question": "What is used to create associated types in protocols?",
+    "options": [
+      "Associated Protocol",
+      "Generic Protocol",
+      "Associated Type",
+      "Type Alias"
+    ],
+    "correctAnswer": "Associated Type",
+    "explanation": "Associated types allow creating flexible, generic protocols with placeholder types that are specified when the protocol is adopted.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 17,
+    "question": "What type of programming does Swift primarily support?",
+    "options": [
+      "Purely Object-Oriented",
+      "Purely Functional",
+      "Protocol-Oriented",
+      "Procedural"
+    ],
+    "correctAnswer": "Protocol-Oriented",
+    "explanation": "Swift emphasizes protocol-oriented programming, allowing for more flexible and composable code design.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 18,
+    "question": "Which keyword is used to define a type alias in Swift?",
+    "options": [
+      "alias",
+      "typealias",
+      "typedef",
+      "type"
+    ],
+    "correctAnswer": "typealias",
+    "explanation": "The typealias keyword creates an alternative name for an existing type, improving code readability.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 19,
+    "question": "What is the default access level for types and members in Swift?",
+    "options": [
+      "public",
+      "private",
+      "internal",
+      "fileprivate"
+    ],
+    "correctAnswer": "internal",
+    "explanation": "Internal is the default access level, making entities accessible within the same module but not outside it.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 20,
+    "question": "Which operator is used for nil-coalescing in Swift?",
+    "options": [
+      "?:",
+      "??",
+      "||",
+      "?="
+    ],
+    "correctAnswer": "??",
+    "explanation": "The ?? operator provides a default value when an optional contains nil.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 21,
+    "question": "What type of parameter allows a function to accept zero or more values?",
+    "options": [
+      "Optional Parameter",
+      "Default Parameter",
+      "Variadic Parameter",
+      "Generic Parameter"
+    ],
+    "correctAnswer": "Variadic Parameter",
+    "explanation": "Variadic parameters, denoted with ..., accept zero or more values of a specified type.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 22,
+    "question": "Which keyword prevents a class from being subclassed?",
+    "options": [
+      "static",
+      "final",
+      "sealed",
+      "private"
+    ],
+    "correctAnswer": "final",
+    "explanation": "The final keyword prevents a class, method, or property from being overridden or subclassed.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 23,
+    "question": "What is used to group related values in Swift without defining a type?",
+    "options": [
+      "Array",
+      "Dictionary",
+      "Tuple",
+      "Struct"
+    ],
+    "correctAnswer": "Tuple",
+    "explanation": "Tuples group multiple values into a single compound value without requiring a formal type definition.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 24,
+    "question": "Which attribute marks a function that modifies a struct's properties?",
+    "options": [
+      "@modifying",
+      "mutable",
+      "mutating",
+      "@mutable"
+    ],
+    "correctAnswer": "mutating",
+    "explanation": "The mutating keyword allows methods to modify properties of value types like structs and enums.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 25,
+    "question": "What feature allows Swift to infer types without explicit declaration?",
+    "options": [
+      "Type Casting",
+      "Type Inference",
+      "Dynamic Typing",
+      "Type Deduction"
+    ],
+    "correctAnswer": "Type Inference",
+    "explanation": "Type inference allows Swift to automatically deduce the type of a variable or constant from its initial value.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 26,
+    "question": "Which keyword creates a computed property that cannot be set?",
+    "options": [
+      "let",
+      "readonly",
+      "get",
+      "immutable"
+    ],
+    "correctAnswer": "get",
+    "explanation": "A computed property with only a get block is read-only and cannot be assigned a value.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 27,
+    "question": "What is the purpose of the @escaping attribute for closures?",
+    "options": [
+      "To prevent memory leaks",
+      "To allow the closure to outlive the function",
+      "To make the closure run immediately",
+      "To capture variables by reference"
+    ],
+    "correctAnswer": "To allow the closure to outlive the function",
+    "explanation": "@escaping indicates that a closure can be stored and called after the function returns.",
+    "difficulty": "hard"
+  }
+]
