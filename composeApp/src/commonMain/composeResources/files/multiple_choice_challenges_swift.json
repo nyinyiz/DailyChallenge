@@ -1,6 +1,5 @@
 [
   {
-    "id": 1,
     "question": "What is the primary programming language for iOS app development?",
     "options": [
       "C++",
@@ -13,7 +12,6 @@
     "difficulty": "easy"
   },
   {
-    "id": 2,
     "question": "Which property wrapper is used to create a state variable in SwiftUI?",
     "options": [
       "@Binding",
@@ -26,7 +24,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 3,
     "question": "What does ARC stand for in Swift?",
     "options": [
       "Automated Reference Counting",
@@ -39,7 +36,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 4,
     "question": "Which protocol is used to make a type encodable and decodable in Swift?",
     "options": [
       "Serializable",
@@ -52,7 +48,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 5,
     "question": "Which property wrapper is used to create an observable object in SwiftUI?",
     "options": [
       "@State",
@@ -65,7 +60,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 6,
     "question": "What is the primary way to handle error handling in Swift?",
     "options": [
       "Exception Handling",
@@ -78,7 +72,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 7,
     "question": "Which property is initialized only when first accessed?",
     "options": [
       "Computed Property",
@@ -91,7 +84,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 8,
     "question": "What prevents retain cycles in Swift?",
     "options": [
       "Strong References",
@@ -104,7 +96,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 9,
     "question": "What allows Swift types to be used interchangeably with Objective-C?",
     "options": [
       "Objective-C Runtime",
@@ -117,7 +108,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 10,
     "question": "Which collection type in Swift is unordered and contains unique values?",
     "options": [
       "Array",
@@ -130,7 +120,6 @@
     "difficulty": "easy"
   },
   {
-    "id": 11,
     "question": "Which type allows representing either a success or a failure in Swift?",
     "options": [
       "Optional",
@@ -143,7 +132,6 @@
     "difficulty": "hard"
   },
   {
-    "id": 12,
     "question": "What is used to add constraints to generic type parameters in Swift?",
     "options": [
       "Type Constraints",
@@ -156,7 +144,6 @@
     "difficulty": "hard"
   },
   {
-    "id": 13,
     "question": "What type are closures in Swift?",
     "options": [
       "Value Types",
@@ -169,7 +156,6 @@
     "difficulty": "hard"
   },
   {
-    "id": 14,
     "question": "Which keyword ensures a block of code is executed when a scope exits?",
     "options": [
       "finally",
@@ -182,7 +168,6 @@
     "difficulty": "hard"
   },
   {
-    "id": 15,
     "question": "What is used to create custom subscripts in Swift?",
     "options": [
       "Subscript Method",
@@ -195,7 +180,6 @@
     "difficulty": "hard"
   },
   {
-    "id": 16,
     "question": "What is used to create associated types in protocols?",
     "options": [
       "Associated Protocol",
@@ -208,7 +192,6 @@
     "difficulty": "hard"
   },
   {
-    "id": 17,
     "question": "What type of programming does Swift primarily support?",
     "options": [
       "Purely Object-Oriented",
@@ -221,7 +204,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 18,
     "question": "Which keyword is used to define a type alias in Swift?",
     "options": [
       "alias",
@@ -234,7 +216,6 @@
     "difficulty": "easy"
   },
   {
-    "id": 19,
     "question": "What is the default access level for types and members in Swift?",
     "options": [
       "public",
@@ -247,7 +228,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 20,
     "question": "Which operator is used for nil-coalescing in Swift?",
     "options": [
       "?:",
@@ -260,7 +240,6 @@
     "difficulty": "easy"
   },
   {
-    "id": 21,
     "question": "What type of parameter allows a function to accept zero or more values?",
     "options": [
       "Optional Parameter",
@@ -273,7 +252,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 22,
     "question": "Which keyword prevents a class from being subclassed?",
     "options": [
       "static",
@@ -286,7 +264,6 @@
     "difficulty": "easy"
   },
   {
-    "id": 23,
     "question": "What is used to group related values in Swift without defining a type?",
     "options": [
       "Array",
@@ -299,7 +276,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 24,
     "question": "Which attribute marks a function that modifies a struct's properties?",
     "options": [
       "@modifying",
@@ -312,7 +288,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 25,
     "question": "What feature allows Swift to infer types without explicit declaration?",
     "options": [
       "Type Casting",
@@ -325,7 +300,6 @@
     "difficulty": "easy"
   },
   {
-    "id": 26,
     "question": "Which keyword creates a computed property that cannot be set?",
     "options": [
       "let",
@@ -338,7 +312,6 @@
     "difficulty": "medium"
   },
   {
-    "id": 27,
     "question": "What is the purpose of the @escaping attribute for closures?",
     "options": [
       "To prevent memory leaks",

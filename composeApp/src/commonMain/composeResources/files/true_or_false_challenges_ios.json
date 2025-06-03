@@ -1,251 +1,215 @@
 [
   {
-    "id": 1,
     "question": "UIKit is the only framework used for building user interfaces in iOS.",
     "correctAnswer": false,
     "explanation": "SwiftUI is another modern framework for building user interfaces in iOS, introduced in iOS 13.",
     "difficulty": "easy"
   },
   {
-    "id": 2,
     "question": "Core Data is a framework for managing the model layer objects in iOS applications.",
     "correctAnswer": true,
     "explanation": "Core Data provides an object graph management and persistence framework for iOS and macOS applications.",
     "difficulty": "medium"
   },
   {
-    "id": 3,
     "question": "UIViewController lifecycle methods are always called in a predictable order.",
     "correctAnswer": false,
     "explanation": "While there is a general order, not all lifecycle methods are guaranteed to be called in every scenario, and some can be skipped depending on the app's state.",
     "difficulty": "hard"
   },
   {
-    "id": 4,
     "question": "URLSession is only used for making network requests.",
     "correctAnswer": false,
     "explanation": "URLSession can also handle background downloads, uploads, and other network-related tasks.",
     "difficulty": "medium"
   },
   {
-    "id": 5,
     "question": "Core Animation is exclusively used for animating user interface elements.",
     "correctAnswer": false,
     "explanation": "Core Animation is a graphics rendering and animation infrastructure used for more than just UI animations, including complex rendering tasks.",
     "difficulty": "hard"
   },
   {
-    "id": 6,
     "question": "Core Location framework is used only for GPS tracking.",
     "correctAnswer": false,
     "explanation": "Core Location provides a range of location services, including GPS, cellular, and Wi-Fi positioning.",
     "difficulty": "medium"
   },
   {
-    "id": 7,
     "question": "UIKit views can be directly used in SwiftUI without any conversion.",
     "correctAnswer": false,
     "explanation": "UIKit views need to be wrapped in UIViewRepresentable protocol to be used in SwiftUI.",
     "difficulty": "medium"
   },
   {
-    "id": 8,
     "question": "Core Graphics is a low-level drawing API for iOS.",
     "correctAnswer": true,
     "explanation": "Core Graphics provides low-level drawing capabilities for creating custom graphics and rendering.",
     "difficulty": "medium"
   },
   {
-    "id": 9,
     "question": "UITableView is part of the SwiftUI framework.",
     "correctAnswer": false,
     "explanation": "UITableView is a UIKit component, not a SwiftUI component. SwiftUI uses List for similar functionality.",
     "difficulty": "easy"
   },
   {
-    "id": 10,
     "question": "Core Data can only persist data to SQLite databases.",
     "correctAnswer": false,
     "explanation": "Core Data supports multiple store types, including SQLite, XML, and binary stores.",
     "difficulty": "medium"
   },
   {
-    "id": 11,
     "question": "URLSession's dataTask method always runs on the main thread.",
     "correctAnswer": false,
     "explanation": "URLSession's dataTask runs on a background thread by default, requiring explicit main thread dispatching for UI updates.",
     "difficulty": "medium"
   },
   {
-    "id": 12,
     "question": "UIViewController's viewDidLoad() is called every time the view appears on screen.",
     "correctAnswer": false,
     "explanation": "viewDidLoad() is called only once when the view controller's view is first loaded into memory. viewWillAppear() or viewDidAppear() are called each time the view appears.",
     "difficulty": "easy"
   },
   {
-    "id": 13,
     "question": "Core Data can only use SQLite as its persistent store type.",
     "correctAnswer": false,
     "explanation": "Core Data supports multiple persistent store types including SQLite, Binary, XML, and In-Memory stores.",
     "difficulty": "medium"
   },
   {
-    "id": 14,
     "question": "URLSession automatically caches HTTP responses by default.",
     "correctAnswer": true,
     "explanation": "URLSession uses URLCache by default to cache HTTP/HTTPS responses according to the cache policy and server headers.",
     "difficulty": "medium"
   },
   {
-    "id": 15,
     "question": "UITableView's dequeueReusableCell method can return nil.",
     "correctAnswer": false,
     "explanation": "dequeueReusableCell(withIdentifier:for:) always returns a cell and crashes if the identifier isn't registered. The older dequeueReusableCell(withIdentifier:) can return nil.",
     "difficulty": "medium"
   },
   {
-    "id": 16,
     "question": "Core Animation transactions are committed at the end of the current run loop cycle.",
     "correctAnswer": true,
     "explanation": "Core Animation batches changes and commits them at the end of the run loop cycle for performance optimization.",
     "difficulty": "hard"
   },
   {
-    "id": 17,
     "question": "UIKit can be safely used from background threads.",
     "correctAnswer": false,
     "explanation": "UIKit is not thread-safe and must be used only on the main thread, with few exceptions like UIImage.",
     "difficulty": "easy"
   },
   {
-    "id": 18,
     "question": "UserDefaults synchronizes changes to disk immediately after setting a value.",
     "correctAnswer": false,
     "explanation": "UserDefaults synchronizes periodically and at certain points, not immediately. You can force synchronization with synchronize(), though it's usually unnecessary.",
     "difficulty": "medium"
   },
   {
-    "id": 19,
     "question": "Core Location requires both NSLocationWhenInUseUsageDescription and NSLocationAlwaysUsageDescription keys in Info.plist.",
     "correctAnswer": false,
     "explanation": "You only need to include the usage description keys for the location authorization levels your app actually requests.",
     "difficulty": "medium"
   },
   {
-    "id": 20,
     "question": "UIScrollView's contentSize must be set explicitly for scrolling to work.",
     "correctAnswer": true,
     "explanation": "UIScrollView requires its contentSize to be larger than its bounds for scrolling to be enabled, unless using Auto Layout with proper constraints.",
     "difficulty": "easy"
   },
   {
-    "id": 21,
     "question": "AVAudioSession is automatically configured for audio playback.",
     "correctAnswer": false,
     "explanation": "AVAudioSession must be explicitly configured with appropriate category and activation for audio playback or recording.",
     "difficulty": "medium"
   },
   {
-    "id": 22,
     "question": "UICollectionViewFlowLayout can create both grid and list layouts.",
     "correctAnswer": true,
     "explanation": "UICollectionViewFlowLayout is versatile and can create various layouts including grids, lists, and custom arrangements by adjusting item sizes and spacing.",
     "difficulty": "easy"
   },
   {
-    "id": 23,
     "question": "Core Bluetooth can scan for devices while the app is in the background indefinitely.",
     "correctAnswer": false,
     "explanation": "Background Bluetooth scanning is limited and requires specific background modes. The system may throttle or stop scanning to preserve battery.",
     "difficulty": "hard"
   },
   {
-    "id": 24,
     "question": "UIView animations automatically enable user interaction during animation.",
     "correctAnswer": false,
     "explanation": "UIView animations disable user interaction by default. You must use the .allowUserInteraction option to enable it during animations.",
     "difficulty": "medium"
   },
   {
-    "id": 25,
     "question": "Keychain data persists after app uninstallation.",
     "correctAnswer": true,
     "explanation": "Keychain data can persist after app deletion and be available when the app is reinstalled, though this behavior can vary with keychain access groups.",
     "difficulty": "medium"
   },
   {
-    "id": 26,
     "question": "UIPasteboard content is shared between all apps by default.",
     "correctAnswer": false,
     "explanation": "The general pasteboard is shared between apps, but apps can create private pasteboards that aren't accessible to other apps.",
     "difficulty": "medium"
   },
   {
-    "id": 27,
     "question": "Core Image filters are processed on the GPU by default.",
     "correctAnswer": true,
     "explanation": "Core Image preferentially uses GPU processing for better performance, though it can fall back to CPU processing when necessary.",
     "difficulty": "medium"
   },
   {
-    "id": 28,
     "question": "UINavigationController maintains a strong reference to all view controllers in its stack.",
     "correctAnswer": true,
     "explanation": "UINavigationController keeps strong references to all view controllers in its navigation stack until they are popped.",
     "difficulty": "easy"
   },
   {
-    "id": 29,
     "question": "NotificationCenter delivers notifications synchronously on the posting thread.",
     "correctAnswer": true,
     "explanation": "NotificationCenter delivers notifications synchronously on the same thread where post() is called, unless using notification queues.",
     "difficulty": "medium"
   },
   {
-    "id": 30,
     "question": "UIDocument automatically handles conflict resolution for iCloud documents.",
     "correctAnswer": true,
     "explanation": "UIDocument provides built-in conflict detection and resolution mechanisms for documents stored in iCloud.",
     "difficulty": "hard"
   },
   {
-    "id": 31,
     "question": "CADisplayLink is guaranteed to fire at exactly 60 times per second.",
     "correctAnswer": false,
     "explanation": "CADisplayLink synchronizes with the display refresh rate, which varies by device (60Hz, 120Hz ProMotion) and can skip frames under load.",
     "difficulty": "medium"
   },
   {
-    "id": 32,
     "question": "UIApplication.shared can be accessed from app extensions.",
     "correctAnswer": false,
     "explanation": "App extensions run in separate processes and cannot access UIApplication.shared, which is only available in the main app.",
     "difficulty": "medium"
   },
   {
-    "id": 33,
     "question": "Core Motion requires device motion updates to be started on the main thread.",
     "correctAnswer": false,
     "explanation": "Core Motion updates can be started from any thread, and you can specify which queue should handle the updates.",
     "difficulty": "hard"
   },
   {
-    "id": 34,
     "question": "UITextView automatically detects and makes links tappable when dataDetectorTypes is set.",
     "correctAnswer": true,
     "explanation": "UITextView can automatically detect and create tappable links for URLs, phone numbers, addresses, etc. when dataDetectorTypes is configured.",
     "difficulty": "easy"
   },
   {
-    "id": 35,
     "question": "Core Graphics coordinate system has its origin at the top-left corner like UIKit.",
     "correctAnswer": false,
     "explanation": "Core Graphics uses a coordinate system with origin at bottom-left, while UIKit uses top-left. This requires coordinate transformation when mixing the two.",
     "difficulty": "medium"
   },
   {
-    "id": 36,
     "question": "UIStackView directly renders its arranged subviews.",
     "correctAnswer": false,
     "explanation": "UIStackView is a non-rendering view that only manages the layout of its arranged subviews using Auto Layout constraints.",
