@@ -30,6 +30,13 @@ Compose for Android, iOS, Desktop, and Web.
 </div>
 
 ---
+## Download for Testing
+
+You can download the latest Android APK for testing purposes from the link below:
+
+- **[Download Android APK](https://drive.google.com/file/d/1iVbWyTKYXIWb2e-VXF75y62iZJXG3-3m/view?usp=sharing)**
+
+---
 
 ## Tech Stack
 
