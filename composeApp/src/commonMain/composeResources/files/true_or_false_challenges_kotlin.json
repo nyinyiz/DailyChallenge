@@ -1,0 +1,302 @@
+[
+  {
+    "question": "In Kotlin, `val` declares a mutable variable, while `var` declares an immutable one.",
+    "correctAnswer": false,
+    "explanation": "`val` declares an immutable (read-only) variable, and `var` declares a mutable variable.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Kotlin code can be compiled to JavaScript.",
+    "correctAnswer": true,
+    "explanation": "Kotlin supports multiplatform programming, allowing compilation to JVM bytecode, JavaScript, and native binaries.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "By default, all classes in Kotlin are `open` for inheritance.",
+    "correctAnswer": false,
+    "explanation": "Classes in Kotlin are `final` by default, meaning they cannot be inherited unless explicitly marked with the `open` keyword.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin provides built-in null safety, meaning variables are non-nullable by default.",
+    "correctAnswer": true,
+    "explanation": "To declare a nullable variable in Kotlin, you must explicitly add a `?` to the type (e.g., `String?`).",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `when` expression in Kotlin must always have an `else` branch.",
+    "correctAnswer": false,
+    "explanation": "An `else` branch is only mandatory if `when` is used as an expression (its result is assigned to a variable or returned) and the compiler cannot prove that all possible cases are covered.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Data classes in Kotlin automatically generate `equals()`, `hashCode()`, and `toString()` methods.",
+    "correctAnswer": true,
+    "explanation": "Data classes also generate `copy()` and component functions (`componentN()`).",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Extension functions in Kotlin modify the original class's source code.",
+    "correctAnswer": false,
+    "explanation": "Extension functions allow adding new functionality to existing classes without altering their original source code. They are resolved statically.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin supports operator overloading.",
+    "correctAnswer": true,
+    "explanation": "Kotlin allows providing custom implementations for a predefined set of operators by defining member or extension functions with specific names (e.g., `plus` for `+`).",
+    "difficulty": "medium"
+  },
+  {
+    "question": "A `lateinit` property in Kotlin can be of a nullable type.",
+    "correctAnswer": false,
+    "explanation": "`lateinit` is used for non-null properties that are initialized after object construction. If a property can be null, it should be declared as a nullable type with `?`.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `Unit` type is equivalent to Java's `void`.",
+    "correctAnswer": true,
+    "explanation": "`Unit` indicates that a function does not return any meaningful value. It can be omitted if it's the return type.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Coroutines in Kotlin are managed by the operating system threads directly.",
+    "correctAnswer": false,
+    "explanation": "Coroutines are lightweight and managed by the Kotlin runtime, often multiplexed onto a smaller number of OS threads, making them more efficient for concurrent tasks.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The Elvis operator (`?:`) is used for safe calls on nullable types.",
+    "correctAnswer": false,
+    "explanation": "The Elvis operator (`?:`) provides a default value if an expression is null. Safe calls use the `?.` operator.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "A Kotlin `object` declaration creates a singleton instance.",
+    "correctAnswer": true,
+    "explanation": "The `object` keyword is used to declare singletons in a concise way.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Kotlin functions can have default argument values.",
+    "correctAnswer": true,
+    "explanation": "This allows calling a function without explicitly passing all arguments if default values are specified in the function signature.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Primary constructors in Kotlin must use the `constructor` keyword.",
+    "correctAnswer": false,
+    "explanation": "The `constructor` keyword is optional for primary constructors if there are no annotations or visibility modifiers. It's mandatory for secondary constructors.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `Int` type is always a nullable type.",
+    "correctAnswer": false,
+    "explanation": "`Int` is a non-nullable integer type. `Int?` would be the nullable integer type.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "String templates in Kotlin can only contain simple variable references, not expressions.",
+    "correctAnswer": false,
+    "explanation": "String templates can contain expressions by enclosing them in `${expression}`.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `internal` visibility modifier makes a declaration visible only within the same file.",
+    "correctAnswer": false,
+    "explanation": "`internal` declarations are visible anywhere within the same module (e.g., a Gradle project).",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Sealed classes in Kotlin can be subclassed from any file.",
+    "correctAnswer": false,
+    "explanation": "Subclasses of a sealed class must be declared in the same file as the sealed class itself (or as nested classes). In Kotlin 1.5+, they can be in the same package and module.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Kotlin has checked exceptions, similar to Java.",
+    "correctAnswer": false,
+    "explanation": "Kotlin does not have checked exceptions. All exception handling is optional.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The `companion object` allows adding static-like members to a Kotlin class.",
+    "correctAnswer": true,
+    "explanation": "Members of a companion object can be accessed using the class name as a qualifier, similar to static members in Java.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Lambda expressions in Kotlin always need explicit type declarations for their parameters.",
+    "correctAnswer": false,
+    "explanation": "Kotlin's type inference can often deduce the types of lambda parameters, especially if the lambda is passed as an argument where the expected function type is known.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Kotlin's `listOf()` creates a mutable list.",
+    "correctAnswer": false,
+    "explanation": "`listOf()` creates an immutable (read-only) list. `mutableListOf()` creates a mutable list.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `!!` operator in Kotlin is a safe way to handle nullable types.",
+    "correctAnswer": false,
+    "explanation": "The not-null assertion operator (`!!`) converts a nullable type to its non-null type but throws a `NullPointerException` if the value is actually null. It's not considered safe.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "In Kotlin, `===` is used for structural equality and `==` for referential equality.",
+    "correctAnswer": false,
+    "explanation": "`==` checks for structural equality (calls `equals()`), while `===` checks for referential equality.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "A `suspend` function in Kotlin can be called from any regular (non-suspend) function.",
+    "correctAnswer": false,
+    "explanation": "Suspend functions can only be called from other suspend functions or from within a coroutine builder (like `launch` or `async`).",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin allows defining top-level functions and properties outside of any class.",
+    "correctAnswer": true,
+    "explanation": "This is a common practice in Kotlin and helps in organizing utility functions.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "A `data class` in Kotlin cannot have a body with additional properties or functions.",
+    "correctAnswer": false,
+    "explanation": "While primarily for holding data, a data class can have a body where you can define additional properties, functions, or init blocks.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The `by` keyword in Kotlin is used exclusively for delegated properties.",
+    "correctAnswer": false,
+    "explanation": "The `by` keyword is also used for interface delegation (class delegation).",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Type aliases in Kotlin create new distinct types.",
+    "correctAnswer": false,
+    "explanation": "Type aliases provide alternative names for existing types but do not introduce new types. `typealias UserId = String` means `UserId` is just another name for `String`.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin supports implicit widening conversions for numbers (e.g., `Int` to `Long`).",
+    "correctAnswer": false,
+    "explanation": "Kotlin requires explicit conversions for numbers (e.g., using `toLong()`, `toInt()`) to prevent potential precision loss or unexpected behavior.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "`Any` is the supertype of all nullable types in Kotlin.",
+    "correctAnswer": false,
+    "explanation": "`Any` is the root of the non-nullable type hierarchy. `Any?` is the supertype of all types, including nullable ones.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The `tailrec` keyword guarantees that a recursive function will be optimized to an iterative loop, preventing stack overflows.",
+    "correctAnswer": true,
+    "explanation": "For a function to be `tailrec`, the recursive call must be the very last operation it performs.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin interfaces can contain concrete method implementations.",
+    "correctAnswer": true,
+    "explanation": "Since Java 8, and similarly in Kotlin, interfaces can have default method implementations.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `inline` keyword for functions always improves performance.",
+    "correctAnswer": false,
+    "explanation": "While inlining can reduce overhead for small functions (especially those with lambda parameters), excessive inlining of large functions can increase bytecode size and potentially degrade performance.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin allows multiple `companion object` declarations within a single class.",
+    "correctAnswer": false,
+    "explanation": "A class can have only one companion object.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `init` block in a Kotlin class is executed before the primary constructor.",
+    "correctAnswer": false,
+    "explanation": "Initializer blocks (`init`) are executed in the order they appear in the class body, along with property initializers, as part of the primary constructor's execution.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's smart casts work with `var` properties even if they are accessed from different modules.",
+    "correctAnswer": false,
+    "explanation": "Smart casts for `var` properties only work if the variable is local and not modified between the check and the usage, or if it's a `val` or a private/internal property without a custom getter, where the compiler can guarantee its immutability after the check within the same module.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "The `as?` operator performs an unsafe cast and throws an exception if the cast fails.",
+    "correctAnswer": false,
+    "explanation": "`as?` is the safe cast operator; it returns `null` if the cast is not possible. The `as` operator performs an unsafe cast and throws `ClassCastException` on failure.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Kotlin's `Nothing` type indicates that a function will never return normally (e.g., it always throws an exception).",
+    "correctAnswer": true,
+    "explanation": "`Nothing` has no instances and can be used as a return type for functions that never complete, such as one containing an infinite loop or always throwing an exception.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Destructuring declarations can only be used with data classes.",
+    "correctAnswer": false,
+    "explanation": "Destructuring declarations work with any class that provides the necessary `componentN()` functions (operator functions), which data classes generate automatically. They also work with arrays and collections.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin ranges (e.g., `1..10`) are always inclusive of the end value.",
+    "correctAnswer": true,
+    "explanation": "The `..` operator creates an inclusive range. To create a range that excludes the end value, you can use `until` (e.g., `1 until 10`).",
+    "difficulty": "easy"
+  },
+  {
+    "question": "A `const val` can be declared inside a function.",
+    "correctAnswer": false,
+    "explanation": "`const val` is for compile-time constants and must be declared at the top level or as a member of an `object` or `companion object`.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The `runBlocking` coroutine builder is suitable for launching long-running background tasks from UI components in Android.",
+    "correctAnswer": false,
+    "explanation": "`runBlocking` blocks the current thread, so it should not be used on the main UI thread as it can cause the application to freeze. Use builders like `launch` with appropriate dispatchers for UI-related tasks.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin requires semicolons at the end of every statement.",
+    "correctAnswer": false,
+    "explanation": "Semicolons are optional in Kotlin; they are usually only needed if multiple statements are on the same line.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `with` scope function in Kotlin is an extension function.",
+    "correctAnswer": false,
+    "explanation": "`with` is a regular function that takes an object and a lambda as arguments. `let`, `run`, `apply`, and `also` are extension functions.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Properties declared in a Kotlin primary constructor using `val` or `var` automatically become class properties.",
+    "correctAnswer": true,
+    "explanation": "This is a concise way to declare properties and initialize them via the primary constructor (e.g., `class User(val name: String)`).",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Kotlin supports raw string literals, which can contain newlines and arbitrary text without escaping.",
+    "correctAnswer": true,
+    "explanation": "Raw string literals are enclosed in triple quotes (`\"\"\"`).",
+    "difficulty": "easy"
+  },
+  {
+    "question": "An abstract class in Kotlin can be instantiated directly.",
+    "correctAnswer": false,
+    "explanation": "Abstract classes cannot be instantiated directly; they are meant to be subclassed.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `it` keyword can be used in any lambda expression in Kotlin, regardless of the number of parameters.",
+    "correctAnswer": false,
+    "explanation": "The implicit `it` keyword can only be used if the lambda has exactly one parameter.",
+    "difficulty": "easy"
+  }
+]
