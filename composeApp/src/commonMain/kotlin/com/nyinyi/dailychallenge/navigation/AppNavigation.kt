@@ -66,7 +66,9 @@ fun AppNavigation(
             when (val state = uiState) {
                 is AppState.ContentById -> {
                     QuestionDetail(
-                        onBack = { navController.popBackStack() },
+                        onBack = {
+                            navController.popBackStack()
+                        },
                         question = state.dailyChallenge,
                         onToggleTheme = onToggleTheme,
                     )

@@ -26,5 +26,145 @@
     "question": "\uD83D\uDDE3\uFE0F The following snippet can cause you to have some real headaches! Considering that the Service class is bound to a lifecycle and that it can launch many coroutines from this scope, what are the two (2) bugs you can see happening when using this code?",
     "questionCode": "import android.app.Service\n\nclass NotificationService : Service() {\n\n    private val serviceScope = CoroutineScope(Dispatchers.Default)\n\n    override fun onBind(intent: Intent?): IBinder? {\n        // Your custom logic here\n        return null\n    }\n\n    override fun onDestroy() {\n        super.onDestroy()\n    }\n}",
     "answerCode": "Solution,\n\uD83D\uDC1B Bug #1: Scope Not Cancelled on onDestroy()\n\nWithout serviceScope.cancel(), all launched coroutines keep running until they have completed—even after the service is destroyed. That’s a classic memory leak risk.\n\n\uD83D\uDC1B Bug #2: Not Using SupervisorJob()\n\nA normal coroutine scope will get cancelled when any of its child coroutines throw an exception, which in most cases is not something that you want when creating such lifecycle-scoped coroutine scopes (similar to the built-in viewModelScope and lifecycleScope who also use SupervisorJob() under the hood)\n\nSupervisorJob() is unique because it prevents a failure in one child coroutine to cancel any of its siblings or the scope itself.\n\n\n import android.app.Service\n\nclass NotificationService : Service() {\n\n    private val serviceScope = CoroutineScope(Dispatchers.Default + SupervisorJob())\n\n    override fun onBind(intent: Intent?): IBinder? {\n        return null\n    }\n\n    override fun onDestroy() {\n        super.onDestroy()\n        serviceScope.cancel()\n    }\n}"
+  },
+  {
+    "id": "5",
+    "difficulty": "Easy",
+    "question": "🧭 You're using a ViewModel to fetch a list of items. But you notice the API gets called multiple times across recompositions. What's the cause and fix?",
+    "questionCode": "@Composable\nfun ProductScreen(viewModel: ProductViewModel = viewModel()) {\n    val products by viewModel.products.collectAsState()\n    viewModel.loadProducts() // This is called on every recomposition!\n\n    LazyColumn {\n        items(products) {\n            Text(it.name)\n        }\n    }\n}",
+    "answerCode": "✅ The issue is calling `loadProducts()` inside the Composable. It will be triggered on every recomposition.\n\n💡 Fix it using `LaunchedEffect`:\n\nLaunchedEffect(Unit) {\n    viewModel.loadProducts()\n}"
+  },
+  {
+    "id": "6",
+    "difficulty": "Medium",
+    "question": "🔐 You are building a login screen with Jetpack Compose and want to prevent the button from being spammed (double clicks). What is a safe way to do this?",
+    "questionCode": "Button(onClick = {\n    loginUser()\n}) {\n    Text(\"Login\")\n}",
+    "answerCode": "✅ The issue is multiple quick taps might fire multiple login requests.\n\n💡 Fix it by disabling the button while loading:\n\nvar loading by remember { mutableStateOf(false) }\n\nButton(\n    onClick = {\n        loading = true\n        loginUser(onComplete = { loading = false })\n    },\n    enabled = !loading\n) {\n    if (loading) CircularProgressIndicator()\n    else Text(\"Login\")\n}"
+  },
+  {
+    "id": "7",
+    "difficulty": "Easy",
+    "question": "🎨 Why does your Jetpack Compose list flicker when data updates, even when the list items look the same?",
+    "questionCode": "LazyColumn {\n    items(itemsList) { item ->\n        Text(item.title)\n    }\n}",
+    "answerCode": "⚠️ If items are re-created or lack stable identity, Compose can't preserve state or animations properly.\n\n✅ Use a stable key to prevent flickering:\n\nLazyColumn {\n    items(itemsList, key = { it.id }) { item ->\n        Text(item.title)\n    }\n}"
+  },
+  {
+    "id": "8",
+    "difficulty": "Hard",
+    "question": "📦 You’re caching images from the internet using Coil in Compose. But your image flashes every time recomposition happens. Why?",
+    "questionCode": "Image(\n    painter = rememberAsyncImagePainter(url),\n    contentDescription = null\n)",
+    "answerCode": "✅ Coil uses rememberAsyncImagePainter internally but recomposition resets it if `url` changes.\n\n💡 Wrap it properly to avoid image flickering:\n\nval painter = remember(url) {\n    rememberAsyncImagePainter(url)\n}\n\nImage(painter = painter, contentDescription = null)"
+  },
+  {
+    "id": "9",
+    "difficulty": "Medium",
+    "question": "📱 Why is your screen content covered by the system status bar when running on a newer Android version?",
+    "questionCode": "setContent {\n    MyApp()\n}",
+    "answerCode": "✅ Newer Android versions (API 30+) require using WindowInsets to manage system bars.\n\n💡 Add this before setContent:\n\nWindowCompat.setDecorFitsSystemWindows(window, false)\n\nThen inside Compose:\n\nBox(Modifier.padding(WindowInsets.systemBars.asPaddingValues())) { ... }"
+  },
+  {
+    "id": "10",
+    "difficulty": "Medium",
+    "question": "🧵 You’re launching multiple coroutines inside a ViewModel. What are common mistakes that lead to crashes or leaks?",
+    "questionCode": "viewModelScope.launch {\n    fetchData1()\n}\n\nviewModelScope.launch {\n    fetchData2()\n}",
+    "answerCode": "⚠️ Mistake: Launching multiple coroutines without proper error isolation. If one fails, all others get cancelled.\n\n✅ Use `supervisorScope` to isolate them:\n\nviewModelScope.launch {\n    supervisorScope {\n        launch { fetchData1() }\n        launch { fetchData2() }\n    }\n}"
+  },
+  {
+    "id": "11",
+    "difficulty": "Easy",
+    "question": "💾 You’re using `remember` to store UI state. But on device rotation, the state resets. How do you fix this?",
+    "questionCode": "var count by remember { mutableStateOf(0) }",
+    "answerCode": "✅ Use `rememberSaveable` instead of `remember` to persist across recompositions and configuration changes:\n\nvar count by rememberSaveable { mutableStateOf(0) }"
+  },
+  {
+    "id": "12",
+    "difficulty": "Hard",
+    "question": "🧪 Why does your Jetpack Compose test fail to find a Button with `Text(\"Submit\")`, even though it’s visible on screen?",
+    "questionCode": "Button(onClick = {}) {\n    Text(\"Submit\")\n}",
+    "answerCode": "✅ Compose Test uses semantics. You may need to add a `testTag` for reliability:\n\nButton(\n    onClick = {},\n    modifier = Modifier.testTag(\"submit_button\")\n) {\n    Text(\"Submit\")\n}\n\n// In test:\nonNodeWithTag(\"submit_button\").assertIsDisplayed()"
+  },
+  {
+    "id": "13",
+    "difficulty": "Medium",
+    "question": "🎯 You want to throttle search input so it doesn't fire an API call on every keystroke. What's the best way?",
+    "questionCode": "TextField(value = query, onValueChange = { query = it })",
+    "answerCode": "✅ Use `debounce` operator on a `Flow`:\n\nval queryFlow = MutableStateFlow(\"\")\n\nLaunchedEffect(Unit) {\n    queryFlow\n        .debounce(300)\n        .distinctUntilChanged()\n        .collect { viewModel.search(it) }\n}"
+  },
+  {
+    "id": "14",
+    "difficulty": "Hard",
+    "question": "🧯 You’re getting 'java.lang.IllegalStateException: LifecycleOwner has been garbage collected' when collecting a Flow. What’s wrong?",
+    "questionCode": "viewModel.dataFlow.collect { value -> ... }",
+    "answerCode": "⚠️ This collect runs on a non-lifecycle-aware scope.\n\n✅ Use `collectAsState()` or lifecycle-aware collectors:\n\nlifecycleScope.launch {\n    repeatOnLifecycle(Lifecycle.State.STARTED) {\n        viewModel.dataFlow.collect { ... }\n    }\n}"
+  },
+  {
+    "id": "15",
+    "difficulty": "Medium",
+    "question": "📊 You display a loading spinner while fetching data. But it never disappears. What’s going wrong?",
+    "questionCode": "val loading = MutableStateFlow(true)\n\nLaunchedEffect(Unit) {\n    val data = fetchData()\n    loading.value = false\n}",
+    "answerCode": "✅ If `fetchData()` throws an exception, `loading.value = false` is never reached.\n\n💡 Use `try-finally`:\n\nLaunchedEffect(Unit) {\n    try {\n        fetchData()\n    } finally {\n        loading.value = false\n    }\n}"
+  },
+  {
+    "id": "16",
+    "difficulty": "Easy",
+    "question": "📏 You want a box to take half the screen height in Compose. What’s the best way?",
+    "questionCode": "// Inside Column\nBox(\n    modifier = Modifier.height(/** half height? **/)\n)",
+    "answerCode": "✅ Use `fillMaxHeight(0.5f)` for half the height:\n\nBox(\n    modifier = Modifier\n        .fillMaxWidth()\n        .fillMaxHeight(0.5f)\n)"
+  },
+  {
+    "id": "17",
+    "difficulty": "Hard",
+    "question": "🧠 Your `remember` value seems to reset unexpectedly. What are common causes?",
+    "questionCode": "val state = remember { expensiveComputation() }",
+    "answerCode": "⚠️ Common cause: `remember` used inside a lambda or not keyed properly.\n\n✅ Use `key` if the value depends on inputs:\n\nval state = remember(key) { expensiveComputation(key) }"
+  },
+  {
+    "id": "18",
+    "difficulty": "Medium",
+    "question": "📥 How can you handle back press in Jetpack Compose screens cleanly?",
+    "questionCode": "// In Compose screen",
+    "answerCode": "✅ Use `BackHandler`:\n\nBackHandler(enabled = true) {\n    navController.popBackStack()\n}"
+  },
+  {
+    "id": "19",
+    "difficulty": "Medium",
+    "question": "💥 Your app crashes when navigating quickly between Compose screens. Why?",
+    "questionCode": "// NavHost + Compose Screens",
+    "answerCode": "⚠️ You might be using mutable state without a proper `rememberSaveable`, leading to null or reused ViewModels.\n\n✅ Always scope ViewModels properly and preserve state with `rememberSaveable` when needed."
+  },
+  {
+    "id": "20",
+    "difficulty": "Medium",
+    "question": "🛑 Why does your `LaunchedEffect` run multiple times unexpectedly?",
+    "questionCode": "LaunchedEffect(someList) { /* do something */ }",
+    "answerCode": "⚠️ If `someList` is a new object each recomposition (e.g., `List()`), LaunchedEffect restarts.\n\n✅ Use stable keys or `remember` the list:\n\nval stableList = remember { someList }\nLaunchedEffect(stableList) { ... }"
+  },
+  {
+    "id": "21",
+    "difficulty": "Hard",
+    "question": "🧼 Your SharedFlow is missing some values in the UI. Why?",
+    "questionCode": "val flow = MutableSharedFlow<Int>()\n\nLaunchedEffect(Unit) {\n    flow.collect { ... }\n}",
+    "answerCode": "⚠️ SharedFlow requires subscribers to be active before emitting.\n\n✅ Use `replay` or `StateFlow` if you want to retain the last value:\n\nval flow = MutableStateFlow(0)\n\nOR\n\nval flow = MutableSharedFlow<Int>(replay = 1)"
+  },
+  {
+    "id": "22",
+    "difficulty": "Easy",
+    "question": "🧪 You want to test your ViewModel with Coroutine APIs. What setup is required?",
+    "questionCode": "// ViewModelTest",
+    "answerCode": "✅ Use `MainDispatcherRule` and `runTest {}`\n\n@get:Rule\nval rule = MainDispatcherRule()\n\n@Test\nfun testSomething() = runTest {\n    // your test logic\n}"
+  },
+  {
+    "id": "23",
+    "difficulty": "Hard",
+    "question": "🚀 Your long-running background task keeps UI thread busy. What’s wrong?",
+    "questionCode": "viewModelScope.launch {\n    val result = heavyComputation()\n}",
+    "answerCode": "⚠️ Computation is running on Main thread.\n\n✅ Use proper dispatcher:\n\nviewModelScope.launch(Dispatchers.Default) {\n    val result = heavyComputation()\n}"
+  },
+  {
+    "id": "24",
+    "difficulty": "Medium",
+    "question": "📤 You're uploading a file and want to show progress in Compose. How do you expose that?",
+    "questionCode": "// Upload code in ViewModel",
+    "answerCode": "✅ Use `StateFlow` to expose progress:\n\nval uploadProgress = MutableStateFlow(0f)\n\nfun uploadFile() {\n    viewModelScope.launch {\n        for (i in 0..100) {\n            delay(50)\n            uploadProgress.value = i / 100f\n        }\n    }\n}"
   }
 ]

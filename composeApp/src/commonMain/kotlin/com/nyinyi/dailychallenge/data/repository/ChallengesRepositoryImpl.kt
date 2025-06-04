@@ -32,21 +32,22 @@ class ChallengesRepositoryImpl(
             defaultChallenges.first()
         }
 
-    override suspend fun getDailyChallenges(): List<DailyChallengeObj> {
-        return try {
+    override suspend fun getDailyChallenges(): List<DailyChallengeObj> =
+        try {
             val readBytes = Res.readBytes("files/daily_challenges.json")
             val jsonString = readBytes.decodeToString()
-            return Json.decodeFromString(jsonString)
+            val challenges: List<DailyChallengeObj> = Json.decodeFromString(jsonString)
+            challenges.shuffled()
         } catch (e: Exception) {
-            println("Error parsing challenges JSON: ${e.message}")
-            defaultChallenges
+            println("Error parsing challenges JSON or file not found: ${e.message}")
+            defaultChallenges.shuffled()
         }
-    }
 
     override suspend fun getTrueFalseChallenges(): List<QuizCard> =
         try {
             val category = userPreferencesRepository.selectedCategory.first()
-            val readBytes = Res.readBytes("files/true_or_false_challenges_${category.name.lowercase()}.json")
+            val readBytes =
+                Res.readBytes("files/true_or_false_challenges_${category.name.lowercase()}.json")
             val jsonString = readBytes.decodeToString()
             val allQuestions: List<QuizCard> = Json.decodeFromString(jsonString)
 
@@ -69,7 +70,8 @@ class ChallengesRepositoryImpl(
     override suspend fun getMultipleChoiceChallenges(): List<MultipleChoiceObj> =
         try {
             val category = userPreferencesRepository.selectedCategory.first()
-            val readBytes = Res.readBytes("files/multiple_choice_challenges_${category.name.lowercase()}.json")
+            val readBytes =
+                Res.readBytes("files/multiple_choice_challenges_${category.name.lowercase()}.json")
             val jsonString = readBytes.decodeToString()
             val allQuestions: List<MultipleChoiceObj> = Json.decodeFromString(jsonString)
 

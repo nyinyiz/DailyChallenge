@@ -73,7 +73,6 @@ fun DailyChallengeListContent(
 ) {
     val uiState by viewModel.state.collectAsStateWithLifecycle()
     val listState = rememberLazyListState()
-    var selectedChallenge by remember { mutableStateOf<DailyChallengeObj?>(null) }
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -206,7 +205,7 @@ private fun ChallengeCard(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        ChallengeBadge(challenge.id)
+                        ChallengeBadge((index + 1).toString())
                         DifficultyTag(
                             difficulty = challenge.difficulty,
                             color = difficultyColor,
