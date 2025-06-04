@@ -146,6 +146,8 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            modules("jdk.unsupported")
+            modules("jdk.unsupported.desktop")
             packageName = "com.nyinyi.dailychallenge"
             packageVersion = "1.0.0"
         }
