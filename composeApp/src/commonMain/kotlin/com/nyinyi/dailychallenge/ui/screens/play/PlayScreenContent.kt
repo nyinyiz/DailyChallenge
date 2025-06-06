@@ -25,6 +25,10 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -37,6 +41,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.nyinyi.dailychallenge.data.model.Category
 import com.nyinyi.dailychallenge.ui.screens.play.components.AnimatedCategoryText
 import com.nyinyi.dailychallenge.ui.screens.play.components.DailyChallengeCard
@@ -61,83 +66,98 @@ fun PlayScreenContent(
     onNavigateToGameMode: (GameMode) -> Unit,
 ) {
     var isContentVisible by remember { mutableStateOf(false) }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(uiState.categoryUpdateError) {
+        uiState.categoryUpdateError?.let { errorMessage ->
+            snackbarHostState.showSnackbar(
+                message = errorMessage,
+                duration = SnackbarDuration.Short,
+            )
+            viewModel.consumeCategoryUpdateError()
+        }
+    }
 
     LaunchedEffect(Unit) {
         isContentVisible = true
     }
 
-    Column(
-        modifier =
-            Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background),
-    ) {
-        // Top Section with Welcome and Profile
-        AnimatedVisibility(
-            visible = isContentVisible,
-            enter =
-                slideInVertically(
-                    initialOffsetY = { -it },
-                    animationSpec = tween(durationMillis = 500),
-                ) + fadeIn(animationSpec = tween(durationMillis = 500)),
+    Scaffold(snackbarHost = { SnackbarHost(snackbarHostState) }) { paddingValues ->
+        Column(
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .background(MaterialTheme.colorScheme.background),
         ) {
-            TopSection(viewModel = viewModel)
-        }
+            // Top Section with Welcome and Profile
+            AnimatedVisibility(
+                visible = isContentVisible,
+                enter =
+                    slideInVertically(
+                        initialOffsetY = { -it },
+                        animationSpec = tween(durationMillis = 500),
+                    ) + fadeIn(animationSpec = tween(durationMillis = 500)),
+            ) {
+                TopSection(viewModel = viewModel)
+            }
 
-        // Daily Challenge Section with scale animation
-        AnimatedVisibility(
-            visible = isContentVisible,
-            enter =
-                scaleIn(
-                    initialScale = 0.8f,
-                    animationSpec =
-                        tween(
-                            durationMillis = 500,
-                            delayMillis = 100,
-                            easing = EaseOutBack,
-                        ),
-                ) +
-                    fadeIn(
+            // Daily Challenge Section with scale animation
+            AnimatedVisibility(
+                visible = isContentVisible,
+                enter =
+                    scaleIn(
+                        initialScale = 0.8f,
                         animationSpec =
                             tween(
                                 durationMillis = 500,
                                 delayMillis = 100,
+                                easing = EaseOutBack,
                             ),
-                    ),
-        ) {
-            DailyChallengeCard(
-                onStartChallenge = {
-                    onNavigateToChallenge()
-                },
-            )
-        }
-
-        // Game Modes with staggered animation
-        AnimatedVisibility(
-            visible = isContentVisible,
-            enter =
-                slideInVertically(
-                    initialOffsetY = { it / 2 },
-                    animationSpec =
-                        tween(
-                            durationMillis = 500,
-                            delayMillis = 200,
-                            easing = EaseOutBack,
+                    ) +
+                        fadeIn(
+                            animationSpec =
+                                tween(
+                                    durationMillis = 500,
+                                    delayMillis = 100,
+                                ),
                         ),
-                ) +
-                    fadeIn(
+            ) {
+                DailyChallengeCard(
+                    onStartChallenge = {
+                        onNavigateToChallenge()
+                    },
+                )
+            }
+
+            // Game Modes with staggered animation
+            AnimatedVisibility(
+                visible = isContentVisible,
+                enter =
+                    slideInVertically(
+                        initialOffsetY = { it / 2 },
                         animationSpec =
                             tween(
                                 durationMillis = 500,
                                 delayMillis = 200,
+                                easing = EaseOutBack,
                             ),
-                    ),
-        ) {
-            GameModesSection(
-                onGameModeSelected = { gameMode ->
-                    onNavigateToGameMode(gameMode)
-                },
-            )
+                    ) +
+                        fadeIn(
+                            animationSpec =
+                                tween(
+                                    durationMillis = 500,
+                                    delayMillis = 200,
+                                ),
+                        ),
+            ) {
+                GameModesSection(
+                    onGameModeSelected = { gameMode ->
+                        onNavigateToGameMode(gameMode)
+                    },
+                )
+            }
         }
     }
 }
