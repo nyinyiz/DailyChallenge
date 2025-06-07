@@ -5,10 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
 import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class QuestionListViewModel(
@@ -20,8 +22,23 @@ class QuestionListViewModel(
     private val _state = MutableStateFlow<QuestionListState>(QuestionListState.Loading)
     val state: StateFlow<QuestionListState> = _state.asStateFlow()
 
+    private val _eventChannel = Channel<QuestionListEvent>()
+    val eventFlow = _eventChannel.receiveAsFlow()
+
     init {
         getDailyChallenges()
+    }
+
+    fun getRandomChallenges() {
+        viewModelScope.launch {
+            try {
+                repository.getRandomChallenges().let {
+                    _eventChannel.send(QuestionListEvent.RandomDataChanged(it))
+                }
+            } catch (e: Exception) {
+                _state.value = QuestionListState.Error
+            }
+        }
     }
 
     fun getDailyChallenges() {
@@ -51,4 +68,10 @@ sealed class QuestionListState {
     ) : QuestionListState()
 
     object Error : QuestionListState()
+}
+
+sealed class QuestionListEvent {
+    data class RandomDataChanged(
+        val randomChallenges: DailyChallengeObj,
+    ) : QuestionListEvent()
 }

@@ -119,12 +119,6 @@ fun DailyChallengeCard(onStartChallenge: () -> Unit) {
                         style = MaterialTheme.typography.bodyMedium,
                         color = Color.White.copy(alpha = 0.9f),
                     )
-
-                    Text(
-                        text = "Complete today's challenge to earn points",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = Color.White.copy(alpha = 0.7f),
-                    )
                 }
 
                 FilledTonalButton(

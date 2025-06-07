@@ -9,6 +9,8 @@ interface ChallengesRepository {
 
     suspend fun getDailyChallenges(): List<DailyChallengeObj>
 
+    suspend fun getRandomChallenges(): DailyChallengeObj
+
     suspend fun getTrueFalseChallenges(): List<QuizCard>
 
     suspend fun getMultipleChoiceChallenges(): List<MultipleChoiceObj>

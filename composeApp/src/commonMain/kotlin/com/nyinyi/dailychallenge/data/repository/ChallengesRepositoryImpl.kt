@@ -37,11 +37,16 @@ class ChallengesRepositoryImpl(
             val readBytes = Res.readBytes("files/daily_challenges.json")
             val jsonString = readBytes.decodeToString()
             val challenges: List<DailyChallengeObj> = Json.decodeFromString(jsonString)
-            challenges.shuffled()
+            challenges
         } catch (e: Exception) {
             println("Error parsing challenges JSON or file not found: ${e.message}")
-            defaultChallenges.shuffled()
+            defaultChallenges
         }
+
+    override suspend fun getRandomChallenges(): DailyChallengeObj {
+        val dailyChallenges = getDailyChallenges()
+        return dailyChallenges.random()
+    }
 
     override suspend fun getTrueFalseChallenges(): List<QuizCard> =
         try {

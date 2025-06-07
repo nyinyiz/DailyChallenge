@@ -94,7 +94,10 @@ fun DailyChallengeListContent(
                         ChallengeCard(
                             challenge = challenge,
                             index = index,
-                            onClickChallenge = onClickChallenge,
+                            onClickChallenge = {
+                                println("Clicked challenge: ${challenge.id}")
+                                onClickChallenge(challenge)
+                            },
                         )
                     }
 

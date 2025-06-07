@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
@@ -51,6 +52,15 @@ fun QuestionsList(
 ) {
     val currentScreen = viewModel.currentScreen.value
 
+    LaunchedEffect(Unit) {
+        viewModel.eventFlow.collect { event ->
+            when (event) {
+                is QuestionListEvent.RandomDataChanged -> {
+                    onClickChallenge(event.randomChallenges)
+                }
+            }
+        }
+    }
     Scaffold(
         topBar = {
             if (currentScreen == BottomNavItem.Home) {
@@ -102,7 +112,7 @@ fun QuestionsList(
                             navigateToGameMode(gameMode)
                         },
                         onNavigateToChallenge = {
-                            // TODO navigate to challenge
+                            viewModel.getRandomChallenges()
                         },
                     )
 
