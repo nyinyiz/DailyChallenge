@@ -166,5 +166,75 @@
     "question": "📤 You're uploading a file and want to show progress in Compose. How do you expose that?",
     "questionCode": "// Upload code in ViewModel",
     "answerCode": "✅ Use `StateFlow` to expose progress:\n\nval uploadProgress = MutableStateFlow(0f)\n\nfun uploadFile() {\n    viewModelScope.launch {\n        for (i in 0..100) {\n            delay(50)\n            uploadProgress.value = i / 100f\n        }\n    }\n}"
+  },
+  {
+    "id": "25",
+    "difficulty": "Easy",
+    "question": "🛠️ You want to show a FloatingActionButton (FAB) only after scrolling past the first few items. You’ve got access to scroll state — now you need to connect that to visibility. How would you do it? Feel free to share code snippets!",
+    "questionCode": "val listState = rememberLazyListState()\n\nLazyColumn(state = listState) {\n  items(100) { Text(\"Item $it\") }\n}\n\n// Show a FAB only when the first visible index > 4",
+    "answerCode": "val listState = rememberLazyListState()\n\nval showFab by remember {\n    derivedStateOf {\n        listState.firstVisibleItemIndex > 2\n    }\n}\n\nAnimatedVisibility(\n    visible = showFab,\n    enter = fadeIn() + slideInVertically { it },\n    exit = fadeOut() + slideOutVertically { it }\n) {\n    FloatingActionButton(onClick = { /* Action */ }) {\n        // FAB content\n    }\n}"
+  },
+  {
+    "id": "26",
+    "difficulty": "Easy",
+    "question": "📲 You want to prevent multiple rapid taps on a button that causes duplicate network calls. How would you debounce the click in a Jetpack Compose Button?",
+    "questionCode": "Button(onClick = { /* network call */ }) {\n    Text(\"Submit\")\n}",
+    "answerCode": "var isClickAllowed by remember { mutableStateOf(true) }\n\nButton(onClick = {\n    if (isClickAllowed) {\n        isClickAllowed = false\n        coroutineScope.launch {\n            delay(1000)\n            isClickAllowed = true\n        }\n        // Trigger network call\n    }\n}) {\n    Text(\"Submit\")\n}"
+  },
+  {
+    "id": "27",
+    "difficulty": "Medium",
+    "question": "🔄 You need to collect a `Flow` in Compose and recompose only when the value changes. What is the best way to do that?",
+    "questionCode": "val myFlow: Flow<Int> = viewModel.counterFlow",
+    "answerCode": "val counter by viewModel.counterFlow.collectAsState(initial = 0)\n\nText(\"Counter: $counter\")"
+  },
+  {
+    "id": "28",
+    "difficulty": "Medium",
+    "question": "🔐 You’re building a login screen. How would you validate the email field in real-time using `StateFlow` in your ViewModel?",
+    "questionCode": "// In ViewModel\nval email = MutableStateFlow(\"\")",
+    "answerCode": "val isEmailValid = email.map { Patterns.EMAIL_ADDRESS.matcher(it).matches() }\n    .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)"
+  },
+  {
+    "id": "29",
+    "difficulty": "Medium",
+    "question": "📶 How would you detect if the user’s device has no internet connection and show a snackbar in Compose?",
+    "questionCode": "// Use ConnectivityManager from Android",
+    "answerCode": "val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager\n\nval isConnected = connectivityManager.activeNetworkInfo?.isConnected == true\n\nLaunchedEffect(isConnected) {\n    if (!isConnected) snackbarHostState.showSnackbar(\"No Internet Connection\")\n}"
+  },
+  {
+    "id": "30",
+    "difficulty": "Hard",
+    "question": "📁 You need to securely store a user token locally in an Android app. What is the best approach using Jetpack libraries?",
+    "questionCode": "// Assume you have a token from login API",
+    "answerCode": "val encryptedPrefs = EncryptedSharedPreferences.create(\n    \"secure_prefs\",\n    MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC),\n    context,\n    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,\n    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM\n)\n\nencryptedPrefs.edit().putString(\"token\", token).apply()"
+  },
+  {
+    "id": "31",
+    "difficulty": "Easy",
+    "question": "🖼️ You want to load an image from a URL into your Jetpack Compose UI. What is the best approach?",
+    "questionCode": "// Show a remote image",
+    "answerCode": "AsyncImage(\n    model = \"https://example.com/image.png\",\n    contentDescription = null,\n    modifier = Modifier.size(128.dp),\n    contentScale = ContentScale.Crop\n)"
+  },
+  {
+    "id": "32",
+    "difficulty": "Medium",
+    "question": "🧪 You want to test your ViewModel logic without relying on Android dependencies. How would you structure your test?",
+    "questionCode": "// ViewModel has a MutableStateFlow for counter",
+    "answerCode": "@Test\nfun testCounterIncrement() = runTest {\n    val viewModel = MyViewModel()\n    viewModel.increment()\n    assertEquals(1, viewModel.counter.value)\n}"
+  },
+  {
+    "id": "33",
+    "difficulty": "Hard",
+    "question": "⚙️ You want to split a large Compose screen into multiple recomposable functions without losing state or performance. What pattern would you follow?",
+    "questionCode": "// One giant composable with many inputs",
+    "answerCode": "// Break into smaller composables and hoist state\n@Composable\nfun ProfileScreen() {\n    val name = remember { mutableStateOf(\"\") }\n    val age = remember { mutableStateOf(0) }\n    NameInput(name)\n    AgeInput(age)\n}\n\n@Composable\nfun NameInput(name: MutableState<String>) {\n    TextField(value = name.value, onValueChange = { name.value = it })\n}"
+  },
+  {
+    "id": "34",
+    "difficulty": "Medium",
+    "question": "🔃 You want to retry a failed API call every 5 seconds until it succeeds using Kotlin Flow. What operator can help you?",
+    "questionCode": "// Wrap your network call",
+    "answerCode": "flow {\n    emit(api.fetchData())\n}.retryWhen { cause, attempt ->\n    delay(5000)\n    true // retry forever\n}"
   }
 ]
