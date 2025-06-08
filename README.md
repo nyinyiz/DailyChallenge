@@ -1,4 +1,5 @@
-![App Icon](screenshots/app_icon.png)# Daily Challenge
+![App Icon](screenshots/app_icon.png)
+# Daily Challenge
 
 A multiplatform app to browse and solve daily coding challenges. Built with Kotlin Multiplatform and
 Compose for Android, iOS, Desktop, and Web.
