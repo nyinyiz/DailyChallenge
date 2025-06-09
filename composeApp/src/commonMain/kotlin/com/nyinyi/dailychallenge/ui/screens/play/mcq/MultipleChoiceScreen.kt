@@ -28,6 +28,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -155,6 +157,7 @@ private fun QuizContent(
     quizState: MultipleChoiceUiState.Quiz,
     onAnswerSelected: (String) -> Unit,
 ) {
+    val hapticFeedback = LocalHapticFeedback.current
     Column {
         quizState.currentQuestion?.let { question ->
             Text(
@@ -177,7 +180,10 @@ private fun QuizContent(
                 ) { option ->
                     OptionItem(
                         option = option,
-                        onClick = { onAnswerSelected(option) },
+                        onClick = {
+                            hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                            onAnswerSelected(option)
+                        },
                     )
                 }
             }

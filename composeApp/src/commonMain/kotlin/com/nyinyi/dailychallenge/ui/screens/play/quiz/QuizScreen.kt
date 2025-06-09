@@ -26,6 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -63,6 +65,7 @@ fun QuizScreen(
     var currentQuestionIndex by remember { mutableStateOf(0) }
     var quizResults by remember { mutableStateOf<QuizResult?>(null) }
     var incorrectAnswers by remember { mutableStateOf(listOf<QuizCard>()) }
+    val hapticFeedback = LocalHapticFeedback.current
 
     Scaffold(
         topBar = {
@@ -179,6 +182,7 @@ fun QuizScreen(
                                 TinderStyleCard(
                                     card = state.quizList[currentQuestionIndex],
                                     onSwipeLeft = {
+                                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                                         if (state.quizList[currentQuestionIndex].correctAnswer) {
                                             incorrectAnswers =
                                                 incorrectAnswers + state.quizList[currentQuestionIndex]
@@ -194,6 +198,7 @@ fun QuizScreen(
                                         }
                                     },
                                     onSwipeRight = {
+                                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                                         if (!state.quizList[currentQuestionIndex].correctAnswer) {
                                             incorrectAnswers =
                                                 incorrectAnswers + state.quizList[currentQuestionIndex]

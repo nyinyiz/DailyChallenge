@@ -91,7 +91,6 @@ fun PlayScreenContent(
                     .padding(paddingValues)
                     .background(MaterialTheme.colorScheme.background),
         ) {
-            // Top Section with Welcome and Profile
             AnimatedVisibility(
                 visible = isContentVisible,
                 enter =
@@ -103,7 +102,6 @@ fun PlayScreenContent(
                 TopSection(viewModel = viewModel)
             }
 
-            // Daily Challenge Section with scale animation
             AnimatedVisibility(
                 visible = isContentVisible,
                 enter =
@@ -131,7 +129,6 @@ fun PlayScreenContent(
                 )
             }
 
-            // Game Modes with staggered animation
             AnimatedVisibility(
                 visible = isContentVisible,
                 enter =

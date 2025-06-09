@@ -298,5 +298,365 @@
     "correctAnswer": false,
     "explanation": "The implicit `it` keyword can only be used if the lambda has exactly one parameter.",
     "difficulty": "easy"
+  },
+  {
+    "question": "Kotlin supports both expression and statement forms of `if`.",
+    "correctAnswer": true,
+    "explanation": "In Kotlin, `if` can be used as an expression that returns a value, or as a statement for control flow.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `lazy` delegate in Kotlin is thread-safe by default.",
+    "correctAnswer": true,
+    "explanation": "The `lazy` delegate uses `LazyThreadSafetyMode.SYNCHRONIZED` by default, ensuring thread safety.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `for` loop can iterate over any object that provides an `iterator()` function.",
+    "correctAnswer": true,
+    "explanation": "Any object that has an `iterator()` function (or extension function) can be used in a `for` loop.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@JvmStatic` annotation is required for all companion object functions to be called from Java.",
+    "correctAnswer": false,
+    "explanation": "Companion object functions can be called from Java without `@JvmStatic`, but the syntax is different (e.g., `MyClass.Companion.function()`).",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `Array<T>` is the same as Java's `T[]` array.",
+    "correctAnswer": false,
+    "explanation": "Kotlin's `Array<T>` compiles to Java's `Object[]`, while specialized arrays like `IntArray` compile to `int[]`.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "The `crossinline` keyword prevents non-local returns in inline functions.",
+    "correctAnswer": true,
+    "explanation": "`crossinline` ensures that lambda parameters cannot perform non-local returns, useful when the lambda is called indirectly.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Kotlin supports nested functions (functions inside functions).",
+    "correctAnswer": true,
+    "explanation": "Local functions can be declared inside other functions and have access to the outer function's variables.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `reified` keyword can be used with any generic function parameter.",
+    "correctAnswer": false,
+    "explanation": "`reified` can only be used with type parameters of inline functions, allowing access to the actual type at runtime.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `let` function always returns the result of the lambda expression.",
+    "correctAnswer": true,
+    "explanation": "`let` is a scope function that executes the lambda and returns its result.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@Throws` annotation in Kotlin affects the compiled bytecode for Java interoperability.",
+    "correctAnswer": true,
+    "explanation": "`@Throws` adds the exception information to the method signature in the compiled bytecode for Java compatibility.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `use` function automatically closes resources even if an exception occurs.",
+    "correctAnswer": true,
+    "explanation": "`use` is similar to Java's try-with-resources and ensures proper resource cleanup.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `vararg` parameter in Kotlin must always be the last parameter in a function.",
+    "correctAnswer": false,
+    "explanation": "`vararg` can be in any position, but if it's not the last parameter, named arguments must be used for subsequent parameters.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `break` and `continue` statements can use labels to control nested loops.",
+    "correctAnswer": true,
+    "explanation": "Labels allow breaking or continuing specific loops in nested structures (e.g., `break@outerLoop`).",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `suspend` modifier can be applied to lambda expressions.",
+    "correctAnswer": true,
+    "explanation": "Suspending lambdas are written as `suspend () -> Unit` and can be used with coroutines.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `map` function modifies the original collection.",
+    "correctAnswer": false,
+    "explanation": "`map` creates a new collection with transformed elements; it doesn't modify the original collection.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `noinline` keyword prevents inlining of all lambda parameters in an inline function.",
+    "correctAnswer": false,
+    "explanation": "`noinline` only prevents inlining of specific lambda parameters, not all of them.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `typealias` can be used to create aliases for function types.",
+    "correctAnswer": true,
+    "explanation": "Type aliases work with function types, e.g., `typealias Handler = (String) -> Unit`.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@JvmOverloads` annotation generates overloaded methods for functions with default parameters.",
+    "correctAnswer": true,
+    "explanation": "This annotation creates multiple Java method overloads for each combination of default parameters.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `when` expression can be used without a subject (as a replacement for if-else chains).",
+    "correctAnswer": true,
+    "explanation": "A `when` expression without a subject can contain boolean conditions in each branch.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@JvmField` annotation exposes Kotlin properties as public fields in Java.",
+    "correctAnswer": true,
+    "explanation": "`@JvmField` instructs the compiler to expose the property as a field instead of generating getter/setter methods.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `associateBy` function can handle duplicate keys by keeping only the last occurrence.",
+    "correctAnswer": true,
+    "explanation": "When duplicate keys are encountered, `associateBy` keeps the value from the last element with that key.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The `expect` and `actual` keywords are used for multiplatform programming in Kotlin.",
+    "correctAnswer": true,
+    "explanation": "These keywords allow declaring platform-specific implementations in Kotlin Multiplatform projects.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `fold` function requires an initial value, while `reduce` does not.",
+    "correctAnswer": true,
+    "explanation": "`fold` starts with an initial value, while `reduce` uses the first element as the initial value.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@JvmName` annotation can change the name of generated Java methods.",
+    "correctAnswer": true,
+    "explanation": "`@JvmName` allows specifying a different name for the method in the compiled bytecode.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `sealed interface` can be implemented by classes in different files.",
+    "correctAnswer": false,
+    "explanation": "Like sealed classes, sealed interfaces can only be implemented by classes in the same file (or same package/module in newer versions).",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The `infix` keyword allows calling a function without parentheses and dots.",
+    "correctAnswer": true,
+    "explanation": "Infix functions can be called with natural language syntax (e.g., `1 to 2` instead of `1.to(2)`).",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Kotlin's `buildString` function is more efficient than string concatenation for building large strings.",
+    "correctAnswer": true,
+    "explanation": "`buildString` uses StringBuilder internally, which is more efficient than repeated string concatenation.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `operator` keyword is required for all function overloads in Kotlin.",
+    "correctAnswer": false,
+    "explanation": "`operator` is only required for functions that overload operators (like `plus`, `minus`, etc.).",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Kotlin's `takeIf` function returns the receiver if the predicate is true, otherwise null.",
+    "correctAnswer": true,
+    "explanation": "`takeIf` is useful for conditional chaining and returns the object itself or null based on the condition.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@PublishedApi` annotation makes internal functions visible to inline functions.",
+    "correctAnswer": true,
+    "explanation": "This annotation allows internal APIs to be called from public inline functions.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Kotlin's `sequence` builder creates a lazy sequence that computes values on-demand.",
+    "correctAnswer": true,
+    "explanation": "Sequences are lazy and compute elements only when needed, unlike collections which are eager.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The `contracts` feature in Kotlin allows expressing function behavior to the compiler.",
+    "correctAnswer": true,
+    "explanation": "Contracts help the compiler understand function behavior for better null safety and smart casting.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Kotlin's `also` function returns the original receiver object, not the lambda result.",
+    "correctAnswer": true,
+    "explanation": "`also` executes the lambda for side effects and returns the original object.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@Volatile` annotation ensures that writes to a variable are immediately visible to other threads.",
+    "correctAnswer": true,
+    "explanation": "`@Volatile` provides memory visibility guarantees for multithreaded access.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `require` function throws IllegalStateException when the condition is false.",
+    "correctAnswer": false,
+    "explanation": "`require` throws IllegalArgumentException, while `check` throws IllegalStateException.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@JvmSynthetic` annotation hides Kotlin functions from Java code.",
+    "correctAnswer": true,
+    "explanation": "This annotation prevents the annotated declaration from being visible in Java.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `distinctBy` function keeps the first occurrence of each distinct element.",
+    "correctAnswer": true,
+    "explanation": "`distinctBy` returns a list containing only the first occurrence of each element with a distinct key.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@OptIn` annotation is used to acknowledge the use of experimental APIs.",
+    "correctAnswer": true,
+    "explanation": "`@OptIn` (formerly `@UseExperimental`) is required to use APIs marked with opt-in annotations.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `apply` function returns the result of the lambda expression.",
+    "correctAnswer": false,
+    "explanation": "`apply` returns the receiver object, not the lambda result. It's used for object configuration.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@Deprecated` annotation can specify a replacement for deprecated code.",
+    "correctAnswer": true,
+    "explanation": "The `replaceWith` parameter in `@Deprecated` can provide automatic code replacement suggestions.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Kotlin's `groupBy` function returns a Map where values are single elements, not lists.",
+    "correctAnswer": false,
+    "explanation": "`groupBy` returns a Map where each value is a List of elements that share the same key.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `internal` visibility modifier is equivalent to package-private in Java.",
+    "correctAnswer": false,
+    "explanation": "`internal` is module-scoped, which is broader than Java's package-private scope.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `run` function can be called without a receiver object.",
+    "correctAnswer": true,
+    "explanation": "There are two versions of `run`: one as an extension function and one as a regular function.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The `@JvmDefault` annotation allows default methods in interfaces when targeting Java 8+.",
+    "correctAnswer": false,
+    "explanation": "`@JvmDefault` was deprecated. Kotlin now generates default methods in interfaces automatically when targeting Java 8+.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Kotlin's `partition` function splits a collection into two lists based on a predicate.",
+    "correctAnswer": true,
+    "explanation": "`partition` returns a Pair where the first list contains elements matching the predicate and the second contains the rest.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@Suppress` annotation can disable specific compiler warnings.",
+    "correctAnswer": true,
+    "explanation": "`@Suppress` can be used to suppress various warnings like \"UNCHECKED_CAST\", \"UNUSED_PARAMETER\", etc.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Kotlin's `flatMap` function automatically flattens nested collections.",
+    "correctAnswer": true,
+    "explanation": "`flatMap` transforms each element and then flattens the results into a single collection.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@get:` and `@set:` annotations can target property getter and setter methods specifically.",
+    "correctAnswer": true,
+    "explanation": "Use-site targets like `@get:JvmName` allow applying annotations to specific parts of properties.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `zip` function combines corresponding elements from two collections.",
+    "correctAnswer": true,
+    "explanation": "`zip` creates pairs of elements from the same positions in two collections.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@JvmRecord` annotation can be used to generate Java records from Kotlin data classes.",
+    "correctAnswer": true,
+    "explanation": "`@JvmRecord` generates Java record classes when targeting Java 14+, providing better Java interoperability.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `count` function with a predicate is more efficient than `filter` followed by `size`.",
+    "correctAnswer": true,
+    "explanation": "`count` with a predicate doesn't create an intermediate collection, making it more memory efficient.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The `@field:` annotation target is used to annotate the backing field of a property.",
+    "correctAnswer": true,
+    "explanation": "Use-site target `@field:` applies annotations directly to the generated backing field.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `chunked` function splits a collection into sublists of a specified size.",
+    "correctAnswer": true,
+    "explanation": "`chunked` creates a list of lists, each containing at most the specified number of elements.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@DslMarker` annotation helps prevent accidental nesting in DSL builders.",
+    "correctAnswer": true,
+    "explanation": "`@DslMarker` restricts the scope of DSL builders to prevent calling outer scope functions accidentally.",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Kotlin's `windowed` function creates a sliding window over a collection.",
+    "correctAnswer": true,
+    "explanation": "`windowed` returns a list of snapshots of the collection with a specified window size.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The `@RequiresOptIn` annotation is used to mark APIs that require explicit opt-in.",
+    "correctAnswer": true,
+    "explanation": "`@RequiresOptIn` creates opt-in requirement annotations for experimental or unstable APIs.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `sortedWith` function modifies the original collection in place.",
+    "correctAnswer": false,
+    "explanation": "`sortedWith` returns a new sorted list. Use `sortWith` to sort a mutable list in place.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@file:` annotation target applies annotations to the entire Kotlin file.",
+    "correctAnswer": true,
+    "explanation": "File-level annotations like `@file:JvmName` affect the entire Kotlin file or its generated class.",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Kotlin's `maxByOrNull` function returns null if the collection is empty.",
+    "correctAnswer": true,
+    "explanation": "`maxByOrNull` and similar functions return null for empty collections instead of throwing exceptions.",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The `@JvmInline` annotation is used to create inline value classes in Kotlin.",
+    "correctAnswer": true,
+    "explanation": "`@JvmInline value class` creates a wrapper around a single value that can be optimized away at runtime.",
+    "difficulty": "medium"
   }
 ]
