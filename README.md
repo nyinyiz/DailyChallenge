@@ -246,10 +246,7 @@ The following features and improvements are planned for future releases:
 - **User Profiles**: Track progress and achievements
 - **Leaderboards**: Compete with other users
 - **More Categories**: Expand to include Flutter, React Native, and other mobile technologies
-- **Offline Mode**: Full functionality without an internet connection
 - **Push Notifications**: Daily reminders for new challenges
-
-Check the [tasks.md](docs/tasks.md) file for a comprehensive list of planned improvements.
 
 ## 👤 Author
 
