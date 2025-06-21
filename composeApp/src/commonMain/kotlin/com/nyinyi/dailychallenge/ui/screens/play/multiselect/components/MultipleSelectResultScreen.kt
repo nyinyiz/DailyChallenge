@@ -31,22 +31,25 @@ fun MultipleSelectResultScreen(
     onBackToHome: () -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         // Score section
         Card(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primaryContainer,
-            ),
+            colors =
+                CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                ),
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
@@ -55,24 +58,24 @@ fun MultipleSelectResultScreen(
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
-                
+
                 Spacer(modifier = Modifier.height(16.dp))
-                
+
                 Text(
                     text = "Your Score",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
-                
+
                 Text(
                     text = "${result.score}/${result.totalQuestions}",
                     style = MaterialTheme.typography.displayMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
-                
+
                 Spacer(modifier = Modifier.height(8.dp))
-                
+
                 Text(
                     text = "Percentage: ${(result.score.toFloat() / result.totalQuestions.toFloat() * 100).toInt()}%",
                     style = MaterialTheme.typography.bodyLarge,
@@ -80,9 +83,9 @@ fun MultipleSelectResultScreen(
                 )
             }
         }
-        
+
         Spacer(modifier = Modifier.height(24.dp))
-        
+
         // Incorrect answers section
         if (result.incorrectAnswers.isNotEmpty()) {
             Text(
@@ -92,9 +95,9 @@ fun MultipleSelectResultScreen(
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Start,
             )
-            
+
             Spacer(modifier = Modifier.height(8.dp))
-            
+
             LazyColumn(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -102,14 +105,16 @@ fun MultipleSelectResultScreen(
                 items(result.incorrectAnswers) { question ->
                     Card(
                         modifier = Modifier.fillMaxWidth(),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.errorContainer,
-                        ),
+                        colors =
+                            CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.errorContainer,
+                            ),
                     ) {
                         Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
                         ) {
                             Text(
                                 text = question.question,
@@ -117,18 +122,18 @@ fun MultipleSelectResultScreen(
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onErrorContainer,
                             )
-                            
+
                             Spacer(modifier = Modifier.height(8.dp))
-                            
+
                             Text(
                                 text = "Correct answers: ${question.correctAnswers.joinToString(", ")}",
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onErrorContainer,
                             )
-                            
+
                             if (question.explanation.isNotEmpty()) {
                                 Spacer(modifier = Modifier.height(8.dp))
-                                
+
                                 Text(
                                     text = "Explanation: ${question.explanation}",
                                     style = MaterialTheme.typography.bodyMedium,
@@ -147,9 +152,9 @@ fun MultipleSelectResultScreen(
                 modifier = Modifier.weight(1f).padding(vertical = 32.dp),
             )
         }
-        
+
         Spacer(modifier = Modifier.height(16.dp))
-        
+
         // Action buttons
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -161,7 +166,7 @@ fun MultipleSelectResultScreen(
             ) {
                 Text(text = "Back to Home")
             }
-            
+
             Button(
                 onClick = onRestartQuiz,
                 modifier = Modifier.weight(1f),

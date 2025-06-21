@@ -44,8 +44,11 @@ sealed class MultipleSelectUiState {
                     },
             )
         }
-        
-        private fun areAnswersCorrect(selected: List<String>, correct: List<String>): Boolean {
+
+        private fun areAnswersCorrect(
+            selected: List<String>,
+            correct: List<String>,
+        ): Boolean {
             // Check if selected answers match exactly with correct answers
             return selected.size == correct.size && selected.containsAll(correct)
         }
@@ -82,14 +85,14 @@ class MultipleSelectViewModel(
 
     fun toggleOptionSelection(option: String) {
         val currentState = _uiState.value as? MultipleSelectUiState.Quiz ?: return
-        
+
         val currentSelectedOptions = currentState.selectedOptions.toMutableList()
         if (currentSelectedOptions.contains(option)) {
             currentSelectedOptions.remove(option)
         } else {
             currentSelectedOptions.add(option)
         }
-        
+
         _uiState.value = currentState.copy(selectedOptions = currentSelectedOptions)
     }
 
@@ -97,15 +100,15 @@ class MultipleSelectViewModel(
         val currentState = _uiState.value as? MultipleSelectUiState.Quiz ?: return
         val currentQuestion = currentState.currentQuestion ?: return
         val selectedOptions = currentState.selectedOptions
-        
+
         val isCorrect = areAnswersCorrect(selectedOptions, currentQuestion.correctAnswers)
         val newScore = if (isCorrect) currentState.score + 1 else currentState.score
         val newIndex = currentState.currentQuestionIndex + 1
-        
+
         val newAnsweredQuestions =
             currentState.answeredQuestions +
                 (currentState.currentQuestionIndex to selectedOptions)
-        
+
         _uiState.value =
             currentState.copy(
                 currentQuestionIndex = newIndex,
@@ -114,8 +117,11 @@ class MultipleSelectViewModel(
                 selectedOptions = emptyList(), // Reset selected options for next question
             )
     }
-    
-    private fun areAnswersCorrect(selected: List<String>, correct: List<String>): Boolean {
+
+    private fun areAnswersCorrect(
+        selected: List<String>,
+        correct: List<String>,
+    ): Boolean {
         // Check if selected answers match exactly with correct answers
         return selected.size == correct.size && selected.containsAll(correct)
     }

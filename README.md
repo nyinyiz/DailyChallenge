@@ -1,5 +1,6 @@
-<img src="screenshots/app_icon.png" alt="App Icon" width="80">
-# Daily Challenge
+<img src="screenshots/app_icon.png" alt="App Icon" width="80"> 
+
+### Daily Challenge
 
 A multiplatform app to browse and solve daily coding challenges for mobile developers. Built with Kotlin Multiplatform and
 Compose for Android, iOS, Desktop, and Web.
