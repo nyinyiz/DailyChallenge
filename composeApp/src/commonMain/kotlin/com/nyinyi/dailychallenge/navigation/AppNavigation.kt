@@ -14,6 +14,7 @@ import com.nyinyi.dailychallenge.ui.screens.detail.QuestionDetail
 import com.nyinyi.dailychallenge.ui.screens.list.QuestionsList
 import com.nyinyi.dailychallenge.ui.screens.play.components.GameMode
 import com.nyinyi.dailychallenge.ui.screens.play.mcq.MultipleChoiceScreen
+import com.nyinyi.dailychallenge.ui.screens.play.multiselect.MultipleSelectScreen
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.QuizScreen
 
 @Composable
@@ -42,7 +43,7 @@ fun AppNavigation(
                         }
 
                         GameMode.MultipleSelect -> {
-                            // TODO: Handle multiple select
+                            navController.navigate(Routes.MultipleSelectScreen)
                         }
 
                         GameMode.MatchingGame -> {
@@ -92,6 +93,14 @@ fun AppNavigation(
 
         composable<Routes.MultipleChoiceScreen> {
             MultipleChoiceScreen(
+                onBack = { navController.popBackStack() },
+                onBackToHome = { navController.popBackStack() },
+                onToggleTheme = onToggleTheme,
+            )
+        }
+
+        composable<Routes.MultipleSelectScreen> {
+            MultipleSelectScreen(
                 onBack = { navController.popBackStack() },
                 onBackToHome = { navController.popBackStack() },
                 onToggleTheme = onToggleTheme,

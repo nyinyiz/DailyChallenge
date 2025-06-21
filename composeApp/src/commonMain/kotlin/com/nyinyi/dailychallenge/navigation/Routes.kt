@@ -16,4 +16,7 @@ sealed interface Routes {
 
     @Serializable
     data object MultipleChoiceScreen : Routes
+
+    @Serializable
+    data object MultipleSelectScreen : Routes
 }

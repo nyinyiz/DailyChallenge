@@ -88,7 +88,6 @@ fun PlayScreenContent(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .padding(paddingValues)
                     .background(MaterialTheme.colorScheme.background),
         ) {
             AnimatedVisibility(
@@ -114,13 +113,13 @@ fun PlayScreenContent(
                                 easing = EaseOutBack,
                             ),
                     ) +
-                        fadeIn(
-                            animationSpec =
-                                tween(
-                                    durationMillis = 500,
-                                    delayMillis = 100,
-                                ),
-                        ),
+                            fadeIn(
+                                animationSpec =
+                                    tween(
+                                        durationMillis = 500,
+                                        delayMillis = 100,
+                                    ),
+                            ),
             ) {
                 DailyChallengeCard(
                     onStartChallenge = {
@@ -141,13 +140,13 @@ fun PlayScreenContent(
                                 easing = EaseOutBack,
                             ),
                     ) +
-                        fadeIn(
-                            animationSpec =
-                                tween(
-                                    durationMillis = 500,
-                                    delayMillis = 200,
-                                ),
-                        ),
+                            fadeIn(
+                                animationSpec =
+                                    tween(
+                                        durationMillis = 500,
+                                        delayMillis = 200,
+                                    ),
+                            ),
             ) {
                 GameModesSection(
                     onGameModeSelected = { gameMode ->

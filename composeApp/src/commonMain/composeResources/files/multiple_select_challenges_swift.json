@@ -1,0 +1,22 @@
+[
+  {
+    "question": "Which of the following are Swift keywords?",
+    "options": [
+      "let",
+      "var",
+      "func",
+      "def",
+      "guard",
+      "switch"
+    ],
+    "correctAnswers": [
+      "let",
+      "var",
+      "func",
+      "guard",
+      "switch"
+    ],
+    "difficulty": "Easy",
+    "explanation": "let, var, func, guard, and switch are Swift keywords. def is used in languages like Python and Ruby."
+  }
+]

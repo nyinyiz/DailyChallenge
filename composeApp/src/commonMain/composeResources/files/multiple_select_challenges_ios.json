@@ -1,0 +1,187 @@
+[
+  {
+    "question": "Which of the following are valid iOS lifecycle methods?",
+    "options": [
+      "viewDidLoad()",
+      "viewWillAppear(_:)",
+      "onCreate()",
+      "viewDidAppear(_:)",
+      "onStart()",
+      "viewWillDisappear(_:)"
+    ],
+    "correctAnswers": [
+      "viewDidLoad()",
+      "viewWillAppear(_:)",
+      "viewDidAppear(_:)",
+      "viewWillDisappear(_:)"
+    ],
+    "difficulty": "Easy",
+    "explanation": "iOS view controller lifecycle methods include viewDidLoad(), viewWillAppear(_:), viewDidAppear(_:), viewWillDisappear(_:), and viewDidDisappear(_:). onCreate() and onStart() are Android lifecycle methods."
+  },
+  {
+    "question": "Which of these are iOS UI components?",
+    "options": [
+      "UILabel",
+      "TextView",
+      "UIButton",
+      "Button",
+      "UITableView",
+      "RecyclerView"
+    ],
+    "correctAnswers": [
+      "UILabel",
+      "UIButton",
+      "UITableView"
+    ],
+    "difficulty": "Easy",
+    "explanation": "UILabel, UIButton, and UITableView are iOS UI components. TextView, Button, and RecyclerView are Android UI components."
+  },
+  {
+    "question": "Which of these are valid ways to navigate between view controllers in iOS?",
+    "options": [
+      "Using a UINavigationController",
+      "Using present(_:animated:completion:)",
+      "Using an Intent",
+      "Using a UITabBarController",
+      "Using startActivity()"
+    ],
+    "correctAnswers": [
+      "Using a UINavigationController",
+      "Using present(_:animated:completion:)",
+      "Using a UITabBarController"
+    ],
+    "difficulty": "Medium",
+    "explanation": "UINavigationController, present(_:animated:completion:), and UITabBarController are valid ways to navigate between view controllers in iOS. Intent and startActivity() are Android navigation methods."
+  },
+  {
+    "question": "Which of these are iOS storage options?",
+    "options": [
+      "UserDefaults",
+      "Shared Preferences",
+      "Core Data",
+      "Internal Storage",
+      "Keychain",
+      "SQLite Database"
+    ],
+    "correctAnswers": [
+      "UserDefaults",
+      "Core Data",
+      "Keychain",
+      "SQLite Database"
+    ],
+    "difficulty": "Medium",
+    "explanation": "UserDefaults, Core Data, Keychain, and SQLite Database are iOS storage options. Shared Preferences and Internal Storage are Android storage options."
+  },
+  {
+    "question": "Which of these are iOS app states?",
+    "options": [
+      "Not running",
+      "Inactive",
+      "Active",
+      "Background",
+      "Suspended",
+      "Destroyed"
+    ],
+    "correctAnswers": [
+      "Not running",
+      "Inactive",
+      "Active",
+      "Background",
+      "Suspended"
+    ],
+    "difficulty": "Hard",
+    "explanation": "iOS app states include Not running, Inactive, Active, Background, and Suspended. Destroyed is an Android app state."
+  },
+  {
+    "question": "Which of these are valid iOS resource file types?",
+    "options": [
+      "storyboard",
+      "xib",
+      "drawable",
+      "layout",
+      "xcassets",
+      "values"
+    ],
+    "correctAnswers": [
+      "storyboard",
+      "xib",
+      "xcassets"
+    ],
+    "difficulty": "Medium",
+    "explanation": "storyboard, xib, and xcassets are valid iOS resource file types. drawable, layout, and values are Android resource directories."
+  },
+  {
+    "question": "Which of these are iOS frameworks?",
+    "options": [
+      "UIKit",
+      "SwiftUI",
+      "ViewModel",
+      "Foundation",
+      "LiveData",
+      "CoreData"
+    ],
+    "correctAnswers": [
+      "UIKit",
+      "SwiftUI",
+      "Foundation",
+      "CoreData"
+    ],
+    "difficulty": "Hard",
+    "explanation": "UIKit, SwiftUI, Foundation, and CoreData are iOS frameworks. ViewModel and LiveData are Android architectural components."
+  },
+  {
+    "question": "Which of these are valid iOS build configurations?",
+    "options": [
+      "Debug",
+      "Release",
+      "Staging",
+      "Development",
+      "Production",
+      "Test"
+    ],
+    "correctAnswers": [
+      "Debug",
+      "Release"
+    ],
+    "difficulty": "Medium",
+    "explanation": "Debug and Release are the default iOS build configurations. Staging, Development, Production, and Test are custom build configurations that can be added but are not default."
+  },
+  {
+    "question": "Which of these are iOS notification authorization options?",
+    "options": [
+      "alert",
+      "badge",
+      "sound",
+      "vibration",
+      "carPlay",
+      "lights"
+    ],
+    "correctAnswers": [
+      "alert",
+      "badge",
+      "sound",
+      "carPlay"
+    ],
+    "difficulty": "Hard",
+    "explanation": "iOS notification authorization options include alert, badge, sound, and carPlay. vibration and lights are Android notification options."
+  },
+  {
+    "question": "Which of these are valid iOS Auto Layout attributes?",
+    "options": [
+      "leading",
+      "trailing",
+      "top",
+      "bottom",
+      "android:layout_width",
+      "android:layout_height"
+    ],
+    "correctAnswers": [
+      "leading",
+      "trailing",
+      "top",
+      "bottom"
+    ],
+    "difficulty": "Easy",
+    "explanation": "leading, trailing, top, and bottom are valid iOS Auto Layout attributes. android:layout_width and android:layout_height are Android layout attributes."
+  }
+]

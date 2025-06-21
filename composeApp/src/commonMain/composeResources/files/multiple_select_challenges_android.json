@@ -1,0 +1,188 @@
+[
+  {
+    "question": "Which of the following are valid Android lifecycle methods?",
+    "options": [
+      "onCreate()",
+      "onStart()",
+      "onInitialize()",
+      "onResume()",
+      "onActivate()",
+      "onPause()"
+    ],
+    "correctAnswers": [
+      "onCreate()",
+      "onStart()",
+      "onResume()",
+      "onPause()"
+    ],
+    "difficulty": "Easy",
+    "explanation": "Android activity lifecycle methods include onCreate(), onStart(), onResume(), onPause(), onStop(), and onDestroy(). onInitialize() and onActivate() are not part of the standard Android lifecycle."
+  },
+  {
+    "question": "Which of these are Android UI components?",
+    "options": [
+      "TextView",
+      "UILabel",
+      "Button",
+      "UIButton",
+      "RecyclerView",
+      "TableView"
+    ],
+    "correctAnswers": [
+      "TextView",
+      "Button",
+      "RecyclerView"
+    ],
+    "difficulty": "Easy",
+    "explanation": "TextView, Button, and RecyclerView are Android UI components. UILabel, UIButton, and TableView are iOS UI components."
+  },
+  {
+    "question": "Which of these are valid ways to start an Activity in Android?",
+    "options": [
+      "Using an Intent",
+      "Using startActivity()",
+      "Using a Fragment",
+      "Using a Service",
+      "Using startActivityForResult()"
+    ],
+    "correctAnswers": [
+      "Using an Intent",
+      "Using startActivity()",
+      "Using startActivityForResult()"
+    ],
+    "difficulty": "Medium",
+    "explanation": "Activities can be started using an Intent with startActivity() or startActivityForResult(). Fragments and Services are different components and not ways to start an Activity."
+  },
+  {
+    "question": "Which of these are Android storage options?",
+    "options": [
+      "Shared Preferences",
+      "Internal Storage",
+      "External Storage",
+      "Core Data",
+      "SQLite Database",
+      "UserDefaults"
+    ],
+    "correctAnswers": [
+      "Shared Preferences",
+      "Internal Storage",
+      "External Storage",
+      "SQLite Database"
+    ],
+    "difficulty": "Medium",
+    "explanation": "Shared Preferences, Internal Storage, External Storage, and SQLite Database are Android storage options. Core Data and UserDefaults are iOS storage options."
+  },
+  {
+    "question": "Which of these are Android permission protection levels?",
+    "options": [
+      "Normal",
+      "Dangerous",
+      "Signature",
+      "Critical",
+      "SystemOrSignature",
+      "Public"
+    ],
+    "correctAnswers": [
+      "Normal",
+      "Dangerous",
+      "Signature",
+      "SystemOrSignature"
+    ],
+    "difficulty": "Hard",
+    "explanation": "Android permission protection levels include Normal, Dangerous, Signature, and SystemOrSignature. Critical and Public are not valid Android permission protection levels."
+  },
+  {
+    "question": "Which of these are valid Android resource directories?",
+    "options": [
+      "drawable",
+      "layout",
+      "values",
+      "assets",
+      "storyboard",
+      "xib"
+    ],
+    "correctAnswers": [
+      "drawable",
+      "layout",
+      "values",
+      "assets"
+    ],
+    "difficulty": "Medium",
+    "explanation": "drawable, layout, values, and assets are valid Android resource directories. storyboard and xib are iOS resource file types."
+  },
+  {
+    "question": "Which of these are Android architectural components?",
+    "options": [
+      "ViewModel",
+      "LiveData",
+      "Room",
+      "UIKit",
+      "WorkManager",
+      "SwiftUI"
+    ],
+    "correctAnswers": [
+      "ViewModel",
+      "LiveData",
+      "Room",
+      "WorkManager"
+    ],
+    "difficulty": "Hard",
+    "explanation": "ViewModel, LiveData, Room, and WorkManager are Android architectural components. UIKit and SwiftUI are iOS frameworks."
+  },
+  {
+    "question": "Which of these are valid Android build types?",
+    "options": [
+      "Debug",
+      "Release",
+      "Staging",
+      "Development",
+      "Production",
+      "Test"
+    ],
+    "correctAnswers": [
+      "Debug",
+      "Release"
+    ],
+    "difficulty": "Medium",
+    "explanation": "Debug and Release are the default Android build types. Staging, Development, Production, and Test are custom build types that can be added but are not default."
+  },
+  {
+    "question": "Which of these are Android notification importance levels?",
+    "options": [
+      "IMPORTANCE_NONE",
+      "IMPORTANCE_MIN",
+      "IMPORTANCE_LOW",
+      "IMPORTANCE_DEFAULT",
+      "IMPORTANCE_HIGH",
+      "IMPORTANCE_MAX"
+    ],
+    "correctAnswers": [
+      "IMPORTANCE_NONE",
+      "IMPORTANCE_MIN",
+      "IMPORTANCE_LOW",
+      "IMPORTANCE_DEFAULT",
+      "IMPORTANCE_HIGH"
+    ],
+    "difficulty": "Hard",
+    "explanation": "Android notification importance levels include IMPORTANCE_NONE, IMPORTANCE_MIN, IMPORTANCE_LOW, IMPORTANCE_DEFAULT, and IMPORTANCE_HIGH. IMPORTANCE_MAX is not a valid importance level."
+  },
+  {
+    "question": "Which of these are valid Android layout attributes?",
+    "options": [
+      "android:layout_width",
+      "android:layout_height",
+      "android:layout_margin",
+      "ios:layout_width",
+      "android:padding",
+      "ios:padding"
+    ],
+    "correctAnswers": [
+      "android:layout_width",
+      "android:layout_height",
+      "android:layout_margin",
+      "android:padding"
+    ],
+    "difficulty": "Easy",
+    "explanation": "android:layout_width, android:layout_height, android:layout_margin, and android:padding are valid Android layout attributes. ios:layout_width and ios:padding are not valid."
+  }
+]
