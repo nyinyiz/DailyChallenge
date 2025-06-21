@@ -134,7 +134,7 @@ Contributions are welcome and appreciated! Help make Daily Challenge better for 
 ### Ways to Contribute
 
 - **Add New Questions**: Expand our collection of challenges in Android, iOS, Kotlin, Swift, or other mobile development topics
-- **Implement Features**: Work on items from our [roadmap](#️-roadmap) or [tasks list](docs/tasks.md)
+- **Implement Features**: Work on items from our [roadmap](#️-roadmap)
 - **Fix Bugs**: Help squash bugs and improve the app's stability
 - **Improve Documentation**: Enhance the documentation to make it more helpful for users and contributors
 
