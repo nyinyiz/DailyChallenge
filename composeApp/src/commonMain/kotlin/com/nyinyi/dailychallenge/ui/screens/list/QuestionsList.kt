@@ -3,9 +3,10 @@ package com.nyinyi.dailychallenge.ui.screens.list
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,7 +38,7 @@ sealed class BottomNavItem(
 ) {
     object Home : BottomNavItem("home", Icons.Filled.Home, "Home")
 
-    object Play : BottomNavItem("play", Icons.Filled.PlayArrow, "Play")
+    object List : BottomNavItem("list", Icons.AutoMirrored.Filled.List, "Questions")
 
     object Profile : BottomNavItem("profile", Icons.Filled.Person, "Profile")
 }
@@ -63,7 +64,7 @@ fun QuestionsList(
     }
     Scaffold(
         topBar = {
-            if (currentScreen == BottomNavItem.Home) {
+            if (currentScreen == BottomNavItem.List) {
                 TopAppBar(
                     title = {
                         Text(
@@ -102,11 +103,6 @@ fun QuestionsList(
         Box(modifier = Modifier.padding(paddingValues)) {
             when (currentScreen) {
                 BottomNavItem.Home ->
-                    DailyChallengeListContent(
-                        onClickChallenge = onClickChallenge,
-                    )
-
-                BottomNavItem.Play ->
                     PlayScreenContent(
                         onNavigateToGameMode = { gameMode ->
                             navigateToGameMode(gameMode)
@@ -114,6 +110,11 @@ fun QuestionsList(
                         onNavigateToChallenge = {
                             viewModel.getRandomChallenges()
                         },
+                    )
+
+                BottomNavItem.List ->
+                    DailyChallengeListContent(
+                        onClickChallenge = onClickChallenge,
                     )
 
                 BottomNavItem.Profile -> ProfileScreenContent()
@@ -130,7 +131,7 @@ fun QuestionsListBottomNavigationBar(
     val items =
         listOf(
             BottomNavItem.Home,
-            BottomNavItem.Play,
+            BottomNavItem.List,
             BottomNavItem.Profile,
         )
     NavigationBar(
