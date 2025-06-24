@@ -12,6 +12,7 @@ import com.nyinyi.dailychallenge.ui.screens.play.PlayScreenContentViewModel
 import com.nyinyi.dailychallenge.ui.screens.play.mcq.MultipleChoiceViewModel
 import com.nyinyi.dailychallenge.ui.screens.play.multiselect.MultipleSelectViewModel
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.QuizScreenViewModel
+import com.nyinyi.dailychallenge.ui.screens.profile.ProfileViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -30,16 +31,19 @@ val appModule =
             QuestionListViewModel(get())
         }
         viewModel {
-            QuizScreenViewModel(get())
+            QuizScreenViewModel(get(), get())
         }
         viewModel {
-            MultipleChoiceViewModel(get())
+            MultipleChoiceViewModel(get(), get())
         }
         viewModel {
-            MultipleSelectViewModel(get())
+            MultipleSelectViewModel(get(), get())
         }
         viewModel {
             PlayScreenContentViewModel(get())
+        }
+        viewModel {
+            ProfileViewModel(get())
         }
     }
 

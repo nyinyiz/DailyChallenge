@@ -73,7 +73,11 @@ fun DailyChallenge1(modifier: Modifier = Modifier) {
                             CardDefaults.cardColors(
                                 containerColor =
                                     when {
-                                        index < 3 -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f)
+                                        index < 3 ->
+                                            MaterialTheme.colorScheme.primaryContainer.copy(
+                                                alpha = 0.7f,
+                                            )
+
                                         else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
                                     },
                             ),

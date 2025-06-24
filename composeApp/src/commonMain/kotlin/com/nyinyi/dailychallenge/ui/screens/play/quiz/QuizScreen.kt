@@ -186,6 +186,8 @@ fun QuizScreen(
                                         if (state.quizList[currentQuestionIndex].correctAnswer) {
                                             incorrectAnswers =
                                                 incorrectAnswers + state.quizList[currentQuestionIndex]
+                                            // Save failed question to user profile
+                                            viewModel.saveFailedQuestion(state.quizList[currentQuestionIndex])
                                         }
                                         currentQuestionIndex++
                                         if (currentQuestionIndex >= state.quizList.size) {
@@ -202,6 +204,8 @@ fun QuizScreen(
                                         if (!state.quizList[currentQuestionIndex].correctAnswer) {
                                             incorrectAnswers =
                                                 incorrectAnswers + state.quizList[currentQuestionIndex]
+                                            // Save failed question to user profile
+                                            viewModel.saveFailedQuestion(state.quizList[currentQuestionIndex])
                                         }
                                         currentQuestionIndex++
                                         if (currentQuestionIndex >= state.quizList.size) {

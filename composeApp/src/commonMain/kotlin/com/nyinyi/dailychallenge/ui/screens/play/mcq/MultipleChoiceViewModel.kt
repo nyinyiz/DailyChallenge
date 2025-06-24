@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.nyinyi.dailychallenge.data.model.MultipleChoiceObj
 import com.nyinyi.dailychallenge.data.model.MultipleChoiceResult
 import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
+import com.nyinyi.dailychallenge.data.repository.UserPreferencesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -47,6 +48,7 @@ sealed class MultipleChoiceUiState {
 
 class MultipleChoiceViewModel(
     private val repository: ChallengesRepository,
+    private val userPreferencesRepository: UserPreferencesRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<MultipleChoiceUiState>(MultipleChoiceUiState.Loading)
     val uiState: StateFlow<MultipleChoiceUiState> = _uiState.asStateFlow()
@@ -84,6 +86,13 @@ class MultipleChoiceViewModel(
         val newAnsweredQuestions =
             currentState.answeredQuestions +
                 (currentState.currentQuestionIndex to selectedAnswer)
+
+        // Save failed question to user profile
+        if (!isCorrect) {
+            viewModelScope.launch {
+                userPreferencesRepository.addFailedMultipleChoiceQuestion(currentQuestion.toString())
+            }
+        }
 
         _uiState.value =
             currentState.copy(
