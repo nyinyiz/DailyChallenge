@@ -1,5 +1,5 @@
 [versions]
-adaptive = "1.2.0-alpha06"
+adaptive = "1.2.0-alpha07"
 agp = "8.7.3"
 android-compileSdk = "35"
 android-minSdk = "24"
