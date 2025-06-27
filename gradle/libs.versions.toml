@@ -22,7 +22,7 @@ lottieCompose = "6.0.0"
 materialIconsCore = "1.7.8"
 materialIconsExtended = "1.7.8"
 materialIconsExtendedVersion = "1.7.3"
-navigationCompose = "2.8.0-alpha10"
+navigationCompose = "2.8.0-alpha13"
 kotlinSerialization = "1.7.3"
 koin-bom = "4.0.0"
 
