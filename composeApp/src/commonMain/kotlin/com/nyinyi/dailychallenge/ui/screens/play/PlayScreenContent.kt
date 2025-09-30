@@ -17,7 +17,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.DropdownMenu
@@ -101,58 +103,65 @@ fun PlayScreenContent(
                 TopSection(viewModel = viewModel)
             }
 
-            AnimatedVisibility(
-                visible = isContentVisible,
-                enter =
-                    scaleIn(
-                        initialScale = 0.8f,
-                        animationSpec =
-                            tween(
-                                durationMillis = 500,
-                                delayMillis = 100,
-                                easing = EaseOutBack,
-                            ),
-                    ) +
-                        fadeIn(
+            Column(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState()),
+            ) {
+                AnimatedVisibility(
+                    visible = isContentVisible,
+                    enter =
+                        scaleIn(
+                            initialScale = 0.8f,
                             animationSpec =
                                 tween(
                                     durationMillis = 500,
                                     delayMillis = 100,
+                                    easing = EaseOutBack,
                                 ),
-                        ),
-            ) {
-                DailyChallengeCard(
-                    onStartChallenge = {
-                        onNavigateToChallenge()
-                    },
-                )
-            }
-
-            AnimatedVisibility(
-                visible = isContentVisible,
-                enter =
-                    slideInVertically(
-                        initialOffsetY = { it / 2 },
-                        animationSpec =
-                            tween(
-                                durationMillis = 500,
-                                delayMillis = 200,
-                                easing = EaseOutBack,
+                        ) +
+                            fadeIn(
+                                animationSpec =
+                                    tween(
+                                        durationMillis = 500,
+                                        delayMillis = 100,
+                                    ),
                             ),
-                    ) +
-                        fadeIn(
+                ) {
+                    DailyChallengeCard(
+                        onStartChallenge = {
+                            onNavigateToChallenge()
+                        },
+                    )
+                }
+
+                AnimatedVisibility(
+                    visible = isContentVisible,
+                    enter =
+                        slideInVertically(
+                            initialOffsetY = { it / 2 },
                             animationSpec =
                                 tween(
                                     durationMillis = 500,
                                     delayMillis = 200,
+                                    easing = EaseOutBack,
                                 ),
-                        ),
-            ) {
-                GameModesSection(
-                    onGameModeSelected = { gameMode ->
-                        onNavigateToGameMode(gameMode)
-                    },
-                )
+                        ) +
+                            fadeIn(
+                                animationSpec =
+                                    tween(
+                                        durationMillis = 500,
+                                        delayMillis = 200,
+                                    ),
+                            ),
+                ) {
+                    GameModesSection(
+                        onGameModeSelected = { gameMode ->
+                            onNavigateToGameMode(gameMode)
+                        },
+                    )
+                }
             }
         }
     }

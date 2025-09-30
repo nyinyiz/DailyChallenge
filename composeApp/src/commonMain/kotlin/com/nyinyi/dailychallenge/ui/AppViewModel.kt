@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
 import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
+import com.nyinyi.dailychallenge.data.repository.UserPreferencesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +12,9 @@ import kotlinx.coroutines.launch
 
 class AppViewModel(
     private val repository: ChallengesRepository,
+    private val userPreferencesRepository: UserPreferencesRepository,
 ) : ViewModel() {
+    val userProfile = userPreferencesRepository.userProfile
     private val _state = MutableStateFlow<AppState>(AppState.Loading)
     val state: StateFlow<AppState> = _state.asStateFlow()
 

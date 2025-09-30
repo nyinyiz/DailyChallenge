@@ -16,6 +16,8 @@ interface UserPreferencesRepository {
 
     suspend fun updateUserEmail(email: String)
 
+    suspend fun updateDarkTheme(darkTheme: Boolean)
+
     suspend fun addFailedQuizCard(questionId: String)
 
     suspend fun addFailedMultipleChoiceQuestion(questionId: String)

@@ -40,6 +40,12 @@ class ProfileViewModel(
         }
     }
 
+    fun updateDarkTheme(darkTheme: Boolean) {
+        viewModelScope.launch {
+            userPreferencesRepository.updateDarkTheme(darkTheme)
+        }
+    }
+
     fun clearFailedExercises() {
         viewModelScope.launch {
             userPreferencesRepository.clearFailedExercises()

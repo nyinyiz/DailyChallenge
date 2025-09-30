@@ -26,7 +26,7 @@ val appModule =
         }
 
         viewModel {
-            AppViewModel(get())
+            AppViewModel(get(), get())
         }
         viewModel {
             QuestionListViewModel(get())

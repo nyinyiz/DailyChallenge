@@ -9,6 +9,7 @@ import kotlinx.serialization.Serializable
 data class UserProfile(
     val name: String = "",
     val email: String = "",
+    val darkTheme: Boolean = true,
     val failedQuizCards: List<String> = emptyList(),
     val failedMultipleChoiceQuestions: List<String> = emptyList(),
     val failedMultipleSelectQuestions: List<String> = emptyList(),

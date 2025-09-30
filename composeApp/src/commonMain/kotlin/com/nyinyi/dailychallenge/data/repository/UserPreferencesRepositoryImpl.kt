@@ -17,6 +17,7 @@ class UserPreferencesRepositoryImpl(
         val SELECTED_CATEGORY = stringPreferencesKey("selected_category")
         val USER_NAME = stringPreferencesKey("user_name")
         val USER_EMAIL = stringPreferencesKey("user_email")
+        val DARK_THEME = androidx.datastore.preferences.core.booleanPreferencesKey("dark_theme")
         val FAILED_QUIZ_CARDS = stringSetPreferencesKey("failed_quiz_cards")
         val FAILED_MULTIPLE_CHOICE = stringSetPreferencesKey("failed_multiple_choice")
         val FAILED_MULTIPLE_SELECT = stringSetPreferencesKey("failed_multiple_select")
@@ -37,6 +38,7 @@ class UserPreferencesRepositoryImpl(
         dataStore.data.map { preferences ->
             val name = preferences[PreferencesKeys.USER_NAME] ?: ""
             val email = preferences[PreferencesKeys.USER_EMAIL] ?: ""
+            val darkTheme = preferences[PreferencesKeys.DARK_THEME] ?: true
             val failedQuizCards =
                 preferences[PreferencesKeys.FAILED_QUIZ_CARDS]?.toList() ?: emptyList()
             val failedMultipleChoice =
@@ -47,6 +49,7 @@ class UserPreferencesRepositoryImpl(
             UserProfile(
                 name = name,
                 email = email,
+                darkTheme = darkTheme,
                 failedQuizCards = failedQuizCards,
                 failedMultipleChoiceQuestions = failedMultipleChoice,
                 failedMultipleSelectQuestions = failedMultipleSelect,
@@ -63,6 +66,7 @@ class UserPreferencesRepositoryImpl(
         dataStore.edit { preferences ->
             preferences[PreferencesKeys.USER_NAME] = userProfile.name
             preferences[PreferencesKeys.USER_EMAIL] = userProfile.email
+            preferences[PreferencesKeys.DARK_THEME] = userProfile.darkTheme
             preferences[PreferencesKeys.FAILED_QUIZ_CARDS] = userProfile.failedQuizCards.toSet()
             preferences[PreferencesKeys.FAILED_MULTIPLE_CHOICE] =
                 userProfile.failedMultipleChoiceQuestions.toSet()
@@ -80,6 +84,12 @@ class UserPreferencesRepositoryImpl(
     override suspend fun updateUserEmail(email: String) {
         dataStore.edit { preferences ->
             preferences[PreferencesKeys.USER_EMAIL] = email
+        }
+    }
+
+    override suspend fun updateDarkTheme(darkTheme: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.DARK_THEME] = darkTheme
         }
     }
 
