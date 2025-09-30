@@ -421,7 +421,7 @@ private fun GameContent(
                     Box(
                         modifier =
                             Modifier
-                                .width(2.dp)
+                                .width(1.dp)
                                 .fillMaxHeight()
                                 .background(
                                     MaterialTheme.colorScheme.outlineVariant,
