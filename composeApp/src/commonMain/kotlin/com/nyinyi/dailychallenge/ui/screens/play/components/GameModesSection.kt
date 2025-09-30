@@ -136,20 +136,14 @@ fun GameModeCard(
     onSelected: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var isPressed by remember { mutableStateOf(false) }
-
     ElevatedCard(
         onClick = {
-            isPressed = true
             onSelected()
         },
         modifier =
             modifier
                 .defaultMinSize(minHeight = 200.dp)
-                .graphicsLayer {
-                    scaleX = if (isPressed) 0.95f else 1f
-                    scaleY = if (isPressed) 0.95f else 1f
-                }.animateContentSize(
+                .animateContentSize(
                     animationSpec =
                         spring(
                             dampingRatio = Spring.DampingRatioMediumBouncy,
@@ -159,8 +153,7 @@ fun GameModeCard(
         shape = RoundedCornerShape(24.dp),
         elevation =
             CardDefaults.elevatedCardElevation(
-                defaultElevation = 8.dp,
-                pressedElevation = 4.dp,
+                0.dp,
             ),
     ) {
         Box(
@@ -268,14 +261,6 @@ fun GameModeCard(
                     }
                 }
             }
-        }
-    }
-
-    // Reset pressed state after animation
-    LaunchedEffect(isPressed) {
-        if (isPressed) {
-            delay(100)
-            isPressed = false
         }
     }
 }
