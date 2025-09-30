@@ -1,0 +1,232 @@
+[
+  {
+    "question": "Match Swift keywords with their purposes",
+    "pairs": [
+      {
+        "left": "let",
+        "right": "Declares constant"
+      },
+      {
+        "left": "var",
+        "right": "Declares variable"
+      },
+      {
+        "left": "guard",
+        "right": "Early exit with condition"
+      },
+      {
+        "left": "defer",
+        "right": "Executes code before scope exit"
+      }
+    ],
+    "difficulty": "Easy",
+    "explanation": "Swift uses specific keywords for variable declaration and control flow management."
+  },
+  {
+    "question": "Match access control levels with their visibility",
+    "pairs": [
+      {
+        "left": "open",
+        "right": "Accessible and subclassable outside module"
+      },
+      {
+        "left": "public",
+        "right": "Accessible outside module"
+      },
+      {
+        "left": "internal",
+        "right": "Accessible within module"
+      },
+      {
+        "left": "private",
+        "right": "Accessible within declaration"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Swift provides fine-grained access control for encapsulation and modularity."
+  },
+  {
+    "question": "Match property wrappers with their uses",
+    "pairs": [
+      {
+        "left": "@Published",
+        "right": "Publishes property changes"
+      },
+      {
+        "left": "@State",
+        "right": "SwiftUI view state"
+      },
+      {
+        "left": "@Binding",
+        "right": "Two-way state binding"
+      },
+      {
+        "left": "@Environment",
+        "right": "Reads environment value"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Property wrappers in Swift add behavior to properties with minimal boilerplate."
+  },
+  {
+    "question": "Match collection types with their characteristics",
+    "pairs": [
+      {
+        "left": "Array",
+        "right": "Ordered collection"
+      },
+      {
+        "left": "Set",
+        "right": "Unordered unique values"
+      },
+      {
+        "left": "Dictionary",
+        "right": "Key-value pairs"
+      },
+      {
+        "left": "Range",
+        "right": "Sequence of values"
+      }
+    ],
+    "difficulty": "Easy",
+    "explanation": "Swift provides various collection types for different data organization needs."
+  },
+  {
+    "question": "Match error handling constructs with their purposes",
+    "pairs": [
+      {
+        "left": "throw",
+        "right": "Throws an error"
+      },
+      {
+        "left": "try",
+        "right": "Calls throwing function"
+      },
+      {
+        "left": "catch",
+        "right": "Handles thrown errors"
+      },
+      {
+        "left": "try?",
+        "right": "Converts error to optional"
+      }
+    ],
+    "difficulty": "Easy",
+    "explanation": "Swift uses explicit error handling for robust and predictable code."
+  },
+  {
+    "question": "Match closure syntax elements with their meanings",
+    "pairs": [
+      {
+        "left": "$0, $1",
+        "right": "Shorthand argument names"
+      },
+      {
+        "left": "in",
+        "right": "Separates parameters from body"
+      },
+      {
+        "left": "-> Type",
+        "right": "Return type declaration"
+      },
+      {
+        "left": "@escaping",
+        "right": "Closure outlives function"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Swift closures are self-contained blocks of functionality with flexible syntax."
+  },
+  {
+    "question": "Match protocol features with their purposes",
+    "pairs": [
+      {
+        "left": "associatedtype",
+        "right": "Generic placeholder in protocol"
+      },
+      {
+        "left": "extension",
+        "right": "Adds functionality to types"
+      },
+      {
+        "left": "protocol inheritance",
+        "right": "Combines multiple protocols"
+      },
+      {
+        "left": "default implementation",
+        "right": "Provides method implementation"
+      }
+    ],
+    "difficulty": "Hard",
+    "explanation": "Swift protocols enable protocol-oriented programming with powerful features."
+  },
+  {
+    "question": "Match optionals handling with their syntax",
+    "pairs": [
+      {
+        "left": "if let",
+        "right": "Optional binding"
+      },
+      {
+        "left": "??",
+        "right": "Nil-coalescing operator"
+      },
+      {
+        "left": "!",
+        "right": "Forced unwrapping"
+      },
+      {
+        "left": "?",
+        "right": "Optional chaining"
+      }
+    ],
+    "difficulty": "Easy",
+    "explanation": "Swift optionals provide type-safe handling of values that may be absent."
+  },
+  {
+    "question": "Match memory management concepts with their behaviors",
+    "pairs": [
+      {
+        "left": "strong",
+        "right": "Increases reference count"
+      },
+      {
+        "left": "weak",
+        "right": "Doesn't increase count, becomes nil"
+      },
+      {
+        "left": "unowned",
+        "right": "Doesn't increase count, never nil"
+      },
+      {
+        "left": "ARC",
+        "right": "Automatic reference counting"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Swift uses ARC for memory management with different reference types to prevent cycles."
+  },
+  {
+    "question": "Match Swift 5.5+ concurrency features with their roles",
+    "pairs": [
+      {
+        "left": "async",
+        "right": "Marks asynchronous function"
+      },
+      {
+        "left": "await",
+        "right": "Suspends until async call completes"
+      },
+      {
+        "left": "Task",
+        "right": "Creates concurrent work unit"
+      },
+      {
+        "left": "actor",
+        "right": "Serializes access to state"
+      }
+    ],
+    "difficulty": "Hard",
+    "explanation": "Swift's structured concurrency provides safe, modern asynchronous programming."
+  }
+]

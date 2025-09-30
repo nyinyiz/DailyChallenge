@@ -1,0 +1,232 @@
+[
+  {
+    "question": "Match Kotlin keywords with their usage",
+    "pairs": [
+      {
+        "left": "val",
+        "right": "Declares read-only property"
+      },
+      {
+        "left": "var",
+        "right": "Declares mutable property"
+      },
+      {
+        "left": "const",
+        "right": "Compile-time constant"
+      },
+      {
+        "left": "lateinit",
+        "right": "Non-null property initialized later"
+      }
+    ],
+    "difficulty": "Easy",
+    "explanation": "These keywords define different types of properties in Kotlin with varying mutability and initialization rules."
+  },
+  {
+    "question": "Match collection operations with their functions",
+    "pairs": [
+      {
+        "left": "map",
+        "right": "Transforms each element"
+      },
+      {
+        "left": "filter",
+        "right": "Selects elements matching predicate"
+      },
+      {
+        "left": "fold",
+        "right": "Accumulates value with initial value"
+      },
+      {
+        "left": "flatMap",
+        "right": "Maps and flattens collections"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Kotlin provides rich collection operations for functional-style data processing."
+  },
+  {
+    "question": "Match scope functions with their characteristics",
+    "pairs": [
+      {
+        "left": "let",
+        "right": "Context object as 'it', returns lambda result"
+      },
+      {
+        "left": "run",
+        "right": "Context object as 'this', returns lambda result"
+      },
+      {
+        "left": "apply",
+        "right": "Context object as 'this', returns object itself"
+      },
+      {
+        "left": "also",
+        "right": "Context object as 'it', returns object itself"
+      }
+    ],
+    "difficulty": "Hard",
+    "explanation": "Scope functions execute a block of code within the context of an object with different context references and return values."
+  },
+  {
+    "question": "Match coroutine builders with their purposes",
+    "pairs": [
+      {
+        "left": "launch",
+        "right": "Fire-and-forget coroutine"
+      },
+      {
+        "left": "async",
+        "right": "Returns Deferred result"
+      },
+      {
+        "left": "runBlocking",
+        "right": "Blocks current thread"
+      },
+      {
+        "left": "withContext",
+        "right": "Switches coroutine context"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Different coroutine builders serve different purposes for asynchronous programming in Kotlin."
+  },
+  {
+    "question": "Match visibility modifiers with their scope",
+    "pairs": [
+      {
+        "left": "public",
+        "right": "Visible everywhere"
+      },
+      {
+        "left": "private",
+        "right": "Visible in same file or class"
+      },
+      {
+        "left": "protected",
+        "right": "Visible in subclasses"
+      },
+      {
+        "left": "internal",
+        "right": "Visible in same module"
+      }
+    ],
+    "difficulty": "Easy",
+    "explanation": "Visibility modifiers control the accessibility of declarations in Kotlin."
+  },
+  {
+    "question": "Match class types with their characteristics",
+    "pairs": [
+      {
+        "left": "data class",
+        "right": "Auto-generates equals, hashCode, toString"
+      },
+      {
+        "left": "sealed class",
+        "right": "Restricted class hierarchy"
+      },
+      {
+        "left": "enum class",
+        "right": "Finite set of values"
+      },
+      {
+        "left": "object",
+        "right": "Singleton instance"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Kotlin provides different class types optimized for specific use cases."
+  },
+  {
+    "question": "Match delegation patterns with examples",
+    "pairs": [
+      {
+        "left": "by lazy",
+        "right": "Lazy initialization"
+      },
+      {
+        "left": "by Delegates.observable",
+        "right": "Property change observer"
+      },
+      {
+        "left": "by Delegates.vetoable",
+        "right": "Conditional property change"
+      },
+      {
+        "left": "class delegation",
+        "right": "Interface implementation forwarding"
+      }
+    ],
+    "difficulty": "Hard",
+    "explanation": "Kotlin's delegation features reduce boilerplate code and enable powerful design patterns."
+  },
+  {
+    "question": "Match null safety operators with their behavior",
+    "pairs": [
+      {
+        "left": "?.",
+        "right": "Safe call operator"
+      },
+      {
+        "left": "!!",
+        "right": "Non-null assertion"
+      },
+      {
+        "left": "?:",
+        "right": "Elvis operator"
+      },
+      {
+        "left": "as?",
+        "right": "Safe cast"
+      }
+    ],
+    "difficulty": "Easy",
+    "explanation": "Kotlin's null safety operators help prevent NullPointerExceptions at compile time."
+  },
+  {
+    "question": "Match functional programming concepts with Kotlin features",
+    "pairs": [
+      {
+        "left": "Higher-order function",
+        "right": "Function that takes or returns function"
+      },
+      {
+        "left": "Lambda",
+        "right": "Anonymous function expression"
+      },
+      {
+        "left": "Extension function",
+        "right": "Adds functions to existing classes"
+      },
+      {
+        "left": "Infix function",
+        "right": "Called without dot notation"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Kotlin supports functional programming paradigms with first-class function support."
+  },
+  {
+    "question": "Match Flow operators with their purposes",
+    "pairs": [
+      {
+        "left": "collect",
+        "right": "Terminal operator to consume flow"
+      },
+      {
+        "left": "flowOn",
+        "right": "Changes context of upstream flow"
+      },
+      {
+        "left": "debounce",
+        "right": "Delays emissions by timeout"
+      },
+      {
+        "left": "combine",
+        "right": "Combines multiple flows"
+      }
+    ],
+    "difficulty": "Hard",
+    "explanation": "Kotlin Flow provides reactive stream processing with various operators for data transformation."
+  }
+]

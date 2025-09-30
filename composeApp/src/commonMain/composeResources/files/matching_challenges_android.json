@@ -1,0 +1,232 @@
+[
+  {
+    "question": "Match Android components with their primary purpose",
+    "pairs": [
+      {
+        "left": "Activity",
+        "right": "Represents a single screen with UI"
+      },
+      {
+        "left": "Service",
+        "right": "Performs long-running background operations"
+      },
+      {
+        "left": "BroadcastReceiver",
+        "right": "Responds to system-wide broadcast announcements"
+      },
+      {
+        "left": "ContentProvider",
+        "right": "Manages shared app data"
+      }
+    ],
+    "difficulty": "Easy",
+    "explanation": "These are the four fundamental components of an Android application, each serving a distinct purpose in the app architecture."
+  },
+  {
+    "question": "Match Jetpack libraries with their functions",
+    "pairs": [
+      {
+        "left": "Room",
+        "right": "Database abstraction layer"
+      },
+      {
+        "left": "Navigation",
+        "right": "Handles app navigation"
+      },
+      {
+        "left": "WorkManager",
+        "right": "Schedules deferrable background tasks"
+      },
+      {
+        "left": "DataStore",
+        "right": "Stores key-value pairs or typed objects"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Android Jetpack provides a collection of libraries that help developers follow best practices and write robust code."
+  },
+  {
+    "question": "Match lifecycle methods with their timing",
+    "pairs": [
+      {
+        "left": "onCreate()",
+        "right": "Called when activity is first created"
+      },
+      {
+        "left": "onStart()",
+        "right": "Called when activity becomes visible"
+      },
+      {
+        "left": "onResume()",
+        "right": "Called when activity starts interacting with user"
+      },
+      {
+        "left": "onPause()",
+        "right": "Called when activity loses focus"
+      }
+    ],
+    "difficulty": "Easy",
+    "explanation": "Understanding the Activity lifecycle is crucial for proper resource management and user experience."
+  },
+  {
+    "question": "Match Compose concepts with their descriptions",
+    "pairs": [
+      {
+        "left": "Composable",
+        "right": "Function that describes UI"
+      },
+      {
+        "left": "Recomposition",
+        "right": "Process of updating UI when state changes"
+      },
+      {
+        "left": "State",
+        "right": "Any value that can change over time"
+      },
+      {
+        "left": "Modifier",
+        "right": "Decorates or adds behavior to composables"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Jetpack Compose uses declarative UI programming with these core concepts for building modern Android apps."
+  },
+  {
+    "question": "Match threading concepts with their purpose",
+    "pairs": [
+      {
+        "left": "Main Thread",
+        "right": "Handles UI operations"
+      },
+      {
+        "left": "Coroutines",
+        "right": "Simplifies asynchronous programming"
+      },
+      {
+        "left": "Dispatcher.IO",
+        "right": "Optimized for I/O operations"
+      },
+      {
+        "left": "Dispatcher.Default",
+        "right": "Optimized for CPU-intensive work"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Proper thread management is essential for responsive Android apps and preventing ANR errors."
+  },
+  {
+    "question": "Match architectural patterns with their characteristics",
+    "pairs": [
+      {
+        "left": "MVVM",
+        "right": "Separates UI from business logic using ViewModel"
+      },
+      {
+        "left": "MVI",
+        "right": "Unidirectional data flow with intents"
+      },
+      {
+        "left": "Repository Pattern",
+        "right": "Abstracts data sources"
+      },
+      {
+        "left": "Clean Architecture",
+        "right": "Organizes code in layers"
+      }
+    ],
+    "difficulty": "Hard",
+    "explanation": "These architectural patterns help organize code for maintainability, testability, and scalability."
+  },
+  {
+    "question": "Match permission types with examples",
+    "pairs": [
+      {
+        "left": "Normal",
+        "right": "INTERNET"
+      },
+      {
+        "left": "Dangerous",
+        "right": "CAMERA"
+      },
+      {
+        "left": "Signature",
+        "right": "Only granted to apps signed with same certificate"
+      },
+      {
+        "left": "Runtime",
+        "right": "Must be requested at runtime"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Android uses different permission levels to protect user privacy and system integrity."
+  },
+  {
+    "question": "Match storage options with their use cases",
+    "pairs": [
+      {
+        "left": "SharedPreferences",
+        "right": "Small key-value pairs"
+      },
+      {
+        "left": "Room Database",
+        "right": "Structured relational data"
+      },
+      {
+        "left": "Internal Storage",
+        "right": "Private app files"
+      },
+      {
+        "left": "External Storage",
+        "right": "Public shared files"
+      }
+    ],
+    "difficulty": "Easy",
+    "explanation": "Android provides various storage options depending on the type and scope of data."
+  },
+  {
+    "question": "Match testing frameworks with their purposes",
+    "pairs": [
+      {
+        "left": "JUnit",
+        "right": "Unit testing framework"
+      },
+      {
+        "left": "Espresso",
+        "right": "UI testing framework"
+      },
+      {
+        "left": "MockK",
+        "right": "Mocking library for Kotlin"
+      },
+      {
+        "left": "Robolectric",
+        "right": "Android framework mocking"
+      }
+    ],
+    "difficulty": "Medium",
+    "explanation": "Different testing frameworks serve different purposes in ensuring app quality and reliability."
+  },
+  {
+    "question": "Match build configuration with their purpose",
+    "pairs": [
+      {
+        "left": "minSdk",
+        "right": "Minimum Android version supported"
+      },
+      {
+        "left": "targetSdk",
+        "right": "Version app is optimized for"
+      },
+      {
+        "left": "compileSdk",
+        "right": "SDK version used to compile app"
+      },
+      {
+        "left": "versionCode",
+        "right": "Internal version number"
+      }
+    ],
+    "difficulty": "Easy",
+    "explanation": "These build configuration values are essential for proper app deployment and compatibility."
+  }
+]
