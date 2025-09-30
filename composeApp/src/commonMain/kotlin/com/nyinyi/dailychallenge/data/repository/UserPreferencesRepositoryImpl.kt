@@ -17,7 +17,9 @@ class UserPreferencesRepositoryImpl(
         val SELECTED_CATEGORY = stringPreferencesKey("selected_category")
         val USER_NAME = stringPreferencesKey("user_name")
         val USER_EMAIL = stringPreferencesKey("user_email")
-        val DARK_THEME = androidx.datastore.preferences.core.booleanPreferencesKey("dark_theme")
+        val DARK_THEME =
+            androidx.datastore.preferences.core
+                .booleanPreferencesKey("dark_theme")
         val FAILED_QUIZ_CARDS = stringSetPreferencesKey("failed_quiz_cards")
         val FAILED_MULTIPLE_CHOICE = stringSetPreferencesKey("failed_multiple_choice")
         val FAILED_MULTIPLE_SELECT = stringSetPreferencesKey("failed_multiple_select")
