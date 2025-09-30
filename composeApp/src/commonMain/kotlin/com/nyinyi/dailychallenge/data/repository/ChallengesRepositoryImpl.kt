@@ -1,6 +1,7 @@
 package com.nyinyi.dailychallenge.data.repository
 
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
+import com.nyinyi.dailychallenge.data.model.MatchingGameObj
 import com.nyinyi.dailychallenge.data.model.MultipleChoiceObj
 import com.nyinyi.dailychallenge.data.model.MultipleSelectObj
 import com.nyinyi.dailychallenge.data.model.QuizCard
@@ -109,6 +110,30 @@ class ChallengesRepositoryImpl(
             allQuestions
                 .shuffled() // Randomly shuffle the list
                 .take(10) // Take first 10 items from shuffled list
+                .also { randomQuestions ->
+                    if (randomQuestions.isEmpty()) {
+                        println("Warning: No questions were loaded")
+                    } else {
+                        println("Successfully loaded ${randomQuestions.size} random questions")
+                    }
+                }
+        } catch (e: Exception) {
+            println("Error loading questions: ${e.message}")
+            emptyList()
+        }
+
+    override suspend fun getMatchingGameChallenges(): List<MatchingGameObj> =
+        try {
+            val category = userPreferencesRepository.selectedCategory.first()
+            val readBytes =
+                Res.readBytes("files/matching_challenges_${category.name.lowercase()}.json")
+            val jsonString = readBytes.decodeToString()
+            val allQuestions: List<MatchingGameObj> = Json.decodeFromString(jsonString)
+
+            // Get 10 random questions
+            allQuestions
+                .shuffled() // Randomly shuffle the list
+                .take(3) // Take first 10 items from shuffled list
                 .also { randomQuestions ->
                     if (randomQuestions.isEmpty()) {
                         println("Warning: No questions were loaded")

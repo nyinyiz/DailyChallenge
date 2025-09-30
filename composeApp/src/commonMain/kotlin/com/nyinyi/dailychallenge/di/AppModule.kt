@@ -9,6 +9,7 @@ import com.nyinyi.dailychallenge.data.repository.UserPreferencesRepositoryImpl
 import com.nyinyi.dailychallenge.ui.AppViewModel
 import com.nyinyi.dailychallenge.ui.screens.list.QuestionListViewModel
 import com.nyinyi.dailychallenge.ui.screens.play.PlayScreenContentViewModel
+import com.nyinyi.dailychallenge.ui.screens.play.matching.MatchingGameViewModel
 import com.nyinyi.dailychallenge.ui.screens.play.mcq.MultipleChoiceViewModel
 import com.nyinyi.dailychallenge.ui.screens.play.multiselect.MultipleSelectViewModel
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.QuizScreenViewModel
@@ -38,6 +39,9 @@ val appModule =
         }
         viewModel {
             MultipleSelectViewModel(get(), get())
+        }
+        viewModel {
+            MatchingGameViewModel(get(), get())
         }
         viewModel {
             PlayScreenContentViewModel(get())

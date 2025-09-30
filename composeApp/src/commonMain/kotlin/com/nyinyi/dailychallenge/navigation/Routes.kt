@@ -19,4 +19,7 @@ sealed interface Routes {
 
     @Serializable
     data object MultipleSelectScreen : Routes
+
+    @Serializable
+    data object MatchingGameScreen : Routes
 }
