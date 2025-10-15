@@ -15,7 +15,7 @@ Daily Challenge is an educational app designed to help developers improve their 
   - **True or False**: Quick yes/no questions to test basic knowledge
   - **Multiple Choice**: Select the correct answer from multiple options
   - **Multiple Select**: Choose all correct answers from a set of options
-  - **Matching Game**: Match related pairs correctly (coming soon)
+  - **Matching Game**: Match related pairs correctly
 - **Category Selection**: Focus on your preferred technology (Android, iOS, Kotlin, Swift)
 - **Daily Challenges**: New coding problems delivered regularly
 - **Cross-Platform**: Same experience across Android, iOS, and Desktop
@@ -104,12 +104,24 @@ Try out the app on your device:
 | **Adaptive UI** | Responsive design across platforms |
 | **Compose Navigation** | Screen navigation |
 
+### Networking
+| Library | Description | Version |
+|---------|-------------|---------|
+| **Ktor Client** | KMP HTTP client for API calls | `2.3.12` |
+| **Content Negotiation** | JSON request/response handling | - |
+| **Platform Engines** | OkHttp (Android), Darwin (iOS), CIO (Desktop) | - |
+
 ### Data Management
 | Library | Description | Version |
 |---------|-------------|---------|
 | **DataStore** | Preferences storage | `1.1.7` |
 | **Kotlinx Serialization** | JSON serialization | `1.7.3` |
 | **Coil** | Image loading and caching | `3.2.0` |
+
+### Data Source
+- **API**: Challenges fetched from `https://nyinyiz.github.io/daily_challenges_data/`
+- **Repository Pattern**: Clean separation between data layer and UI
+- **Error Handling**: Comprehensive network error handling with fallbacks
 
 ### Platform Support
 | Platform | Details |
@@ -134,7 +146,6 @@ Contributions are welcome and appreciated! Help make Daily Challenge better for 
 ### Ways to Contribute
 
 - **Add New Questions**: Expand our collection of challenges in Android, iOS, Kotlin, Swift, or other mobile development topics
-- **Implement Features**: Work on items from our [roadmap](#️-roadmap)
 - **Fix Bugs**: Help squash bugs and improve the app's stability
 - **Improve Documentation**: Enhance the documentation to make it more helpful for users and contributors
 
@@ -163,14 +174,21 @@ Contributions are welcome and appreciated! Help make Daily Challenge better for 
 Thank you for considering contributing to Daily Challenge! Here's how you can add new challenge
 questions.
 
-### JSON File Structure
+### Data Source
 
-Challenge questions are stored in the `composeApp/src/commonMain/composeResources/files` directory.
-There are three types of challenges:
+Challenge questions are fetched from our public API hosted on GitHub Pages:
+- **API Base URL**: `https://nyinyiz.github.io/daily_challenges_data/`
+- **Data Repository**: [github.com/nyinyiz/daily_challenges_data](https://github.com/nyinyiz/daily_challenges_data)
+
+To contribute new questions, please submit pull requests to the data repository.
+
+### Available Challenge Types
 
 1. Daily Challenges: `daily_challenges.json`
 2. True/False Questions: `true_or_false_challenges_[category].json`
 3. Multiple Choice Questions: `multiple_choice_challenges_[category].json`
+4. Multiple Select Questions: `multiple_select_challenges_[category].json`
+5. Matching Game Questions: `matching_challenges_[category].json`
 
 where `[category]` can be: android, ios, kotlin, swift, or flutter
 
@@ -241,12 +259,13 @@ where `[category]` can be: android, ios, kotlin, swift, or flutter
 
 The following features and improvements are planned for future releases:
 
-- **Matching Game Mode**: Implementation of the matching pairs game mode
 - **Web Support**: Complete WebAssembly support with DataStore integration
 - **User Profiles**: Track progress and achievements
 - **Leaderboards**: Compete with other users
+- **Backend API**: Migrate to a dynamic backend with user authentication
 - **More Categories**: Expand to include Flutter, React Native, and other mobile technologies
 - **Push Notifications**: Daily reminders for new challenges
+- **Offline Mode**: Cache questions for offline access
 
 ## 👤 Author
 
