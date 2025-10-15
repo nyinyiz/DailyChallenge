@@ -53,8 +53,7 @@ Daily Challenge is an educational app designed to help developers improve their 
 
 Try out the app on your device:
 
-- [Download Android APK](https://drive.google.com/file/d/1iVbWyTKYXIWb2e-VXF75y62iZJXG3-3m/view?usp=sharing)
-- [Download Mac APP DMG](https://drive.google.com/file/d/1ncy1zSjszQ3zZQ8cXHABDZRgHl4-Jocq/view?usp=sharing)
+- [Download Android APK](https://drive.google.com/file/d/1BmHZNsmH_hfqaPOGbZMzDP1pq04pS-To/view?usp=sharing)
 
 ## 🛠️ Installation & Setup
 
