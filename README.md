@@ -255,18 +255,6 @@ where `[category]` can be: android, ios, kotlin, swift, or flutter
 }
 ```
 
-## 🗺️ Roadmap
-
-The following features and improvements are planned for future releases:
-
-- **Web Support**: Complete WebAssembly support with DataStore integration
-- **User Profiles**: Track progress and achievements
-- **Leaderboards**: Compete with other users
-- **Backend API**: Migrate to a dynamic backend with user authentication
-- **More Categories**: Expand to include Flutter, React Native, and other mobile technologies
-- **Push Notifications**: Daily reminders for new challenges
-- **Offline Mode**: Cache questions for offline access
-
 ## 👤 Author
 
 Created by **Nyi Nyi Zaw** (nyinyizaw.dev@gmail.com)
