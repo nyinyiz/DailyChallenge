@@ -62,6 +62,7 @@ kotlin {
             implementation(libs.androidx.material.icons.core)
             implementation(libs.androidx.material.icons.extended)
             implementation(libs.androidx.adaptive)
+            implementation(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -87,6 +88,12 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.core)
 
+            // Ktor HTTP Client
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.ktor.client.logging)
+
             api(libs.androidx.datastore)
             api(libs.androidx.datastore.preferences)
         }
@@ -96,6 +103,10 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+            implementation(libs.ktor.client.cio)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 }

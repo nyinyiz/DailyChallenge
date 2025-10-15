@@ -5,12 +5,13 @@ import com.nyinyi.dailychallenge.data.model.MatchingGameObj
 import com.nyinyi.dailychallenge.data.model.MultipleChoiceObj
 import com.nyinyi.dailychallenge.data.model.MultipleSelectObj
 import com.nyinyi.dailychallenge.data.model.QuizCard
-import dailychallenge.composeapp.generated.resources.Res
+import com.nyinyi.dailychallenge.data.remote.ChallengesApiService
+import com.nyinyi.dailychallenge.data.remote.getOrDefault
 import kotlinx.coroutines.flow.first
-import kotlinx.serialization.json.Json
 
 class ChallengesRepositoryImpl(
     private val userPreferencesRepository: UserPreferencesRepository,
+    private val apiService: ChallengesApiService,
 ) : ChallengesRepository {
     private val defaultChallenges =
         listOf(
@@ -23,126 +24,68 @@ class ChallengesRepositoryImpl(
             ),
         )
 
-    override suspend fun getDailyChallengeById(id: String): DailyChallengeObj =
-        try {
-            val readBytes = Res.readBytes("files/daily_challenges.json")
-            val jsonString = readBytes.decodeToString()
-            val challenges = Json.decodeFromString<List<DailyChallengeObj>>(jsonString)
+    override suspend fun getDailyChallengeById(id: String): DailyChallengeObj {
+        val result = apiService.getDailyChallenges()
+        val challenges = result.getOrDefault(defaultChallenges)
+
+        return try {
             challenges.first { it.id == id }
         } catch (e: Exception) {
-            println("Error parsing challenges JSON: ${e.message}")
             defaultChallenges.first()
         }
+    }
 
-    override suspend fun getDailyChallenges(): List<DailyChallengeObj> =
-        try {
-            val readBytes = Res.readBytes("files/daily_challenges.json")
-            val jsonString = readBytes.decodeToString()
-            val challenges: List<DailyChallengeObj> = Json.decodeFromString(jsonString)
-            challenges
-        } catch (e: Exception) {
-            println("Error parsing challenges JSON or file not found: ${e.message}")
-            defaultChallenges
-        }
+    override suspend fun getDailyChallenges(): List<DailyChallengeObj> {
+        val result = apiService.getDailyChallenges()
+        return result.getOrDefault(defaultChallenges)
+    }
 
     override suspend fun getRandomChallenges(): DailyChallengeObj {
         val dailyChallenges = getDailyChallenges()
         return dailyChallenges.random()
     }
 
-    override suspend fun getTrueFalseChallenges(): List<QuizCard> =
-        try {
-            val category = userPreferencesRepository.selectedCategory.first()
-            val readBytes =
-                Res.readBytes("files/true_or_false_challenges_${category.name.lowercase()}.json")
-            val jsonString = readBytes.decodeToString()
-            val allQuestions: List<QuizCard> = Json.decodeFromString(jsonString)
+    override suspend fun getTrueFalseChallenges(): List<QuizCard> {
+        val category = userPreferencesRepository.selectedCategory.first()
+        val result = apiService.getTrueFalseChallenges(category.name)
+        val allQuestions = result.getOrDefault(emptyList())
 
-            // Get 10 random questions
-            allQuestions
-                .shuffled() // Randomly shuffle the list
-                .take(10) // Take first 10 items from shuffled list
-                .also { randomQuestions ->
-                    if (randomQuestions.isEmpty()) {
-                        println("Warning: No questions were loaded")
-                    } else {
-                        println("Successfully loaded ${randomQuestions.size} random questions")
-                    }
-                }
-        } catch (e: Exception) {
-            println("Error loading questions: ${e.message}")
-            emptyList()
-        }
+        // Get 10 random questions
+        return allQuestions
+            .shuffled()
+            .take(10)
+    }
 
-    override suspend fun getMultipleChoiceChallenges(): List<MultipleChoiceObj> =
-        try {
-            val category = userPreferencesRepository.selectedCategory.first()
-            val readBytes =
-                Res.readBytes("files/multiple_choice_challenges_${category.name.lowercase()}.json")
-            val jsonString = readBytes.decodeToString()
-            val allQuestions: List<MultipleChoiceObj> = Json.decodeFromString(jsonString)
+    override suspend fun getMultipleChoiceChallenges(): List<MultipleChoiceObj> {
+        val category = userPreferencesRepository.selectedCategory.first()
+        val result = apiService.getMultipleChoiceChallenges(category.name)
+        val allQuestions = result.getOrDefault(emptyList())
 
-            // Get 10 random questions
-            allQuestions
-                .shuffled() // Randomly shuffle the list
-                .take(10) // Take first 10 items from shuffled list
-                .also { randomQuestions ->
-                    if (randomQuestions.isEmpty()) {
-                        println("Warning: No questions were loaded")
-                    } else {
-                        println("Successfully loaded ${randomQuestions.size} random questions")
-                    }
-                }
-        } catch (e: Exception) {
-            println("Error loading questions: ${e.message}")
-            emptyList()
-        }
+        // Get 10 random questions
+        return allQuestions
+            .shuffled()
+            .take(10)
+    }
 
-    override suspend fun getMultipleSelectChallenges(): List<MultipleSelectObj> =
-        try {
-            val category = userPreferencesRepository.selectedCategory.first()
-            val readBytes =
-                Res.readBytes("files/multiple_select_challenges_${category.name.lowercase()}.json")
-            val jsonString = readBytes.decodeToString()
-            val allQuestions: List<MultipleSelectObj> = Json.decodeFromString(jsonString)
+    override suspend fun getMultipleSelectChallenges(): List<MultipleSelectObj> {
+        val category = userPreferencesRepository.selectedCategory.first()
+        val result = apiService.getMultipleSelectChallenges(category.name)
+        val allQuestions = result.getOrDefault(emptyList())
 
-            // Get 10 random questions
-            allQuestions
-                .shuffled() // Randomly shuffle the list
-                .take(10) // Take first 10 items from shuffled list
-                .also { randomQuestions ->
-                    if (randomQuestions.isEmpty()) {
-                        println("Warning: No questions were loaded")
-                    } else {
-                        println("Successfully loaded ${randomQuestions.size} random questions")
-                    }
-                }
-        } catch (e: Exception) {
-            println("Error loading questions: ${e.message}")
-            emptyList()
-        }
+        // Get 10 random questions
+        return allQuestions
+            .shuffled()
+            .take(10)
+    }
 
-    override suspend fun getMatchingGameChallenges(): List<MatchingGameObj> =
-        try {
-            val category = userPreferencesRepository.selectedCategory.first()
-            val readBytes =
-                Res.readBytes("files/matching_challenges_${category.name.lowercase()}.json")
-            val jsonString = readBytes.decodeToString()
-            val allQuestions: List<MatchingGameObj> = Json.decodeFromString(jsonString)
+    override suspend fun getMatchingGameChallenges(): List<MatchingGameObj> {
+        val category = userPreferencesRepository.selectedCategory.first()
+        val result = apiService.getMatchingGameChallenges(category.name)
+        val allQuestions = result.getOrDefault(emptyList())
 
-            // Get 10 random questions
-            allQuestions
-                .shuffled() // Randomly shuffle the list
-                .take(3) // Take first 10 items from shuffled list
-                .also { randomQuestions ->
-                    if (randomQuestions.isEmpty()) {
-                        println("Warning: No questions were loaded")
-                    } else {
-                        println("Successfully loaded ${randomQuestions.size} random questions")
-                    }
-                }
-        } catch (e: Exception) {
-            println("Error loading questions: ${e.message}")
-            emptyList()
-        }
+        // Get 3 random questions
+        return allQuestions
+            .shuffled()
+            .take(3)
+    }
 }
