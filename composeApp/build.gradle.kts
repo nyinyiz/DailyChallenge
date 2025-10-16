@@ -63,6 +63,11 @@ kotlin {
             implementation(libs.androidx.material.icons.extended)
             implementation(libs.androidx.adaptive)
             implementation(libs.ktor.client.okhttp)
+
+            // Glance for widgets
+            implementation(libs.glance.appwidget)
+            implementation(libs.glance.material3)
+            implementation(libs.androidx.work.runtime.ktx)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
