@@ -5,6 +5,7 @@ object ApiConstants {
 
     // Endpoints
     const val DAILY_CHALLENGES = "daily_challenges.json"
+    const val PROGRAMMING_TIPS = "programming_tips.json"
 
     fun getTrueFalseChallengesEndpoint(category: String): String = "true_or_false_challenges_${category.lowercase()}.json"
 

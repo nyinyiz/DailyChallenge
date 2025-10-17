@@ -4,6 +4,7 @@ import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
 import com.nyinyi.dailychallenge.data.model.MatchingGameObj
 import com.nyinyi.dailychallenge.data.model.MultipleChoiceObj
 import com.nyinyi.dailychallenge.data.model.MultipleSelectObj
+import com.nyinyi.dailychallenge.data.model.ProgrammingTip
 import com.nyinyi.dailychallenge.data.model.QuizCard
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -77,6 +78,19 @@ class ChallengesApiService(
                 NetworkResult.Success(challenges)
             } else {
                 NetworkResult.Error("Failed to fetch matching game challenges: ${response.status.description}")
+            }
+        }
+
+    suspend fun getProgrammingTips(): NetworkResult<List<ProgrammingTip>> =
+        safeApiCall {
+            val url = ApiConstants.BASE_URL + ApiConstants.PROGRAMMING_TIPS
+            val response: HttpResponse = httpClient.get(url)
+
+            if (response.status.isSuccess()) {
+                val tips: List<ProgrammingTip> = response.body()
+                NetworkResult.Success(tips)
+            } else {
+                NetworkResult.Error("Failed to fetch programming tips: ${response.status.description}")
             }
         }
 

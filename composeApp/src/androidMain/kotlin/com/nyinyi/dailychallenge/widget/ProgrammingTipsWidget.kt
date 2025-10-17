@@ -27,14 +27,40 @@ import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import com.nyinyi.dailychallenge.MainActivity
 import com.nyinyi.dailychallenge.data.model.ProgrammingTip
-import com.nyinyi.dailychallenge.widget.data.TipsRepository
+import com.nyinyi.dailychallenge.data.remote.ChallengesApiService
+import com.nyinyi.dailychallenge.data.repository.TipsRepository
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 
 class ProgrammingTipsWidget : GlanceAppWidget() {
+    private val httpClient by lazy {
+        HttpClient {
+            install(ContentNegotiation) {
+                json(
+                    Json {
+                        prettyPrint = true
+                        isLenient = true
+                        ignoreUnknownKeys = true
+                    },
+                )
+            }
+        }
+    }
+
+    private val apiService by lazy {
+        ChallengesApiService(httpClient)
+    }
+
+    private val repository by lazy {
+        TipsRepository(apiService)
+    }
+
     override suspend fun provideGlance(
         context: Context,
         id: GlanceId,
     ) {
-        val repository = TipsRepository(context)
         val tip = repository.getRandomTip()
 
         provideContent {

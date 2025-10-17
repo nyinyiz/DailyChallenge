@@ -1,28 +1,18 @@
-package com.nyinyi.dailychallenge.widget.data
+package com.nyinyi.dailychallenge.data.repository
 
-import android.content.Context
 import com.nyinyi.dailychallenge.data.model.ProgrammingTip
-import dailychallenge.composeapp.generated.resources.Res
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
+import com.nyinyi.dailychallenge.data.remote.ChallengesApiService
+import com.nyinyi.dailychallenge.data.remote.NetworkResult
 
 class TipsRepository(
-    private val context: Context,
+    private val apiService: ChallengesApiService,
 ) {
-    private val json =
-        Json {
-            ignoreUnknownKeys = true
-            isLenient = true
-        }
-
     suspend fun getAllTips(): List<ProgrammingTip> =
-        withContext(Dispatchers.IO) {
-            try {
-                val readBytes = Res.readBytes("files/programming_tips.json")
-                val jsonString = readBytes.decodeToString()
-                json.decodeFromString<List<ProgrammingTip>>(jsonString)
-            } catch (e: Exception) {
+        when (val result = apiService.getProgrammingTips()) {
+            is NetworkResult.Success -> result.data
+            is NetworkResult.NetworkError,
+            is NetworkResult.Error,
+            -> {
                 listOf(
                     ProgrammingTip(
                         id = "fallback",
