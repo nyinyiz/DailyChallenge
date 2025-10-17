@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "category": "Programming Knowledge",
+    "tip": "DRY Principle: Don't Repeat Yourself. Extract common code into reusable functions or classes."
+  },
+  {
+    "id": "2",
+    "category": "System Design",
+    "tip": "Scale horizontally by adding more servers rather than vertically upgrading a single server."
+  },
+  {
+    "id": "3",
+    "category": "Best Practices",
+    "tip": "Write tests first (TDD). It helps design better APIs and catches bugs early."
+  },
+  {
+    "id": "4",
+    "category": "Performance",
+    "tip": "Lazy loading: Load resources only when needed to improve app startup time."
+  },
+  {
+    "id": "5",
+    "category": "Security",
+    "tip": "Never store sensitive data like passwords or API keys in plain text or version control."
+  },
+  {
+    "id": "6",
+    "category": "Android",
+    "tip": "Use ViewModel to survive configuration changes and separate UI logic from business logic."
+  },
+  {
+    "id": "7",
+    "category": "System Design",
+    "tip": "Use caching strategically: Cache at multiple layers (client, CDN, server) for best performance."
+  },
+  {
+    "id": "8",
+    "category": "Code Quality",
+    "tip": "Keep functions small and focused. Each function should do one thing and do it well."
+  },
+  {
+    "id": "9",
+    "category": "Architecture",
+    "tip": "SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion."
+  },
+  {
+    "id": "10",
+    "category": "Database",
+    "tip": "Index your database columns that are frequently used in WHERE clauses for faster queries."
+  },
+  {
+    "id": "11",
+    "category": "Kotlin",
+    "tip": "Use sealed classes for representing restricted class hierarchies and exhaustive when statements."
+  },
+  {
+    "id": "12",
+    "category": "System Design",
+    "tip": "Implement rate limiting to protect your API from abuse and ensure fair resource usage."
+  },
+  {
+    "id": "13",
+    "category": "Git",
+    "tip": "Write meaningful commit messages: Start with a verb, keep it concise, explain the 'why' not the 'what'."
+  },
+  {
+    "id": "14",
+    "category": "Performance",
+    "tip": "Avoid premature optimization. Profile first, then optimize the actual bottlenecks."
+  },
+  {
+    "id": "15",
+    "category": "Android",
+    "tip": "Use Jetpack Compose for modern UI development with declarative syntax and less boilerplate."
+  },
+  {
+    "id": "16",
+    "category": "API Design",
+    "tip": "Version your APIs from day one. Use URL versioning (/v1/users) or header versioning."
+  },
+  {
+    "id": "17",
+    "category": "Clean Code",
+    "tip": "Use meaningful variable names. Code is read more often than written—make it readable."
+  },
+  {
+    "id": "18",
+    "category": "System Design",
+    "tip": "Use message queues for asynchronous processing and decoupling system components."
+  },
+  {
+    "id": "19",
+    "category": "Testing",
+    "tip": "Follow the testing pyramid: More unit tests, fewer integration tests, even fewer UI tests."
+  },
+  {
+    "id": "20",
+    "category": "Concurrency",
+    "tip": "Use Kotlin Coroutines for asynchronous programming—simpler and more readable than callbacks."
+  }
+]

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DailyChallenge</string>
+    <string name="widget_description">Quick programming tips and best practices. Updates every hour.</string>
 </resources>
