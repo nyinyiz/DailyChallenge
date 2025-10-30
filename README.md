@@ -1,25 +1,12 @@
-<img src="screenshots/app_icon.png" alt="App Icon" width="80"> 
+<img src="screenshots/app_icon.png" alt="App Icon" width="80">
 
-### Daily Challenge
+# Daily Challenge
 
-A multiplatform app to browse and solve daily coding challenges for mobile developers. Built with Kotlin Multiplatform and
-Compose for Android, iOS, Desktop, and Web.
+A Kotlin Multiplatform educational app that helps developers improve their programming skills through daily coding challenges and interactive quizzes. Built with Jetpack Compose Multiplatform for Android, iOS, Desktop, and Web.
 
-## 🚀 Overview
+## Overview
 
-Daily Challenge is an educational app designed to help developers improve their programming skills through daily coding challenges and quizzes. The app focuses on mobile development topics including Android, iOS, Kotlin, and Swift, offering various interactive game modes to make learning fun and engaging.
-
-## ✨ Features
-
-- **Multiple Game Modes**: Test your knowledge with different quiz formats
-  - **True or False**: Quick yes/no questions to test basic knowledge
-  - **Multiple Choice**: Select the correct answer from multiple options
-  - **Multiple Select**: Choose all correct answers from a set of options
-  - **Matching Game**: Match related pairs correctly
-- **Category Selection**: Focus on your preferred technology (Android, iOS, Kotlin, Swift)
-- **Daily Challenges**: New coding problems delivered regularly
-- **Cross-Platform**: Same experience across Android, iOS, and Desktop
-- **Dark/Light Theme**: Choose your preferred visual style
+Daily Challenge offers various interactive game modes to make learning mobile development fun and engaging. Focus on Android, iOS, Kotlin, Swift, or Flutter topics through multiple quiz formats.
 
 ## Screenshots
 
@@ -49,215 +36,73 @@ Daily Challenge is an educational app designed to help developers improve their 
 
 ---
 
-## 📱 Download for Testing
-
-Try out the app on your device:
+## Download for Testing
 
 - [Download Android APK](https://drive.google.com/file/d/1BmHZNsmH_hfqaPOGbZMzDP1pq04pS-To/view?usp=sharing)
 
-## 🛠️ Installation & Setup
+---
 
-### Prerequisites
-- [Android Studio Arctic Fox](https://developer.android.com/studio) or newer
-- [Kotlin](https://kotlinlang.org/docs/getting-started.html) 1.9.0+
-- [Java JDK](https://www.oracle.com/java/technologies/javase-downloads.html) 17+
-- [Xcode](https://developer.apple.com/xcode/) 14+ (for iOS development)
+## Documentation
 
-### Building the Project
+Comprehensive documentation is organized into separate guides for easy navigation:
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/nyinyiz/DailyChallenge.git
-   cd DailyChallenge
-   ```
-
-2. Open the project in Android Studio
-
-3. Build and run for your target platform:
-   - **Android**: Select an Android device/emulator and click Run
-   - **iOS**: Run the `iosApp` configuration (requires macOS with Xcode)
-   - **Desktop**: Run the `desktopApp` configuration
+- **[Project Introduction](docs/PROJECT_INTRO.md)** - Learn about the project, its goals, and what it offers
+- **[Architecture Guide](docs/ARCHITECTURE.md)** - Understand the app's architecture, design patterns, and code structure
+- **[Tech Stack](docs/TECH_STACK.md)** - Detailed information about technologies, libraries, and frameworks used
+- **[Features](docs/FEATURES.md)** - Complete guide to all app features and game modes
+- **[Setup & Installation](docs/SETUP.md)** - Get started with development and build instructions
+- **[API Reference](docs/API_REFERENCE.md)** - API endpoints, data formats, and integration details
+- **[Contributing Guidelines](docs/CONTRIBUTING.md)** - How to contribute to the project
 
 ---
 
-## 🔧 Tech Stack
+## Quick Start
 
-### Core Technologies
-| Technology | Description | Version |
-|------------|-------------|---------|
-| **Kotlin Multiplatform (KMP)** | Cross-platform development | `2.1.21` |
-| **Jetpack Compose Multiplatform** | UI toolkit | `1.8.1` |
-| **Compose Hot Reload** | Development workflow enhancement | - |
+```bash
+# Clone the repository
+git clone https://github.com/nyinyiz/DailyChallenge.git
+cd DailyChallenge
 
-### Architecture & Design Patterns
-| Pattern | Description | Version |
-|---------|-------------|---------|
-| **MVVM Architecture** | Using `ViewModel` and state management | - |
-| **Navigation Component** | Jetpack Navigation Compose for routing | - |
-| **Koin** | Dependency injection | `4.0.0` |
+# Open in Android Studio and run
+```
 
-### UI Framework
-| Component | Description |
-|-----------|-------------|
-| **Compose Material 3** | Modern UI components |
-| **Adaptive UI** | Responsive design across platforms |
-| **Compose Navigation** | Screen navigation |
-
-### Networking
-| Library | Description | Version |
-|---------|-------------|---------|
-| **Ktor Client** | KMP HTTP client for API calls | `2.3.12` |
-| **Content Negotiation** | JSON request/response handling | - |
-| **Platform Engines** | OkHttp (Android), Darwin (iOS), CIO (Desktop) | - |
-
-### Data Management
-| Library | Description | Version |
-|---------|-------------|---------|
-| **DataStore** | Preferences storage | `1.1.7` |
-| **Kotlinx Serialization** | JSON serialization | `1.7.3` |
-| **Coil** | Image loading and caching | `3.2.0` |
-
-### Data Source
-- **API**: Challenges fetched from `https://nyinyiz.github.io/daily_challenges_data/`
-- **Repository Pattern**: Clean separation between data layer and UI
-- **Error Handling**: Comprehensive network error handling with fallbacks
-
-### Platform Support
-| Platform | Details |
-|----------|---------|
-| **Android** | Min SDK `24`, Target SDK `35` |
-| **iOS** | Native support via KMP |
-| **Desktop** | JVM-based desktop application |
-| **Web** | Configured for WebAssembly *(currently commented out, looking for DataStore solution)* |
-
-### Other Libraries
-| Library | Description | Version |
-|---------|-------------|---------|
-| **Material Icons Extended** | UI icons | - |
-| **Coroutines** | Asynchronous programming | `1.10.2` |
+See the [Setup Guide](docs/SETUP.md) for detailed instructions.
 
 ---
 
-## 👥 Contributing
+## Key Features
 
-Contributions are welcome and appreciated! Help make Daily Challenge better for everyone.
+- Multiple Game Modes (True/False, MCQ, Multiple Select, Matching)
+- Cross-Platform Support (Android, iOS, Desktop)
+- Category-Specific Challenges (Android, iOS, Kotlin, Swift, Flutter)
+- Daily Programming Tips Widget
+- Dark/Light Theme Support
+- Offline Support with Default Data
 
-### Ways to Contribute
+---
 
-- **Add New Questions**: Expand our collection of challenges in Android, iOS, Kotlin, Swift, or other mobile development topics
-- **Fix Bugs**: Help squash bugs and improve the app's stability
-- **Improve Documentation**: Enhance the documentation to make it more helpful for users and contributors
+## Tech Highlights
 
-### Contribution Process
+- **Kotlin Multiplatform** (2.2.20) with **Jetpack Compose Multiplatform** (1.9.1)
+- **MVVM + Clean Architecture** with **Koin DI**
+- **Ktor Client** for networking
+- **Material 3 Design System**
+- **DataStore** for preferences
 
-1. **Fork** the repository
-2. **Clone** your fork:
-   ```sh
-   git clone https://github.com/nyinyiz/DailyChallenge.git
-   ```
-3. **Create a new branch** for your feature or fix:
-   ```sh
-   git checkout -b my-new-feature
-   ```
-4. **Make your changes** and test them thoroughly
-5. **Commit** and **push** your changes:
-   ```sh
-   git add .
-   git commit -m "Add feature: [description]"
-   git push origin my-new-feature
-   ```
-6. **Open a Pull Request** on GitHub with a clear description of your changes
+See the [Tech Stack Guide](docs/TECH_STACK.md) for complete details.
 
-## Contributing Challenge Questions
+---
 
-Thank you for considering contributing to Daily Challenge! Here's how you can add new challenge
-questions.
+## Contributing
 
-### Data Source
+We welcome contributions! Whether you want to add new challenges, fix bugs, or improve documentation, check out our [Contributing Guidelines](docs/CONTRIBUTING.md).
 
-Challenge questions are fetched from our public API hosted on GitHub Pages:
-- **API Base URL**: `https://nyinyiz.github.io/daily_challenges_data/`
-- **Data Repository**: [github.com/nyinyiz/daily_challenges_data](https://github.com/nyinyiz/daily_challenges_data)
+---
 
-To contribute new questions, please submit pull requests to the data repository.
-
-### Available Challenge Types
-
-1. Daily Challenges: `daily_challenges.json`
-2. True/False Questions: `true_or_false_challenges_[category].json`
-3. Multiple Choice Questions: `multiple_choice_challenges_[category].json`
-4. Multiple Select Questions: `multiple_select_challenges_[category].json`
-5. Matching Game Questions: `matching_challenges_[category].json`
-
-where `[category]` can be: android, ios, kotlin, swift, or flutter
-
-### JSON Format Examples
-
-#### Daily Challenge Format
-
-```json
-{
-  "id": "unique_id",
-  "difficulty": "Easy|Medium|Hard",
-  "question": "Your question text here",
-  "questionCode": "Code snippet for the question (optional)",
-  "answerCode": "Solution code snippet"
-}
-```
-
-#### True/False Challenge Format
-
-```json
-{
-  "id": "unique_id",
-  "question": "Your question text here",
-  "correctAnswer": "true|false",
-  "explanation": "Explanation text",
-  "difficulty": "Easy|Medium|Hard"
-}
-```
-
-#### Multiple Choice Challenge Format
-
-```json
-{
-  "question": "Your multiple choice question",
-  "options": [
-    "Option A",
-    "Option B",
-    "Option C",
-    "Option D"
-  ],
-  "correctAnswer": "Option A",
-  "difficulty": "Easy|Medium|Hard",
-  "explanation": "Explanation for the correct answer"
-}
-```
-
-#### Multiple Select Challenge Format
-
-```json
-{
-  "question": "Your multiple select question",
-  "options": [
-    "Option A",
-    "Option B",
-    "Option C",
-    "Option D"
-  ],
-  "correctAnswers": [
-    "Option A",
-    "Option C"
-  ],
-  "difficulty": "Easy|Medium|Hard",
-  "explanation": "Explanation for the correct answers"
-}
-```
-
-## 👤 Author
+## Author
 
 Created by **Nyi Nyi Zaw** (nyinyizaw.dev@gmail.com)
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
