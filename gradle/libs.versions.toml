@@ -1,6 +1,6 @@
 [versions]
 agp = "8.11.2"
-adaptive = "1.2.0-rc01"
+adaptive = "1.2.0"
 android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "35"
