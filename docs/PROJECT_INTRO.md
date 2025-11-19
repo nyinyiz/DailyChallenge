@@ -31,16 +31,13 @@ Daily Challenge addresses these challenges by offering:
 
 ## Target Audience
 
-### Primary Users
-- **Mobile Developers** (beginner to intermediate) looking to sharpen their skills
-- **Students** learning mobile development in academic settings
-- **Career Switchers** transitioning into mobile development
-- **Interview Prep** developers preparing for technical interviews
-
-### Secondary Users
-- **Educators** looking for teaching resources
-- **Tech Communities** seeking interactive learning tools
-- **Self-learners** building mobile development knowledge
+| User Type | Description |
+| :--- | :--- |
+| **👩‍💻 Mobile Developers** | Beginner to intermediate devs sharpening skills |
+| **🎓 Students** | Academic learners |
+| **🔄 Career Switchers** | Transitioning into mobile dev |
+| **💼 Interview Prep** | Preparing for technical interviews |
+| **🏫 Educators** | Looking for teaching resources |
 
 ## Core Philosophy
 
@@ -61,32 +58,13 @@ Knowledge should be accessible anywhere. Our Kotlin Multiplatform approach ensur
 
 ## Key Differentiators
 
-### What Makes Daily Challenge Unique?
-
-1. **True Multiplatform Experience**
-   - Not just responsive design, but native performance on Android, iOS, and Desktop
-   - Single codebase with platform-specific optimizations
-
-2. **Multiple Learning Modalities**
-   - True/False: Quick knowledge checks
-   - Multiple Choice: Deeper concept understanding
-   - Multiple Select: Complex scenario handling
-   - Matching Game: Relationship and pattern recognition
-
-3. **Category-Focused Learning**
-   - Specialized tracks for different technologies
-   - Ability to focus on your primary stack
-   - Cross-pollination of concepts
-
-4. **Offline-First Design**
-   - Works without internet connection
-   - Fallback data ensures continuous learning
-   - Sync when connected
-
-5. **Open Source & Extensible**
-   - MIT licensed for community contribution
-   - Separated data repository for easy content updates
-   - Clear contribution guidelines
+| Feature | Benefit |
+| :--- | :--- |
+| **🚀 True Multiplatform** | Native performance on Android, iOS, Desktop |
+| **🎮 Multiple Modalities** | True/False, MCQ, Multi-Select, Matching |
+| **🎯 Category Focus** | Specialized tracks for Android, iOS, Kotlin, etc. |
+| **📶 Offline First** | Works without internet, syncs when online |
+| **🔓 Open Source** | MIT licensed, community-driven |
 
 ## Project Goals
 

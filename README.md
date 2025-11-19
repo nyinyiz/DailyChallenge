@@ -1,108 +1,74 @@
-<img src="screenshots/app_icon.png" alt="App Icon" width="80">
-
-# Daily Challenge
-
-A Kotlin Multiplatform educational app that helps developers improve their programming skills through daily coding challenges and interactive quizzes. Built with Jetpack Compose Multiplatform for Android, iOS, Desktop, and Web.
-
-## Overview
-
-Daily Challenge offers various interactive game modes to make learning mobile development fun and engaging. Focus on Android, iOS, Kotlin, Swift, or Flutter topics through multiple quiz formats.
-
-## Screenshots
-
-### Android Screenshots
-
 <div align="center">
-  <img src="screenshots/Android1.png" alt="Android Screenshot 1" width="200">
-  <img src="screenshots/Android2.png" alt="Android Screenshot 2" width="200">
-  <img src="screenshots/Android3.png" alt="Android Screenshot 3" width="200">
+  <img src="screenshots/app_icon.png" alt="App Icon" width="120">
+  <h1>Daily Challenge</h1>
+  <p>
+    <a href="https://kotlinlang.org"><img src="https://img.shields.io/badge/Kotlin-2.0.20-purple?style=flat&logo=kotlin" alt="Kotlin"></a>
+    <a href="https://www.jetbrains.com/lp/compose-multiplatform/"><img src="https://img.shields.io/badge/Compose%20Multiplatform-1.7.0-blue?style=flat&logo=jetpackcompose" alt="Compose Multiplatform"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=flat" alt="License"></a>
+  </p>
+  <p><strong>Master Mobile Development with Daily Coding Challenges</strong></p>
 </div>
 
-### iOS Screenshots
+## 🚀 Overview
+
+**Daily Challenge** is a Kotlin Multiplatform educational app designed to gamify learning for Android, iOS, and Desktop developers.
+
+| 🤖 Android | 🍎 iOS | 🖥️ Desktop |
+| :---: | :---: | :---: |
+| Compose Multiplatform | Compose Multiplatform | Compose Multiplatform |
+
+## ✨ Key Features
+
+| Feature | Description |
+| :--- | :--- |
+| **🎮 Game Modes** | True/False, MCQ, Multi-Select, Matching |
+| **📚 Categories** | Android, iOS, Kotlin, Swift, Flutter |
+| **🔥 Daily Challenges** | Complex coding problems with solutions |
+| **🌙 Theming** | Dark/Light mode support |
+| **📶 Offline First** | Learn anywhere, anytime |
+
+## 📸 Screenshots
 
 <div align="center">
-  <img src="screenshots/ios1.png" alt="iOS Screenshot 1" width="200">
-  <img src="screenshots/ios2.png" alt="iOS Screenshot 2" width="200">
-  <img src="screenshots/ios3.png" alt="iOS Screenshot 3" width="200">
+  <img src="screenshots/Android1.png" width="200" alt="Android">
+  <img src="screenshots/ios1.png" width="200" alt="iOS">
+  <img src="screenshots/desktop1.png" width="250" alt="Desktop">
 </div>
 
-### Desktop Screenshots
+## 🏗️ Architecture
 
-<div align="center">
-  <img src="screenshots/desktop1.png" alt="Desktop Screenshot 1" width="250">
-  <img src="screenshots/desktop2.png" alt="Desktop Screenshot 2" width="250">
-  <img src="screenshots/desktop3.png" alt="Desktop Screenshot 3" width="250">
-</div>
-
----
-
-## Download for Testing
-
-- [Download Android APK](https://drive.google.com/file/d/1BmHZNsmH_hfqaPOGbZMzDP1pq04pS-To/view?usp=sharing)
-
----
-
-## Documentation
-
-Comprehensive documentation is organized into separate guides for easy navigation:
-
-- **[Project Introduction](docs/PROJECT_INTRO.md)** - Learn about the project, its goals, and what it offers
-- **[Architecture Guide](docs/ARCHITECTURE.md)** - Understand the app's architecture, design patterns, and code structure
-- **[Tech Stack](docs/TECH_STACK.md)** - Detailed information about technologies, libraries, and frameworks used
-- **[Features](docs/FEATURES.md)** - Complete guide to all app features and game modes
-- **[Setup & Installation](docs/SETUP.md)** - Get started with development and build instructions
-- **[API Reference](docs/API_REFERENCE.md)** - API endpoints, data formats, and integration details
-- **[Contributing Guidelines](docs/CONTRIBUTING.md)** - How to contribute to the project
-
----
-
-## Quick Start
-
-```bash
-# Clone the repository
-git clone https://github.com/nyinyiz/DailyChallenge.git
-cd DailyChallenge
-
-# Open in Android Studio and run
+```mermaid
+graph TD
+    User[User Action] --> UI[Compose UI]
+    UI --> VM[ViewModel]
+    VM --> Repo[Repository]
+    Repo --> Remote[API Service]
+    Repo --> Local[DataStore/Cache]
 ```
 
-See the [Setup Guide](docs/SETUP.md) for detailed instructions.
+## 📚 Documentation
 
----
+| Guide | Description |
+| :--- | :--- |
+| [**Project Intro**](docs/PROJECT_INTRO.md) | Goals, mission, and vision |
+| [**Architecture**](docs/ARCHITECTURE.md) | MVVM, Clean Architecture, Koin |
+| [**Tech Stack**](docs/TECH_STACK.md) | Libraries and tools used |
+| [**Features**](docs/FEATURES.md) | Detailed feature breakdown |
+| [**Setup**](docs/SETUP.md) | Installation and build guide |
+| [**API Reference**](docs/API_REFERENCE.md) | API endpoints and data formats |
 
-## Key Features
+## ⚡ Quick Start
 
-- Multiple Game Modes (True/False, MCQ, Multiple Select, Matching)
-- Cross-Platform Support (Android, iOS, Desktop)
-- Category-Specific Challenges (Android, iOS, Kotlin, Swift, Flutter)
-- Daily Programming Tips Widget
-- Dark/Light Theme Support
-- Offline Support with Default Data
+```bash
+git clone https://github.com/nyinyiz/DailyChallenge.git
+cd DailyChallenge
+./gradlew composeApp:run
+```
 
----
+## 🤝 Contributing
 
-## Tech Highlights
+Contributions are welcome! See [CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
-- **Kotlin Multiplatform** (2.2.20) with **Jetpack Compose Multiplatform** (1.9.1)
-- **MVVM + Clean Architecture** with **Koin DI**
-- **Ktor Client** for networking
-- **Material 3 Design System**
-- **DataStore** for preferences
+## 📄 License
 
-See the [Tech Stack Guide](docs/TECH_STACK.md) for complete details.
-
----
-
-## Contributing
-
-We welcome contributions! Whether you want to add new challenges, fix bugs, or improve documentation, check out our [Contributing Guidelines](docs/CONTRIBUTING.md).
-
----
-
-## Author
-
-Created by **Nyi Nyi Zaw** (nyinyizaw.dev@gmail.com)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [MIT License](LICENSE).
