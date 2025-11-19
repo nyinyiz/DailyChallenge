@@ -26,14 +26,14 @@ Daily Challenge offers multiple interactive ways to learn and practice mobile de
 ### Core Features at a Glance
 
 | Feature | Description | Platforms |
-|---------|-------------|-----------|
-| Multiple Game Modes | 4 different quiz formats | All |
-| Category Selection | Focus on specific technologies | All |
-| Daily Challenges | Detailed coding problems | All |
-| Dark/Light Theme | Customizable appearance | All |
-| Programming Tips Widget | Hourly updated tips | Android |
-| Offline Support | Works without internet | All |
-| Progress Tracking | Track your learning journey | All |
+| :--- | :--- | :---: |
+| **🎮 Game Modes** | 4 different quiz formats | 🤖 🍎 🖥️ |
+| **📚 Categories** | Focus on specific technologies | 🤖 🍎 🖥️ |
+| **🔥 Daily Challenges** | Detailed coding problems | 🤖 🍎 🖥️ |
+| **🌙 Theming** | Customizable appearance | 🤖 🍎 🖥️ |
+| **💡 Tips Widget** | Hourly updated tips | 🤖 |
+| **📶 Offline Support** | Works without internet | 🤖 🍎 🖥️ |
+| **📈 Progress** | Track your learning journey | 🤖 🍎 🖥️ |
 
 ---
 
@@ -295,12 +295,12 @@ fun MatchingGame(
 Daily Challenge supports five technology categories:
 
 | Category | Icon | Focus Area | Question Count |
-|----------|------|------------|----------------|
-| Android | 🤖 | Android development | 100+ |
-| iOS | 🍎 | iOS development | 80+ |
-| Kotlin | 🎯 | Kotlin language | 120+ |
-| Swift | 🧡 | Swift language | 80+ |
-| Flutter | 💙 | Flutter framework | 60+ |
+| :--- | :---: | :--- | :---: |
+| **Android** | 🤖 | Android development | 100+ |
+| **iOS** | 🍎 | iOS development | 80+ |
+| **Kotlin** | 🎯 | Kotlin language | 120+ |
+| **Swift** | 🧡 | Swift language | 80+ |
+| **Flutter** | 💙 | Flutter framework | 60+ |
 
 ### Category Selection
 

@@ -60,13 +60,13 @@ Daily Challenge leverages modern, production-ready technologies to deliver a hig
 **Compose Libraries:**
 
 | Library | Version | Purpose |
-|---------|---------|---------|
-| `compose.ui` | 1.9.1 | Core UI components |
-| `compose.foundation` | 1.9.1 | Basic building blocks |
-| `compose.material3` | 1.9.1 | Material Design 3 |
-| `compose.components.resources` | 1.9.1 | Resource management |
-| `compose-navigation` | 2.9.1 | Screen navigation |
-| `compose.material:material-icons-extended` | 1.7.8 | Extended icon set |
+| :--- | :---: | :--- |
+| **`compose.ui`** | 1.9.1 | Core UI components |
+| **`compose.foundation`** | 1.9.1 | Basic building blocks |
+| **`compose.material3`** | 1.9.1 | Material Design 3 |
+| **`compose.components.resources`** | 1.9.1 | Resource management |
+| **`compose-navigation`** | 2.9.1 | Screen navigation |
+| **`material-icons-extended`** | 1.7.8 | Extended icon set |
 
 ---
 
@@ -186,10 +186,10 @@ fun QuizScreen() {
 **Platform Engines:**
 
 | Platform | Engine | Library |
-|----------|--------|---------|
-| Android | OkHttp | `ktor-client-okhttp` |
-| iOS | Darwin | `ktor-client-darwin` |
-| Desktop | CIO | `ktor-client-cio` |
+| :--- | :--- | :--- |
+| **🤖 Android** | OkHttp | `ktor-client-okhttp` |
+| **🍎 iOS** | Darwin | `ktor-client-darwin` |
+| **🖥️ Desktop** | CIO | `ktor-client-cio` |
 
 **Client Configuration:**
 ```kotlin

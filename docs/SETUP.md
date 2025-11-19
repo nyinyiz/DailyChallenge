@@ -616,12 +616,13 @@ Recommended settings:
 
 ### Keyboard Shortcuts
 
-| Action | Windows/Linux | macOS |
-|--------|--------------|-------|
-| Build | Ctrl+F9 | Cmd+F9 |
-| Run | Shift+F10 | Ctrl+R |
-| Debug | Shift+F9 | Ctrl+D |
-| Reformat Code | Ctrl+Alt+L | Cmd+Opt+L |
+| Acti| Tool | Minimum Version | Purpose |
+| :--- | :---: | :--- |
+| **🤖 Android Studio** | Ladybug 2024.2.2 | IDE |
+| **☕ Kotlin** | 2.2.20 | Language |
+| **☕ Java JDK** | 17 | Runtime |
+| **🛠️ Gradle** | 8.11.2 | Build tool |
+| **🍎 Xcode** | 14+ | iOS development (macOS only) | Cmd+Opt+L |
 | Find | Ctrl+F | Cmd+F |
 | Find in Files | Ctrl+Shift+F | Cmd+Shift+F |
 
