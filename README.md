@@ -27,12 +27,30 @@
 | **🌙 Theming** | Dark/Light mode support |
 | **📶 Offline First** | Learn anywhere, anytime |
 
-## 📸 Screenshots
+## Screenshots
+
+### Android Screenshots
 
 <div align="center">
-  <img src="screenshots/Android1.png" width="200" alt="Android">
-  <img src="screenshots/ios1.png" width="200" alt="iOS">
-  <img src="screenshots/desktop1.png" width="250" alt="Desktop">
+  <img src="screenshots/Android1.png" alt="Android Screenshot 1" width="200">
+  <img src="screenshots/Android2.png" alt="Android Screenshot 2" width="200">
+  <img src="screenshots/Android3.png" alt="Android Screenshot 3" width="200">
+</div>
+
+### iOS Screenshots
+
+<div align="center">
+  <img src="screenshots/ios1.png" alt="iOS Screenshot 1" width="200">
+  <img src="screenshots/ios2.png" alt="iOS Screenshot 2" width="200">
+  <img src="screenshots/ios3.png" alt="iOS Screenshot 3" width="200">
+</div>
+
+### Desktop Screenshots
+
+<div align="center">
+  <img src="screenshots/desktop1.png" alt="Desktop Screenshot 1" width="250">
+  <img src="screenshots/desktop2.png" alt="Desktop Screenshot 2" width="250">
+  <img src="screenshots/desktop3.png" alt="Desktop Screenshot 3" width="250">
 </div>
 
 ## 🏗️ Architecture
