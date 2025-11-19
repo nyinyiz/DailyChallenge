@@ -124,23 +124,7 @@ fun QuestionDetail(
                     TopAppBarDefaults.centerAlignedTopAppBarColors(
                         containerColor = MaterialTheme.colorScheme.background,
                     ),
-                actions = {
-                    Card(
-                        shape = CircleShape,
-                        colors =
-                            CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                            ),
-                        modifier = Modifier.padding(end = 8.dp),
-                    ) {
-                        IconButton(onClick = onToggleTheme) {
-                            Text(
-                                text = if (ThemeColors.isDarkTheme) "☀️" else "🌙",
-                                style = MaterialTheme.typography.titleMedium,
-                            )
-                        }
-                    }
-                },
+
             )
         },
     ) { paddingValues ->

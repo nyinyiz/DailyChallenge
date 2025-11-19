@@ -75,14 +75,7 @@ fun QuestionsList(
                             modifier = Modifier.padding(bottom = 8.dp),
                         )
                     },
-                    actions = {
-                        IconButton(onClick = onToggleTheme) {
-                            Text(
-                                text = if (ThemeColors.isDarkTheme) "☀️" else "🌙",
-                                style = MaterialTheme.typography.titleMedium,
-                            )
-                        }
-                    },
+
                     colors =
                         TopAppBarDefaults.topAppBarColors(
                             containerColor = MaterialTheme.colorScheme.surface,
