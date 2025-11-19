@@ -64,17 +64,6 @@ graph TD
     Repo --> Local[DataStore/Cache]
 ```
 
-## 📚 Documentation
-
-| Guide | Description |
-| :--- | :--- |
-| [**Project Intro**](docs/PROJECT_INTRO.md) | Goals, mission, and vision |
-| [**Architecture**](docs/ARCHITECTURE.md) | MVVM, Clean Architecture, Koin |
-| [**Tech Stack**](docs/TECH_STACK.md) | Libraries and tools used |
-| [**Features**](docs/FEATURES.md) | Detailed feature breakdown |
-| [**Setup**](docs/SETUP.md) | Installation and build guide |
-| [**API Reference**](docs/API_REFERENCE.md) | API endpoints and data formats |
-
 ## ⚡ Quick Start
 
 ```bash
