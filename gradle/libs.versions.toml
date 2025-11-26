@@ -25,7 +25,7 @@ materialIconsExtendedVersion = "1.7.3"
 navigationCompose = "2.9.1"
 kotlinSerialization = "1.9.0"
 koin-bom = "4.1.1"
-ktor = "3.3.1"
+ktor = "3.3.3"
 glance = "1.1.1"
 work = "2.10.0"
 
