@@ -4,13 +4,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
@@ -113,15 +116,6 @@ private fun QuestionAttemptCard(
     attempt: QuestionAttempt,
     modifier: Modifier = Modifier,
 ) {
-    val containerColor =
-        if (attempt.isCompleted && attempt.incorrectAttempts == 0) {
-            MaterialTheme.colorScheme.primaryContainer
-        } else if (attempt.isCompleted) {
-            MaterialTheme.colorScheme.tertiaryContainer
-        } else {
-            MaterialTheme.colorScheme.errorContainer
-        }
-
     val statusColor =
         if (attempt.isCompleted && attempt.incorrectAttempts == 0) {
             MaterialTheme.colorScheme.primary
@@ -135,156 +129,91 @@ private fun QuestionAttemptCard(
         modifier = modifier.fillMaxWidth(),
         colors =
             CardDefaults.cardColors(
-                containerColor = containerColor,
+                containerColor = MaterialTheme.colorScheme.surface,
             ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp),
+        Row(
+            modifier = Modifier.height(IntrinsicSize.Min),
         ) {
-            // Header Row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    // Question Number Badge
-                    Box(
-                        modifier =
-                            Modifier
-                                .size(32.dp)
-                                .clip(CircleShape)
-                                .background(statusColor),
-                        contentAlignment = Alignment.Center,
-                    ) {
-                        Text(
-                            text = "$questionNumber",
-                            style = MaterialTheme.typography.labelLarge,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onPrimary,
-                        )
-                    }
-
-                    Text(
-                        text = "Question $questionNumber",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
-
-                // Status Icon
-                Icon(
-                    imageVector =
-                        if (attempt.isCompleted) {
-                            Icons.Rounded.CheckCircle
-                        } else {
-                            Icons.Rounded.Close
-                        },
-                    contentDescription = null,
-                    tint = statusColor,
-                    modifier = Modifier.size(24.dp),
-                )
-            }
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            // Question Text
-            Text(
-                text = attempt.question.question,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            // Stats Row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                // Status Badge
-                StatusBadge(
-                    label = "Status",
-                    value =
-                        if (attempt.isCompleted) "Completed ✓" else "Failed ✗",
-                    color = statusColor,
-                )
-
-                // Wrong Attempts Badge
-                if (attempt.incorrectAttempts > 0) {
-                    StatusBadge(
-                        label = "Wrong Attempts",
-                        value = "${attempt.incorrectAttempts}",
-                        color = MaterialTheme.colorScheme.error,
-                    )
-                }
-            }
-
-            // Show correct pairs
-            Spacer(modifier = Modifier.height(12.dp))
-
-            HorizontalDivider(
-                modifier = Modifier.padding(vertical = 8.dp),
-            )
-
-            Text(
-                text = "Correct Pairs:",
-                style = MaterialTheme.typography.labelLarge,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 8.dp),
+            // Indicator Strip
+            Box(
+                modifier =
+                    Modifier
+                        .fillMaxHeight()
+                        .width(6.dp)
+                        .background(statusColor),
             )
 
             Column(
-                verticalArrangement = Arrangement.spacedBy(6.dp),
+                modifier = Modifier.padding(16.dp),
             ) {
-                attempt.question.pairs.forEach { pair ->
+                // Header Row
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                     ) {
-                        Box(
-                            modifier =
-                                Modifier
-                                    .weight(1f)
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.5f))
-                                    .padding(8.dp),
-                        ) {
-                            Text(
-                                text = pair.left,
-                                style = MaterialTheme.typography.bodySmall,
-                            )
-                        }
-
-                        Icon(
-                            imageVector = Icons.Rounded.SwapHoriz,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(16.dp),
+                        Text(
+                            text = "Question $questionNumber",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
                         )
+                    }
 
-                        Box(
-                            modifier =
-                                Modifier
-                                    .weight(1f)
-                                    .clip(RoundedCornerShape(8.dp))
-                                    .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.5f))
-                                    .padding(8.dp),
-                        ) {
-                            Text(
-                                text = pair.right,
-                                style = MaterialTheme.typography.bodySmall,
-                            )
-                        }
+                    // Status Icon
+                    Icon(
+                        imageVector =
+                            if (attempt.isCompleted) {
+                                Icons.Rounded.CheckCircle
+                            } else {
+                                Icons.Rounded.Close
+                            },
+                        contentDescription = null,
+                        tint = statusColor,
+                        modifier = Modifier.size(24.dp),
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                // Question Text
+                Text(
+                    text = attempt.question.question,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium,
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                // Stats Row
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                ) {
+                    // Status Badge
+                    StatusBadge(
+                        label = "Status",
+                        value =
+                            if (attempt.isCompleted) "Completed ✓" else "Failed ✗",
+                        color = statusColor,
+                    )
+
+                    // Wrong Attempts Badge
+                    if (attempt.incorrectAttempts > 0) {
+                        StatusBadge(
+                            label = "Wrong Attempts",
+                            value = "${attempt.incorrectAttempts}",
+                            color = MaterialTheme.colorScheme.error,
+                        )
                     }
                 }
-            }
 
-            // Show explanation if there were mistakes
-            if (attempt.incorrectAttempts > 0 && attempt.question.explanation.isNotEmpty()) {
+                // Show correct pairs
                 Spacer(modifier = Modifier.height(12.dp))
 
                 HorizontalDivider(
@@ -292,17 +221,79 @@ private fun QuestionAttemptCard(
                 )
 
                 Text(
-                    text = "💡 Explanation:",
+                    text = "Correct Pairs:",
                     style = MaterialTheme.typography.labelLarge,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 4.dp),
+                    modifier = Modifier.padding(bottom = 8.dp),
                 )
 
-                Text(
-                    text = attempt.question.explanation,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
-                )
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    attempt.question.pairs.forEach { pair ->
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            Box(
+                                modifier =
+                                    Modifier
+                                        .weight(1f)
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+                                        .padding(8.dp),
+                            ) {
+                                Text(
+                                    text = pair.left,
+                                    style = MaterialTheme.typography.bodySmall,
+                                )
+                            }
+
+                            Icon(
+                                imageVector = Icons.Rounded.SwapHoriz,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(16.dp),
+                            )
+
+                            Box(
+                                modifier =
+                                    Modifier
+                                        .weight(1f)
+                                        .clip(RoundedCornerShape(8.dp))
+                                        .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+                                        .padding(8.dp),
+                            ) {
+                                Text(
+                                    text = pair.right,
+                                    style = MaterialTheme.typography.bodySmall,
+                                )
+                            }
+                        }
+                    }
+                }
+
+                // Show explanation if there were mistakes
+                if (attempt.incorrectAttempts > 0 && attempt.question.explanation.isNotEmpty()) {
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = 8.dp),
+                    )
+
+                    Text(
+                        text = "💡 Explanation:",
+                        style = MaterialTheme.typography.labelLarge,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(bottom = 4.dp),
+                    )
+
+                    Text(
+                        text = attempt.question.explanation,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+                    )
+                }
             }
         }
     }

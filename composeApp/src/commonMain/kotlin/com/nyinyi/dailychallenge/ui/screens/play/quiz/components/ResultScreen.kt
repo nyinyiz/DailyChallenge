@@ -8,17 +8,21 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -194,37 +198,49 @@ fun ResultScreen(
 
 @Composable
 private fun ReviewQuestionCard(question: QuizCard) {
+    var expanded by remember { mutableStateOf(false) }
+
     ElevatedCard(
         modifier =
             Modifier
                 .fillMaxWidth()
-                .animateContentSize(),
+                .animateContentSize()
+                .clickable { expanded = !expanded },
         colors =
             CardDefaults.elevatedCardColors(
-                containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.7f),
+                containerColor = MaterialTheme.colorScheme.surface,
             ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
-        var expanded by remember { mutableStateOf(false) }
-
-        Column(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .clickable { expanded = !expanded }
-                    .padding(16.dp),
+        Row(
+            modifier = Modifier.height(IntrinsicSize.Min),
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
+            // Indicator Strip
+            Box(
+                modifier =
+                    Modifier
+                        .fillMaxHeight()
+                        .width(6.dp)
+                        .background(MaterialTheme.colorScheme.error),
+            )
+
+            Column(
+                modifier =
+                    Modifier
+                        .weight(1f)
+                        .padding(16.dp),
             ) {
-                Text(
-                    text = question.question,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onErrorContainer,
-                    modifier = Modifier.weight(1f),
-                )
-                IconButton(onClick = { expanded = !expanded }) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.Top,
+                ) {
+                    Text(
+                        text = question.question,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.weight(1f),
+                    )
                     Icon(
                         imageVector =
                             if (expanded) {
@@ -233,28 +249,29 @@ private fun ReviewQuestionCard(question: QuizCard) {
                                 Icons.Rounded.ExpandMore
                             },
                         contentDescription = if (expanded) "Show less" else "Show more",
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
-            }
 
-            AnimatedVisibility(visible = expanded) {
-                Column(
-                    modifier = Modifier.padding(top = 8.dp),
-                ) {
-                    Text(
-                        text = "Correct Answer: ${if (question.correctAnswer) "True" else "False"}",
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onErrorContainer,
-                    )
+                AnimatedVisibility(visible = expanded) {
+                    Column(
+                        modifier = Modifier.padding(top = 12.dp),
+                    ) {
+                        Text(
+                            text = "Correct Answer: ${if (question.correctAnswer) "True" else "False"}",
+                            style = MaterialTheme.typography.labelLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary,
+                        )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(8.dp))
 
-                    Text(
-                        text = question.explanation,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f),
-                    )
+                        Text(
+                            text = question.explanation,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
                 }
             }
         }
