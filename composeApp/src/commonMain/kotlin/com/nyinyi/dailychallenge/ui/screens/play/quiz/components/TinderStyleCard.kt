@@ -41,6 +41,7 @@ fun TinderStyleCard(
     card: QuizCard,
     onSwipeLeft: () -> Unit,
     onSwipeRight: () -> Unit,
+    onDrag: (Float) -> Unit = {},
 ) {
     var offsetX by remember { mutableStateOf(0f) }
     var offsetY by remember { mutableStateOf(0f) }
@@ -66,11 +67,13 @@ fun TinderStyleCard(
                             }
                             offsetX = 0f
                             offsetY = 0f
+                            onDrag(0f)
                         },
                         onDrag = { change, dragAmount ->
                             change.consume()
                             offsetX += dragAmount.x
                             offsetY += dragAmount.y
+                            onDrag(offsetX)
                         },
                     )
                 },

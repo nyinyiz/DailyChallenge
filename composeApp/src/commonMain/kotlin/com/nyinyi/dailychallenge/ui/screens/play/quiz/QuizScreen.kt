@@ -1,12 +1,16 @@
 package com.nyinyi.dailychallenge.ui.screens.play.quiz
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.Card
@@ -65,6 +69,7 @@ fun QuizScreen(
     var currentQuestionIndex by remember { mutableStateOf(0) }
     var quizResults by remember { mutableStateOf<QuizResult?>(null) }
     var incorrectAnswers by remember { mutableStateOf(listOf<QuizCard>()) }
+    var swipeOffsetX by remember { mutableStateOf(0f) }
     val hapticFeedback = LocalHapticFeedback.current
 
     Scaffold(
@@ -96,7 +101,6 @@ fun QuizScreen(
                     TopAppBarDefaults.centerAlignedTopAppBarColors(
                         containerColor = MaterialTheme.colorScheme.background,
                     ),
-
             )
         },
     ) { innerPadding ->
@@ -104,8 +108,7 @@ fun QuizScreen(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(16.dp),
+                    .padding(innerPadding),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             when (val state = uiState) {
@@ -162,6 +165,44 @@ fun QuizScreen(
                                 // Swipe Instruction Text
                                 SwipeInstructions()
 
+                                // Left Indicator (False/Red)
+                                if (swipeOffsetX < 0) {
+                                    Box(
+                                        modifier =
+                                            Modifier
+                                                .align(Alignment.CenterStart)
+                                                .fillMaxHeight()
+                                                .width((-swipeOffsetX / 5).dp.coerceIn(0.dp, 24.dp))
+                                                .background(
+                                                    color = MaterialTheme.colorScheme.error,
+                                                    shape =
+                                                        RoundedCornerShape(
+                                                            topEnd = 16.dp,
+                                                            bottomEnd = 16.dp,
+                                                        ),
+                                                ),
+                                    )
+                                }
+
+                                // Right Indicator (True/Blue)
+                                if (swipeOffsetX > 0) {
+                                    Box(
+                                        modifier =
+                                            Modifier
+                                                .align(Alignment.CenterEnd)
+                                                .fillMaxHeight()
+                                                .width((swipeOffsetX / 5).dp.coerceIn(0.dp, 24.dp))
+                                                .background(
+                                                    color = MaterialTheme.colorScheme.primary,
+                                                    shape =
+                                                        RoundedCornerShape(
+                                                            topStart = 16.dp,
+                                                            bottomStart = 16.dp,
+                                                        ),
+                                                ),
+                                    )
+                                }
+
                                 // Question Card
                                 TinderStyleCard(
                                     card = state.quizList[currentQuestionIndex],
@@ -200,6 +241,9 @@ fun QuizScreen(
                                                     incorrectAnswers = incorrectAnswers,
                                                 )
                                         }
+                                    },
+                                    onDrag = { offsetX ->
+                                        swipeOffsetX = offsetX
                                     },
                                 )
                             }
