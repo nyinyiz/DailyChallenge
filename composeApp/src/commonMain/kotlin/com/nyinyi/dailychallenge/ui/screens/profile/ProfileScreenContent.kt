@@ -307,34 +307,27 @@ private fun ThemeOptionCard(
         label = "iconColor",
     )
 
-    val scale by animateFloatAsState(
-        targetValue = if (isSelected) 1.02f else 1f,
-        label = "scale",
-    )
-
     Surface(
         modifier =
             modifier
-                .height(100.dp)
-                .scale(scale)
+                .height(80.dp)
                 .clickable(onClick = onClick),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(12.dp),
         color = backgroundColor,
-        border = BorderStroke(2.dp, borderColor),
-        shadowElevation = if (isSelected) 4.dp else 0.dp,
+        border = BorderStroke(1.dp, borderColor),
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
+        Row(
+            modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 tint = iconColor,
-                modifier = Modifier.size(32.dp),
+                modifier = Modifier.size(24.dp),
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.width(12.dp))
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleSmall,

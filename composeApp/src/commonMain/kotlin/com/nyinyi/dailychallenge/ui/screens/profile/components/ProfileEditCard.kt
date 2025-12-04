@@ -31,48 +31,35 @@ fun ProfileEditCard(
 
     val hasChanges = name != originalName || email != originalEmail
 
-    Card(
+    Column(
         modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors =
-            CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant,
-            ),
     ) {
-        Column(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
-        ) {
-            NameTextField(
-                value = name,
-                onValueChange = { name = it },
-            )
+        NameTextField(
+            value = name,
+            onValueChange = { name = it },
+        )
 
+        Spacer(modifier = Modifier.height(20.dp))
+
+        EmailTextField(
+            value = email,
+            onValueChange = { email = it },
+        )
+
+        if (hasChanges) {
             Spacer(modifier = Modifier.height(20.dp))
-
-            EmailTextField(
-                value = email,
-                onValueChange = { email = it },
+            ActionButtons(
+                onCancel = {
+                    name = originalName
+                    email = originalEmail
+                },
+                onConfirm = {
+                    onNameChanged(name)
+                    onEmailChanged(email)
+                    originalName = name
+                    originalEmail = email
+                },
             )
-
-            if (hasChanges) {
-                Spacer(modifier = Modifier.height(20.dp))
-                ActionButtons(
-                    onCancel = {
-                        name = originalName
-                        email = originalEmail
-                    },
-                    onConfirm = {
-                        onNameChanged(name)
-                        onEmailChanged(email)
-                        originalName = name
-                        originalEmail = email
-                    },
-                )
-            }
         }
     }
 }
