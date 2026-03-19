@@ -35,6 +35,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.nyinyi.dailychallenge.data.model.QuizCard
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeColors
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeElevation
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeShapes
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing
 
 @Composable
 fun TinderStyleCard(
@@ -79,9 +83,9 @@ fun TinderStyleCard(
                 },
         elevation =
             CardDefaults.cardElevation(
-                defaultElevation = 8.dp,
+                defaultElevation = DailyChallengeElevation.high,
             ),
-        shape = RoundedCornerShape(16.dp),
+        shape = DailyChallengeShapes.large,
         colors =
             CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.surface,
@@ -91,7 +95,7 @@ fun TinderStyleCard(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .padding(16.dp),
+                    .padding(DailyChallengeSpacing.large),
             contentAlignment = Alignment.Center,
         ) {
             // Question Text
@@ -107,7 +111,7 @@ fun TinderStyleCard(
                     Modifier
                         .fillMaxWidth()
                         .align(Alignment.BottomCenter)
-                        .padding(bottom = 16.dp),
+                        .padding(bottom = DailyChallengeSpacing.large),
                 horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
                 AnimatedVisibility(
@@ -118,12 +122,12 @@ fun TinderStyleCard(
                     Card(
                         colors =
                             CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.error.copy(alpha = 0.9f),
+                                containerColor = DailyChallengeColors.danger.copy(alpha = 0.9f),
                             ),
                     ) {
                         Text(
                             text = "FALSE",
-                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                            modifier = Modifier.padding(horizontal = DailyChallengeSpacing.large, vertical = DailyChallengeSpacing.small),
                             color = Color.White,
                             fontWeight = FontWeight.Bold,
                         )
@@ -138,12 +142,12 @@ fun TinderStyleCard(
                     Card(
                         colors =
                             CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.9f),
+                                containerColor = DailyChallengeColors.success.copy(alpha = 0.9f),
                             ),
                     ) {
                         Text(
                             text = "TRUE",
-                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                            modifier = Modifier.padding(horizontal = DailyChallengeSpacing.large, vertical = DailyChallengeSpacing.small),
                             color = Color.White,
                             fontWeight = FontWeight.Bold,
                         )

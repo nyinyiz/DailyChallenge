@@ -16,7 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.unit.dp
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeElevation
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,19 +39,19 @@ fun QuizAnswerOptionCard(
             ),
         elevation =
             CardDefaults.cardElevation(
-                defaultElevation = 4.dp,
+                defaultElevation = DailyChallengeElevation.medium,
             ),
     ) {
         Box(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(DailyChallengeSpacing.large),
             contentAlignment = Alignment.CenterStart,
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                horizontalArrangement = Arrangement.spacedBy(DailyChallengeSpacing.medium),
             ) {
                 Icon(
                     imageVector = leadingIcon,

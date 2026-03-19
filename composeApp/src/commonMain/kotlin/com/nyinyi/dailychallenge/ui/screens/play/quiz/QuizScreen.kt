@@ -10,16 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBackIosNew
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,6 +23,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.nyinyi.dailychallenge.ui.components.AppScreenScaffold
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.EmptyState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.ErrorState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.LoadingState
@@ -39,7 +31,7 @@ import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.QuestionProgres
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.ResultScreen
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.SwipeInstructions
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.TinderStyleCard
-import com.nyinyi.dailychallenge.ui.theme.ThemeColors
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -52,7 +44,6 @@ fun QuizScreenPreview() {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuizScreen(
     onBack: () -> Unit,
@@ -64,37 +55,9 @@ fun QuizScreen(
     var swipeOffsetX by remember { mutableStateOf(0f) }
     val hapticFeedback = LocalHapticFeedback.current
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Text(
-                            text = "True or False",
-                            style =
-                                MaterialTheme.typography.titleMedium.copy(
-                                    fontWeight = FontWeight.Bold,
-                                ),
-                        )
-                    }
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            Icons.Outlined.ArrowBackIosNew,
-                            contentDescription = "Back",
-                            tint = MaterialTheme.colorScheme.primary,
-                        )
-                    }
-                },
-                colors =
-                    TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.background,
-                    ),
-            )
-        },
+    AppScreenScaffold(
+        onBack = onBack,
+        title = "True or False",
     ) { innerPadding ->
         Column(
             modifier =
@@ -150,36 +113,36 @@ fun QuizScreen(
                             if (swipeOffsetX < 0) {
                                 Box(
                                     modifier =
-                                        Modifier
-                                            .align(Alignment.CenterStart)
-                                            .fillMaxHeight()
-                                            .width((-swipeOffsetX / 5).dp.coerceIn(0.dp, 24.dp))
-                                            .background(
-                                                color = MaterialTheme.colorScheme.error,
-                                                shape =
-                                                    RoundedCornerShape(
-                                                        topEnd = 16.dp,
-                                                        bottomEnd = 16.dp,
-                                                    ),
-                                            ),
+                                            Modifier
+                                                .align(Alignment.CenterStart)
+                                                .fillMaxHeight()
+                                                .width((-swipeOffsetX / 5).dp.coerceIn(0.dp, DailyChallengeSpacing.xLarge))
+                                                .background(
+                                                    color = MaterialTheme.colorScheme.error,
+                                                    shape =
+                                                        RoundedCornerShape(
+                                                            topEnd = DailyChallengeSpacing.large,
+                                                            bottomEnd = DailyChallengeSpacing.large,
+                                                        ),
+                                                ),
                                 )
                             }
 
                             if (swipeOffsetX > 0) {
                                 Box(
                                     modifier =
-                                        Modifier
-                                            .align(Alignment.CenterEnd)
-                                            .fillMaxHeight()
-                                            .width((swipeOffsetX / 5).dp.coerceIn(0.dp, 24.dp))
-                                            .background(
-                                                color = MaterialTheme.colorScheme.primary,
-                                                shape =
-                                                    RoundedCornerShape(
-                                                        topStart = 16.dp,
-                                                        bottomStart = 16.dp,
-                                                    ),
-                                            ),
+                                            Modifier
+                                                .align(Alignment.CenterEnd)
+                                                .fillMaxHeight()
+                                                .width((swipeOffsetX / 5).dp.coerceIn(0.dp, DailyChallengeSpacing.xLarge))
+                                                .background(
+                                                    color = MaterialTheme.colorScheme.primary,
+                                                    shape =
+                                                        RoundedCornerShape(
+                                                            topStart = DailyChallengeSpacing.large,
+                                                            bottomStart = DailyChallengeSpacing.large,
+                                                        ),
+                                                ),
                                 )
                             }
 

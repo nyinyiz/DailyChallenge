@@ -22,26 +22,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.HelpOutline
-import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.SwapHoriz
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -57,17 +51,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.nyinyi.dailychallenge.ui.components.AppScreenScaffold
 import com.nyinyi.dailychallenge.ui.screens.play.matching.components.MatchingGameResultScreen
 import com.nyinyi.dailychallenge.ui.screens.play.matching.components.MatchingItem
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.EmptyState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.ErrorState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.LoadingState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.QuestionProgressUI
-import com.nyinyi.dailychallenge.ui.theme.ThemeColors
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeColors
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeShapes
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing
 import kotlinx.coroutines.delay
 import org.koin.compose.viewmodel.koinViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MatchingGameScreen(
     onBack: () -> Unit,
@@ -77,33 +73,9 @@ fun MatchingGameScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = "Matching Game",
-                        style =
-                            MaterialTheme.typography.titleMedium.copy(
-                                fontWeight = FontWeight.Bold,
-                            ),
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.Outlined.ArrowBackIosNew,
-                            contentDescription = "Back",
-                        )
-                    }
-                },
-
-                colors =
-                    TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.background,
-                    ),
-            )
-        },
+    AppScreenScaffold(
+        onBack = onBack,
+        title = "Matching Game",
     ) { paddingValues ->
         Column(
             modifier =
@@ -132,7 +104,7 @@ fun MatchingGameScreen(
                         modifier =
                             Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp),
+                                .padding(DailyChallengeSpacing.large),
                     )
 
                     if (state.isGameComplete) {
@@ -184,9 +156,9 @@ private fun GameContent(
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
+                    Modifier
+                        .fillMaxSize()
+                        .padding(DailyChallengeSpacing.large),
         ) {
             gameState.currentQuestion?.let { question ->
                 // Question Title Card with Help Icon
@@ -237,10 +209,7 @@ private fun GameContent(
                             modifier = Modifier.fillMaxWidth(),
                             colors =
                                 CardDefaults.cardColors(
-                                    containerColor =
-                                        MaterialTheme.colorScheme.secondaryContainer.copy(
-                                            alpha = 0.5f,
-                                        ),
+                                    containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.5f),
                                 ),
                         ) {
                             Row(
@@ -265,7 +234,7 @@ private fun GameContent(
                                 )
                             }
                         }
-                        Spacer(modifier = Modifier.height(12.dp))
+                        Spacer(modifier = Modifier.height(DailyChallengeSpacing.medium))
                     }
                 }
 
@@ -316,7 +285,7 @@ private fun GameContent(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(DailyChallengeSpacing.small))
 
                 // Visual progress bar
                 LinearProgressIndicator(
@@ -324,13 +293,13 @@ private fun GameContent(
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .height(8.dp)
-                            .clip(RoundedCornerShape(4.dp)),
-                    color = MaterialTheme.colorScheme.primary,
-                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
+                            .height(DailyChallengeSpacing.small)
+                            .clip(DailyChallengeShapes.small),
+                    color = DailyChallengeColors.success,
+                    trackColor = DailyChallengeColors.surfaceMuted,
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(DailyChallengeSpacing.large))
 
                 // Column Headers
                 Row(

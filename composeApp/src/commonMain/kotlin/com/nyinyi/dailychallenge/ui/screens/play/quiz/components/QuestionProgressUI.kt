@@ -40,6 +40,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.nyinyi.dailychallenge.ui.screens.list.DifficultyTag
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeColors
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeShapes
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing
 
 @Composable
 fun QuestionProgressUI(
@@ -55,10 +58,10 @@ fun QuestionProgressUI(
 
     val difficultyColor =
         when (difficulty.lowercase()) {
-            "completed" -> MaterialTheme.colorScheme.primary
-            "easy" -> MaterialTheme.colorScheme.tertiary
+            "completed" -> DailyChallengeColors.success
+            "easy" -> DailyChallengeColors.warning
             "medium" -> MaterialTheme.colorScheme.secondary
-            else -> MaterialTheme.colorScheme.error
+            else -> DailyChallengeColors.danger
         }
 
     LaunchedEffect(currentQuestion) {
@@ -79,7 +82,7 @@ fun QuestionProgressUI(
         modifier =
             modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = DailyChallengeSpacing.large),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Row(
@@ -89,7 +92,7 @@ fun QuestionProgressUI(
         ) {
             // Progress Stats with Animation
             Column(
-                modifier = Modifier.padding(vertical = 8.dp),
+                modifier = Modifier.padding(vertical = DailyChallengeSpacing.small),
             ) {
                 Text(
                     text =
@@ -133,23 +136,23 @@ fun QuestionProgressUI(
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(DailyChallengeSpacing.large))
 
         // Custom Progress Bar with Gradient and Shimmer
         Box(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .height(12.dp)
-                    .clip(RoundedCornerShape(6.dp))
-                    .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+                    .height(DailyChallengeSpacing.medium)
+                    .clip(DailyChallengeShapes.small)
+                    .background(DailyChallengeColors.surfaceMuted.copy(alpha = 0.5f)),
         ) {
             Box(
                 modifier =
                     Modifier
                         .fillMaxWidth(progressAnimation)
                         .fillMaxHeight()
-                        .clip(RoundedCornerShape(6.dp))
+                        .clip(DailyChallengeShapes.small)
                         .background(
                             brush =
                                 Brush.horizontalGradient(

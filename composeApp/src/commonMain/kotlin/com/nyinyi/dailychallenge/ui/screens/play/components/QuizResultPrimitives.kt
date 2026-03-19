@@ -47,6 +47,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeColors
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeElevation
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeShapes
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing
 import kotlin.math.roundToInt
 
 @Composable
@@ -57,9 +61,9 @@ fun CircularQuizResultSummary(
 ) {
     val scoreColor =
         when {
-            percentage >= 80 -> MaterialTheme.colorScheme.primary
-            percentage >= 60 -> MaterialTheme.colorScheme.tertiary
-            else -> MaterialTheme.colorScheme.error
+            percentage >= 80 -> DailyChallengeColors.success
+            percentage >= 60 -> DailyChallengeColors.warning
+            else -> DailyChallengeColors.danger
         }
 
     AnimatedVisibility(
@@ -82,13 +86,13 @@ fun CircularQuizResultSummary(
                 color = scoreColor,
             )
 
-            Spacer(modifier = Modifier.size(24.dp))
+            Spacer(modifier = Modifier.size(DailyChallengeSpacing.xLarge))
 
             Box(
                 modifier =
                     Modifier
                         .size(200.dp)
-                        .padding(8.dp),
+                        .padding(DailyChallengeSpacing.small),
                 contentAlignment = Alignment.Center,
             ) {
                 var progressAnimation by remember { mutableFloatStateOf(0f) }
@@ -103,14 +107,14 @@ fun CircularQuizResultSummary(
                 CircularProgressIndicator(
                     progress = { 1f },
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.surfaceVariant,
-                    strokeWidth = 12.dp,
+                    color = DailyChallengeColors.surfaceMuted,
+                    strokeWidth = DailyChallengeSpacing.medium,
                 )
                 CircularProgressIndicator(
                     progress = { progressAnimation },
                     modifier = Modifier.fillMaxSize(),
                     color = scoreColor,
-                    strokeWidth = 12.dp,
+                    strokeWidth = DailyChallengeSpacing.medium,
                 )
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -151,7 +155,7 @@ fun QuizExpandableReviewCard(
             CardDefaults.elevatedCardColors(
                 containerColor = MaterialTheme.colorScheme.surface,
             ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = DailyChallengeElevation.low),
     ) {
         Row(
             modifier = Modifier.height(IntrinsicSize.Min),
@@ -168,7 +172,7 @@ fun QuizExpandableReviewCard(
                 modifier =
                     Modifier
                         .weight(1f)
-                        .padding(16.dp),
+                        .padding(DailyChallengeSpacing.large),
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -195,17 +199,17 @@ fun QuizExpandableReviewCard(
 
                 AnimatedVisibility(visible = expanded) {
                     Column(
-                        modifier = Modifier.padding(top = 12.dp),
+                        modifier = Modifier.padding(top = DailyChallengeSpacing.medium),
                     ) {
                         Text(
                             text = answerLabel,
                             style = MaterialTheme.typography.labelLarge,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary,
+                            color = DailyChallengeColors.success,
                         )
 
                         if (!explanation.isNullOrEmpty()) {
-                            Spacer(modifier = Modifier.size(8.dp))
+                            Spacer(modifier = Modifier.size(DailyChallengeSpacing.small))
                             Text(
                                 text = explanation,
                                 style = MaterialTheme.typography.bodyMedium,
@@ -231,7 +235,7 @@ fun QuizResultActionsRow(
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(DailyChallengeSpacing.small),
     ) {
         if (secondaryLabel != null && onSecondaryClick != null) {
             OutlinedButton(
@@ -246,7 +250,7 @@ fun QuizResultActionsRow(
                 }
                 Text(
                     text = secondaryLabel,
-                    modifier = Modifier.padding(start = if (secondaryIcon != null) 8.dp else 0.dp),
+                    modifier = Modifier.padding(start = if (secondaryIcon != null) DailyChallengeSpacing.small else 0.dp),
                 )
             }
         }
@@ -256,7 +260,7 @@ fun QuizResultActionsRow(
             modifier = Modifier.weight(1f),
             colors =
                 ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
+                    containerColor = DailyChallengeColors.success,
                 ),
         ) {
             if (primaryIcon != null) {
@@ -267,7 +271,7 @@ fun QuizResultActionsRow(
             }
             Text(
                 text = primaryLabel,
-                modifier = Modifier.padding(start = if (primaryIcon != null) 8.dp else 0.dp),
+                modifier = Modifier.padding(start = if (primaryIcon != null) DailyChallengeSpacing.small else 0.dp),
             )
         }
     }
