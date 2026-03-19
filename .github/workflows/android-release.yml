@@ -1,0 +1,67 @@
+name: Android APK Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android-apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Ensure Gradle wrapper is executable
+        run: chmod +x ./gradlew
+
+      - name: Build debug APK
+        run: ./gradlew :composeApp:assembleDebug --stacktrace
+
+      - name: Prepare release asset
+        run: cp composeApp/build/outputs/apk/debug/composeApp-debug.apk DailyChallenge-latest.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: DailyChallenge-latest-apk
+          path: DailyChallenge-latest.apk
+          if-no-files-found: error
+
+      - name: Publish rolling GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: latest-apk
+          name: Latest APK
+          artifacts: DailyChallenge-latest.apk
+          artifactErrorsFailBuild: true
+          allowUpdates: true
+          removeArtifacts: true
+          replacesArtifacts: true
+          makeLatest: true
+          body: |
+            Latest Android APK built from `main`.
+
+            Commit: `${{ github.sha }}`
+            Download: https://github.com/${{ github.repository }}/releases/download/latest-apk/DailyChallenge-latest.apk

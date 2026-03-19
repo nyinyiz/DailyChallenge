@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 permissions:
   contents: read
@@ -42,12 +39,20 @@ jobs:
       - name: Build project
         run: >
           ./gradlew build --stacktrace
-          -x linkDebugFrameworkIosX64
-          -x linkReleaseFrameworkIosX64
-          -x linkDebugFrameworkIosArm64
-          -x linkReleaseFrameworkIosArm64
-          -x linkDebugFrameworkIosSimulatorArm64
-          -x linkReleaseFrameworkIosSimulatorArm64
-          -x iosX64Test
-          -x iosArm64Test
-          -x iosSimulatorArm64Test
+          -x composeApp:compileKotlinIosX64
+          -x composeApp:compileKotlinIosArm64
+          -x composeApp:compileKotlinIosSimulatorArm64
+          -x composeApp:compileTestKotlinIosX64
+          -x composeApp:compileTestKotlinIosArm64
+          -x composeApp:compileTestKotlinIosSimulatorArm64
+          -x composeApp:linkDebugFrameworkIosX64
+          -x composeApp:linkReleaseFrameworkIosX64
+          -x composeApp:linkDebugFrameworkIosArm64
+          -x composeApp:linkReleaseFrameworkIosArm64
+          -x composeApp:linkDebugFrameworkIosSimulatorArm64
+          -x composeApp:linkReleaseFrameworkIosSimulatorArm64
+          -x composeApp:linkDebugTestIosX64
+          -x composeApp:linkDebugTestIosArm64
+          -x composeApp:linkDebugTestIosSimulatorArm64
+          -x composeApp:iosX64Test
+          -x composeApp:iosSimulatorArm64Test

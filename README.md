@@ -9,6 +9,13 @@
   <p><strong>Master Mobile Development with Daily Coding Challenges</strong></p>
 </div>
 
+## Download Latest APK
+
+[![Download Latest APK](https://img.shields.io/badge/Download-Latest%20APK-2ea44f?style=for-the-badge&logo=android)](https://github.com/nyinyiz/DailyChallenge/releases/download/latest-apk/DailyChallenge-latest.apk)
+
+Use the direct download link above to install the newest Android build published from the `main` branch.
+The release page is also available here: [Latest APK Release](https://github.com/nyinyiz/DailyChallenge/releases/tag/latest-apk).
+
 ## 🚀 Overview
 
 **Daily Challenge** is a Kotlin Multiplatform educational app designed to gamify learning for Android, iOS, and Desktop developers.
