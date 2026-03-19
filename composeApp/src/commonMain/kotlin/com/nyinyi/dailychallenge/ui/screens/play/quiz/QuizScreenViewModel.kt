@@ -2,16 +2,16 @@ package com.nyinyi.dailychallenge.ui.screens.play.quiz
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
-import com.nyinyi.dailychallenge.data.repository.UserPreferencesRepository
+import com.nyinyi.dailychallenge.data.repository.ChallengePlayRepository
+import com.nyinyi.dailychallenge.data.repository.UserProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class QuizScreenViewModel(
-    private val repository: ChallengesRepository,
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val repository: ChallengePlayRepository,
+    private val userProfileRepository: UserProfileRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow<QuizState>(QuizState.Loading)
     val state: StateFlow<QuizState> = _state.asStateFlow()
@@ -45,7 +45,7 @@ class QuizScreenViewModel(
 
         outcome.failedQuestion?.let { failedQuestion ->
             viewModelScope.launch {
-                userPreferencesRepository.addFailedQuizCard(failedQuestion)
+                userProfileRepository.addFailedQuizCard(failedQuestion)
             }
         }
     }

@@ -2,8 +2,8 @@ package com.nyinyi.dailychallenge.ui.screens.play.multiselect
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
-import com.nyinyi.dailychallenge.data.repository.UserPreferencesRepository
+import com.nyinyi.dailychallenge.data.repository.ChallengePlayRepository
+import com.nyinyi.dailychallenge.data.repository.UserProfileRepository
 import com.nyinyi.dailychallenge.feature.play.multiselect.MultipleSelectSession
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,8 +25,8 @@ sealed class MultipleSelectUiState {
 }
 
 class MultipleSelectViewModel(
-    private val repository: ChallengesRepository,
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val repository: ChallengePlayRepository,
+    private val userProfileRepository: UserProfileRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<MultipleSelectUiState>(MultipleSelectUiState.Loading)
     val uiState: StateFlow<MultipleSelectUiState> = _uiState.asStateFlow()
@@ -63,7 +63,7 @@ class MultipleSelectViewModel(
         val outcome = currentState.session.submitAnswer()
         outcome.failedQuestion?.let { failedQuestion ->
             viewModelScope.launch {
-                userPreferencesRepository.addFailedMultipleSelectQuestion(failedQuestion)
+                userProfileRepository.addFailedMultipleSelectQuestion(failedQuestion)
             }
         }
         _uiState.value = currentState.copy(session = outcome.nextSession)

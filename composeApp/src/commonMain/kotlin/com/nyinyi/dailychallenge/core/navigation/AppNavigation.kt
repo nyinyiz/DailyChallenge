@@ -12,7 +12,10 @@ import androidx.navigation.toRoute
 import com.nyinyi.dailychallenge.feature.challenge.detail.QuestionDetail
 import com.nyinyi.dailychallenge.feature.challenge.detail.QuestionDetailUiState
 import com.nyinyi.dailychallenge.feature.challenge.detail.QuestionDetailViewModel
-import com.nyinyi.dailychallenge.feature.challenge.list.QuestionsList
+import com.nyinyi.dailychallenge.feature.challenge.list.AppTab
+import com.nyinyi.dailychallenge.feature.challenge.list.ChallengeListTabScreen
+import com.nyinyi.dailychallenge.feature.challenge.list.HomeTabScreen
+import com.nyinyi.dailychallenge.feature.challenge.list.ProfileTabScreen
 import com.nyinyi.dailychallenge.ui.screens.play.components.GameMode
 import com.nyinyi.dailychallenge.ui.screens.play.matching.MatchingGameScreen
 import com.nyinyi.dailychallenge.ui.screens.play.mcq.MultipleChoiceScreen
@@ -27,10 +30,13 @@ fun AppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.QuestionList,
+        startDestination = Routes.Home,
     ) {
-        composable<Routes.QuestionList> {
-            QuestionsList(
+        composable<Routes.Home> {
+            HomeTabScreen(
+                onTabSelected = { tab ->
+                    navController.navigateToTab(tab)
+                },
                 navigateToGameMode = { gameMode ->
                     when (gameMode) {
                         GameMode.TrueOrFalse -> {
@@ -55,7 +61,23 @@ fun AppNavigation(
                         Routes.QuestionDetail(questionId = question.id),
                     )
                 },
-                onToggleTheme = onToggleTheme,
+            )
+        }
+        composable<Routes.ChallengeList> {
+            ChallengeListTabScreen(
+                onTabSelected = { tab ->
+                    navController.navigateToTab(tab)
+                },
+                onClickChallenge = { question ->
+                    navController.navigate(Routes.QuestionDetail(questionId = question.id))
+                },
+            )
+        }
+        composable<Routes.Profile> {
+            ProfileTabScreen(
+                onTabSelected = { tab ->
+                    navController.navigateToTab(tab)
+                },
             )
         }
         composable<Routes.QuestionDetail> { backStackEntry ->
@@ -96,7 +118,9 @@ fun AppNavigation(
         composable<Routes.MultipleChoiceScreen> {
             MultipleChoiceScreen(
                 onBack = { navController.popBackStack() },
-                onBackToHome = { navController.popBackStack() },
+                onBackToHome = {
+                    navController.navigateToTab(AppTab.Home)
+                },
                 onToggleTheme = onToggleTheme,
             )
         }
@@ -104,7 +128,9 @@ fun AppNavigation(
         composable<Routes.MultipleSelectScreen> {
             MultipleSelectScreen(
                 onBack = { navController.popBackStack() },
-                onBackToHome = { navController.popBackStack() },
+                onBackToHome = {
+                    navController.navigateToTab(AppTab.Home)
+                },
                 onToggleTheme = onToggleTheme,
             )
         }
@@ -112,9 +138,28 @@ fun AppNavigation(
         composable<Routes.MatchingGameScreen> {
             MatchingGameScreen(
                 onBack = { navController.popBackStack() },
-                onBackToHome = { navController.popBackStack() },
+                onBackToHome = {
+                    navController.navigateToTab(AppTab.Home)
+                },
                 onToggleTheme = onToggleTheme,
             )
         }
+    }
+}
+
+private fun NavHostController.navigateToTab(tab: AppTab) {
+    val route =
+        when (tab) {
+            AppTab.Home -> Routes.Home
+            AppTab.List -> Routes.ChallengeList
+            AppTab.Profile -> Routes.Profile
+        }
+
+    navigate(route) {
+        popUpTo(graph.startDestinationId) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
     }
 }

@@ -2,8 +2,8 @@ package com.nyinyi.dailychallenge.ui.screens.play.mcq
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
-import com.nyinyi.dailychallenge.data.repository.UserPreferencesRepository
+import com.nyinyi.dailychallenge.data.repository.ChallengePlayRepository
+import com.nyinyi.dailychallenge.data.repository.UserProfileRepository
 import com.nyinyi.dailychallenge.feature.play.mcq.MultipleChoiceSession
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,8 +25,8 @@ sealed class MultipleChoiceUiState {
 }
 
 class MultipleChoiceViewModel(
-    private val repository: ChallengesRepository,
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val repository: ChallengePlayRepository,
+    private val userProfileRepository: UserProfileRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<MultipleChoiceUiState>(MultipleChoiceUiState.Loading)
     val uiState: StateFlow<MultipleChoiceUiState> = _uiState.asStateFlow()
@@ -58,7 +58,7 @@ class MultipleChoiceViewModel(
         val outcome = currentState.session.answer(selectedAnswer)
         outcome.failedQuestion?.let { failedQuestion ->
             viewModelScope.launch {
-                userPreferencesRepository.addFailedMultipleChoiceQuestion(failedQuestion)
+                userProfileRepository.addFailedMultipleChoiceQuestion(failedQuestion)
             }
         }
         _uiState.value = currentState.copy(session = outcome.nextSession)

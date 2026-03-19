@@ -3,7 +3,7 @@ package com.nyinyi.dailychallenge.feature.profile
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nyinyi.dailychallenge.data.model.UserProfile
-import com.nyinyi.dailychallenge.data.repository.UserPreferencesRepository
+import com.nyinyi.dailychallenge.data.repository.UserProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val userProfileRepository: UserProfileRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<ProfileUiState>(ProfileUiState.Loading)
     val uiState: StateFlow<ProfileUiState> = _uiState.asStateFlow()
@@ -22,7 +22,7 @@ class ProfileViewModel(
 
     private fun loadUserProfile() {
         viewModelScope.launch {
-            userPreferencesRepository.userProfile.collectLatest { userProfile ->
+            userProfileRepository.userProfile.collectLatest { userProfile ->
                 val currentEditorState = (_uiState.value as? ProfileUiState.Success)?.editorState
                 _uiState.value =
                     ProfileUiState.Success(
@@ -54,20 +54,20 @@ class ProfileViewModel(
     fun saveProfileEdits() {
         val currentState = _uiState.value as? ProfileUiState.Success ?: return
         viewModelScope.launch {
-            userPreferencesRepository.updateUserName(currentState.editorState.name)
-            userPreferencesRepository.updateUserEmail(currentState.editorState.email)
+            userProfileRepository.updateUserName(currentState.editorState.name)
+            userProfileRepository.updateUserEmail(currentState.editorState.email)
         }
     }
 
     fun updateDarkTheme(darkTheme: Boolean) {
         viewModelScope.launch {
-            userPreferencesRepository.updateDarkTheme(darkTheme)
+            userProfileRepository.updateDarkTheme(darkTheme)
         }
     }
 
     fun clearFailedExercises() {
         viewModelScope.launch {
-            userPreferencesRepository.clearFailedExercises()
+            userProfileRepository.clearFailedExercises()
         }
     }
 

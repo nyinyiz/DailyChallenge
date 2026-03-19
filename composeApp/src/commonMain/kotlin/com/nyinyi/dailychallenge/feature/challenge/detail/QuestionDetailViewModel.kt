@@ -3,14 +3,14 @@ package com.nyinyi.dailychallenge.feature.challenge.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
-import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
+import com.nyinyi.dailychallenge.data.repository.ChallengeCatalogRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class QuestionDetailViewModel(
-    private val challengesRepository: ChallengesRepository,
+    private val challengesRepository: ChallengeCatalogRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow<QuestionDetailUiState>(QuestionDetailUiState.Loading)
     val state: StateFlow<QuestionDetailUiState> = _state.asStateFlow()

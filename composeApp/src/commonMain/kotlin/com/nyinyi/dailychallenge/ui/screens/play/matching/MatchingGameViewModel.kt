@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.nyinyi.dailychallenge.data.model.MatchingGameObj
 import com.nyinyi.dailychallenge.data.model.MatchingGameResult
 import com.nyinyi.dailychallenge.data.model.QuestionAttempt
-import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
-import com.nyinyi.dailychallenge.data.repository.UserPreferencesRepository
+import com.nyinyi.dailychallenge.data.repository.ChallengePlayRepository
+import com.nyinyi.dailychallenge.data.repository.UserProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -57,8 +57,8 @@ sealed class MatchingGameUiState {
 }
 
 class MatchingGameViewModel(
-    private val repository: ChallengesRepository,
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val repository: ChallengePlayRepository,
+    private val userProfileRepository: UserProfileRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<MatchingGameUiState>(MatchingGameUiState.Loading)
     val uiState: StateFlow<MatchingGameUiState> = _uiState.asStateFlow()
@@ -222,7 +222,7 @@ class MatchingGameViewModel(
             // If too many incorrect attempts, save to user profile
             if (newIncorrectAttempts >= 3) {
                 viewModelScope.launch {
-                    userPreferencesRepository.addFailedMatchingGameQuestion(currentQuestion)
+                    userProfileRepository.addFailedMatchingGameQuestion(currentQuestion)
                 }
             }
         }

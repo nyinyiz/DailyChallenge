@@ -1,10 +1,9 @@
 package com.nyinyi.dailychallenge.feature.challenge.list
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
-import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
+import com.nyinyi.dailychallenge.data.repository.ChallengeCatalogRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,11 +12,8 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class QuestionListViewModel(
-    private val repository: ChallengesRepository,
+    private val repository: ChallengeCatalogRepository,
 ) : ViewModel() {
-    private val _currentScreen = mutableStateOf<BottomNavItem>(BottomNavItem.Home)
-    val currentScreen = _currentScreen
-
     private val _state = MutableStateFlow<QuestionListState>(QuestionListState.Loading)
     val state: StateFlow<QuestionListState> = _state.asStateFlow()
 
@@ -31,7 +27,7 @@ class QuestionListViewModel(
     fun getRandomChallenges() {
         viewModelScope.launch {
             try {
-                repository.getRandomChallenges().let {
+                repository.getRandomChallenge().let {
                     _eventChannel.send(QuestionListEvent.RandomDataChanged(it))
                 }
             } catch (e: Exception) {
@@ -53,9 +49,6 @@ class QuestionListViewModel(
         }
     }
 
-    fun updateCurrentScreen(screen: BottomNavItem) {
-        _currentScreen.value = screen
-    }
 }
 
 sealed class QuestionListState {

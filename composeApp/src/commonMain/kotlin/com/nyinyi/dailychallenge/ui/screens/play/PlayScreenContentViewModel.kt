@@ -4,7 +4,7 @@ import androidx.datastore.core.IOException
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nyinyi.dailychallenge.data.model.Category
-import com.nyinyi.dailychallenge.data.repository.UserPreferencesRepository
+import com.nyinyi.dailychallenge.data.repository.SettingsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -14,13 +14,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class PlayScreenContentViewModel(
-    private val userPreferencesRepository: UserPreferencesRepository,
+    private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(PlayScreenUiState())
     val uiState: StateFlow<PlayScreenUiState> = _uiState.asStateFlow()
 
     val selectedCategory =
-        userPreferencesRepository.selectedCategory
+        settingsRepository.selectedCategory
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),
@@ -38,7 +38,7 @@ class PlayScreenContentViewModel(
             }
 
             try {
-                userPreferencesRepository.setSelectedCategory(category)
+                settingsRepository.setSelectedCategory(category)
                 _uiState.update {
                     it.copy(
                         isLoadingCategoryUpdate = false,

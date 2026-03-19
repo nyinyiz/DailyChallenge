@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.map
 
 class UserPreferencesRepositoryImpl(
     private val dataStore: DataStore<Preferences>,
-) : UserPreferencesRepository {
+) : SettingsRepository, UserProfileRepository {
     private object PreferencesKeys {
         val SELECTED_CATEGORY = stringPreferencesKey("selected_category")
         val USER_NAME = stringPreferencesKey("user_name")

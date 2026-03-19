@@ -28,40 +28,80 @@ import com.nyinyi.dailychallenge.ui.screens.play.PlayScreenContent
 import com.nyinyi.dailychallenge.ui.screens.play.components.GameMode
 import org.koin.compose.viewmodel.koinViewModel
 
-sealed class BottomNavItem(
-    val route: String,
+enum class AppTab(
     val icon: ImageVector,
     val label: String,
 ) {
-    object Home : BottomNavItem("home", Icons.Filled.Home, "Home")
+    Home(Icons.Filled.Home, "Home"),
+    List(Icons.AutoMirrored.Filled.List, "Questions"),
+    Profile(Icons.Filled.Person, "Profile"),
+}
 
-    object List : BottomNavItem("list", Icons.AutoMirrored.Filled.List, "Questions")
+@Composable
+fun HomeTabScreen(
+    onTabSelected: (AppTab) -> Unit,
+    onClickChallenge: (DailyChallengeObj) -> Unit,
+    navigateToGameMode: (GameMode) -> Unit,
+    viewModel: QuestionListViewModel = koinViewModel(),
+) {
+    LaunchedEffect(Unit) {
+        viewModel.eventFlow.collect { event ->
+            when (event) {
+                is QuestionListEvent.RandomDataChanged -> onClickChallenge(event.randomChallenges)
+            }
+        }
+    }
 
-    object Profile : BottomNavItem("profile", Icons.Filled.Person, "Profile")
+    AppTabScaffold(
+        currentTab = AppTab.Home,
+        onTabSelected = onTabSelected,
+    ) {
+        PlayScreenContent(
+            onNavigateToGameMode = navigateToGameMode,
+            onNavigateToChallenge = viewModel::getRandomChallenges,
+        )
+    }
+}
+
+@Composable
+fun ChallengeListTabScreen(
+    onTabSelected: (AppTab) -> Unit,
+    onClickChallenge: (DailyChallengeObj) -> Unit,
+    viewModel: QuestionListViewModel = koinViewModel(),
+) {
+    AppTabScaffold(
+        currentTab = AppTab.List,
+        onTabSelected = onTabSelected,
+    ) {
+        DailyChallengeListContent(
+            viewModel = viewModel,
+            onClickChallenge = onClickChallenge,
+        )
+    }
+}
+
+@Composable
+fun ProfileTabScreen(
+    onTabSelected: (AppTab) -> Unit,
+) {
+    AppTabScaffold(
+        currentTab = AppTab.Profile,
+        onTabSelected = onTabSelected,
+    ) {
+        ProfileScreenContent()
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QuestionsList(
-    viewModel: QuestionListViewModel = koinViewModel(),
-    onClickChallenge: (DailyChallengeObj) -> Unit = {},
-    onToggleTheme: () -> Unit = {},
-    navigateToGameMode: (GameMode) -> Unit = {},
+private fun AppTabScaffold(
+    currentTab: AppTab,
+    onTabSelected: (AppTab) -> Unit,
+    content: @Composable () -> Unit,
 ) {
-    val currentScreen = viewModel.currentScreen.value
-
-    LaunchedEffect(Unit) {
-        viewModel.eventFlow.collect { event ->
-            when (event) {
-                is QuestionListEvent.RandomDataChanged -> {
-                    onClickChallenge(event.randomChallenges)
-                }
-            }
-        }
-    }
     Scaffold(
         topBar = {
-            if (currentScreen == BottomNavItem.List) {
+            if (currentTab == AppTab.List) {
                 TopAppBar(
                     title = {
                         Text(
@@ -73,7 +113,6 @@ fun QuestionsList(
                             modifier = Modifier.padding(bottom = 8.dp),
                         )
                     },
-
                     colors =
                         TopAppBarDefaults.topAppBarColors(
                             containerColor = MaterialTheme.colorScheme.surface,
@@ -83,64 +122,39 @@ fun QuestionsList(
         },
         bottomBar = {
             QuestionsListBottomNavigationBar(
-                currentScreen = currentScreen,
-                onScreenSelected = { screen ->
-                    viewModel.updateCurrentScreen(screen)
-                },
+                currentTab = currentTab,
+                onTabSelected = onTabSelected,
             )
         },
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {
-            when (currentScreen) {
-                BottomNavItem.Home ->
-                    PlayScreenContent(
-                        onNavigateToGameMode = { gameMode ->
-                            navigateToGameMode(gameMode)
-                        },
-                        onNavigateToChallenge = {
-                            viewModel.getRandomChallenges()
-                        },
-                    )
-
-                BottomNavItem.List ->
-                    DailyChallengeListContent(
-                        onClickChallenge = onClickChallenge,
-                    )
-
-                BottomNavItem.Profile -> ProfileScreenContent()
-            }
+            content()
         }
     }
 }
 
 @Composable
 fun QuestionsListBottomNavigationBar(
-    currentScreen: BottomNavItem,
-    onScreenSelected: (BottomNavItem) -> Unit,
+    currentTab: AppTab,
+    onTabSelected: (AppTab) -> Unit,
 ) {
-    val items =
-        listOf(
-            BottomNavItem.Home,
-            BottomNavItem.List,
-            BottomNavItem.Profile,
-        )
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surface, // Or any other color
-        contentColor = MaterialTheme.colorScheme.onSurface, // Default color for icons and text
+        containerColor = MaterialTheme.colorScheme.surface,
+        contentColor = MaterialTheme.colorScheme.onSurface,
     ) {
-        items.forEach { screen ->
+        AppTab.entries.forEach { tab ->
             NavigationBarItem(
-                icon = { Icon(screen.icon, contentDescription = screen.label) },
-                label = { Text(screen.label) },
-                selected = currentScreen == screen,
-                onClick = { onScreenSelected(screen) },
+                icon = { Icon(tab.icon, contentDescription = tab.label) },
+                label = { Text(tab.label) },
+                selected = currentTab == tab,
+                onClick = { onTabSelected(tab) },
                 colors =
                     NavigationBarItemDefaults.colors(
                         selectedIconColor = MaterialTheme.colorScheme.primary,
                         selectedTextColor = MaterialTheme.colorScheme.primary,
                         unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                         unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                        indicatorColor = MaterialTheme.colorScheme.primaryContainer, // Color of the selection indicator
+                        indicatorColor = MaterialTheme.colorScheme.primaryContainer,
                     ),
             )
         }
