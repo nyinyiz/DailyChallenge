@@ -13,7 +13,7 @@
 
 [![Download Latest APK](https://img.shields.io/badge/Download-Latest%20APK-2ea44f?style=for-the-badge&logo=android)](https://github.com/nyinyiz/DailyChallenge/releases/download/latest-apk/DailyChallenge-latest.apk)
 
-Use the direct download link above to install the newest Android build published from the `main` branch.
+Use the direct download link above to install the newest signed Android release build published from the `main` branch.
 The release page is also available here: [Latest APK Release](https://github.com/nyinyiz/DailyChallenge/releases/tag/latest-apk).
 
 ## 🚀 Overview
