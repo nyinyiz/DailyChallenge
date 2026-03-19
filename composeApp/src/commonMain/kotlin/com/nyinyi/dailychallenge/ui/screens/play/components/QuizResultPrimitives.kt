@@ -49,7 +49,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.nyinyi.dailychallenge.ui.theme.DailyChallengeColors
 import com.nyinyi.dailychallenge.ui.theme.DailyChallengeElevation
-import com.nyinyi.dailychallenge.ui.theme.DailyChallengeShapes
 import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing
 import kotlin.math.roundToInt
 

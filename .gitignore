@@ -17,4 +17,8 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 .claude
+.folders
+.agents/
+.desloppify/
+.venv/
 docs/

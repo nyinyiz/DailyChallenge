@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowForward
+import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
@@ -144,7 +144,7 @@ fun DailyChallengeCard(onStartChallenge: () -> Unit) {
                             fontWeight = FontWeight.Bold,
                         )
                         Icon(
-                            Icons.Rounded.ArrowForward,
+                            Icons.AutoMirrored.Rounded.ArrowForward,
                             contentDescription = null,
                             modifier = Modifier.padding(start = 8.dp),
                             tint = MaterialTheme.colorScheme.primary,
