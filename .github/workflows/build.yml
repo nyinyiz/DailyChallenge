@@ -1,0 +1,53 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Ensure Gradle wrapper is executable
+        run: chmod +x ./gradlew
+
+      - name: Build project
+        run: >
+          ./gradlew build --stacktrace
+          -x linkDebugFrameworkIosX64
+          -x linkReleaseFrameworkIosX64
+          -x linkDebugFrameworkIosArm64
+          -x linkReleaseFrameworkIosArm64
+          -x linkDebugFrameworkIosSimulatorArm64
+          -x linkReleaseFrameworkIosSimulatorArm64
+          -x iosX64Test
+          -x iosArm64Test
+          -x iosSimulatorArm64Test
