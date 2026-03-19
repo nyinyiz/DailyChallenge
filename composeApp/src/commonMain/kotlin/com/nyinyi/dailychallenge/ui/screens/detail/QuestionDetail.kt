@@ -16,21 +16,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -45,11 +36,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
+import com.nyinyi.dailychallenge.ui.components.AppScreenScaffold
 import com.nyinyi.dailychallenge.ui.components.QuestionTab
 import com.nyinyi.dailychallenge.ui.components.SolutionTab
-import com.nyinyi.dailychallenge.ui.theme.ThemeColors
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeShapes
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuestionDetail(
     onBack: () -> Unit,
@@ -80,52 +72,35 @@ fun QuestionDetail(
         showContent = true
     }
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Text(
-                            text = "Challenge ${question.id}",
-                            style =
-                                MaterialTheme.typography.titleMedium.copy(
-                                    fontWeight = FontWeight.Bold,
-                                ),
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Box(
-                            modifier =
-                                Modifier
-                                    .clip(RoundedCornerShape(12.dp))
-                                    .background(difficultyColor.copy(alpha = 0.2f))
-                                    .padding(horizontal = 8.dp, vertical = 2.dp),
-                            contentAlignment = Alignment.Center,
-                        ) {
-                            Text(
-                                text = difficulty,
-                                style = MaterialTheme.typography.labelSmall,
-                                color = difficultyColor,
-                            )
-                        }
-                    }
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            Icons.Outlined.ArrowBackIosNew,
-                            contentDescription = "Back",
-                            tint = MaterialTheme.colorScheme.primary,
-                        )
-                    }
-                },
-                colors =
-                    TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.background,
-                    ),
-
-            )
+    AppScreenScaffold(
+        onBack = onBack,
+        titleContent = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = "Challenge ${question.id}",
+                    style =
+                        MaterialTheme.typography.titleMedium.copy(
+                            fontWeight = FontWeight.Bold,
+                        ),
+                )
+                Spacer(modifier = Modifier.width(DailyChallengeSpacing.small))
+                Box(
+                    modifier =
+                        Modifier
+                            .clip(DailyChallengeShapes.medium)
+                            .background(difficultyColor.copy(alpha = 0.2f))
+                            .padding(horizontal = DailyChallengeSpacing.small, vertical = 2.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(
+                        text = difficulty,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = difficultyColor,
+                    )
+                }
+            }
         },
     ) { paddingValues ->
         Column(
@@ -138,7 +113,7 @@ fun QuestionDetail(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
+                        .padding(horizontal = DailyChallengeSpacing.large),
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -146,7 +121,7 @@ fun QuestionDetail(
                     onClick = { isFlipped = !isFlipped },
                     modifier =
                         Modifier
-                            .padding(horizontal = 16.dp),
+                            .padding(horizontal = DailyChallengeSpacing.large),
                     colors =
                         androidx.compose.material3.ButtonDefaults.textButtonColors(
                             contentColor = if (isFlipped) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.primary,
@@ -168,10 +143,10 @@ fun QuestionDetail(
             ) {
                 Box(
                     modifier =
-                        Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp),
+                            Modifier
+                                .weight(1f)
+                                .fillMaxWidth()
+                                .padding(horizontal = DailyChallengeSpacing.large),
                 ) {
                     Card(
                         modifier =

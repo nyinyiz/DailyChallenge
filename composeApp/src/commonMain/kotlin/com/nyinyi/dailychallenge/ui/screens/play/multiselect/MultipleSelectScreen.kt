@@ -11,18 +11,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.RadioButtonUnchecked
 import androidx.compose.material3.Button
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -30,17 +24,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.nyinyi.dailychallenge.ui.components.AppScreenScaffold
 import com.nyinyi.dailychallenge.ui.screens.play.components.QuizAnswerOptionCard
 import com.nyinyi.dailychallenge.ui.screens.play.multiselect.components.MultipleSelectResultScreen
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.EmptyState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.ErrorState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.LoadingState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.QuestionProgressUI
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing
 import org.koin.compose.viewmodel.koinViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MultipleSelectScreen(
     onBack: () -> Unit,
@@ -50,33 +44,9 @@ fun MultipleSelectScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = "Multiple Select",
-                        style =
-                            MaterialTheme.typography.titleMedium.copy(
-                                fontWeight = FontWeight.Bold,
-                            ),
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.Outlined.ArrowBackIosNew,
-                            contentDescription = "Back",
-                        )
-                    }
-                },
-
-                colors =
-                    TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.background,
-                    ),
-            )
-        },
+    AppScreenScaffold(
+        onBack = onBack,
+        title = "Multiple Select",
     ) { paddingValues ->
         Column(
             modifier =
@@ -105,7 +75,7 @@ fun MultipleSelectScreen(
                         modifier =
                             Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp),
+                                .padding(DailyChallengeSpacing.large),
                     )
 
                     if (state.isComplete) {
@@ -142,16 +112,16 @@ private fun QuizContent(
                 text = question.question,
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier.padding(DailyChallengeSpacing.large),
             )
 
             LazyColumn(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
+                        .padding(DailyChallengeSpacing.large)
                         .weight(1f),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(DailyChallengeSpacing.small),
             ) {
                 items(
                     items = question.options,
@@ -173,7 +143,7 @@ private fun QuizContent(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(DailyChallengeSpacing.large),
                 contentAlignment = Alignment.Center,
             ) {
                 Button(
@@ -192,12 +162,11 @@ private fun QuizContent(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(DailyChallengeSpacing.large))
         }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OptionItem(
     option: String,

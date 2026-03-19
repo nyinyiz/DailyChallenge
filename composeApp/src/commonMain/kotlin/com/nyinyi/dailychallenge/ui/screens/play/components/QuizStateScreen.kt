@@ -21,7 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeColors
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing
 
 @Composable
 fun QuizStateScreen(
@@ -40,14 +41,14 @@ fun QuizStateScreen(
         contentAlignment = Alignment.Center,
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(DailyChallengeSpacing.large),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
             when {
                 showLoadingIndicator -> {
                     CircularProgressIndicator(
-                        modifier = Modifier.size(48.dp),
+                        modifier = Modifier.size(DailyChallengeSpacing.xLarge * 2),
                     )
                 }
                 icon != null -> {
@@ -55,12 +56,12 @@ fun QuizStateScreen(
                         imageVector = icon,
                         contentDescription = null,
                         tint = iconTint,
-                        modifier = Modifier.size(48.dp),
+                        modifier = Modifier.size(DailyChallengeSpacing.xLarge * 2),
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(DailyChallengeSpacing.large))
 
             if (title != null) {
                 Text(
@@ -68,7 +69,7 @@ fun QuizStateScreen(
                     style = MaterialTheme.typography.headlineSmall,
                     textAlign = TextAlign.Center,
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(DailyChallengeSpacing.small))
             }
 
             Text(
@@ -77,19 +78,19 @@ fun QuizStateScreen(
                 textAlign = TextAlign.Center,
                 color =
                     if (iconTint == MaterialTheme.colorScheme.error) {
-                        MaterialTheme.colorScheme.error
+                        DailyChallengeColors.danger
                     } else {
                         MaterialTheme.colorScheme.onSurfaceVariant
                     },
             )
 
             if (actionLabel != null && onAction != null) {
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(DailyChallengeSpacing.xLarge))
                 Button(
                     onClick = onAction,
                     colors =
                         ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primary,
+                            containerColor = DailyChallengeColors.success,
                         ),
                 ) {
                     if (actionIcon != null) {
@@ -97,7 +98,7 @@ fun QuizStateScreen(
                             imageVector = actionIcon,
                             contentDescription = null,
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(DailyChallengeSpacing.small))
                     }
                     Text(
                         text = actionLabel,

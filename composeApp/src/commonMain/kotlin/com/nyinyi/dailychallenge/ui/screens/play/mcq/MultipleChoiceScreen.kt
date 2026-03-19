@@ -8,34 +8,26 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material.icons.rounded.RadioButtonUnchecked
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.nyinyi.dailychallenge.ui.components.AppScreenScaffold
 import com.nyinyi.dailychallenge.ui.screens.play.components.QuizAnswerOptionCard
 import com.nyinyi.dailychallenge.ui.screens.play.mcq.components.MultipleChoiceResultScreen
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.EmptyState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.ErrorState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.LoadingState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.QuestionProgressUI
+import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing
 import org.koin.compose.viewmodel.koinViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MultipleChoiceScreen(
     onBack: () -> Unit,
@@ -45,33 +37,9 @@ fun MultipleChoiceScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = "Multiple Choice",
-                        style =
-                            MaterialTheme.typography.titleMedium.copy(
-                                fontWeight = FontWeight.Bold,
-                            ),
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            imageVector = Icons.Outlined.ArrowBackIosNew,
-                            contentDescription = "Back",
-                        )
-                    }
-                },
-
-                colors =
-                    TopAppBarDefaults.centerAlignedTopAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.background,
-                    ),
-            )
-        },
+    AppScreenScaffold(
+        onBack = onBack,
+        title = "Multiple Choice",
     ) { paddingValues ->
         Column(
             modifier =
@@ -100,7 +68,7 @@ fun MultipleChoiceScreen(
                         modifier =
                             Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp),
+                                .padding(DailyChallengeSpacing.large),
                     )
 
                     if (state.isComplete) {
@@ -135,15 +103,15 @@ private fun QuizContent(
                 text = question.question,
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier.padding(DailyChallengeSpacing.large),
             )
 
             LazyColumn(
                 modifier =
                     Modifier
                         .fillMaxSize()
-                        .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
+                        .padding(DailyChallengeSpacing.large),
+                verticalArrangement = Arrangement.spacedBy(DailyChallengeSpacing.small),
             ) {
                 items(
                     items = question.options,
@@ -162,7 +130,6 @@ private fun QuizContent(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OptionItem(
     option: String,
