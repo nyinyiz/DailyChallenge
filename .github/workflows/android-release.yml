@@ -1,9 +1,11 @@
 name: Android APK Release
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types:
+      - closed
 
 permissions:
   contents: write
@@ -14,12 +16,15 @@ concurrency:
 
 jobs:
   android-apk:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
 
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@v4

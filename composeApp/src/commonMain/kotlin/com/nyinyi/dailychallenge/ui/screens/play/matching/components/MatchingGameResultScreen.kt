@@ -24,13 +24,11 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material.icons.rounded.SwapHoriz
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -40,6 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.nyinyi.dailychallenge.data.model.MatchingGameResult
 import com.nyinyi.dailychallenge.data.model.QuestionAttempt
+import com.nyinyi.dailychallenge.ui.screens.play.components.QuizResultActionsRow
 
 @Composable
 fun MatchingGameResultScreen(
@@ -72,41 +71,14 @@ fun MatchingGameResultScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Action Buttons
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            OutlinedButton(
-                onClick = onBackToHome,
-                modifier = Modifier.weight(1f),
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Home,
-                    contentDescription = "Home",
-                    modifier = Modifier.size(20.dp),
-                )
-                Text(
-                    text = "Home",
-                    modifier = Modifier.padding(start = 8.dp),
-                )
-            }
-
-            Button(
-                onClick = onRestartGame,
-                modifier = Modifier.weight(1f),
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Refresh,
-                    contentDescription = "Retry",
-                    modifier = Modifier.size(20.dp),
-                )
-                Text(
-                    text = "Try Again",
-                    modifier = Modifier.padding(start = 8.dp),
-                )
-            }
-        }
+        QuizResultActionsRow(
+            primaryLabel = "Try Again",
+            onPrimaryClick = onRestartGame,
+            primaryIcon = Icons.Rounded.Refresh,
+            secondaryLabel = "Home",
+            onSecondaryClick = onBackToHome,
+            secondaryIcon = Icons.Rounded.Home,
+        )
     }
 }
 
