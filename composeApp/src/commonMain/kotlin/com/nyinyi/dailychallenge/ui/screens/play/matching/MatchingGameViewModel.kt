@@ -216,7 +216,7 @@ class MatchingGameViewModel(
             // If too many incorrect attempts, save to user profile
             if (newIncorrectAttempts >= 3) {
                 viewModelScope.launch {
-                    userPreferencesRepository.addFailedMultipleChoiceQuestion(currentQuestion.toString())
+                    userPreferencesRepository.addFailedMatchingGameQuestion(currentQuestion)
                 }
             }
         }

@@ -1,6 +1,10 @@
 package com.nyinyi.dailychallenge.data.repository
 
 import com.nyinyi.dailychallenge.data.model.Category
+import com.nyinyi.dailychallenge.data.model.MatchingGameObj
+import com.nyinyi.dailychallenge.data.model.MultipleChoiceObj
+import com.nyinyi.dailychallenge.data.model.MultipleSelectObj
+import com.nyinyi.dailychallenge.data.model.QuizCard
 import com.nyinyi.dailychallenge.data.model.UserProfile
 import kotlinx.coroutines.flow.Flow
 
@@ -18,11 +22,13 @@ interface UserPreferencesRepository {
 
     suspend fun updateDarkTheme(darkTheme: Boolean)
 
-    suspend fun addFailedQuizCard(questionId: String)
+    suspend fun addFailedQuizCard(question: QuizCard)
 
-    suspend fun addFailedMultipleChoiceQuestion(questionId: String)
+    suspend fun addFailedMultipleChoiceQuestion(question: MultipleChoiceObj)
 
-    suspend fun addFailedMultipleSelectQuestion(questionId: String)
+    suspend fun addFailedMultipleSelectQuestion(question: MultipleSelectObj)
+
+    suspend fun addFailedMatchingGameQuestion(question: MatchingGameObj)
 
     suspend fun clearFailedExercises()
 }

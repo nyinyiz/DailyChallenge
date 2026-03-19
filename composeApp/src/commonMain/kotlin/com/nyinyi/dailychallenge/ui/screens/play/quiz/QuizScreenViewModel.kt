@@ -36,7 +36,7 @@ class QuizScreenViewModel(
 
     fun saveFailedQuestion(question: QuizCard) {
         viewModelScope.launch {
-            userPreferencesRepository.addFailedQuizCard(question.toString())
+            userPreferencesRepository.addFailedQuizCard(question)
         }
     }
 }

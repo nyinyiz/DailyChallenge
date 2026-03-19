@@ -20,19 +20,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.nyinyi.dailychallenge.data.model.FailedQuestionRecord
 import com.nyinyi.dailychallenge.ui.screens.profile.utils.QuestionDisplay
-import com.nyinyi.dailychallenge.ui.screens.profile.utils.parseQuestionForDisplay
+import com.nyinyi.dailychallenge.ui.screens.profile.utils.questionDisplayForRecord
+import com.nyinyi.dailychallenge.ui.screens.profile.utils.reportDetailsForRecord
 
 @Composable
 fun FailedQuestionItem(
-    question: String,
-    questionType: String,
+    record: FailedQuestionRecord,
+    sectionTitle: String,
 ) {
     var showReportDialog by remember { mutableStateOf(false) }
     val questionDisplay =
-        remember(question, questionType) {
-            parseQuestionForDisplay(question, questionType)
+        remember(record) {
+            questionDisplayForRecord(record)
         }
+    val reportDetails = remember(record) { reportDetailsForRecord(record) }
 
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -70,8 +73,8 @@ fun FailedQuestionItem(
 
     if (showReportDialog) {
         ReportIssueDialog(
-            question = question,
-            questionType = questionType,
+            question = reportDetails,
+            questionType = sectionTitle,
             onDismiss = { showReportDialog = false },
         )
     }

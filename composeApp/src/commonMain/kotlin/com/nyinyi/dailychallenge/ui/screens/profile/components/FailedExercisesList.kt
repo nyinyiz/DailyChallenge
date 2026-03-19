@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.nyinyi.dailychallenge.data.model.FailedQuestionRecord
 import com.nyinyi.dailychallenge.data.model.UserProfile
 
 @Composable
@@ -45,7 +46,8 @@ fun FailedExercisesSection(
     val hasFailedExercises =
         userProfile.failedQuizCards.isNotEmpty() ||
             userProfile.failedMultipleChoiceQuestions.isNotEmpty() ||
-            userProfile.failedMultipleSelectQuestions.isNotEmpty()
+            userProfile.failedMultipleSelectQuestions.isNotEmpty() ||
+            userProfile.failedMatchingGameQuestions.isNotEmpty()
 
     if (hasFailedExercises) {
         FailedExercisesHeader(onClearFailedExercises)
@@ -136,12 +138,19 @@ fun FailedExercisesList(userProfile: UserProfile) {
             items = userProfile.failedMultipleSelectQuestions,
         )
     }
+
+    if (userProfile.failedMatchingGameQuestions.isNotEmpty()) {
+        FailedExerciseSection(
+            title = "Matching Game Questions",
+            items = userProfile.failedMatchingGameQuestions,
+        )
+    }
 }
 
 @Composable
 private fun FailedExerciseSection(
     title: String,
-    items: List<String>,
+    items: List<FailedQuestionRecord>,
 ) {
     // State to toggle expand/collapse
     var isExpanded by remember { mutableStateOf(false) }
@@ -203,8 +212,8 @@ private fun FailedExerciseSection(
                     Spacer(modifier = Modifier.height(12.dp))
                     items.forEach { item ->
                         FailedQuestionItem(
-                            question = item,
-                            questionType = title,
+                            record = item,
+                            sectionTitle = title,
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                     }

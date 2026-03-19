@@ -114,7 +114,7 @@ class MultipleSelectViewModel(
         // Save failed question to user profile
         if (!isCorrect) {
             viewModelScope.launch {
-                userPreferencesRepository.addFailedMultipleSelectQuestion(currentQuestion.toString())
+                userPreferencesRepository.addFailedMultipleSelectQuestion(currentQuestion)
             }
         }
 
