@@ -34,6 +34,12 @@ sealed class MatchingGameUiState {
     ) : MatchingGameUiState() {
         val totalQuestions: Int = questions.size
         val currentQuestion: MatchingGameObj? = questions.getOrNull(currentQuestionIndex)
+        val difficultyStatus: String =
+            currentQuestion
+                ?.difficulty
+                ?.takeIf { it.isNotBlank() }
+                ?.lowercase()
+                ?: "completed"
         val isQuestionComplete: Boolean = matchedPairs.size == leftItems.size
         val isGameComplete: Boolean = currentQuestionIndex >= totalQuestions
         val progressPercentage: Float =

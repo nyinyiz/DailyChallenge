@@ -125,15 +125,8 @@ fun MatchingGameScreen(
                     )
 
                 is MatchingGameUiState.Game -> {
-                    val difficultStatus =
-                        if (state.currentQuestion?.difficulty != null && state.currentQuestion.difficulty.isNotEmpty()) {
-                            state.currentQuestion.difficulty.lowercase()
-                        } else {
-                            "completed"
-                        }
-
                     QuestionProgressUI(
-                        difficulty = difficultStatus,
+                        difficulty = state.difficultyStatus,
                         currentQuestion = state.currentQuestionIndex + 1,
                         totalQuestions = state.totalQuestions,
                         modifier =

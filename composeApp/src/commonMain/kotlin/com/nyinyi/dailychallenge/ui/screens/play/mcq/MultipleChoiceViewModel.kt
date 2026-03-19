@@ -29,8 +29,15 @@ sealed class MultipleChoiceUiState {
         val totalQuestions: Int = questions.size
         val currentQuestion: MultipleChoiceObj? = questions.getOrNull(currentQuestionIndex)
         val isComplete: Boolean = currentQuestionIndex >= totalQuestions
+        val difficultyStatus: String =
+            currentQuestion
+                ?.difficulty
+                ?.takeIf { it.isNotBlank() }
+                ?.lowercase()
+                ?: "completed"
         val progressPercentage: Float =
             (currentQuestionIndex.toFloat() / totalQuestions.toFloat()) * 100
+        val result: MultipleChoiceResult? = toResult()
 
         fun toResult(): MultipleChoiceResult? {
             if (!isComplete) return null
@@ -112,8 +119,4 @@ class MultipleChoiceViewModel(
             )
     }
 
-    fun getQuizResult(): MultipleChoiceResult? {
-        val currentState = _uiState.value as? MultipleChoiceUiState.Quiz ?: return null
-        return currentState.toResult()
-    }
 }
