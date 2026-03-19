@@ -93,15 +93,8 @@ fun MultipleChoiceScreen(
                     )
 
                 is MultipleChoiceUiState.Quiz -> {
-                    val difficultStatus =
-                        if (state.currentQuestion?.difficulty != null && state.currentQuestion.difficulty.isNotEmpty()) {
-                            state.currentQuestion.difficulty.lowercase()
-                        } else {
-                            "completed"
-                        }
-
                     QuestionProgressUI(
-                        difficulty = difficultStatus,
+                        difficulty = state.difficultyStatus,
                         currentQuestion = state.currentQuestionIndex + 1,
                         totalQuestions = state.totalQuestions,
                         modifier =
@@ -111,7 +104,7 @@ fun MultipleChoiceScreen(
                     )
 
                     if (state.isComplete) {
-                        viewModel.getQuizResult()?.let { result ->
+                        state.result?.let { result ->
                             MultipleChoiceResultScreen(
                                 result = result,
                                 onRestartQuiz = viewModel::restartQuiz,

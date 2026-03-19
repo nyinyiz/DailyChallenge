@@ -9,12 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -35,8 +32,6 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nyinyi.dailychallenge.data.model.QuizCard
-import com.nyinyi.dailychallenge.data.model.QuizResult
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.EmptyState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.ErrorState
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.LoadingState
@@ -66,9 +61,6 @@ fun QuizScreen(
 ) {
     val uiState by viewModel.state.collectAsStateWithLifecycle()
 
-    var currentQuestionIndex by remember { mutableStateOf(0) }
-    var quizResults by remember { mutableStateOf<QuizResult?>(null) }
-    var incorrectAnswers by remember { mutableStateOf(listOf<QuizCard>()) }
     var swipeOffsetX by remember { mutableStateOf(0f) }
     val hapticFeedback = LocalHapticFeedback.current
 
@@ -118,135 +110,93 @@ fun QuizScreen(
 
                 is QuizState.Error -> {
                     ErrorState(
-                        message = "Error loading questions",
-                        onRetry = {
-                        },
+                        message = state.message,
+                        onRetry = viewModel::getTrueFalseChallenges,
                     )
                 }
 
+                is QuizState.Empty ->
+                    EmptyState(
+                        onRetry = viewModel::getTrueFalseChallenges,
+                    )
+
                 is QuizState.Success -> {
-                    if (state.quizList.isEmpty()) {
-                        EmptyState(
-                            onRetry = {
+                    val session = state.session
+
+                    QuestionProgressUI(
+                        difficulty = session.difficultyStatus,
+                        currentQuestion = session.currentQuestionIndex + 1,
+                        totalQuestions = session.totalQuestions,
+                    )
+
+                    session.result?.let { result ->
+                        ResultScreen(
+                            result = result,
+                            onRetryQuiz = {
+                                swipeOffsetX = 0f
+                                viewModel.restartQuiz()
                             },
                         )
-                    } else {
-                        val difficultyStatus =
-                            if (currentQuestionIndex < state.quizList.size) {
-                                state.quizList[currentQuestionIndex].difficulty
-                            } else {
-                                "completed"
-                            }
+                    } ?: session.currentQuestion?.let { currentQuestion ->
+                        Box(
+                            modifier =
+                                Modifier
+                                    .weight(1f)
+                                    .fillMaxWidth(),
+                            contentAlignment = Alignment.Center,
+                        ) {
+                            SwipeInstructions()
 
-                        QuestionProgressUI(
-                            difficulty = difficultyStatus,
-                            currentQuestion = currentQuestionIndex + 1,
-                            totalQuestions = state.quizList.size,
-                        )
-
-                        if (quizResults != null) {
-                            ResultScreen(
-                                result = quizResults!!,
-                                onRetryQuiz = {
-                                    currentQuestionIndex = 0
-                                    incorrectAnswers = listOf()
-                                    quizResults = null
-                                    viewModel.getTrueFalseChallenges()
-                                },
-                            )
-                        } else if (currentQuestionIndex < state.quizList.size) {
-                            Box(
-                                modifier =
-                                    Modifier
-                                        .weight(1f)
-                                        .fillMaxWidth(),
-                                contentAlignment = Alignment.Center,
-                            ) {
-                                // Swipe Instruction Text
-                                SwipeInstructions()
-
-                                // Left Indicator (False/Red)
-                                if (swipeOffsetX < 0) {
-                                    Box(
-                                        modifier =
-                                            Modifier
-                                                .align(Alignment.CenterStart)
-                                                .fillMaxHeight()
-                                                .width((-swipeOffsetX / 5).dp.coerceIn(0.dp, 24.dp))
-                                                .background(
-                                                    color = MaterialTheme.colorScheme.error,
-                                                    shape =
-                                                        RoundedCornerShape(
-                                                            topEnd = 16.dp,
-                                                            bottomEnd = 16.dp,
-                                                        ),
-                                                ),
-                                    )
-                                }
-
-                                // Right Indicator (True/Blue)
-                                if (swipeOffsetX > 0) {
-                                    Box(
-                                        modifier =
-                                            Modifier
-                                                .align(Alignment.CenterEnd)
-                                                .fillMaxHeight()
-                                                .width((swipeOffsetX / 5).dp.coerceIn(0.dp, 24.dp))
-                                                .background(
-                                                    color = MaterialTheme.colorScheme.primary,
-                                                    shape =
-                                                        RoundedCornerShape(
-                                                            topStart = 16.dp,
-                                                            bottomStart = 16.dp,
-                                                        ),
-                                                ),
-                                    )
-                                }
-
-                                // Question Card
-                                TinderStyleCard(
-                                    card = state.quizList[currentQuestionIndex],
-                                    onSwipeLeft = {
-                                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
-                                        if (state.quizList[currentQuestionIndex].correctAnswer) {
-                                            incorrectAnswers =
-                                                incorrectAnswers + state.quizList[currentQuestionIndex]
-                                            // Save failed question to user profile
-                                            viewModel.saveFailedQuestion(state.quizList[currentQuestionIndex])
-                                        }
-                                        currentQuestionIndex++
-                                        if (currentQuestionIndex >= state.quizList.size) {
-                                            quizResults =
-                                                QuizResult(
-                                                    totalQuestions = state.quizList.size,
-                                                    correctAnswers = state.quizList.size - incorrectAnswers.size,
-                                                    incorrectAnswers = incorrectAnswers,
-                                                )
-                                        }
-                                    },
-                                    onSwipeRight = {
-                                        hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
-                                        if (!state.quizList[currentQuestionIndex].correctAnswer) {
-                                            incorrectAnswers =
-                                                incorrectAnswers + state.quizList[currentQuestionIndex]
-                                            // Save failed question to user profile
-                                            viewModel.saveFailedQuestion(state.quizList[currentQuestionIndex])
-                                        }
-                                        currentQuestionIndex++
-                                        if (currentQuestionIndex >= state.quizList.size) {
-                                            quizResults =
-                                                QuizResult(
-                                                    totalQuestions = state.quizList.size,
-                                                    correctAnswers = state.quizList.size - incorrectAnswers.size,
-                                                    incorrectAnswers = incorrectAnswers,
-                                                )
-                                        }
-                                    },
-                                    onDrag = { offsetX ->
-                                        swipeOffsetX = offsetX
-                                    },
+                            if (swipeOffsetX < 0) {
+                                Box(
+                                    modifier =
+                                        Modifier
+                                            .align(Alignment.CenterStart)
+                                            .fillMaxHeight()
+                                            .width((-swipeOffsetX / 5).dp.coerceIn(0.dp, 24.dp))
+                                            .background(
+                                                color = MaterialTheme.colorScheme.error,
+                                                shape =
+                                                    RoundedCornerShape(
+                                                        topEnd = 16.dp,
+                                                        bottomEnd = 16.dp,
+                                                    ),
+                                            ),
                                 )
                             }
+
+                            if (swipeOffsetX > 0) {
+                                Box(
+                                    modifier =
+                                        Modifier
+                                            .align(Alignment.CenterEnd)
+                                            .fillMaxHeight()
+                                            .width((swipeOffsetX / 5).dp.coerceIn(0.dp, 24.dp))
+                                            .background(
+                                                color = MaterialTheme.colorScheme.primary,
+                                                shape =
+                                                    RoundedCornerShape(
+                                                        topStart = 16.dp,
+                                                        bottomStart = 16.dp,
+                                                    ),
+                                            ),
+                                )
+                            }
+
+                            TinderStyleCard(
+                                card = currentQuestion,
+                                onSwipeLeft = {
+                                    hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    viewModel.answerQuestion(false)
+                                },
+                                onSwipeRight = {
+                                    hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    viewModel.answerQuestion(true)
+                                },
+                                onDrag = { offsetX ->
+                                    swipeOffsetX = offsetX
+                                },
+                            )
                         }
                     }
                 }
