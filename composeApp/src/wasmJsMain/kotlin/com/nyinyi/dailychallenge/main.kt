@@ -2,7 +2,7 @@ package com.nyinyi.dailychallenge
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
-import com.nyinyi.dailychallenge.ui.App
+import com.nyinyi.dailychallenge.core.app.App
 import kotlinx.browser.document
 
 @OptIn(ExperimentalComposeUiApi::class)

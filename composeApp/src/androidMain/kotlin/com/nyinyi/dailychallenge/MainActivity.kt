@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.nyinyi.dailychallenge.core.app.App
 import com.nyinyi.dailychallenge.di.KoinInitializer
-import com.nyinyi.dailychallenge.ui.App
 
 class MainActivity : ComponentActivity() {
     val dataStore by lazy { createDataStore(applicationContext) }

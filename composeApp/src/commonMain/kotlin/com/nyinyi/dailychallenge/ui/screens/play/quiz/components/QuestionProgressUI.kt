@@ -39,7 +39,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.nyinyi.dailychallenge.ui.screens.list.DifficultyTag
+import com.nyinyi.dailychallenge.feature.challenge.list.DifficultyTag
 import com.nyinyi.dailychallenge.ui.theme.DailyChallengeColors
 import com.nyinyi.dailychallenge.ui.theme.DailyChallengeShapes
 import com.nyinyi.dailychallenge.ui.theme.DailyChallengeSpacing

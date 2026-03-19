@@ -51,7 +51,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nyinyi.dailychallenge.ui.components.AppScreenScaffold
+import com.nyinyi.dailychallenge.core.ui.components.AppScreenScaffold
 import com.nyinyi.dailychallenge.ui.screens.play.matching.components.MatchingGameResultScreen
 import com.nyinyi.dailychallenge.ui.screens.play.matching.components.MatchingItem
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.EmptyState

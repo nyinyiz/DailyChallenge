@@ -2,10 +2,9 @@ package com.nyinyi.dailychallenge.ui.screens.play.multiselect
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nyinyi.dailychallenge.data.model.MultipleSelectObj
-import com.nyinyi.dailychallenge.data.model.MultipleSelectResult
 import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
 import com.nyinyi.dailychallenge.data.repository.UserPreferencesRepository
+import com.nyinyi.dailychallenge.feature.play.multiselect.MultipleSelectSession
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,46 +20,8 @@ sealed class MultipleSelectUiState {
     data object Empty : MultipleSelectUiState()
 
     data class Quiz(
-        val questions: List<MultipleSelectObj>,
-        val currentQuestionIndex: Int = 0,
-        val score: Int = 0,
-        val answeredQuestions: Map<Int, List<String>> = emptyMap(),
-        val selectedOptions: List<String> = emptyList(),
-    ) : MultipleSelectUiState() {
-        val totalQuestions: Int = questions.size
-        val currentQuestion: MultipleSelectObj? = questions.getOrNull(currentQuestionIndex)
-        val isComplete: Boolean = currentQuestionIndex >= totalQuestions
-        val difficultyStatus: String =
-            currentQuestion
-                ?.difficulty
-                ?.takeIf { it.isNotBlank() }
-                ?.lowercase()
-                ?: "completed"
-        val progressPercentage: Float =
-            (currentQuestionIndex.toFloat() / totalQuestions.toFloat()) * 100
-        val result: MultipleSelectResult? = toResult()
-
-        fun toResult(): MultipleSelectResult? {
-            if (!isComplete) return null
-            return MultipleSelectResult(
-                score = score,
-                totalQuestions = totalQuestions,
-                incorrectAnswers =
-                    questions.filterIndexed { index, question ->
-                        val selectedAnswers = answeredQuestions[index] ?: emptyList()
-                        !areAnswersCorrect(selectedAnswers, question.correctAnswers)
-                    },
-            )
-        }
-
-        private fun areAnswersCorrect(
-            selected: List<String>,
-            correct: List<String>,
-        ): Boolean {
-            // Check if selected answers match exactly with correct answers
-            return selected.size == correct.size && selected.containsAll(correct)
-        }
-    }
+        val session: MultipleSelectSession,
+    ) : MultipleSelectUiState()
 }
 
 class MultipleSelectViewModel(
@@ -83,7 +44,7 @@ class MultipleSelectViewModel(
                 } else {
                     _uiState.value =
                         MultipleSelectUiState.Quiz(
-                            questions = questions,
+                            session = MultipleSelectSession(questions = questions),
                         )
                 }
             } catch (e: Exception) {
@@ -94,63 +55,22 @@ class MultipleSelectViewModel(
 
     fun toggleOptionSelection(option: String) {
         val currentState = _uiState.value as? MultipleSelectUiState.Quiz ?: return
-
-        val currentSelectedOptions = currentState.selectedOptions.toMutableList()
-        if (currentSelectedOptions.contains(option)) {
-            currentSelectedOptions.remove(option)
-        } else {
-            currentSelectedOptions.add(option)
-        }
-
-        _uiState.value = currentState.copy(selectedOptions = currentSelectedOptions)
+        _uiState.value = currentState.copy(session = currentState.session.toggleOption(option))
     }
 
     fun submitAnswer() {
         val currentState = _uiState.value as? MultipleSelectUiState.Quiz ?: return
-        val currentQuestion = currentState.currentQuestion ?: return
-        val selectedOptions = currentState.selectedOptions
-
-        val isCorrect = areAnswersCorrect(selectedOptions, currentQuestion.correctAnswers)
-        val newScore = if (isCorrect) currentState.score + 1 else currentState.score
-        val newIndex = currentState.currentQuestionIndex + 1
-
-        val newAnsweredQuestions =
-            currentState.answeredQuestions +
-                (currentState.currentQuestionIndex to selectedOptions)
-
-        // Save failed question to user profile
-        if (!isCorrect) {
+        val outcome = currentState.session.submitAnswer()
+        outcome.failedQuestion?.let { failedQuestion ->
             viewModelScope.launch {
-                userPreferencesRepository.addFailedMultipleSelectQuestion(currentQuestion)
+                userPreferencesRepository.addFailedMultipleSelectQuestion(failedQuestion)
             }
         }
-
-        _uiState.value =
-            currentState.copy(
-                currentQuestionIndex = newIndex,
-                score = newScore,
-                answeredQuestions = newAnsweredQuestions,
-                selectedOptions = emptyList(), // Reset selected options for next question
-            )
-    }
-
-    private fun areAnswersCorrect(
-        selected: List<String>,
-        correct: List<String>,
-    ): Boolean {
-        // Check if selected answers match exactly with correct answers
-        return selected.size == correct.size && selected.containsAll(correct)
+        _uiState.value = currentState.copy(session = outcome.nextSession)
     }
 
     fun restartQuiz() {
         val currentState = _uiState.value as? MultipleSelectUiState.Quiz ?: return
-        _uiState.value =
-            currentState.copy(
-                currentQuestionIndex = 0,
-                score = 0,
-                answeredQuestions = emptyMap(),
-                selectedOptions = emptyList(),
-            )
+        _uiState.value = currentState.copy(session = currentState.session.restart())
     }
-
 }

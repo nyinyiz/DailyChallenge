@@ -18,7 +18,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.nyinyi.dailychallenge.ui.components.AppScreenScaffold
+import com.nyinyi.dailychallenge.core.ui.components.AppScreenScaffold
 import com.nyinyi.dailychallenge.ui.screens.play.components.QuizAnswerOptionCard
 import com.nyinyi.dailychallenge.ui.screens.play.mcq.components.MultipleChoiceResultScreen
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.components.EmptyState
@@ -61,18 +61,19 @@ fun MultipleChoiceScreen(
                     )
 
                 is MultipleChoiceUiState.Quiz -> {
+                    val session = state.session
                     QuestionProgressUI(
-                        difficulty = state.difficultyStatus,
-                        currentQuestion = state.currentQuestionIndex + 1,
-                        totalQuestions = state.totalQuestions,
+                        difficulty = session.difficultyStatus,
+                        currentQuestion = session.currentQuestionIndex + 1,
+                        totalQuestions = session.totalQuestions,
                         modifier =
                             Modifier
                                 .fillMaxWidth()
                                 .padding(DailyChallengeSpacing.large),
                     )
 
-                    if (state.isComplete) {
-                        state.result?.let { result ->
+                    if (session.isComplete) {
+                        session.result?.let { result ->
                             MultipleChoiceResultScreen(
                                 result = result,
                                 onRestartQuiz = viewModel::restartQuiz,
@@ -81,7 +82,7 @@ fun MultipleChoiceScreen(
                         }
                     } else {
                         QuizContent(
-                            quizState = state,
+                            session = session,
                             onAnswerSelected = viewModel::answerQuestion,
                         )
                     }
@@ -93,12 +94,12 @@ fun MultipleChoiceScreen(
 
 @Composable
 private fun QuizContent(
-    quizState: MultipleChoiceUiState.Quiz,
+    session: com.nyinyi.dailychallenge.feature.play.mcq.MultipleChoiceSession,
     onAnswerSelected: (String) -> Unit,
 ) {
     val hapticFeedback = LocalHapticFeedback.current
     Column {
-        quizState.currentQuestion?.let { question ->
+        session.currentQuestion?.let { question ->
             Text(
                 text = question.question,
                 style = MaterialTheme.typography.headlineSmall,

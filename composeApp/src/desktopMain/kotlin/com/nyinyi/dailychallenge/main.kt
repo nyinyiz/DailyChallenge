@@ -4,8 +4,8 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import com.nyinyi.dailychallenge.core.app.App
 import com.nyinyi.dailychallenge.di.KoinInitializer
-import com.nyinyi.dailychallenge.ui.App
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

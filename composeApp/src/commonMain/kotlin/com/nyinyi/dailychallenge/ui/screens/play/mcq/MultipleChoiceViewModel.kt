@@ -2,10 +2,9 @@ package com.nyinyi.dailychallenge.ui.screens.play.mcq
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nyinyi.dailychallenge.data.model.MultipleChoiceObj
-import com.nyinyi.dailychallenge.data.model.MultipleChoiceResult
 import com.nyinyi.dailychallenge.data.repository.ChallengesRepository
 import com.nyinyi.dailychallenge.data.repository.UserPreferencesRepository
+import com.nyinyi.dailychallenge.feature.play.mcq.MultipleChoiceSession
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -21,36 +20,8 @@ sealed class MultipleChoiceUiState {
     data object Empty : MultipleChoiceUiState()
 
     data class Quiz(
-        val questions: List<MultipleChoiceObj>,
-        val currentQuestionIndex: Int = 0,
-        val score: Int = 0,
-        val answeredQuestions: Map<Int, String> = emptyMap(),
-    ) : MultipleChoiceUiState() {
-        val totalQuestions: Int = questions.size
-        val currentQuestion: MultipleChoiceObj? = questions.getOrNull(currentQuestionIndex)
-        val isComplete: Boolean = currentQuestionIndex >= totalQuestions
-        val difficultyStatus: String =
-            currentQuestion
-                ?.difficulty
-                ?.takeIf { it.isNotBlank() }
-                ?.lowercase()
-                ?: "completed"
-        val progressPercentage: Float =
-            (currentQuestionIndex.toFloat() / totalQuestions.toFloat()) * 100
-        val result: MultipleChoiceResult? = toResult()
-
-        fun toResult(): MultipleChoiceResult? {
-            if (!isComplete) return null
-            return MultipleChoiceResult(
-                score = score,
-                totalQuestions = totalQuestions,
-                incorrectAnswers =
-                    questions.filterIndexed { index, question ->
-                        answeredQuestions[index] != question.correctAnswer
-                    },
-            )
-        }
-    }
+        val session: MultipleChoiceSession,
+    ) : MultipleChoiceUiState()
 }
 
 class MultipleChoiceViewModel(
@@ -73,7 +44,7 @@ class MultipleChoiceViewModel(
                 } else {
                     _uiState.value =
                         MultipleChoiceUiState.Quiz(
-                            questions = questions,
+                            session = MultipleChoiceSession(questions = questions),
                         )
                 }
             } catch (e: Exception) {
@@ -84,39 +55,17 @@ class MultipleChoiceViewModel(
 
     fun answerQuestion(selectedAnswer: String) {
         val currentState = _uiState.value as? MultipleChoiceUiState.Quiz ?: return
-        val currentQuestion = currentState.currentQuestion ?: return
-
-        val isCorrect = selectedAnswer == currentQuestion.correctAnswer
-        val newScore = if (isCorrect) currentState.score + 1 else currentState.score
-        val newIndex = currentState.currentQuestionIndex + 1
-
-        val newAnsweredQuestions =
-            currentState.answeredQuestions +
-                (currentState.currentQuestionIndex to selectedAnswer)
-
-        // Save failed question to user profile
-        if (!isCorrect) {
+        val outcome = currentState.session.answer(selectedAnswer)
+        outcome.failedQuestion?.let { failedQuestion ->
             viewModelScope.launch {
-                userPreferencesRepository.addFailedMultipleChoiceQuestion(currentQuestion)
+                userPreferencesRepository.addFailedMultipleChoiceQuestion(failedQuestion)
             }
         }
-
-        _uiState.value =
-            currentState.copy(
-                currentQuestionIndex = newIndex,
-                score = newScore,
-                answeredQuestions = newAnsweredQuestions,
-            )
+        _uiState.value = currentState.copy(session = outcome.nextSession)
     }
 
     fun restartQuiz() {
         val currentState = _uiState.value as? MultipleChoiceUiState.Quiz ?: return
-        _uiState.value =
-            currentState.copy(
-                currentQuestionIndex = 0,
-                score = 0,
-                answeredQuestions = emptyMap(),
-            )
+        _uiState.value = currentState.copy(session = currentState.session.restart())
     }
-
 }
