@@ -3,30 +3,28 @@ package com.nyinyi.dailychallenge.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.material3.Text
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.nyinyi.dailychallenge.ui.AppState
-import com.nyinyi.dailychallenge.ui.AppViewModel
 import com.nyinyi.dailychallenge.ui.screens.detail.QuestionDetail
+import com.nyinyi.dailychallenge.ui.screens.detail.QuestionDetailUiState
+import com.nyinyi.dailychallenge.ui.screens.detail.QuestionDetailViewModel
 import com.nyinyi.dailychallenge.ui.screens.list.QuestionsList
 import com.nyinyi.dailychallenge.ui.screens.play.components.GameMode
 import com.nyinyi.dailychallenge.ui.screens.play.matching.MatchingGameScreen
 import com.nyinyi.dailychallenge.ui.screens.play.mcq.MultipleChoiceScreen
 import com.nyinyi.dailychallenge.ui.screens.play.multiselect.MultipleSelectScreen
 import com.nyinyi.dailychallenge.ui.screens.play.quiz.QuizScreen
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun AppNavigation(
     navController: NavHostController,
-    viewModel: AppViewModel,
-    darkTheme: Boolean,
     onToggleTheme: () -> Unit,
 ) {
-    val uiState by viewModel.state.collectAsStateWithLifecycle()
-
     NavHost(
         navController = navController,
         startDestination = Routes.QuestionList,
@@ -62,26 +60,29 @@ fun AppNavigation(
         }
         composable<Routes.QuestionDetail> { backStackEntry ->
             val args = backStackEntry.toRoute<Routes.QuestionDetail>()
+            val viewModel: QuestionDetailViewModel = koinViewModel()
+            val uiState by viewModel.state.collectAsStateWithLifecycle()
+
             LaunchedEffect(args.questionId) {
-                viewModel.getDailyChallengeById(args.questionId)
+                viewModel.loadQuestion(args.questionId)
             }
+
             when (val state = uiState) {
-                is AppState.ContentById -> {
+                is QuestionDetailUiState.Success -> {
                     QuestionDetail(
                         onBack = {
                             navController.popBackStack()
                         },
-                        question = state.dailyChallenge,
+                        question = state.question,
                         onToggleTheme = onToggleTheme,
                     )
                 }
 
-                AppState.Error -> {
-                    // Show error state
+                is QuestionDetailUiState.Error -> {
+                    Text(text = state.message)
                 }
 
-                else -> {
-                }
+                QuestionDetailUiState.Loading -> Text(text = "Loading...")
             }
         }
 

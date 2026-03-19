@@ -23,9 +23,7 @@ fun App(viewModel: AppViewModel = koinViewModel()) {
     DailyChallengeTheme(darkTheme = userProfile.darkTheme) {
         AppNavigation(
             navController = navController,
-            viewModel = viewModel,
-            darkTheme = userProfile.darkTheme,
-            onToggleTheme = { },
+            onToggleTheme = viewModel::toggleTheme,
         )
     }
 }
