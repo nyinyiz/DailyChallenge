@@ -1,22 +1,22 @@
 package com.nyinyi.dailychallenge.feature.profile.components
 
-import androidx.compose.foundation.background
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandLess
-import androidx.compose.material.icons.filled.ExpandMore
-import androidx.compose.material3.Card
+import androidx.compose.material.icons.rounded.AutoGraph
+import androidx.compose.material.icons.rounded.ExpandLess
+import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -35,122 +35,84 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.nyinyi.dailychallenge.data.model.FailedQuestionRecord
 import com.nyinyi.dailychallenge.data.model.UserProfile
+import com.nyinyi.dailychallenge.feature.profile.reviewGroups
+import com.nyinyi.dailychallenge.feature.profile.totalReviewItemCount
 
 @Composable
 fun FailedExercisesSection(
     userProfile: UserProfile,
     onClearFailedExercises: () -> Unit,
 ) {
-    val hasFailedExercises =
-        userProfile.failedQuizCards.isNotEmpty() ||
-            userProfile.failedMultipleChoiceQuestions.isNotEmpty() ||
-            userProfile.failedMultipleSelectQuestions.isNotEmpty() ||
-            userProfile.failedMatchingGameQuestions.isNotEmpty()
+    val groups = userProfile.reviewGroups()
+    val hasFailedExercises = groups.isNotEmpty()
 
-    if (hasFailedExercises) {
-        FailedExercisesHeader(onClearFailedExercises)
-        FailedExercisesList(userProfile)
-    } else {
-        NoFailedExercisesCard()
-    }
-}
-
-@Composable
-private fun FailedExercisesHeader(onClearFailedExercises: () -> Unit) {
-    Row(
-        modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
+    SectionContainer(
+        title = "Review Queue",
+        action = {
+            if (hasFailedExercises) {
+                TextButton(onClick = onClearFailedExercises) {
+                    Text("Clear All", color = MaterialTheme.colorScheme.error)
+                }
+            }
+        },
     ) {
-        Text(
-            text = "Failed Exercises",
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.Bold,
-        )
-
-        TextButton(
-            onClick = onClearFailedExercises,
-        ) {
-            Text(
-                "Clear All",
-                color = MaterialTheme.colorScheme.error,
+        if (!hasFailedExercises) {
+            EmptyReviewState()
+        } else {
+            InfoRow(
+                label = "Saved questions",
+                value = userProfile.totalReviewItemCount.toString(),
             )
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            groups.forEach { (title, items) ->
+                FailedExerciseGroupCard(
+                    title = title,
+                    items = items,
+                )
+            }
         }
     }
 }
 
 @Composable
-private fun NoFailedExercisesCard() {
-    Card(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp),
+private fun EmptyReviewState() {
+    ElevatedCard(
         colors =
-            CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            CardDefaults.elevatedCardColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.55f),
             ),
     ) {
         Column(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
+            Icon(
+                imageVector = Icons.Rounded.AutoGraph,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+            )
             Text(
-                text = "No Failed Exercises",
+                text = "No review backlog",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
             )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
             Text(
-                text = "Great job! You haven't failed any exercises yet. Keep up the good work!",
+                text = "Strong work. Your profile is clear of saved misses, so this is a good time to push into harder challenges.",
                 textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
     }
 }
 
 @Composable
-fun FailedExercisesList(userProfile: UserProfile) {
-    if (userProfile.failedQuizCards.isNotEmpty()) {
-        FailedExerciseSection(
-            title = "True/False Questions",
-            items = userProfile.failedQuizCards,
-        )
-    }
-
-    if (userProfile.failedMultipleChoiceQuestions.isNotEmpty()) {
-        FailedExerciseSection(
-            title = "Multiple Choice Questions",
-            items = userProfile.failedMultipleChoiceQuestions,
-        )
-    }
-
-    if (userProfile.failedMultipleSelectQuestions.isNotEmpty()) {
-        FailedExerciseSection(
-            title = "Multiple Select Questions",
-            items = userProfile.failedMultipleSelectQuestions,
-        )
-    }
-
-    if (userProfile.failedMatchingGameQuestions.isNotEmpty()) {
-        FailedExerciseSection(
-            title = "Matching Game Questions",
-            items = userProfile.failedMatchingGameQuestions,
-        )
-    }
-}
-
-@Composable
-private fun FailedExerciseSection(
+private fun FailedExerciseGroupCard(
     title: String,
     items: List<FailedQuestionRecord>,
 ) {
-    // State to toggle expand/collapse
     var isExpanded by remember { mutableStateOf(false) }
 
     ElevatedCard(
@@ -160,60 +122,58 @@ private fun FailedExerciseSection(
                 .padding(bottom = 8.dp),
         colors =
             CardDefaults.elevatedCardColors(
-                containerColor = MaterialTheme.colorScheme.surface,
+                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.34f),
             ),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
-        Row(
-            modifier = Modifier.height(IntrinsicSize.Min),
+        Column(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
         ) {
-            // Indicator Strip
-            Box(
+            Row(
                 modifier =
                     Modifier
-                        .fillMaxHeight()
-                        .width(6.dp)
-                        .background(MaterialTheme.colorScheme.error),
-            )
-
-            Column(
-                modifier =
-                    Modifier
-                        .weight(1f)
-                        .padding(16.dp),
+                        .fillMaxWidth()
+                        .clickable { isExpanded = isExpanded.not() },
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                // Title Row with Toggle Icon
-                Row(
-                    modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .clickable { isExpanded = isExpanded.not() },
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
-                        text = title + " (${items.size})",
+                        text = title,
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.weight(1f),
                     )
-
-                    Icon(
-                        imageVector = if (isExpanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
-                        contentDescription = if (isExpanded) "Collapse" else "Expand",
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                    Text(
+                        text = "${items.size} ${if (items.size == 1) "question" else "questions"} waiting",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
 
-                // Conditionally show the list items
-                if (isExpanded) {
-                    Spacer(modifier = Modifier.height(12.dp))
+                Icon(
+                    imageVector = if (isExpanded) Icons.Rounded.ExpandLess else Icons.Rounded.ExpandMore,
+                    contentDescription = if (isExpanded) "Collapse" else "Expand",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+
+            AnimatedVisibility(
+                visible = isExpanded,
+                enter = expandVertically() + fadeIn(),
+                exit = shrinkVertically() + fadeOut(),
+            ) {
+                Column(
+                    modifier = Modifier.padding(top = 12.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
                     items.forEach { item ->
                         FailedQuestionItem(
                             record = item,
                             sectionTitle = title,
                         )
-                        Spacer(modifier = Modifier.height(8.dp))
                     }
                 }
             }

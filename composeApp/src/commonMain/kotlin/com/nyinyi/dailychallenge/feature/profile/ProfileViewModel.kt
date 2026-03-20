@@ -27,6 +27,7 @@ class ProfileViewModel(
                 _uiState.value =
                     ProfileUiState.Success(
                         userProfile = userProfile,
+                        dashboard = buildProfileDashboard(userProfile),
                         editorState =
                             if (currentEditorState == null || !currentEditorState.isDirty) {
                                 ProfileEditorState.from(userProfile)
@@ -82,6 +83,7 @@ sealed class ProfileUiState {
 
     data class Success(
         val userProfile: UserProfile,
+        val dashboard: ProfileDashboard,
         val editorState: ProfileEditorState,
     ) : ProfileUiState()
 

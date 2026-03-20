@@ -41,7 +41,7 @@ fun FailedQuestionItem(
         modifier = Modifier.fillMaxWidth(),
         colors =
             CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.7f),
+                containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.52f),
             ),
     ) {
         Column(
@@ -63,7 +63,7 @@ fun FailedQuestionItem(
                     modifier = Modifier.padding(top = 4.dp),
                 ) {
                     Text(
-                        text = "Report Issue",
+                        text = "Report",
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }

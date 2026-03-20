@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.dp
 fun ActionButtons(
     onCancel: () -> Unit,
     onConfirm: () -> Unit,
+    confirmLabel: String = "Confirm",
+    cancelLabel: String = "Cancel",
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -23,14 +25,14 @@ fun ActionButtons(
             onClick = onCancel,
             modifier = Modifier.weight(1f),
         ) {
-            Text("Cancel")
+            Text(cancelLabel)
         }
 
         Button(
             onClick = onConfirm,
             modifier = Modifier.weight(1f),
         ) {
-            Text("Confirm")
+            Text(confirmLabel)
         }
     }
 }
