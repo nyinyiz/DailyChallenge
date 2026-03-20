@@ -4,11 +4,11 @@ import com.nyinyi.dailychallenge.core.app.AppViewModel
 import com.nyinyi.dailychallenge.feature.challenge.detail.QuestionDetailViewModel
 import com.nyinyi.dailychallenge.feature.challenge.list.QuestionListViewModel
 import com.nyinyi.dailychallenge.feature.profile.ProfileViewModel
-import com.nyinyi.dailychallenge.ui.screens.play.PlayScreenContentViewModel
-import com.nyinyi.dailychallenge.ui.screens.play.matching.MatchingGameViewModel
-import com.nyinyi.dailychallenge.ui.screens.play.mcq.MultipleChoiceViewModel
-import com.nyinyi.dailychallenge.ui.screens.play.multiselect.MultipleSelectViewModel
-import com.nyinyi.dailychallenge.ui.screens.play.quiz.QuizScreenViewModel
+import com.nyinyi.dailychallenge.feature.play.home.PlayHubViewModel
+import com.nyinyi.dailychallenge.feature.play.matching.MatchingGameViewModel
+import com.nyinyi.dailychallenge.feature.play.mcq.MultipleChoiceViewModel
+import com.nyinyi.dailychallenge.feature.play.multiselect.MultipleSelectViewModel
+import com.nyinyi.dailychallenge.feature.play.truefalse.TrueFalseViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -28,7 +28,7 @@ val featureViewModelModule =
             QuestionDetailViewModel(get())
         }
         viewModel {
-            QuizScreenViewModel(get(), get())
+            TrueFalseViewModel(get(), get())
         }
         viewModel {
             MultipleChoiceViewModel(get(), get())
@@ -40,7 +40,7 @@ val featureViewModelModule =
             MatchingGameViewModel(get(), get())
         }
         viewModel {
-            PlayScreenContentViewModel(get())
+            PlayHubViewModel(get())
         }
         viewModel {
             ProfileViewModel(get())

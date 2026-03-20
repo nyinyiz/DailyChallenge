@@ -18,7 +18,7 @@ sealed interface Routes {
     ) : Routes
 
     @Serializable
-    data object QuizScreen : Routes
+    data object TrueFalseScreen : Routes
 
     @Serializable
     data object MultipleChoiceScreen : Routes

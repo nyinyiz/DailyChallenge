@@ -23,9 +23,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.nyinyi.dailychallenge.data.model.DailyChallengeObj
-import com.nyinyi.dailychallenge.feature.profile.ProfileScreenContent
-import com.nyinyi.dailychallenge.ui.screens.play.PlayScreenContent
-import com.nyinyi.dailychallenge.ui.screens.play.components.GameMode
+import com.nyinyi.dailychallenge.feature.profile.ProfileScreen
+import com.nyinyi.dailychallenge.feature.play.home.PlayHubScreen
+import com.nyinyi.dailychallenge.feature.play.home.components.PlayMode
 import org.koin.compose.viewmodel.koinViewModel
 
 enum class AppTab(
@@ -41,7 +41,7 @@ enum class AppTab(
 fun HomeTabScreen(
     onTabSelected: (AppTab) -> Unit,
     onClickChallenge: (DailyChallengeObj) -> Unit,
-    navigateToGameMode: (GameMode) -> Unit,
+    navigateToPlayMode: (PlayMode) -> Unit,
     viewModel: QuestionListViewModel = koinViewModel(),
 ) {
     LaunchedEffect(Unit) {
@@ -56,8 +56,8 @@ fun HomeTabScreen(
         currentTab = AppTab.Home,
         onTabSelected = onTabSelected,
     ) {
-        PlayScreenContent(
-            onNavigateToGameMode = navigateToGameMode,
+        PlayHubScreen(
+            onNavigateToPlayMode = navigateToPlayMode,
             onNavigateToChallenge = viewModel::getRandomChallenges,
         )
     }
@@ -73,7 +73,7 @@ fun ChallengeListTabScreen(
         currentTab = AppTab.List,
         onTabSelected = onTabSelected,
     ) {
-        DailyChallengeListContent(
+        ChallengeListScreen(
             viewModel = viewModel,
             onClickChallenge = onClickChallenge,
         )
@@ -88,7 +88,7 @@ fun ProfileTabScreen(
         currentTab = AppTab.Profile,
         onTabSelected = onTabSelected,
     ) {
-        ProfileScreenContent()
+        ProfileScreen()
     }
 }
 

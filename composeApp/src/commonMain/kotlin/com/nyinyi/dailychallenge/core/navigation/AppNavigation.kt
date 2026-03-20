@@ -16,11 +16,11 @@ import com.nyinyi.dailychallenge.feature.challenge.list.AppTab
 import com.nyinyi.dailychallenge.feature.challenge.list.ChallengeListTabScreen
 import com.nyinyi.dailychallenge.feature.challenge.list.HomeTabScreen
 import com.nyinyi.dailychallenge.feature.challenge.list.ProfileTabScreen
-import com.nyinyi.dailychallenge.ui.screens.play.components.GameMode
-import com.nyinyi.dailychallenge.ui.screens.play.matching.MatchingGameScreen
-import com.nyinyi.dailychallenge.ui.screens.play.mcq.MultipleChoiceScreen
-import com.nyinyi.dailychallenge.ui.screens.play.multiselect.MultipleSelectScreen
-import com.nyinyi.dailychallenge.ui.screens.play.quiz.QuizScreen
+import com.nyinyi.dailychallenge.feature.play.home.components.PlayMode
+import com.nyinyi.dailychallenge.feature.play.matching.MatchingGameScreen
+import com.nyinyi.dailychallenge.feature.play.mcq.MultipleChoiceScreen
+import com.nyinyi.dailychallenge.feature.play.multiselect.MultipleSelectScreen
+import com.nyinyi.dailychallenge.feature.play.truefalse.TrueFalseScreen
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -37,21 +37,21 @@ fun AppNavigation(
                 onTabSelected = { tab ->
                     navController.navigateToTab(tab)
                 },
-                navigateToGameMode = { gameMode ->
-                    when (gameMode) {
-                        GameMode.TrueOrFalse -> {
-                            navController.navigate(Routes.QuizScreen)
+                navigateToPlayMode = { playMode ->
+                    when (playMode) {
+                        PlayMode.TrueOrFalse -> {
+                            navController.navigate(Routes.TrueFalseScreen)
                         }
 
-                        GameMode.MultipleChoice -> {
+                        PlayMode.MultipleChoice -> {
                             navController.navigate(Routes.MultipleChoiceScreen)
                         }
 
-                        GameMode.MultipleSelect -> {
+                        PlayMode.MultipleSelect -> {
                             navController.navigate(Routes.MultipleSelectScreen)
                         }
 
-                        GameMode.MatchingGame -> {
+                        PlayMode.MatchingGame -> {
                             navController.navigate(Routes.MatchingGameScreen)
                         }
                     }
@@ -108,8 +108,8 @@ fun AppNavigation(
             }
         }
 
-        composable<Routes.QuizScreen> {
-            QuizScreen(
+        composable<Routes.TrueFalseScreen> {
+            TrueFalseScreen(
                 onToggleTheme = onToggleTheme,
                 onBack = { navController.popBackStack() },
             )
