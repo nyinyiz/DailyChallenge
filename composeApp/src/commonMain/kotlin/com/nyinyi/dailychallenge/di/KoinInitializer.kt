@@ -8,7 +8,10 @@ object KoinInitializer {
     fun init(dataStore: DataStore<Preferences>) {
         startKoin {
             modules(
-                appModule,
+                networkModule,
+                repositoryModule,
+                appViewModelModule,
+                featureViewModelModule,
                 preferencesModule(dataStore),
             )
         }
